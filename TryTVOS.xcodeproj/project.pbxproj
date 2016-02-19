@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF4E1BA9C95F00A75099 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4D1BA9C95F00A75099 /* ViewController.swift */; };
-		B5F7BF511BA9C95F00A75099 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F7BF4F1BA9C95F00A75099 /* Main.storyboard */; };
 		B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F7BF521BA9C95F00A75099 /* Assets.xcassets */; };
 		B5F7BF5E1BA9C95F00A75099 /* TryTVOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF5D1BA9C95F00A75099 /* TryTVOSTests.swift */; };
 /* End PBXBuildFile section */
@@ -28,7 +27,6 @@
 		B5F7BF481BA9C95F00A75099 /* TryTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TryTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F7BF4D1BA9C95F00A75099 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B5F7BF501BA9C95F00A75099 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5F7BF521BA9C95F00A75099 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F7BF541BA9C95F00A75099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5F7BF591BA9C95F00A75099 /* TryTVOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TryTVOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,7 +76,6 @@
 				B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */,
 				B5F7BF521BA9C95F00A75099 /* Assets.xcassets */,
 				B5F7BF541BA9C95F00A75099 /* Info.plist */,
-				B5F7BF4F1BA9C95F00A75099 /* Main.storyboard */,
 				B5F7BF4D1BA9C95F00A75099 /* ViewController.swift */,
 			);
 			path = TryTVOS;
@@ -174,7 +171,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */,
-				B5F7BF511BA9C95F00A75099 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,17 +210,6 @@
 			targetProxy = B5F7BF5A1BA9C95F00A75099 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		B5F7BF4F1BA9C95F00A75099 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5F7BF501BA9C95F00A75099 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B5F7BF601BA9C95F00A75099 /* Debug */ = {
