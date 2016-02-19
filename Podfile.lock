@@ -1,13 +1,20 @@
 PODS:
   - Alamofire (3.2.0)
   - Freddy (2.0.2)
+  - Keys (1.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Freddy
+  - Keys (from `Pods/CocoaPodsKeys`)
+
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
   Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
   Freddy: e53713b8d5be02dbf5f4132c44d899d99eb09a6b
+  Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
 
 COCOAPODS: 0.39.0

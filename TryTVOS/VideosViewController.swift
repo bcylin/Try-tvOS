@@ -27,6 +27,7 @@
 import UIKit
 import Alamofire
 import Freddy
+import Keys
 
 class VideosViewController: UICollectionViewController {
 
@@ -48,6 +49,12 @@ class VideosViewController: UICollectionViewController {
     return _flowLayout
   }()
 
+  private var videos = [Video]() {
+    didSet {
+      collectionView?.reloadData()
+    }
+  }
+
   // MARK: - Initialization
 
   convenience init() {
@@ -62,10 +69,31 @@ class VideosViewController: UICollectionViewController {
     collectionView?.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    let keys = TrytvosKeys()
+    #if DEBUG
+    print(keys.videoAPIPath())
+    #endif
+
+    Alamofire.request(.GET, keys.videoAPIPath())
+      .responseJSON { response in
+        guard let data = response.data else { return }
+        do {
+          let json = try JSON(data: data)
+          self.videos = try json.array().map(Video.init)
+        } catch {
+          #if DEBUG
+          print(error)
+          #endif
+        }
+    }
+  }
+
   // MARK: - UICollectionViewDataSource
 
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 12
+    return videos.count
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -9,3 +9,8 @@ xcodeproj "TryTVOS"
 
 pod "Alamofire"
 pod "Freddy"
+
+plugin "cocoapods-keys", {
+  project: "TryTVOS",
+  keys: ["VideoAPIPath"]
+}
