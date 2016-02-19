@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
+//  VideoPlayerController.swift
 //  TryTVOS
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 19/02/2016.
+//  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,22 +25,43 @@
 //
 
 import UIKit
+import AVKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class VideoPlayerController: AVPlayerViewController {
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
+  convenience init(url: NSURL) {
+    self.init(nibName: nil, bundle: nil)
+    let playerItem = AVPlayerItem(URL: url)
+    player = AVPlayer(playerItem: playerItem)
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: Selector("handlePlayerItemDidPlayToEndTime:"),
+      name: AVPlayerItemDidPlayToEndTimeNotification,
+      object: playerItem
+    )
+  }
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: VideosViewController())
-    tabBarController.viewControllers = [navigatonController]
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self,
+      name: AVPlayerItemDidPlayToEndTimeNotification,
+      object: nil)
+  }
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = tabBarController
-    window?.makeKeyAndVisible()
+  // MARK: - UIViewController
 
-    return true
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    player?.play()
+  }
+
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    player?.pause()
+  }
+
+  // MARK: - NSNotification Callbacks
+
+  @IBAction private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
+    navigationController?.popViewControllerAnimated(true)
   }
 
 }
