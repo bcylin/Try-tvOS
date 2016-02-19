@@ -1,0 +1,13 @@
+PODS:
+  - Alamofire (3.2.0)
+  - Freddy (2.0.2)
+
+DEPENDENCIES:
+  - Alamofire
+  - Freddy
+
+SPEC CHECKSUMS:
+  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
+  Freddy: e53713b8d5be02dbf5f4132c44d899d99eb09a6b
+
+COCOAPODS: 0.39.0

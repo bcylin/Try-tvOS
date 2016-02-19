@@ -25,6 +25,8 @@
 //
 
 import UIKit
+import Alamofire
+import Freddy
 
 class VideosViewController: UICollectionViewController {
 
