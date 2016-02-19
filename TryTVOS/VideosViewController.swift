@@ -27,6 +27,7 @@
 import UIKit
 import Alamofire
 import Freddy
+import HCYoutubeParser
 import Keys
 
 class VideosViewController: UICollectionViewController {
@@ -100,6 +101,21 @@ class VideosViewController: UICollectionViewController {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
     (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
     return cell
+  }
+
+  // MARK: - UICollectionViewDelegate
+
+  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    guard
+      let youtube = NSURL(string: videos[indexPath.row].youtube),
+      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtube)?["medium"] as? String,
+      let url = NSURL(string: medium)
+      else {
+        return
+    }
+
+    let player = VideoPlayerController(url: url)
+    navigationController?.pushViewController(player, animated: true)
   }
 
 }

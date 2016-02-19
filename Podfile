@@ -9,6 +9,7 @@ xcodeproj "TryTVOS"
 
 pod "Alamofire"
 pod "Freddy"
+pod "HCYoutubeParser"
 pod "Kingfisher"
 
 plugin "cocoapods-keys", {
