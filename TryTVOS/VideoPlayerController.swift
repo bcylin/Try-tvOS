@@ -31,8 +31,22 @@ class VideoPlayerController: AVPlayerViewController {
 
   convenience init(url: NSURL) {
     self.init(nibName: nil, bundle: nil)
-    player = AVPlayer(URL: url)
+    let playerItem = AVPlayerItem(URL: url)
+    player = AVPlayer(playerItem: playerItem)
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: Selector("handlePlayerItemDidPlayToEndTime:"),
+      name: AVPlayerItemDidPlayToEndTimeNotification,
+      object: playerItem
+    )
   }
+
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self,
+      name: AVPlayerItemDidPlayToEndTimeNotification,
+      object: nil)
+  }
+
+  // MARK: - UIViewController
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
@@ -42,6 +56,12 @@ class VideoPlayerController: AVPlayerViewController {
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     player?.pause()
+  }
+
+  // MARK: - NSNotification Callbacks
+
+  @IBAction private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
+    navigationController?.popViewControllerAnimated(true)
   }
 
 }
