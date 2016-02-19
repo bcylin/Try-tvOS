@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
+//  VideoCell.swift
 //  TryTVOS
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 19/02/2016.
+//  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,24 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class VideoCell: UICollectionViewCell {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    title = "Videos"
-    edgesForExtendedLayout = .None
+  // MARK: - Initialization
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setUpAppearance()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setUpAppearance()
+  }
+
+  // MARK: - Private Methods
+
+  private func setUpAppearance() {
+    backgroundColor = UIColor.lightGrayColor()
   }
 
 }
