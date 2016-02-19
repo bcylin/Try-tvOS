@@ -25,8 +25,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class VideoCell: UICollectionViewCell {
+
+  let imageView = UIImageView()
 
   // MARK: - Initialization
 
@@ -40,10 +43,35 @@ class VideoCell: UICollectionViewCell {
     setUpAppearance()
   }
 
+  // MARK: - UICollectionViewCell
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    imageView.image = nil
+    imageView.kf_cancelDownloadTask()
+  }
+
   // MARK: - Private Methods
 
   private func setUpAppearance() {
+    imageView.adjustsImageWhenAncestorFocused = true
+    contentView.addSubview(imageView)
+
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
+    imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
+    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
+    imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+
     backgroundColor = UIColor.lightGrayColor()
+  }
+
+  // MARK: - Public Methods
+
+  func configure(withVideo video: Video) {
+    if let mediumURL = video.cover?.medium, let url = NSURL(string: mediumURL) {
+      imageView.kf_setImageWithURL(url)
+    }
   }
 
 }

@@ -98,6 +98,7 @@ class VideosViewController: UICollectionViewController {
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
+    (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
     return cell
   }
 
