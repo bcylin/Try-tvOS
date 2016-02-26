@@ -80,7 +80,7 @@ class VideosViewController: UICollectionViewController {
     print(keys.videoAPIPath())
     #endif
 
-    Alamofire.request(.GET, keys.videoAPIPath())
+    Alamofire.request(.GET, keys.baseAPIURL() + keys.featuresAPIPath())
       .responseJSON { response in
         guard let data = response.data else { return }
         do {
