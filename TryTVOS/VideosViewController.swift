@@ -32,22 +32,24 @@ import Keys
 
 class VideosViewController: UICollectionViewController {
 
-  static let numberOfColumns = 4
+  private static let horizontalFlowLayout: UICollectionViewFlowLayout = {
+    let _horizontal = UICollectionViewFlowLayout()
+    _horizontal.scrollDirection = .Horizontal
+    _horizontal.sectionInset = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 75)
+    _horizontal.minimumInteritemSpacing = 75
+    _horizontal.minimumLineSpacing = 0
+    _horizontal.itemSize = CGSize(width: 300, height: 300)
+    return _horizontal
+  }()
 
-  static let defaultFlowLayout: UICollectionViewFlowLayout = {
-    let _flowLayout = UICollectionViewFlowLayout()
-    _flowLayout.sectionInset = UIEdgeInsets(top: 75, left: 100, bottom: 75, right: 100)
-    _flowLayout.minimumInteritemSpacing = 75
-    _flowLayout.minimumLineSpacing = 75
-
-    var width = UIScreen.mainScreen().bounds.width
-    width -= _flowLayout.sectionInset.left
-    width -= _flowLayout.sectionInset.right
-    width -= _flowLayout.minimumInteritemSpacing * CGFloat(numberOfColumns - 1)
-    width /= CGFloat(numberOfColumns)
-    _flowLayout.itemSize = CGSize(width: width, height: width * 9 / 16)
-
-    return _flowLayout
+  private static let verticalFlowLayout: UICollectionViewFlowLayout = {
+    let _vertical = UICollectionViewFlowLayout()
+    _vertical.scrollDirection = .Vertical
+    _vertical.sectionInset = UIEdgeInsetsZero
+    _vertical.minimumInteritemSpacing = 75
+    _vertical.minimumLineSpacing = 75
+    _vertical.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 300)
+    return _vertical
   }()
 
   private var videos = [Video]() {
@@ -59,7 +61,7 @@ class VideosViewController: UICollectionViewController {
   // MARK: - Initialization
 
   convenience init() {
-    self.init(collectionViewLayout: self.dynamicType.defaultFlowLayout)
+    self.init(collectionViewLayout: self.dynamicType.verticalFlowLayout)
     title = "Videos"
   }
 
@@ -67,6 +69,7 @@ class VideosViewController: UICollectionViewController {
 
   override func loadView() {
     super.loadView()
+    collectionView?.registerClass(VideoCategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCategoryCell.self))
     collectionView?.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
   }
 
@@ -98,8 +101,8 @@ class VideosViewController: UICollectionViewController {
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
-    (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCategoryCell.self), forIndexPath: indexPath)
+    cell.layer.borderWidth = 1
     return cell
   }
 
