@@ -26,16 +26,9 @@
 
 import UIKit
 
+/// An abstract class to distinct different collection views.
 class VideoRowCollectionView: UICollectionView {
 
   weak var rowContainerCell: UICollectionViewCell?
-
-  // MARK: - Initialization
-
-  convenience init() {
-    self.init(frame: CGRect.zero, collectionViewLayout: Metrics.horizontalFlowLayout)
-    clipsToBounds = false
-    registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
-  }
 
 }

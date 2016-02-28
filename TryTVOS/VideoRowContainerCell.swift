@@ -28,18 +28,18 @@ import UIKit
 
 class VideoRowContainerCell: UICollectionViewCell {
 
-  let collectionView = VideoRowCollectionView()
+  var collectionView: UICollectionView?
 
   // MARK: - Initialization
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    setUpSubviews()
+    clipsToBounds = false
   }
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    setUpSubviews()
+    clipsToBounds = false
   }
 
   // MARK: - UIKit
@@ -48,12 +48,21 @@ class VideoRowContainerCell: UICollectionViewCell {
     return collectionView
   }
 
-  // MARK: - Private Methods
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    collectionView?.removeFromSuperview()
+    collectionView = nil
+  }
 
-  private func setUpSubviews() {
-    clipsToBounds = false
-    contentView.addSubview(collectionView)
+  // MARK: - Public Methods
+
+  func configure(withEmbeddedCollectionView collectionView: VideoRowCollectionView) {
     collectionView.rowContainerCell = self
+
+    self.collectionView?.removeFromSuperview()
+    self.collectionView = collectionView
+
+    contentView.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
 
     collectionView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true

@@ -54,6 +54,7 @@ class VideoCell: UICollectionViewCell {
   // MARK: - Private Methods
 
   private func setUpAppearance() {
+    clipsToBounds = false
     imageView.adjustsImageWhenAncestorFocused = true
     contentView.addSubview(imageView)
 

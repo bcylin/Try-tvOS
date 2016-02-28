@@ -32,7 +32,7 @@ import Keys
 
 class VideosViewController: UICollectionViewController {
 
-  private var videos = [[Video]]() {
+  private var videoRows = [VideoRowViewController]() {
     didSet {
       collectionView?.reloadData()
     }
@@ -64,7 +64,9 @@ class VideosViewController: UICollectionViewController {
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          self.videos = self.videos + [try json.array("videos").map(Video.init)]
+          let features = VideoRowViewController(name: "Features", videos: try json.array("videos").map(Video.init))
+          self.videoRows.append(features)
+          self.collectionView?.reloadData()
         } catch {
           #if DEBUG
           print(error)
@@ -77,7 +79,9 @@ class VideosViewController: UICollectionViewController {
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          self.videos = self.videos + [try json.array().map(Video.init)]
+          let videos = VideoRowViewController(name: "Videos", videos: try json.array().map(Video.init))
+          self.videoRows.append(videos)
+          self.collectionView?.reloadData()
         } catch {
           #if DEBUG
             print(error)
@@ -89,43 +93,19 @@ class VideosViewController: UICollectionViewController {
   // MARK: - UICollectionViewDataSource
 
   override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    if collectionView is VideoRowCollectionView {
-      return 1
-    } else {
-      return videos.count
-    }
+    return videoRows.count
   }
 
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    switch collectionView {
-    case let rowCollectionView as VideoRowCollectionView:
-      if let section = sectionForRowCellectionView(rowCollectionView) {
-        return videos[section].count
-      } else {
-        return 0
-      }
-    default:
-      return 1
-    }
+    return 1
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    switch collectionView {
-    case let rowCollectionView as VideoRowCollectionView:
-      let cell = rowCollectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
-      if let section = sectionForRowCellectionView(rowCollectionView) {
-        (cell as? VideoCell)?.configure(withVideo: videos[section][indexPath.row])
-      }
-      return cell
-
-    default:
-      let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoRowContainerCell.self), forIndexPath: indexPath)
-      if let rowCollectionView = (cell as? VideoRowContainerCell)?.collectionView {
-        rowCollectionView.dataSource = self
-        rowCollectionView.delegate = self
-      }
-      return cell
-    }
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoRowContainerCell.self), forIndexPath: indexPath)
+    let rowCollectionView = videoRows[indexPath.section].collectionView
+    rowCollectionView.delegate = self
+    (cell as? VideoRowContainerCell)?.configure(withEmbeddedCollectionView: rowCollectionView)
+    return cell
   }
 
   // MARK: - UICollectionViewDelegate
@@ -133,7 +113,7 @@ class VideosViewController: UICollectionViewController {
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     guard
       let section = sectionForRowCellectionView(collectionView as? VideoRowCollectionView),
-      let youtube = NSURL(string: videos[section][indexPath.row].youtube),
+      let youtube = NSURL(string: videoRows[section].videos[indexPath.row].youtube),
       let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtube)?["medium"] as? String,
       let url = NSURL(string: medium)
     else {

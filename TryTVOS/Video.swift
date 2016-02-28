@@ -28,11 +28,13 @@ import Foundation
 import Freddy
 
 struct Video {
+
   let id: Int
   let title: String
   let description: String
   let youtube: String
   let cover: Cover?
+
 }
 
 extension Video {
@@ -52,9 +54,11 @@ extension Video {
 
 
 struct Cover {
+
   let large: String
   let medium: String
   let thumb: String
+
 }
 
 extension Cover {
