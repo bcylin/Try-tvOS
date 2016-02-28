@@ -1,5 +1,5 @@
 //
-//  VideoCategoryCell.swift
+//  VideoRowContainerCell.swift
 //  TryTVOS
 //
 //  Created by Ben on 26/02/2016.
@@ -26,7 +26,7 @@
 
 import UIKit
 
-class VideoCategoryCell: UICollectionViewCell {
+class VideoRowContainerCell: UICollectionViewCell {
 
   let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 

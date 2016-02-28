@@ -69,7 +69,7 @@ class VideosViewController: UICollectionViewController {
 
   override func loadView() {
     super.loadView()
-    collectionView?.registerClass(VideoCategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCategoryCell.self))
+    collectionView?.registerClass(VideoRowContainerCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoRowContainerCell.self))
     collectionView?.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
   }
 
@@ -101,7 +101,7 @@ class VideosViewController: UICollectionViewController {
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCategoryCell.self), forIndexPath: indexPath)
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoRowContainerCell.self), forIndexPath: indexPath)
     cell.layer.borderWidth = 1
     return cell
   }

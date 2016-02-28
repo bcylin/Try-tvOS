@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
-		B5AEEE2E1C80A1FE001CF112 /* VideoCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE2D1C80A1FE001CF112 /* VideoCategoryCell.swift */; };
+		B5AEEE2E1C80A1FE001CF112 /* VideoRowContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */; };
 		B5BA61891C77431400548B38 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA61881C77431400548B38 /* VideoCell.swift */; };
 		B5BA618B1C7748B900548B38 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618A1C7748B900548B38 /* Video.swift */; };
 		B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */; };
@@ -32,7 +32,7 @@
 		2BD09092652BB6C0A969FF39 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5AEEE2D1C80A1FE001CF112 /* VideoCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCategoryCell.swift; sourceTree = "<group>"; };
+		B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowContainerCell.swift; sourceTree = "<group>"; };
 		B5BA61881C77431400548B38 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		B5BA618A1C7748B900548B38 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerController.swift; sourceTree = "<group>"; };
@@ -109,9 +109,9 @@
 				B5F7BF521BA9C95F00A75099 /* Assets.xcassets */,
 				B5F7BF541BA9C95F00A75099 /* Info.plist */,
 				B5BA618A1C7748B900548B38 /* Video.swift */,
-				B5AEEE2D1C80A1FE001CF112 /* VideoCategoryCell.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 				B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */,
+				B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */,
 				B5F7BF4D1BA9C95F00A75099 /* VideosViewController.swift */,
 			);
 			path = TryTVOS;
@@ -277,9 +277,9 @@
 			files = (
 				B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */,
 				B5BA618B1C7748B900548B38 /* Video.swift in Sources */,
-				B5AEEE2E1C80A1FE001CF112 /* VideoCategoryCell.swift in Sources */,
 				B5BA61891C77431400548B38 /* VideoCell.swift in Sources */,
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,
+				B5AEEE2E1C80A1FE001CF112 /* VideoRowContainerCell.swift in Sources */,
 				B5F7BF4E1BA9C95F00A75099 /* VideosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
