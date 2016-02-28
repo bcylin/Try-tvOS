@@ -1,8 +1,8 @@
 //
-//  VideoRowContainerCell.swift
+//  Metrics.swift
 //  TryTVOS
 //
-//  Created by Ben on 26/02/2016.
+//  Created by Ben on 28/02/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,40 +26,26 @@
 
 import UIKit
 
-class VideoRowContainerCell: UICollectionViewCell {
+struct Metrics {
 
-  let collectionView = VideoRowCollectionView()
-
-  // MARK: - Initialization
-
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setUpSubviews()
+  static var horizontalFlowLayout: UICollectionViewFlowLayout {
+    let _horizontal = UICollectionViewFlowLayout()
+    _horizontal.scrollDirection = .Horizontal
+    _horizontal.sectionInset = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 75)
+    _horizontal.minimumInteritemSpacing = 0
+    _horizontal.minimumLineSpacing = 75
+    _horizontal.itemSize = CGSize(width: 300, height: 300)
+    return _horizontal
   }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setUpSubviews()
-  }
-
-  // MARK: - UIKit
-
-  override var preferredFocusedView: UIView? {
-    return collectionView
-  }
-
-  // MARK: - Private Methods
-
-  private func setUpSubviews() {
-    clipsToBounds = false
-    contentView.addSubview(collectionView)
-    collectionView.rowContainerCell = self
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-
-    collectionView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
-    collectionView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    collectionView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
-    collectionView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+  static var verticalFlowLayout: UICollectionViewFlowLayout {
+    let _vertical = UICollectionViewFlowLayout()
+    _vertical.scrollDirection = .Vertical
+    _vertical.sectionInset = UIEdgeInsets(top: 25, left: 0, bottom: 25, right: 0)
+    _vertical.minimumInteritemSpacing = 0
+    _vertical.minimumLineSpacing = 75
+    _vertical.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 300)
+    return _vertical
   }
 
 }

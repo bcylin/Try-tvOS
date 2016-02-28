@@ -32,27 +32,7 @@ import Keys
 
 class VideosViewController: UICollectionViewController {
 
-  private static let horizontalFlowLayout: UICollectionViewFlowLayout = {
-    let _horizontal = UICollectionViewFlowLayout()
-    _horizontal.scrollDirection = .Horizontal
-    _horizontal.sectionInset = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 75)
-    _horizontal.minimumInteritemSpacing = 75
-    _horizontal.minimumLineSpacing = 0
-    _horizontal.itemSize = CGSize(width: 300, height: 300)
-    return _horizontal
-  }()
-
-  private static let verticalFlowLayout: UICollectionViewFlowLayout = {
-    let _vertical = UICollectionViewFlowLayout()
-    _vertical.scrollDirection = .Vertical
-    _vertical.sectionInset = UIEdgeInsetsZero
-    _vertical.minimumInteritemSpacing = 75
-    _vertical.minimumLineSpacing = 75
-    _vertical.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 300)
-    return _vertical
-  }()
-
-  private var videos = [Video]() {
+  private var videos = [[Video]]() {
     didSet {
       collectionView?.reloadData()
     }
@@ -61,7 +41,7 @@ class VideosViewController: UICollectionViewController {
   // MARK: - Initialization
 
   convenience init() {
-    self.init(collectionViewLayout: self.dynamicType.verticalFlowLayout)
+    self.init(collectionViewLayout: Metrics.verticalFlowLayout)
     title = "Videos"
   }
 
@@ -70,7 +50,6 @@ class VideosViewController: UICollectionViewController {
   override func loadView() {
     super.loadView()
     collectionView?.registerClass(VideoRowContainerCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoRowContainerCell.self))
-    collectionView?.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
   }
 
   override func viewDidLoad() {
@@ -85,10 +64,23 @@ class VideosViewController: UICollectionViewController {
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          self.videos = try json.array().map(Video.init)
+          self.videos = self.videos + [try json.array("videos").map(Video.init)]
         } catch {
           #if DEBUG
           print(error)
+          #endif
+        }
+    }
+
+    Alamofire.request(.GET, keys.baseAPIURL() + keys.videosAPIPath())
+      .responseJSON { response in
+        guard let data = response.data else { return }
+        do {
+          let json = try JSON(data: data)
+          self.videos = self.videos + [try json.array().map(Video.init)]
+        } catch {
+          #if DEBUG
+            print(error)
           #endif
         }
     }
@@ -96,29 +88,74 @@ class VideosViewController: UICollectionViewController {
 
   // MARK: - UICollectionViewDataSource
 
+  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    if collectionView is VideoRowCollectionView {
+      return 1
+    } else {
+      return videos.count
+    }
+  }
+
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return videos.count
+    switch collectionView {
+    case let rowCollectionView as VideoRowCollectionView:
+      if let section = sectionForRowCellectionView(rowCollectionView) {
+        return videos[section].count
+      } else {
+        return 0
+      }
+    default:
+      return 1
+    }
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoRowContainerCell.self), forIndexPath: indexPath)
-    cell.layer.borderWidth = 1
-    return cell
+    switch collectionView {
+    case let rowCollectionView as VideoRowCollectionView:
+      let cell = rowCollectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
+      if let section = sectionForRowCellectionView(rowCollectionView) {
+        (cell as? VideoCell)?.configure(withVideo: videos[section][indexPath.row])
+      }
+      return cell
+
+    default:
+      let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoRowContainerCell.self), forIndexPath: indexPath)
+      if let rowCollectionView = (cell as? VideoRowContainerCell)?.collectionView {
+        rowCollectionView.dataSource = self
+        rowCollectionView.delegate = self
+      }
+      return cell
+    }
   }
 
   // MARK: - UICollectionViewDelegate
 
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     guard
-      let youtube = NSURL(string: videos[indexPath.row].youtube),
+      let section = sectionForRowCellectionView(collectionView as? VideoRowCollectionView),
+      let youtube = NSURL(string: videos[section][indexPath.row].youtube),
       let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtube)?["medium"] as? String,
       let url = NSURL(string: medium)
-      else {
-        return
+    else {
+      return
     }
 
     let player = VideoPlayerController(url: url)
     navigationController?.pushViewController(player, animated: true)
+  }
+
+  override func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    // Focus VideoCells inside VideoRowCollectionView instead of VideoRowContainerCell in self.collectionView.
+    return collectionView is VideoRowCollectionView
+  }
+
+  // MARK: - Private Methods
+
+  private func sectionForRowCellectionView(collectionView: VideoRowCollectionView?) -> Int? {
+    if let rowCell = collectionView?.rowContainerCell, let section = self.collectionView?.indexPathForCell(rowCell)?.section {
+      return section
+    }
+    return nil
   }
 
 }
