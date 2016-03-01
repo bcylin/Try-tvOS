@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
+		B52E9CD61C85F34F00C9AB2A /* VideoRowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */; };
 		B5AAAE5F1C85EFC4002DDFC8 /* VideoRowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AAAE5E1C85EFC4002DDFC8 /* VideoRowViewController.swift */; };
 		B5AEEE2E1C80A1FE001CF112 /* VideoRowContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */; };
 		B5AEEE301C82D42E001CF112 /* VideoRowCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */; };
@@ -35,6 +36,7 @@
 		2BD09092652BB6C0A969FF39 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowTitleView.swift; sourceTree = "<group>"; };
 		B5AAAE5E1C85EFC4002DDFC8 /* VideoRowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowViewController.swift; sourceTree = "<group>"; };
 		B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowContainerCell.swift; sourceTree = "<group>"; };
 		B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowCollectionView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 				B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */,
 				B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */,
+				B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,
 				B5AEEE301C82D42E001CF112 /* VideoRowCollectionView.swift in Sources */,
 				B5AEEE2E1C80A1FE001CF112 /* VideoRowContainerCell.swift in Sources */,
+				B52E9CD61C85F34F00C9AB2A /* VideoRowTitleView.swift in Sources */,
 				B5AAAE5F1C85EFC4002DDFC8 /* VideoRowViewController.swift in Sources */,
 				B5F7BF4E1BA9C95F00A75099 /* VideosViewController.swift in Sources */,
 			);

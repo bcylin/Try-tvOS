@@ -50,6 +50,10 @@ class VideosViewController: UICollectionViewController {
   override func loadView() {
     super.loadView()
     collectionView?.registerClass(VideoRowContainerCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoRowContainerCell.self))
+    collectionView?.registerClass(VideoRowTitleView.self,
+      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+      withReuseIdentifier: NSStringFromClass(VideoRowTitleView.self)
+    )
   }
 
   override func viewDidLoad() {
@@ -65,8 +69,9 @@ class VideosViewController: UICollectionViewController {
         do {
           let json = try JSON(data: data)
           let features = VideoRowViewController(name: "Features", videos: try json.array("videos").map(Video.init))
+          let indexSet = NSIndexSet(index: self.videoRows.count)
           self.videoRows.append(features)
-          self.collectionView?.reloadData()
+          self.collectionView?.reloadSections(indexSet)
         } catch {
           #if DEBUG
           print(error)
@@ -80,8 +85,9 @@ class VideosViewController: UICollectionViewController {
         do {
           let json = try JSON(data: data)
           let videos = VideoRowViewController(name: "Videos", videos: try json.array().map(Video.init))
+          let indexSet = NSIndexSet(index: self.videoRows.count)
           self.videoRows.append(videos)
-          self.collectionView?.reloadData()
+          self.collectionView?.reloadSections(indexSet)
         } catch {
           #if DEBUG
             print(error)
@@ -106,6 +112,13 @@ class VideosViewController: UICollectionViewController {
     rowCollectionView.delegate = self
     (cell as? VideoRowContainerCell)?.configure(withEmbeddedCollectionView: rowCollectionView)
     return cell
+  }
+
+  override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(VideoRowTitleView.self), forIndexPath: indexPath)
+    let row = videoRows[indexPath.section]
+    (header as? VideoRowTitleView)?.textLabel.text = row.title
+    return header
   }
 
   // MARK: - UICollectionViewDelegate
