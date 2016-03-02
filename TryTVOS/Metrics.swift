@@ -28,7 +28,7 @@ import UIKit
 
 struct Metrics {
 
-  static let EdgePadding = UIEdgeInsets(top: 0, left: 90, bottom: 25, right: 90)
+  static let EdgePadding = UIEdgeInsets(top: 0, left: 90, bottom: 0, right: 90)
 
   static var horizontalFlowLayout: UICollectionViewFlowLayout {
     let _horizontal = UICollectionViewFlowLayout()
