@@ -28,15 +28,15 @@ import UIKit
 
 struct Metrics {
 
-  static let EdgePadding = UIEdgeInsets(top: 25, left: 75, bottom: 25, right: 75)
+  static let EdgePadding = UIEdgeInsets(top: 0, left: 90, bottom: 0, right: 90)
 
   static var horizontalFlowLayout: UICollectionViewFlowLayout {
     let _horizontal = UICollectionViewFlowLayout()
     _horizontal.scrollDirection = .Horizontal
     _horizontal.sectionInset = UIEdgeInsets(top: 0, left: EdgePadding.left, bottom: 0, right: EdgePadding.right)
     _horizontal.minimumInteritemSpacing = 0
-    _horizontal.minimumLineSpacing = 75
-    _horizontal.itemSize = CGSize(width: 300, height: 300)
+    _horizontal.minimumLineSpacing = 50
+    _horizontal.itemSize = CGSize(width: 308, height: 308)
     return _horizontal
   }
 
@@ -45,9 +45,9 @@ struct Metrics {
     _vertical.scrollDirection = .Vertical
     _vertical.sectionInset = UIEdgeInsets(top: EdgePadding.top, left: 0, bottom: EdgePadding.bottom, right: 0)
     _vertical.minimumInteritemSpacing = 0
-    _vertical.minimumLineSpacing = 75
+    _vertical.minimumLineSpacing = 50
     _vertical.headerReferenceSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 100)
-    _vertical.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 300)
+    _vertical.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 308)
     return _vertical
   }
 

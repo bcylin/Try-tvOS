@@ -30,7 +30,7 @@ class VideoRowTitleView: UICollectionReusableView {
 
   private(set) lazy var textLabel: UILabel = {
     let _label = UILabel()
-    _label.font = UIFont.boldSystemFontOfSize(32)
+    _label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
     return _label
   }()
 

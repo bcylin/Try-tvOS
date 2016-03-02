@@ -31,6 +31,14 @@ class VideoCell: UICollectionViewCell {
 
   let imageView = UIImageView()
 
+  private(set) lazy var textLabel: UILabel = {
+    let _label = UILabel()
+    _label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    _label.textColor = UIColor.grayColor()
+    _label.textAlignment = .Center
+    return _label
+  }()
+
   // MARK: - Initialization
 
   override init(frame: CGRect) {
@@ -47,8 +55,28 @@ class VideoCell: UICollectionViewCell {
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    imageView.image = nil
     imageView.kf_cancelDownloadTask()
+    imageView.image = nil
+    textLabel.text = nil
+  }
+
+  // MARK: - UIFocusEnvironment
+
+  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    let restored = (context.previouslyFocusedView == self)
+
+    let color = restored ? UIColor.grayColor() : UIColor.whiteColor()
+    let transform = restored ? CGAffineTransformIdentity : CGAffineTransformMakeTranslation(0, 15)
+
+    let pointSize = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline).pointSize
+    let descriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleSubheadline)
+    let font = restored ? UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline) : UIFont(descriptor: descriptor, size: pointSize + 5)
+
+    coordinator.addCoordinatedAnimations({
+      self.textLabel.textColor = color
+      self.textLabel.transform = transform
+      self.textLabel.font = font
+    }, completion: nil)
   }
 
   // MARK: - Private Methods
@@ -56,15 +84,22 @@ class VideoCell: UICollectionViewCell {
   private func setUpAppearance() {
     clipsToBounds = false
     imageView.adjustsImageWhenAncestorFocused = true
+
     contentView.addSubview(imageView)
+    contentView.addSubview(textLabel)
 
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
     imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
     imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+    imageView.heightAnchor.constraintEqualToAnchor(contentView.widthAnchor, multiplier: 3/4).active = true
 
-    backgroundColor = UIColor.lightGrayColor()
+    textLabel.translatesAutoresizingMaskIntoConstraints = false
+    textLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 20).active = true
+    textLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
+    textLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+
+    backgroundColor = UIColor.clearColor()
   }
 
   // MARK: - Public Methods
@@ -73,6 +108,7 @@ class VideoCell: UICollectionViewCell {
     if let mediumURL = video.cover?.medium, let url = NSURL(string: mediumURL) {
       imageView.kf_setImageWithURL(url)
     }
+    textLabel.text = video.title
   }
 
 }
