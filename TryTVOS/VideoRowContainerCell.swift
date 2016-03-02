@@ -1,8 +1,8 @@
 //
-//  VideoCell.swift
+//  VideoRowContainerCell.swift
 //  TryTVOS
 //
-//  Created by Ben on 19/02/2016.
+//  Created by Ben on 26/02/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,54 +25,50 @@
 //
 
 import UIKit
-import Kingfisher
 
-class VideoCell: UICollectionViewCell {
+class VideoRowContainerCell: UICollectionViewCell {
 
-  let imageView = UIImageView()
+  var collectionView: UICollectionView?
 
   // MARK: - Initialization
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    setUpAppearance()
+    clipsToBounds = false
   }
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    setUpAppearance()
+    clipsToBounds = false
   }
 
-  // MARK: - UICollectionViewCell
+  // MARK: - UIKit
+
+  override var preferredFocusedView: UIView? {
+    return collectionView
+  }
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    imageView.image = nil
-    imageView.kf_cancelDownloadTask()
-  }
-
-  // MARK: - Private Methods
-
-  private func setUpAppearance() {
-    clipsToBounds = false
-    imageView.adjustsImageWhenAncestorFocused = true
-    contentView.addSubview(imageView)
-
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
-    imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
-    imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
-
-    backgroundColor = UIColor.lightGrayColor()
+    collectionView?.removeFromSuperview()
+    collectionView = nil
   }
 
   // MARK: - Public Methods
 
-  func configure(withVideo video: Video) {
-    if let mediumURL = video.cover?.medium, let url = NSURL(string: mediumURL) {
-      imageView.kf_setImageWithURL(url)
-    }
+  func configure(withEmbeddedCollectionView collectionView: VideoRowCollectionView) {
+    collectionView.rowContainerCell = self
+
+    self.collectionView?.removeFromSuperview()
+    self.collectionView = collectionView
+
+    contentView.addSubview(collectionView)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+    collectionView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
+    collectionView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
+    collectionView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
+    collectionView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
   }
 
 }

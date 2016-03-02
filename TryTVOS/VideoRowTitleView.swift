@@ -1,9 +1,9 @@
 //
-//  VideoCell.swift
+//  VideoRowTitleView.swift
 //  TryTVOS
 //
-//  Created by Ben on 19/02/2016.
-//  Copyright © 2016 bcylin.
+//  Created by Ben on 01/03/2016.
+//  Copyright © 2016 bcylin. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,54 +25,34 @@
 //
 
 import UIKit
-import Kingfisher
 
-class VideoCell: UICollectionViewCell {
+class VideoRowTitleView: UICollectionReusableView {
 
-  let imageView = UIImageView()
-
-  // MARK: - Initialization
+  private(set) lazy var textLabel: UILabel = {
+    let _label = UILabel()
+    _label.font = UIFont.boldSystemFontOfSize(32)
+    return _label
+  }()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    setUpAppearance()
+    setUpSubviews()
   }
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    setUpAppearance()
-  }
-
-  // MARK: - UICollectionViewCell
-
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    imageView.image = nil
-    imageView.kf_cancelDownloadTask()
+    setUpSubviews()
   }
 
   // MARK: - Private Methods
 
-  private func setUpAppearance() {
-    clipsToBounds = false
-    imageView.adjustsImageWhenAncestorFocused = true
-    contentView.addSubview(imageView)
+  private func setUpSubviews() {
+    addSubview(textLabel)
+    textLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
-    imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
-    imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
-
-    backgroundColor = UIColor.lightGrayColor()
-  }
-
-  // MARK: - Public Methods
-
-  func configure(withVideo video: Video) {
-    if let mediumURL = video.cover?.medium, let url = NSURL(string: mediumURL) {
-      imageView.kf_setImageWithURL(url)
-    }
+    textLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    textLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
+    textLabel.trailingAnchor.constraintLessThanOrEqualToAnchor(trailingAnchor).active = true
   }
 
 }

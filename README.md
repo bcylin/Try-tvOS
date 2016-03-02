@@ -11,15 +11,15 @@ bundle install
 pod install
 ```
 
-* `pod install` will prompt for the key `VideoAPIPath`, which is required to run the app:
+* `pod install` will prompt for `BaseAPIURL`, `VideosAPIPath` and `FeaturesAPIPath`, which are required to run the app:
 
   ```
 CocoaPods-Keys has detected a keys mismatch for your setup.
-What is the key for VideoAPIPath
+What is the key for BaseAPIURL
 >
 ```
 
-  > `VideoAPIPath` is hidden due to proprietary reasons. Any API output that contains the matched keys will suffice.
+  > API details are hidden due to proprietary reasons. Any API output that contains the matched keys will suffice.
 
 ## API Response
 

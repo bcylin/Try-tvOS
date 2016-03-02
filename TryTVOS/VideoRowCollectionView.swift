@@ -1,8 +1,8 @@
 //
-//  Video.swift
+//  VideoRowCollectionView.swift
 //  TryTVOS
 //
-//  Created by Ben on 19/02/2016.
+//  Created by Ben on 28/02/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,49 +24,11 @@
 //  SOFTWARE.
 //
 
-import Foundation
-import Freddy
+import UIKit
 
-struct Video {
+/// An abstract class to distinct different collection views.
+class VideoRowCollectionView: UICollectionView {
 
-  let id: Int
-  let title: String
-  let description: String
-  let youtube: String
-  let cover: Cover?
-
-}
-
-extension Video {
-
-  init(json value: JSON) throws {
-    id = try value.int("id")
-    title = try value.string("title")
-    description = try value.string("description")
-    youtube = try value.string("embed_url")
-    cover = try value["image"].map(Cover.init)
-  }
-
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-struct Cover {
-
-  let large: String
-  let medium: String
-  let thumb: String
-
-}
-
-extension Cover {
-
-  init(json value: JSON) throws {
-    large = try value.string("url")
-    medium = try value.string("medium", "url")
-    thumb = try value.string("thumb", "url")
-  }
+  weak var rowContainerCell: UICollectionViewCell?
 
 }

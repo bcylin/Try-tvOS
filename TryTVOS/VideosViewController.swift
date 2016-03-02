@@ -32,25 +32,7 @@ import Keys
 
 class VideosViewController: UICollectionViewController {
 
-  static let numberOfColumns = 4
-
-  static let defaultFlowLayout: UICollectionViewFlowLayout = {
-    let _flowLayout = UICollectionViewFlowLayout()
-    _flowLayout.sectionInset = UIEdgeInsets(top: 75, left: 100, bottom: 75, right: 100)
-    _flowLayout.minimumInteritemSpacing = 75
-    _flowLayout.minimumLineSpacing = 75
-
-    var width = UIScreen.mainScreen().bounds.width
-    width -= _flowLayout.sectionInset.left
-    width -= _flowLayout.sectionInset.right
-    width -= _flowLayout.minimumInteritemSpacing * CGFloat(numberOfColumns - 1)
-    width /= CGFloat(numberOfColumns)
-    _flowLayout.itemSize = CGSize(width: width, height: width * 9 / 16)
-
-    return _flowLayout
-  }()
-
-  private var videos = [Video]() {
+  private var videoRows = [VideoRowViewController]() {
     didSet {
       collectionView?.reloadData()
     }
@@ -59,7 +41,7 @@ class VideosViewController: UICollectionViewController {
   // MARK: - Initialization
 
   convenience init() {
-    self.init(collectionViewLayout: self.dynamicType.defaultFlowLayout)
+    self.init(collectionViewLayout: Metrics.verticalFlowLayout)
     title = "Videos"
   }
 
@@ -67,7 +49,11 @@ class VideosViewController: UICollectionViewController {
 
   override func loadView() {
     super.loadView()
-    collectionView?.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
+    collectionView?.registerClass(VideoRowContainerCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoRowContainerCell.self))
+    collectionView?.registerClass(VideoRowTitleView.self,
+      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+      withReuseIdentifier: NSStringFromClass(VideoRowTitleView.self)
+    )
   }
 
   override func viewDidLoad() {
@@ -77,15 +63,34 @@ class VideosViewController: UICollectionViewController {
     print(keys.videoAPIPath())
     #endif
 
-    Alamofire.request(.GET, keys.videoAPIPath())
+    Alamofire.request(.GET, keys.baseAPIURL() + keys.featuresAPIPath())
       .responseJSON { response in
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          self.videos = try json.array().map(Video.init)
+          let features = VideoRowViewController(name: "Features", videos: try json.array("videos").map(Video.init))
+          let indexSet = NSIndexSet(index: self.videoRows.count)
+          self.videoRows.append(features)
+          self.collectionView?.reloadSections(indexSet)
         } catch {
           #if DEBUG
           print(error)
+          #endif
+        }
+    }
+
+    Alamofire.request(.GET, keys.baseAPIURL() + keys.videosAPIPath())
+      .responseJSON { response in
+        guard let data = response.data else { return }
+        do {
+          let json = try JSON(data: data)
+          let videos = VideoRowViewController(name: "Videos", videos: try json.array().map(Video.init))
+          let indexSet = NSIndexSet(index: self.videoRows.count)
+          self.videoRows.append(videos)
+          self.collectionView?.reloadSections(indexSet)
+        } catch {
+          #if DEBUG
+            print(error)
           #endif
         }
     }
@@ -93,29 +98,57 @@ class VideosViewController: UICollectionViewController {
 
   // MARK: - UICollectionViewDataSource
 
+  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    return videoRows.count
+  }
+
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return videos.count
+    return 1
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
-    (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoRowContainerCell.self), forIndexPath: indexPath)
+    let rowCollectionView = videoRows[indexPath.section].collectionView
+    rowCollectionView.delegate = self
+    (cell as? VideoRowContainerCell)?.configure(withEmbeddedCollectionView: rowCollectionView)
     return cell
+  }
+
+  override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(VideoRowTitleView.self), forIndexPath: indexPath)
+    let row = videoRows[indexPath.section]
+    (header as? VideoRowTitleView)?.textLabel.text = row.title
+    return header
   }
 
   // MARK: - UICollectionViewDelegate
 
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     guard
-      let youtube = NSURL(string: videos[indexPath.row].youtube),
+      let section = sectionForRowCellectionView(collectionView as? VideoRowCollectionView),
+      let youtube = NSURL(string: videoRows[section].videos[indexPath.row].youtube),
       let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtube)?["medium"] as? String,
       let url = NSURL(string: medium)
-      else {
-        return
+    else {
+      return
     }
 
     let player = VideoPlayerController(url: url)
     navigationController?.pushViewController(player, animated: true)
+  }
+
+  override func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    // Focus VideoCells inside VideoRowCollectionView instead of VideoRowContainerCell in self.collectionView.
+    return collectionView is VideoRowCollectionView
+  }
+
+  // MARK: - Private Methods
+
+  private func sectionForRowCellectionView(collectionView: VideoRowCollectionView?) -> Int? {
+    if let rowCell = collectionView?.rowContainerCell, let section = self.collectionView?.indexPathForCell(rowCell)?.section {
+      return section
+    }
+    return nil
   }
 
 }
