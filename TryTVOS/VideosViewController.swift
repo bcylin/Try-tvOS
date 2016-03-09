@@ -27,7 +27,6 @@
 import UIKit
 import Alamofire
 import Freddy
-import HCYoutubeParser
 import Keys
 
 class VideosViewController: UICollectionViewController {
@@ -126,9 +125,7 @@ class VideosViewController: UICollectionViewController {
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     guard
       let section = sectionForRowCellectionView(collectionView as? VideoRowCollectionView),
-      let youtube = NSURL(string: videoRows[section].videos[indexPath.row].youtube),
-      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtube)?["medium"] as? String,
-      let url = NSURL(string: medium)
+      let url = videoRows[section].videos[indexPath.row].playerItemURL
     else {
       return
     }

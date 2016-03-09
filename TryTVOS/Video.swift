@@ -26,6 +26,7 @@
 
 import Foundation
 import Freddy
+import HCYoutubeParser
 
 struct Video {
 
@@ -35,16 +36,22 @@ struct Video {
   let youtube: String
   let cover: Cover?
 
-}
-
-extension Video {
-
   init(json value: JSON) throws {
     id = try value.int("id")
     title = try value.string("title")
     description = try value.string("description")
     youtube = try value.string("embed_url")
     cover = try value["image"].map(Cover.init)
+  }
+
+  var playerItemURL: NSURL? {
+    guard
+      let youtubeURL = NSURL(string: youtube),
+      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["medium"] as? String
+      else {
+        return nil
+    }
+    return NSURL(string: medium)
   }
 
 }
@@ -58,10 +65,6 @@ struct Cover {
   let large: String
   let medium: String
   let thumb: String
-
-}
-
-extension Cover {
 
   init(json value: JSON) throws {
     large = try value.string("url")
