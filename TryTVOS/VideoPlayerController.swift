@@ -29,10 +29,14 @@ import AVKit
 
 class VideoPlayerController: AVPlayerViewController {
 
-  convenience init(url: NSURL) {
+  convenience init(video: Video) {
     self.init(nibName: nil, bundle: nil)
+    guard let url = video.playerItemURL else { return }
+
     let playerItem = AVPlayerItem(URL: url)
+    playerItem.externalMetadata = [video.titleMetaData, video.descriptionMetaData]
     player = AVPlayer(playerItem: playerItem)
+
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: Selector("handlePlayerItemDidPlayToEndTime:"),
       name: AVPlayerItemDidPlayToEndTimeNotification,
@@ -48,11 +52,6 @@ class VideoPlayerController: AVPlayerViewController {
 
   // MARK: - UIViewController
 
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-    player?.play()
-  }
-
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     player?.pause()
@@ -61,7 +60,11 @@ class VideoPlayerController: AVPlayerViewController {
   // MARK: - NSNotification Callbacks
 
   @IBAction private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
-    navigationController?.popViewControllerAnimated(true)
+    if let navigationController = navigationController {
+      navigationController.popViewControllerAnimated(true)
+    } else if let presenter = presentingViewController {
+      presenter.dismissViewControllerAnimated(true, completion: nil)
+    }
   }
 
 }
