@@ -29,12 +29,15 @@ import AVKit
 
 class VideoPlayerController: AVPlayerViewController {
 
-  convenience init(video: Video) {
+  convenience init(video: Video, coverImage image: UIImage? = nil) {
     self.init(nibName: nil, bundle: nil)
     guard let url = video.playerItemURL else { return }
 
     let playerItem = AVPlayerItem(URL: url)
     playerItem.externalMetadata = [video.titleMetaData, video.descriptionMetaData]
+    if let cover = image {
+      playerItem.externalMetadata.append(cover.metadataItem)
+    }
     player = AVPlayer(playerItem: playerItem)
 
     NSNotificationCenter.defaultCenter().addObserver(self,
@@ -65,6 +68,25 @@ class VideoPlayerController: AVPlayerViewController {
     } else if let presenter = presentingViewController {
       presenter.dismissViewControllerAnimated(true, completion: nil)
     }
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+extension UIImage {
+
+  private static let JPEGLeastCompressionQuality = CGFloat(1)
+
+  var metadataItem: AVMetadataItem {
+    let _item = AVMutableMetadataItem()
+    _item.key = AVMetadataCommonKeyArtwork
+    _item.keySpace = AVMetadataKeySpaceCommon
+    _item.locale = NSLocale.currentLocale()
+    _item.value = UIImageJPEGRepresentation(self, UIImage.JPEGLeastCompressionQuality)
+    return _item
   }
 
 }

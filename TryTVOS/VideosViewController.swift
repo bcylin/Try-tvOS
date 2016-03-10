@@ -124,7 +124,8 @@ class VideosViewController: UICollectionViewController {
 
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     guard let section = sectionForRowCellectionView(collectionView as? VideoRowCollectionView) else { return }
-    let controller = VideoPlayerController(video: videoRows[section].videos[indexPath.row])
+    let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
+    let controller = VideoPlayerController(video: videoRows[section].videos[indexPath.row], coverImage: cell?.imageView.image)
     presentViewController(controller, animated: true) {
       controller.player?.play()
     }
