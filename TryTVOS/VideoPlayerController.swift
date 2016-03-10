@@ -29,10 +29,17 @@ import AVKit
 
 class VideoPlayerController: AVPlayerViewController {
 
-  convenience init(url: NSURL) {
+  convenience init(video: Video, coverImage image: UIImage? = nil) {
     self.init(nibName: nil, bundle: nil)
+    guard let url = video.playerItemURL else { return }
+
     let playerItem = AVPlayerItem(URL: url)
+    playerItem.externalMetadata = [video.titleMetaData, video.descriptionMetaData]
+    if let cover = image {
+      playerItem.externalMetadata.append(cover.metadataItem)
+    }
     player = AVPlayer(playerItem: playerItem)
+
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: Selector("handlePlayerItemDidPlayToEndTime:"),
       name: AVPlayerItemDidPlayToEndTimeNotification,
@@ -48,11 +55,6 @@ class VideoPlayerController: AVPlayerViewController {
 
   // MARK: - UIViewController
 
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-    player?.play()
-  }
-
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     player?.pause()
@@ -61,7 +63,30 @@ class VideoPlayerController: AVPlayerViewController {
   // MARK: - NSNotification Callbacks
 
   @IBAction private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
-    navigationController?.popViewControllerAnimated(true)
+    if let navigationController = navigationController {
+      navigationController.popViewControllerAnimated(true)
+    } else if let presenter = presentingViewController {
+      presenter.dismissViewControllerAnimated(true, completion: nil)
+    }
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+extension UIImage {
+
+  private static let JPEGLeastCompressionQuality = CGFloat(1)
+
+  var metadataItem: AVMetadataItem {
+    let _item = AVMutableMetadataItem()
+    _item.key = AVMetadataCommonKeyArtwork
+    _item.keySpace = AVMetadataKeySpaceCommon
+    _item.locale = NSLocale.currentLocale()
+    _item.value = UIImageJPEGRepresentation(self, UIImage.JPEGLeastCompressionQuality)
+    return _item
   }
 
 }
