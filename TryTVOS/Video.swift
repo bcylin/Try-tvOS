@@ -43,8 +43,8 @@ struct Video {
     title = try value.string("title")
     subtitle = try value.string("subtitle", ifNull: true)
     description = try value.string("description", ifNull: true)
-    youtube = try value.string("embed_url")
-    cover = try value["image"].map(Cover.init)
+    youtube = try value.string("youtube_url")
+    cover = try value["cover"].map(Cover.init)
   }
 
   var playerItemURL: NSURL? {
@@ -88,9 +88,9 @@ struct Cover {
   let thumb: String
 
   init(json value: JSON) throws {
-    large = try value.string("url")
-    medium = try value.string("medium", "url")
-    thumb = try value.string("thumb", "url")
+    large = try value.string("large_url")
+    medium = try value.string("medium_url")
+    thumb = try value.string("thumb_url")
   }
 
 }

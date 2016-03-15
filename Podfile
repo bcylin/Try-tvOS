@@ -14,5 +14,5 @@ pod "Kingfisher"
 
 plugin "cocoapods-keys", {
   project: "TryTVOS",
-  keys: ["BaseAPIURL", "VideosAPIPath", "FeaturesAPIPath"]
+  keys: ["BaseAPIURL"]
 }
