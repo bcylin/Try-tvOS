@@ -33,11 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let tabBarController = UITabBarController()
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: VideosViewController())
-    tabBarController.viewControllers = [navigatonController]
+    let navigatonController = UINavigationController(rootViewController: CategoryViewController())
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = tabBarController
+    window?.rootViewController = navigatonController
     window?.makeKeyAndVisible()
 
     return true

@@ -28,7 +28,7 @@ import UIKit
 
 struct Metrics {
 
-  static let EdgePadding = UIEdgeInsets(top: 0, left: 90, bottom: 0, right: 90)
+  static let EdgePadding = UIEdgeInsets(top: 60, left: 90, bottom: 60, right: 90)
 
   static var horizontalFlowLayout: UICollectionViewFlowLayout {
     let _horizontal = UICollectionViewFlowLayout()
@@ -43,12 +43,29 @@ struct Metrics {
   static var verticalFlowLayout: UICollectionViewFlowLayout {
     let _vertical = UICollectionViewFlowLayout()
     _vertical.scrollDirection = .Vertical
-    _vertical.sectionInset = UIEdgeInsets(top: EdgePadding.top, left: 0, bottom: EdgePadding.bottom, right: 0)
+    _vertical.sectionInset = UIEdgeInsetsZero
     _vertical.minimumInteritemSpacing = 0
     _vertical.minimumLineSpacing = 50
     _vertical.headerReferenceSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 100)
     _vertical.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: 308)
     return _vertical
+  }
+
+  static var gridFlowLayout: UICollectionViewFlowLayout {
+    let _grid = UICollectionViewFlowLayout()
+    _grid.scrollDirection = .Vertical
+    _grid.sectionInset = EdgePadding
+    _grid.minimumInteritemSpacing = 50
+    _grid.minimumLineSpacing = 100
+
+    let numberOfItemsPerRow = 5
+    let paddings = EdgePadding.left + EdgePadding.right
+    let spaces = _grid.minimumInteritemSpacing * CGFloat(numberOfItemsPerRow - 1)
+    let contentWidth = UIScreen.mainScreen().bounds.width - paddings - spaces
+    let itemWidth = contentWidth / CGFloat(numberOfItemsPerRow)
+    _grid.itemSize = CGSize(width: itemWidth, height: itemWidth * 3 / 4)
+
+    return _grid
   }
 
 }
