@@ -68,4 +68,13 @@ struct Metrics {
     return _grid
   }
 
+  static var showcaseLayout: UICollectionViewFlowLayout {
+    let _showcase = UICollectionViewFlowLayout()
+    _showcase.scrollDirection = .Horizontal
+    _showcase.sectionInset = EdgePadding
+    _showcase.minimumLineSpacing = 50
+    _showcase.itemSize = CGSize(width: 548, height: 548 * 3 / 4)
+    return _showcase
+  }
+
 }

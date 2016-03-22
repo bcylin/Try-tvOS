@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let tabBarController = UITabBarController()
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: CategoryViewController())
+    let navigatonController = UINavigationController(rootViewController: CategoriesViewController())
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window?.rootViewController = navigatonController
