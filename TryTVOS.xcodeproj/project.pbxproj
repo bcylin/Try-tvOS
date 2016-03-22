@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
 		B52E9CD61C85F34F00C9AB2A /* VideoRowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */; };
+		B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E39771CA1494000EB1EEE /* UIColor+TV.swift */; };
 		B5AAAE5F1C85EFC4002DDFC8 /* VideoRowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AAAE5E1C85EFC4002DDFC8 /* VideoRowViewController.swift */; };
 		B5AEEE2E1C80A1FE001CF112 /* VideoRowContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */; };
 		B5AEEE301C82D42E001CF112 /* VideoRowCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */; };
@@ -16,6 +17,7 @@
 		B5BA61891C77431400548B38 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA61881C77431400548B38 /* VideoCell.swift */; };
 		B5BA618B1C7748B900548B38 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618A1C7748B900548B38 /* Video.swift */; };
 		B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */; };
+		B5C591151CA04BA50096B985 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C591141CA04BA50096B985 /* HeaderView.swift */; };
 		B5DCF9341C985E1600D19FC0 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */; };
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF4E1BA9C95F00A75099 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4D1BA9C95F00A75099 /* VideosViewController.swift */; };
@@ -38,6 +40,7 @@
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowTitleView.swift; sourceTree = "<group>"; };
+		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
 		B5AAAE5E1C85EFC4002DDFC8 /* VideoRowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowViewController.swift; sourceTree = "<group>"; };
 		B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowContainerCell.swift; sourceTree = "<group>"; };
 		B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowCollectionView.swift; sourceTree = "<group>"; };
@@ -45,6 +48,7 @@
 		B5BA61881C77431400548B38 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		B5BA618A1C7748B900548B38 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerController.swift; sourceTree = "<group>"; };
+		B5C591141CA04BA50096B985 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		B5F7BF481BA9C95F00A75099 /* TryTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TryTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B53E39791CA1494600EB1EEE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B53E39771CA1494000EB1EEE /* UIColor+TV.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		B5AAAE5B1C85DD0A002DDFC8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +115,7 @@
 		B5AAAE5C1C85DD16002DDFC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B5C591141CA04BA50096B985 /* HeaderView.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 				B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */,
 				B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */,
@@ -114,10 +127,10 @@
 		B5AAAE5D1C85DD1D002DDFC8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */,
 				B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */,
 				B5AAAE5E1C85EFC4002DDFC8 /* VideoRowViewController.swift */,
 				B5F7BF4D1BA9C95F00A75099 /* VideosViewController.swift */,
-				B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -146,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				B5AAAE5D1C85DD1D002DDFC8 /* Controller */,
+				B53E39791CA1494600EB1EEE /* Extension */,
 				B5AAAE5B1C85DD0A002DDFC8 /* Model */,
 				B5AAAE5C1C85DD16002DDFC8 /* View */,
 				B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */,
@@ -315,7 +329,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */,
+				B5DCF9341C985E1600D19FC0 /* CategoryViewController.swift in Sources */,
+				B5C591151CA04BA50096B985 /* HeaderView.swift in Sources */,
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,
+				B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */,
 				B5BA618B1C7748B900548B38 /* Video.swift in Sources */,
 				B5BA61891C77431400548B38 /* VideoCell.swift in Sources */,
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,
@@ -323,7 +340,6 @@
 				B5AEEE2E1C80A1FE001CF112 /* VideoRowContainerCell.swift in Sources */,
 				B52E9CD61C85F34F00C9AB2A /* VideoRowTitleView.swift in Sources */,
 				B5AAAE5F1C85EFC4002DDFC8 /* VideoRowViewController.swift in Sources */,
-				B5DCF9341C985E1600D19FC0 /* CategoryViewController.swift in Sources */,
 				B5F7BF4E1BA9C95F00A75099 /* VideosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

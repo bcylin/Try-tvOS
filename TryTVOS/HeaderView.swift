@@ -1,8 +1,8 @@
 //
-//  VideoRowTitleView.swift
+//  HeaderView.swift
 //  TryTVOS
 //
-//  Created by Ben on 01/03/2016.
+//  Created by Ben on 21/03/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,14 +26,24 @@
 
 import UIKit
 
-class VideoRowTitleView: UICollectionReusableView {
+/// A customized view with a layout of `V:|-[icon][title]-(>=0)-[accessory]-|`.
+class HeaderView: UICollectionReusableView {
 
-  private(set) lazy var textLabel: UILabel = {
-    let _label = UILabel()
-    _label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-    _label.textColor = UIColor.tvTitleColor()
-    return _label
+  private(set) lazy var titleLabel: UILabel = {
+    let _title = UILabel()
+    _title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
+    _title.textColor = UIColor.tvTitleColor()
+    return _title
   }()
+
+  private(set) lazy var accessoryLabel: UILabel = {
+    let _accessory = UILabel()
+    _accessory.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
+    _accessory.textColor = UIColor.tvTitleColor()
+    return _accessory
+  }()
+
+  // MARK: - Initialization
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -48,13 +58,16 @@ class VideoRowTitleView: UICollectionReusableView {
   // MARK: - Private Methods
 
   private func setUpSubviews() {
-    backgroundColor = UIColor.tvNavigationBarColor()
-    addSubview(textLabel)
-    textLabel.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(titleLabel)
+    addSubview(accessoryLabel)
 
-    textLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
-    textLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
-    textLabel.trailingAnchor.constraintLessThanOrEqualToAnchor(trailingAnchor).active = true
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    accessoryLabel.translatesAutoresizingMaskIntoConstraints = false
+
+    titleLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
+    titleLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    accessoryLabel.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -Metrics.EdgePadding.right).active = true
+    accessoryLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
   }
 
 }

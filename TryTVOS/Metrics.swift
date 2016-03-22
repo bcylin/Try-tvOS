@@ -54,16 +54,16 @@ struct Metrics {
   static var gridFlowLayout: UICollectionViewFlowLayout {
     let _grid = UICollectionViewFlowLayout()
     _grid.scrollDirection = .Vertical
-    _grid.sectionInset = EdgePadding
+    _grid.sectionInset = UIEdgeInsets(top: 90, left: 80, bottom: 90, right: 80)
     _grid.minimumInteritemSpacing = 50
-    _grid.minimumLineSpacing = 100
+    _grid.minimumLineSpacing = 75
 
     let numberOfItemsPerRow = 5
     let paddings = EdgePadding.left + EdgePadding.right
     let spaces = _grid.minimumInteritemSpacing * CGFloat(numberOfItemsPerRow - 1)
     let contentWidth = UIScreen.mainScreen().bounds.width - paddings - spaces
     let itemWidth = contentWidth / CGFloat(numberOfItemsPerRow)
-    _grid.itemSize = CGSize(width: itemWidth, height: itemWidth * 3 / 4)
+    _grid.itemSize = CGSize(width: itemWidth, height: itemWidth * 3 / 4 + 60) // 60 pt for the text label
 
     return _grid
   }

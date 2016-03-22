@@ -1,8 +1,8 @@
 //
-//  VideoRowTitleView.swift
+//  UIColor+TV.swift
 //  TryTVOS
 //
-//  Created by Ben on 01/03/2016.
+//  Created by Ben on 22/03/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,36 +25,20 @@
 //
 
 import UIKit
+import Hue
 
-class VideoRowTitleView: UICollectionReusableView {
+extension UIColor {
 
-  private(set) lazy var textLabel: UILabel = {
-    let _label = UILabel()
-    _label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-    _label.textColor = UIColor.tvTitleColor()
-    return _label
-  }()
-
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setUpSubviews()
+  class func tvBackgroundColor() -> UIColor {
+    return UIColor.hex("#EFEDE8").colorWithAlphaComponent(0.8)
   }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setUpSubviews()
+  class func tvNavigationBarColor() -> UIColor {
+    return UIColor.hex("#EFEDE8")
   }
 
-  // MARK: - Private Methods
-
-  private func setUpSubviews() {
-    backgroundColor = UIColor.tvNavigationBarColor()
-    addSubview(textLabel)
-    textLabel.translatesAutoresizingMaskIntoConstraints = false
-
-    textLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
-    textLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
-    textLabel.trailingAnchor.constraintLessThanOrEqualToAnchor(trailingAnchor).active = true
+  class func tvTitleColor() -> UIColor {
+    return UIColor.hex("#746C68")
   }
 
 }

@@ -40,6 +40,13 @@ class CategoryViewController: UIViewController,
     }
   }
 
+  private lazy var headerView: HeaderView = {
+    let _headerView = HeaderView()
+    _headerView.titleLabel.text = "Title"
+    _headerView.accessoryLabel.text = "Category"
+    return _headerView
+  }()
+
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
@@ -53,8 +60,15 @@ class CategoryViewController: UIViewController,
   override func loadView() {
     super.loadView()
     navigationItem.titleView = UIView()
-    collectionView.frame = view.bounds
-    collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+
+    let divided = view.bounds.divide(200, fromEdge: .MinYEdge)
+    headerView.frame = divided.slice
+    headerView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
+    collectionView.frame = divided.remainder
+    collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
+    collectionView.backgroundColor = UIColor.tvBackgroundColor()
+
+    view.addSubview(headerView)
     view.addSubview(collectionView)
   }
 
