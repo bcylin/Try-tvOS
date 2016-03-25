@@ -59,7 +59,7 @@ class VideosViewController: UICollectionViewController {
     super.viewDidLoad()
     let keys = TrytvosKeys()
     #if DEBUG
-    print(keys.videoAPIPath())
+      print(keys.baseAPIURL())
     #endif
 
     Alamofire.request(.GET, keys.baseAPIURL() + "videos/latest.json")
@@ -73,7 +73,7 @@ class VideosViewController: UICollectionViewController {
           self.collectionView?.reloadSections(indexSet)
         } catch {
           #if DEBUG
-          print(error)
+            print(error)
           #endif
         }
     }
