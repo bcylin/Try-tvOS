@@ -26,6 +26,7 @@
 
 import UIKit
 import Alamofire
+import Freddy
 import Keys
 
 class CategoriesViewController: UIViewController,
@@ -33,7 +34,7 @@ class CategoriesViewController: UIViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
 
-  private var categories = [AnyObject]() {
+  private var categories = [Category]() {
     didSet {
       collectionView.reloadData()
     }
@@ -41,7 +42,7 @@ class CategoriesViewController: UIViewController,
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
-    _collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
+    _collectionView.registerClass(CategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(CategoryCell.self))
     _collectionView.dataSource = self
     _collectionView.delegate = self
     return _collectionView
@@ -65,8 +66,16 @@ class CategoriesViewController: UIViewController,
     super.viewDidLoad()
     Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories.json")
       .responseJSON { [weak self] response in
-        guard let _ = response.data else { return }
-        self?.categories = response.result.value?["categories"] as? [AnyObject] ?? []
+        guard let data = response.data else { return }
+        do {
+          print(response.result.value)
+          let json = try JSON(data: data)
+          self?.categories = try json.array("categories").map(Category.init)
+        } catch {
+          #if DEBUG
+            print(error)
+          #endif
+        }
     }
   }
 
@@ -82,8 +91,9 @@ class CategoriesViewController: UIViewController,
   }
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(UICollectionViewCell.self), forIndexPath: indexPath)
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
     cell.layer.borderWidth = 1
+    (cell as? CategoryCell)?.configure(withCategory: categories[indexPath.row])
     return cell
   }
 
