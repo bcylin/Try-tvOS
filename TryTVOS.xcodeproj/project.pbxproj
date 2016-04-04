@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
 		B52E9CD61C85F34F00C9AB2A /* VideoRowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */; };
+		B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */; };
 		B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E39771CA1494000EB1EEE /* UIColor+TV.swift */; };
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
@@ -21,6 +22,7 @@
 		B5BA618B1C7748B900548B38 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618A1C7748B900548B38 /* Video.swift */; };
 		B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */; };
 		B5C591151CA04BA50096B985 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C591141CA04BA50096B985 /* HeaderView.swift */; };
+		B5C85D041CA97981000AE0CF /* UIImage+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */; };
 		B5DCF9341C985E1600D19FC0 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */; };
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF4E1BA9C95F00A75099 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4D1BA9C95F00A75099 /* VideosViewController.swift */; };
@@ -43,6 +45,7 @@
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52E9CD51C85F34F00C9AB2A /* VideoRowTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRowTitleView.swift; sourceTree = "<group>"; };
+		B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Grid.swift"; sourceTree = "<group>"; };
 		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		B5BA618A1C7748B900548B38 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerController.swift; sourceTree = "<group>"; };
 		B5C591141CA04BA50096B985 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Grid.swift"; sourceTree = "<group>"; };
 		B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		B5F7BF481BA9C95F00A75099 /* TryTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TryTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		B53E39791CA1494600EB1EEE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */,
 				B53E39771CA1494000EB1EEE /* UIColor+TV.swift */,
 			);
 			name = Extension;
@@ -124,6 +129,7 @@
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
 				B5C591141CA04BA50096B985 /* HeaderView.swift */,
+				B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 				B5AEEE2F1C82D42E001CF112 /* VideoRowCollectionView.swift */,
 				B5AEEE2D1C80A1FE001CF112 /* VideoRowContainerCell.swift */,
@@ -342,9 +348,11 @@
 				B56D68E91CA564B00097D5D7 /* Category.swift in Sources */,
 				B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */,
 				B5DCF9341C985E1600D19FC0 /* CategoryViewController.swift in Sources */,
+				B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */,
 				B5C591151CA04BA50096B985 /* HeaderView.swift in Sources */,
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,
 				B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */,
+				B5C85D041CA97981000AE0CF /* UIImage+Grid.swift in Sources */,
 				B5BA618B1C7748B900548B38 /* Video.swift in Sources */,
 				B5BA61891C77431400548B38 /* VideoCell.swift in Sources */,
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,

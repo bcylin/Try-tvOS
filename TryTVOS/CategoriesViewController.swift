@@ -92,7 +92,6 @@ class CategoriesViewController: UIViewController,
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    cell.layer.borderWidth = 1
     (cell as? CategoryCell)?.configure(withCategory: categories[indexPath.row])
     return cell
   }

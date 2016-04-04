@@ -25,10 +25,47 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CategoryCell: UICollectionViewCell {
 
   let imageView = UIImageView()
+
+  private var urls = [Grid: NSURL]() {
+    didSet {
+      // Cancel previous tasks
+      for (corner, task) in tasks {
+        task.cancel()
+        tasks[corner] = nil
+      }
+      for (corner, url) in urls {
+        let downloading = ImageDownloader.defaultDownloader.downloadImageWithURL(url, progressBlock: nil) {
+          [weak self] image, error, imageURL, originalData in
+
+          self?.tasks[corner] = nil
+          guard let image = image where imageURL == url else {
+            return
+          }
+          self?.imageOperationQueue.addOperation(NSBlockOperation {
+            self?.setImage(image, atCorner: corner)
+          })
+        }
+        if let task = downloading {
+          tasks[corner] = task
+        }
+      }
+    }
+  }
+
+  private var tasks = [Grid: RetrieveImageDownloadTask]()
+
+  private lazy var imageOperationQueue: NSOperationQueue = {
+    let _queue = NSOperationQueue.mainQueue()
+    _queue.maxConcurrentOperationCount = 1
+    return _queue
+  }()
+
+  // MARK: - Initialization
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -40,10 +77,23 @@ class CategoryCell: UICollectionViewCell {
     setUpSubviews()
   }
 
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    for (index, task) in tasks {
+      task.cancel()
+      tasks[index] = nil
+    }
+    imageOperationQueue.cancelAllOperations()
+    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.grayColor())
+  }
+
   // MARK: - Private Methods
 
   private func setUpSubviews() {
     contentView.addSubview(imageView)
+    imageView.adjustsImageWhenAncestorFocused = true
+    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.grayColor())
+    imageView.contentMode = .ScaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
 
     imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
@@ -54,9 +104,36 @@ class CategoryCell: UICollectionViewCell {
     imageView.contentMode = .ScaleAspectFill
   }
 
+  private func setImage(image: UIImage, atCorner corner: Grid) {
+    let coverSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
+    var cover: UIImage!
+
+    if let currentImage = imageView.image where currentImage.size == coverSize {
+      cover = currentImage
+    } else {
+      cover = UIImage.image(withSize: coverSize, fillColor: UIColor.grayColor())
+    }
+
+    cover = cover.image(byReplacingImage: image, atCorner: corner)
+    UIView.transitionWithView(
+      imageView,
+      duration: 0.3,
+      options: [.TransitionCrossDissolve, .CurveEaseIn],
+      animations: {
+        self.imageView.image = cover
+      }, completion: nil
+    )
+  }
+
   // MARK: - Public Methods
 
   func configure(withCategory category: Category) {
+    var covers = [Grid: NSURL]()
+    for (index, value) in category.coverURLs.enumerate() {
+      guard let corner = Grid(rawValue: index), let url = NSURL(string: value) else { continue }
+      covers[corner] = url
+    }
+    urls = covers
   }
 
 }
