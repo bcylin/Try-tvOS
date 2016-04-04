@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
+//  Category.swift
 //  TryTVOS
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 25/03/2016.
+//  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,18 @@
 //  SOFTWARE.
 //
 
-import UIKit
+import Freddy
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+struct Category {
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
+  let id: Int
+  let name: String
+  let coverURLs: [String]
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: CategoriesViewController())
-
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = navigatonController
-    window?.makeKeyAndVisible()
-
-    return true
+  init(json value: JSON) throws {
+    id = try value.int("id")
+    name = try value.string("name")
+    coverURLs = try value.array("cover_urls").map(String.init)
   }
 
 }

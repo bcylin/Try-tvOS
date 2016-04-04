@@ -10,10 +10,10 @@ A demo tvOS app that plays YouTube videos.
 
   ```
 bundle install
-pod install
+bundle exec pod install
 ```
 
-* `pod install` will prompt for `BaseAPIURL`, `VideosAPIPath` and `FeaturesAPIPath`, which are required to run the app:
+* `pod install` will prompt for `BaseAPIURL`, which is required to run the app:
 
   ```
 CocoaPods-Keys has detected a keys mismatch for your setup.
@@ -25,23 +25,42 @@ What is the key for BaseAPIURL
 
 ## API Response
 
-The `Video` matches a JSON structure as follows:
+The response of `categories`:
 
-```
+```json
 {
-  id
-  title
-  description
-  embed_url // YouTube url
-  image {
-    url
-    medium {
-      url
+  "categories": [
+    {
+      "id": 1,
+      "name": "",
+      "cover_urls": [
+        "https://imag.es/1.png",
+        "https://imag.es/2.png",
+        "https://imag.es/3.png",
+        "https://imag.es/4.png"
+      ]
     }
-    thumb {
-      url
+  ]
+}
+```
+
+The response of `categories/:id/videos`:
+
+```json
+{
+  "name": "Category",
+  "videos": [
+    {
+      "id": 1,
+      "title": "Video",
+      "description": "",
+      "youtube_url": "",
+      "cover": {
+        "large_url": "https://imag.es/1920x1080.png",
+        "small_url": "https://imag.es/400x300.png"
+      }
     }
-  }
+  ]
 }
 ```
 

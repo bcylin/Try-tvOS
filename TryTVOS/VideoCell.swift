@@ -105,7 +105,7 @@ class VideoCell: UICollectionViewCell {
   // MARK: - Public Methods
 
   func configure(withVideo video: Video) {
-    if let mediumURL = video.cover?.medium, let url = NSURL(string: mediumURL) {
+    if let smallURL = video.cover?.small, let url = NSURL(string: smallURL) {
       imageView.kf_setImageWithURL(url)
     }
     textLabel.text = video.title

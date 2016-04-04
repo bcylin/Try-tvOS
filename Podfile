@@ -10,9 +10,10 @@ xcodeproj "TryTVOS"
 pod "Alamofire"
 pod "Freddy"
 pod "HCYoutubeParser"
+pod "Hue", git: "git@github.com:bcylin/Hue.git", branch: "support-tvos"
 pod "Kingfisher"
 
 plugin "cocoapods-keys", {
   project: "TryTVOS",
-  keys: ["BaseAPIURL", "VideosAPIPath", "FeaturesAPIPath"]
+  keys: ["BaseAPIURL"]
 }

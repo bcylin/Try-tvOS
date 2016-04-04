@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
+//  UIColor+TV.swift
 //  TryTVOS
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 22/03/2016.
+//  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,21 +25,20 @@
 //
 
 import UIKit
+import Hue
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+extension UIColor {
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
+  class func tvBackgroundColor() -> UIColor {
+    return UIColor.hex("#EFEDE8").colorWithAlphaComponent(0.8)
+  }
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: CategoriesViewController())
+  class func tvNavigationBarColor() -> UIColor {
+    return UIColor.hex("#EFEDE8")
+  }
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = navigatonController
-    window?.makeKeyAndVisible()
-
-    return true
+  class func tvTitleColor() -> UIColor {
+    return UIColor.hex("#746C68")
   }
 
 }

@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
+//  CGRect+Grid.swift
 //  TryTVOS
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 04/04/2016.
+//  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,20 +26,28 @@
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+enum Grid: Int {
+  case TopLeft, TopRight, BottomLeft, BottomRight
+}
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
+func == (lhs: Grid, rhs: Grid) -> Bool {
+  return lhs.rawValue == rhs.rawValue
+}
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: CategoriesViewController())
+extension CGRect {
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = navigatonController
-    window?.makeKeyAndVisible()
-
-    return true
+  func rect(bySize size: CGSize, atCorner corner: Grid) -> CGRect {
+    let target = CGSize(width: min(width, size.width), height: min(height, size.height))
+    switch corner {
+    case .TopLeft:
+      return divide(target.height, fromEdge: .MaxYEdge).remainder.divide(target.width, fromEdge: .MaxXEdge).remainder
+    case .TopRight:
+      return divide(target.height, fromEdge: .MaxYEdge).remainder.divide(target.width, fromEdge: .MaxXEdge).slice
+    case .BottomLeft:
+      return divide(target.height, fromEdge: .MaxYEdge).slice.divide(target.width, fromEdge: .MaxXEdge).remainder
+    case .BottomRight:
+      return divide(target.height, fromEdge: .MaxYEdge).slice.divide(target.width, fromEdge: .MaxXEdge).slice
+    }
   }
 
 }

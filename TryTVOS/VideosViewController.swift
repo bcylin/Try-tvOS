@@ -59,31 +59,31 @@ class VideosViewController: UICollectionViewController {
     super.viewDidLoad()
     let keys = TrytvosKeys()
     #if DEBUG
-    print(keys.videoAPIPath())
+      print(keys.baseAPIURL())
     #endif
 
-    Alamofire.request(.GET, keys.baseAPIURL() + keys.featuresAPIPath())
+    Alamofire.request(.GET, keys.baseAPIURL() + "videos/latest.json")
       .responseJSON { response in
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          let features = VideoRowViewController(name: "Features", videos: try json.array("videos").map(Video.init))
+          let features = VideoRowViewController(name: "Latest", videos: try json.array("videos").map(Video.init))
           let indexSet = NSIndexSet(index: self.videoRows.count)
           self.videoRows.append(features)
           self.collectionView?.reloadSections(indexSet)
         } catch {
           #if DEBUG
-          print(error)
+            print(error)
           #endif
         }
     }
 
-    Alamofire.request(.GET, keys.baseAPIURL() + keys.videosAPIPath())
+    Alamofire.request(.GET, keys.baseAPIURL() + "categories/1/videos.json")
       .responseJSON { response in
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          let videos = VideoRowViewController(name: "Videos", videos: try json.array().map(Video.init))
+          let videos = VideoRowViewController(name: "Category 1", videos: try json.array("videos").map(Video.init))
           let indexSet = NSIndexSet(index: self.videoRows.count)
           self.videoRows.append(videos)
           self.collectionView?.reloadSections(indexSet)

@@ -41,7 +41,7 @@ class VideoPlayerController: AVPlayerViewController {
     player = AVPlayer(playerItem: playerItem)
 
     NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: Selector("handlePlayerItemDidPlayToEndTime:"),
+      selector: #selector(handlePlayerItemDidPlayToEndTime(_:)),
       name: AVPlayerItemDidPlayToEndTimeNotification,
       object: playerItem
     )
@@ -62,7 +62,7 @@ class VideoPlayerController: AVPlayerViewController {
 
   // MARK: - NSNotification Callbacks
 
-  @IBAction private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
+  @objc private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
     if let navigationController = navigationController {
       navigationController.popViewControllerAnimated(true)
     } else if let presenter = presentingViewController {

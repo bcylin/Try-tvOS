@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
+//  UIImage+Grid.swift
 //  TryTVOS
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 28/03/2016.
+//  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,20 +26,33 @@
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+extension UIImage {
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
+  func image(byReplacingImage image: UIImage, atCorner corner: Grid) -> UIImage {
+    UIGraphicsBeginImageContextWithOptions(size, true, 0);
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: CategoriesViewController())
+    let canvas = CGRect(origin: CGPoint.zero, size: size)
+    self.drawInRect(canvas)
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = navigatonController
-    window?.makeKeyAndVisible()
+    let rect = canvas.rect(bySize: image.size, atCorner: corner)
+    image.drawInRect(rect)
 
-    return true
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return newImage
+  }
+
+  class func image(withSize size: CGSize, fillColor color: UIColor) -> UIImage {
+    UIGraphicsBeginImageContextWithOptions(size, true, 0)
+
+    color.setFill()
+    UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image
   }
 
 }
+
+
