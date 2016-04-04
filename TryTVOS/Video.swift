@@ -83,14 +83,12 @@ struct Video {
 
 struct Cover {
 
-  let large: String
-  let medium: String
-  let thumb: String
+  let large: String?
+  let small: String?
 
   init(json value: JSON) throws {
-    large = try value.string("large_url")
-    medium = try value.string("medium_url")
-    thumb = try value.string("thumb_url")
+    large = try value.string("large_url", ifNotFound: true)
+    small = try value.string("small_url", ifNotFound: true)
   }
 
 }
