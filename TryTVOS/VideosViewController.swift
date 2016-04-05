@@ -41,11 +41,18 @@ class VideosViewController: BlurBackgroundViewController,
     }
   }
 
+  private lazy var dropdownMenuView: MenuView = {
+    let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
+    _menu.backgroundColor = UIColor.tvMenuBarColor()
+    return _menu
+  }()
+
   private let headerView = CategoryHeaderView()
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
+    _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self
     _collectionView.delegate = self
     return _collectionView
@@ -72,9 +79,11 @@ class VideosViewController: BlurBackgroundViewController,
     collectionView.frame = divided.remainder
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
+    collectionView.layer.borderWidth = 1
     view.backgroundColor = UIColor.tvBackgroundColor()
     view.addSubview(headerView)
     view.addSubview(collectionView)
+    view.addSubview(dropdownMenuView)
   }
 
   override func viewDidLoad() {
@@ -101,6 +110,28 @@ class VideosViewController: BlurBackgroundViewController,
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  // MARK: - UIFocusEnvironment
+
+  override var preferredFocusedView: UIView? {
+    return collectionView
+  }
+
+  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    if context.nextFocusedView == dropdownMenuView.button {
+      let revealedFrame = CGRect(origin: CGPoint.zero, size: dropdownMenuView.frame.size)
+      coordinator.addCoordinatedAnimations({
+        self.dropdownMenuView.frame = revealedFrame
+      }, completion: nil)
+    }
+
+    if context.previouslyFocusedView == dropdownMenuView.button {
+      let hiddenFrame = dropdownMenuView.frame.offsetBy(dx: 0, dy: -dropdownMenuView.frame.height)
+      coordinator.addCoordinatedAnimations({
+        self.dropdownMenuView.frame = hiddenFrame
+      }, completion: nil)
+    }
   }
 
   // MARK: - UICollectionViewDataSource

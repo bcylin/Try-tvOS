@@ -59,6 +59,18 @@ extension UIImage {
     return image
   }
 
+  class func resizableImageWithFillColor(color: UIColor) -> UIImage {
+    UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 0)
+
+    color.setFill()
+    UIRectFill(CGRect(x: 0, y: 0, width: 1, height: 1))
+
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    return image.resizableImageWithCapInsets(UIEdgeInsetsZero)
+  }
+
 }
 
 

@@ -40,6 +40,10 @@ extension UIFont {
     return UIFont(name: FontFamily.PingFangTC, size: 40) ?? UIFont.systemFontOfSize(40)
   }
 
+  class func tvFontForMenuButton() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 30) ?? UIFont.systemFontOfSize(30)
+  }
+
   class func tvFontForHeaderTitle() -> UIFont {
     return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
   }

@@ -29,9 +29,25 @@ import UIKit
 /// A customized view with a layout of `H:|[focusGuide][button]-|`.
 class MenuView: UIView {
 
+  private let imageView = UIImageView()
+
+  private lazy var titleLabel: UILabel = {
+    let _label = UILabel()
+    _label.font = UIFont.tvFontForHeaderTitle()
+    _label.textColor = UIColor.tvHeaderTitleColor()
+    _label.text = "Try-tvOS"
+    return _label
+  }()
+
   private(set) lazy var button: UIButton = {
     let _button = UIButton(type: .System)
+    _button.contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
+    _button.titleLabel?.font = UIFont.tvFontForMenuButton()
     _button.setTitle("History", forState: .Normal)
+    _button.setTitleColor(UIColor.Palette.Button.TitleColor, forState: .Normal)
+    _button.setTitleColor(UIColor.Palette.FocusedButton.TitleColor, forState: .Focused)
+    _button.setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.Button.BackgroundColor), forState: .Normal)
+    _button.setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.FocusedButton.BackgroundColor), forState: .Focused)
     return _button
   }()
 
@@ -52,14 +68,28 @@ class MenuView: UIView {
   // MARK: - Private Methods
 
   private func setUpSubviews() {
+    addSubview(imageView)
+    addSubview(titleLabel)
     addSubview(button)
     addLayoutGuide(focusGuide)
+
+    imageView.layer.borderWidth = 1
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
 
     focusGuide.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
     focusGuide.trailingAnchor.constraintEqualToAnchor(button.leadingAnchor).active = true
     focusGuide.heightAnchor.constraintEqualToAnchor(heightAnchor).active = true
     focusGuide.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+
+    imageView.widthAnchor.constraintEqualToConstant(87).active = true
+    imageView.heightAnchor.constraintEqualToConstant(64).active = true
+    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
+    imageView.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+
+    titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
+    titleLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
 
     button.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -Metrics.EdgePadding.right).active = true
     button.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
