@@ -32,6 +32,14 @@ extension UIFont {
     static let PingFangTC = "PingFang TC"
   }
 
+  class func tvFontForCategoryCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
+  }
+
+  class func tvFontForFocusedCategoryCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 40) ?? UIFont.systemFontOfSize(40)
+  }
+
   class func tvFontForHeaderTitle() -> UIFont {
     return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
   }

@@ -34,6 +34,14 @@ extension UIColor {
     static let GreyishBrown = UIColor.hex("#564E4A")
   }
 
+  class func tvTextColor() -> UIColor {
+    return Palette.GreyishBrown.colorWithAlphaComponent(0.6)
+  }
+
+  class func tvFocusedTextColor() -> UIColor {
+    return Palette.GreyishBrown
+  }
+
   class func tvHeaderTitleColor() -> UIColor {
     return Palette.GreyishBrown
   }

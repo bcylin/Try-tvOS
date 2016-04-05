@@ -71,7 +71,7 @@ struct Metrics {
   static var showcaseLayout: UICollectionViewFlowLayout {
     let _showcase = UICollectionViewFlowLayout()
     _showcase.scrollDirection = .Horizontal
-    _showcase.sectionInset = EdgePadding
+    _showcase.sectionInset = UIEdgeInsets(top: 100, left: 100, bottom: 220, right: 100)
     _showcase.minimumLineSpacing = 80
     _showcase.itemSize = CGSize(width: 640, height: 480)
     return _showcase

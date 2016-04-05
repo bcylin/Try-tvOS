@@ -54,8 +54,8 @@ class CategoriesViewController: BlurBackgroundViewController,
     super.loadView()
     navigationItem.titleView = UIView()
 
-    let divided = view.bounds.divide(300, fromEdge: .MinYEdge)
-    collectionView.frame = divided.remainder
+    let divided = view.bounds.divide(800, fromEdge: .MaxYEdge)
+    collectionView.frame = divided.slice
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
     collectionView.layer.borderWidth = 1
@@ -106,7 +106,8 @@ class CategoriesViewController: BlurBackgroundViewController,
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let controller = VideosViewController()
+    let category = categories[indexPath.row]
+    let controller = VideosViewController(categoryID: category.id, title: category.name)
     navigationController?.pushViewController(controller, animated: true)
   }
 

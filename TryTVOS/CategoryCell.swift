@@ -42,6 +42,14 @@ class CategoryCell: UICollectionViewCell {
     return _imageView
   }()
 
+  private(set) lazy var textLabel: UILabel = {
+    let _label = UILabel()
+    _label.font = UIFont.tvFontForCategoryCell()
+    _label.textColor = UIColor.tvTextColor()
+    _label.textAlignment = .Center
+    return _label
+  }()
+
   private let coverBuilder = CoverBuilder()
 
   private var tasks = [Grid: RetrieveImageDownloadTask]()
@@ -58,6 +66,8 @@ class CategoryCell: UICollectionViewCell {
     setUpSubviews()
   }
 
+  // MARK: - UICollectionViewCell
+
   override func prepareForReuse() {
     super.prepareForReuse()
     for (index, task) in tasks {
@@ -66,24 +76,44 @@ class CategoryCell: UICollectionViewCell {
     }
     coverBuilder.resetCover()
     imageView.image = UIImage.placeholderImage(withSize: bounds.size)
+    textLabel.text = nil
   }
 
+  // MARK: - UIFocusEnvironment
+
+  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    let focused = (context.nextFocusedView == self)
+
+    let color = focused ? UIColor.tvFocusedTextColor() : UIColor.tvTextColor()
+    let transform = focused ? CGAffineTransformMakeTranslation(0, 25) : CGAffineTransformIdentity
+    let font = focused ? UIFont.tvFontForFocusedCategoryCell() : UIFont.tvFontForCategoryCell()
+
+    coordinator.addCoordinatedAnimations({
+      self.textLabel.textColor = color
+      self.textLabel.transform = transform
+      self.textLabel.font = font
+    }, completion: nil)
+  }
 
   // MARK: - Private Methods
 
   private func setUpSubviews() {
-    contentView.addSubview(imageView)
+    clipsToBounds = false
     imageView.adjustsImageWhenAncestorFocused = true
-    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
-    imageView.contentMode = .ScaleAspectFill
-    imageView.translatesAutoresizingMaskIntoConstraints = false
 
+    contentView.addSubview(imageView)
+    contentView.addSubview(textLabel)
+
+    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
     imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
     imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
 
-    imageView.contentMode = .ScaleAspectFill
+    textLabel.translatesAutoresizingMaskIntoConstraints = false
+    textLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 22).active = true
+    textLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
+    textLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
   }
 
   func setUpCover(urls: [Grid: NSURL], forCategory category: Category) {
@@ -124,6 +154,8 @@ class CategoryCell: UICollectionViewCell {
   // MARK: - Public Methods
 
   func configure(withCategory category: Category) {
+    textLabel.text = category.name
+
     if let cached = coverBuilder.coverForCategory(withID: category.id) {
       imageView.image = cached
       return
@@ -134,6 +166,7 @@ class CategoryCell: UICollectionViewCell {
       guard let corner = Grid(rawValue: index), let url = NSURL(string: value) else { continue }
       urls[corner] = url
     }
+
     setUpCover(urls, forCategory: category)
   }
 

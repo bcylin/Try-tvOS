@@ -34,17 +34,14 @@ class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
 
+  private var categoryID = 0
   private var videos = [Video]() {
     didSet {
       collectionView.reloadData()
     }
   }
 
-  private lazy var headerView: CategoryHeaderView = {
-    let _headerView = CategoryHeaderView()
-    _headerView.accessoryLabel.text = "Category"
-    return _headerView
-  }()
+  private let headerView = CategoryHeaderView()
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
@@ -54,11 +51,20 @@ class VideosViewController: BlurBackgroundViewController,
     return _collectionView
   }()
 
+  // MARK: - Initialization
+
+  convenience init(categoryID: Int, title: String? = nil) {
+    self.init(nibName: nil, bundle: nil)
+    self.categoryID = categoryID
+    self.title = title
+  }
+
   // MARK: - UIViewController
 
   override func loadView() {
     super.loadView()
     navigationItem.titleView = UIView()
+    headerView.accessoryLabel.text = title ?? "Category"
 
     let divided = view.bounds.divide(140, fromEdge: .MinYEdge)
     headerView.frame = divided.slice
@@ -73,7 +79,12 @@ class VideosViewController: BlurBackgroundViewController,
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/1/videos.json")
+    if categoryID < 0 {
+      // TODO: handle error
+      return
+    }
+
+    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json")
       .responseJSON { [weak self] response in
         guard let data = response.data else { return }
         do {
