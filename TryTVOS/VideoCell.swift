@@ -33,7 +33,7 @@ class VideoCell: UICollectionViewCell {
 
   private(set) lazy var textLabel: UILabel = {
     let _label = UILabel()
-    _label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    _label.font = UIFont.tvFontForNormalCell()
     _label.textColor = UIColor.grayColor()
     _label.textAlignment = .Center
     return _label
@@ -67,10 +67,7 @@ class VideoCell: UICollectionViewCell {
 
     let color = restored ? UIColor.grayColor() : UIColor.whiteColor()
     let transform = restored ? CGAffineTransformIdentity : CGAffineTransformMakeTranslation(0, 15)
-
-    let pointSize = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline).pointSize
-    let descriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleSubheadline)
-    let font = restored ? UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline) : UIFont(descriptor: descriptor, size: pointSize + 5)
+    let font = restored ? UIFont.tvFontForNormalCell() : UIFont.tvFontForFocusedCell()
 
     coordinator.addCoordinatedAnimations({
       self.textLabel.textColor = color

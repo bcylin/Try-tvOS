@@ -40,9 +40,8 @@ class VideosViewController: BlurBackgroundViewController,
     }
   }
 
-  private lazy var headerView: HeaderView = {
-    let _headerView = HeaderView()
-    _headerView.titleLabel.text = "Title"
+  private lazy var headerView: CategoryHeaderView = {
+    let _headerView = CategoryHeaderView()
     _headerView.accessoryLabel.text = "Category"
     return _headerView
   }()
@@ -61,12 +60,13 @@ class VideosViewController: BlurBackgroundViewController,
     super.loadView()
     navigationItem.titleView = UIView()
 
-    let divided = view.bounds.divide(200, fromEdge: .MinYEdge)
+    let divided = view.bounds.divide(140, fromEdge: .MinYEdge)
     headerView.frame = divided.slice
     headerView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
     collectionView.frame = divided.remainder
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
+    view.backgroundColor = UIColor.tvBackgroundColor()
     view.addSubview(headerView)
     view.addSubview(collectionView)
   }

@@ -1,8 +1,8 @@
 //
-//  UIColor+TV.swift
+//  UIFont+TV.swift
 //  TryTVOS
 //
-//  Created by Ben on 22/03/2016.
+//  Created by Ben on 05/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,21 +25,25 @@
 //
 
 import UIKit
-import Hue
 
-extension UIColor {
+extension UIFont {
 
-  enum Palette {
-    static let LightGray = UIColor.hex("#EFEDE8")
-    static let GreyishBrown = UIColor.hex("#564E4A")
+  private enum FontFamily {
+    static let PingFangTC = "PingFang TC"
   }
 
-  class func tvHeaderTitleColor() -> UIColor {
-    return Palette.GreyishBrown
+  class func tvFontForHeaderTitle() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
   }
 
-  class func tvBackgroundColor() -> UIColor {
-    return Palette.LightGray
+  class func tvFontForNormalCell() -> UIFont {
+    return UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+  }
+
+  class func tvFontForFocusedCell() -> UIFont {
+    let pointSize = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline).pointSize
+    let descriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleSubheadline)
+    return UIFont(descriptor: descriptor, size: pointSize + 5)
   }
 
 }
