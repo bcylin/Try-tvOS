@@ -9,7 +9,7 @@ before_install:
   - export LANG=en_US.UTF-8
 install:
   - bundle install --without development --deployment --jobs=3 --retry=3
-  - bundle exec pod install --no-repo-update
+  - bundle exec pod install
 script:
   - set -o pipefail && xcodebuild -workspace TryTVOS.xcworkspace -scheme TryTVOS -destination "name=Apple TV 1080p,OS=latest" clean build | xcpretty -c
 notifications:

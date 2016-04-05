@@ -1,37 +1,37 @@
 PODS:
-  - Alamofire (3.2.0)
+  - Alamofire (3.3.1)
   - Freddy (2.0.2)
   - HCYoutubeParser (0.0.5)
   - Hue (1.1)
   - Keys (1.0.0)
-  - Kingfisher (2.0.3)
+  - Kingfisher (2.2.2)
 
 DEPENDENCIES:
   - Alamofire
   - Freddy
   - HCYoutubeParser
-  - Hue (from `git@github.com:bcylin/Hue.git`, branch `support-tvos`)
+  - Hue (from `https://github.com/hyperoslo/Hue.git`, commit `89ae5e1`)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher
 
 EXTERNAL SOURCES:
   Hue:
-    :branch: support-tvos
-    :git: git@github.com:bcylin/Hue.git
+    :commit: 89ae5e1
+    :git: https://github.com/hyperoslo/Hue.git
   Keys:
     :path: Pods/CocoaPodsKeys
 
 CHECKOUT OPTIONS:
   Hue:
-    :commit: fa00a797757574546d6787c5d6c9a3d405e055d4
-    :git: git@github.com:bcylin/Hue.git
+    :commit: 89ae5e1
+    :git: https://github.com/hyperoslo/Hue.git
 
 SPEC CHECKSUMS:
-  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   Freddy: e53713b8d5be02dbf5f4132c44d899d99eb09a6b
   HCYoutubeParser: bc1db8c062e4b835eda381f2be2f9970f6a8d071
   Hue: c7d6a7206bac669ed69e78cc6c14a4d7bd28277c
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
-  Kingfisher: 44c1f1912f19371a67d701e67c96d6bb45ca1c8d
+  Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
 
 COCOAPODS: 0.39.0
