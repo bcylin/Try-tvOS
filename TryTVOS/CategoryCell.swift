@@ -31,7 +31,7 @@ class CategoryCell: UICollectionViewCell {
 
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
-    _imageView.image = UIImage.image(withSize: self.bounds.size, fillColor: UIColor.lightGrayColor())
+    _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
     _imageView.contentMode = .ScaleAspectFill
     return _imageView
   }()
@@ -89,7 +89,7 @@ class CategoryCell: UICollectionViewCell {
       tasks[index] = nil
     }
     imageOperationQueue.cancelAllOperations()
-    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.lightGrayColor())
+    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
   }
 
 
@@ -98,7 +98,7 @@ class CategoryCell: UICollectionViewCell {
   private func setUpSubviews() {
     contentView.addSubview(imageView)
     imageView.adjustsImageWhenAncestorFocused = true
-    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.grayColor())
+    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
     imageView.contentMode = .ScaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -117,7 +117,7 @@ class CategoryCell: UICollectionViewCell {
     if let currentImage = imageView.image where currentImage.size == coverSize {
       cover = currentImage
     } else {
-      cover = UIImage.image(withSize: coverSize, fillColor: UIColor.lightGrayColor())
+      cover = UIImage.placeholderImage(withSize: coverSize)
     }
 
     cover = cover.image(byReplacingImage: image, atCorner: corner)

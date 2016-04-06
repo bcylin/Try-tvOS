@@ -103,6 +103,7 @@
 			children = (
 				B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */,
 				B53E39771CA1494000EB1EEE /* UIColor+TV.swift */,
+				B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -121,7 +122,6 @@
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
 				B5C591141CA04BA50096B985 /* HeaderView.swift */,
-				B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 			);
 			name = View;

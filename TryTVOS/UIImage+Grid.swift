@@ -28,7 +28,7 @@ import UIKit
 
 extension UIImage {
 
-  func image(byReplacingImage image: UIImage, atCorner corner: Grid) -> UIImage {
+  func image(byReplacingImage image: UIImage, atCorner corner: Grid) -> UIImage! {
     UIGraphicsBeginImageContextWithOptions(size, true, 0);
 
     let canvas = CGRect(origin: CGPoint.zero, size: size)
@@ -39,17 +39,23 @@ extension UIImage {
 
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
+
     return newImage
   }
 
-  class func image(withSize size: CGSize, fillColor color: UIColor) -> UIImage {
-    UIGraphicsBeginImageContextWithOptions(size, true, 0)
+  class func placeholderImage(withSize size: CGSize) -> UIImage! {
+    let layer = CAGradientLayer()
+    layer.frame = CGRect(origin: CGPoint.zero, size: size)
+    layer.colors = [UIColor.whiteColor().CGColor, UIColor.Palette.LightGray.CGColor]
+    layer.startPoint = CGPoint(x: 0, y: 0)
+    layer.endPoint = CGPoint(x: 1, y: 1)
 
-    color.setFill()
-    UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+    UIGraphicsBeginImageContext(size)
+    layer.renderInContext(UIGraphicsGetCurrentContext()!)
 
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
+
     return image
   }
 
