@@ -19,6 +19,7 @@
 		B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */; };
 		B5C591151CA04BA50096B985 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C591141CA04BA50096B985 /* HeaderView.swift */; };
 		B5C85D041CA97981000AE0CF /* UIImage+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */; };
+		B5DA8EE21CB4C2B20068E0E3 /* BlurBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA8EE11CB4C2B20068E0E3 /* BlurBackgroundViewController.swift */; };
 		B5DCF9341C985E1600D19FC0 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */; };
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F7BF521BA9C95F00A75099 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerController.swift; sourceTree = "<group>"; };
 		B5C591141CA04BA50096B985 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Grid.swift"; sourceTree = "<group>"; };
+		B5DA8EE11CB4C2B20068E0E3 /* BlurBackgroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackgroundViewController.swift; sourceTree = "<group>"; };
 		B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		B5F7BF481BA9C95F00A75099 /* TryTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TryTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		B5AAAE5D1C85DD1D002DDFC8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B5DA8EE11CB4C2B20068E0E3 /* BlurBackgroundViewController.swift */,
 				B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */,
 				B5DCF9331C985E1600D19FC0 /* CategoryViewController.swift */,
 				B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */,
@@ -329,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */,
+				B5DA8EE21CB4C2B20068E0E3 /* BlurBackgroundViewController.swift in Sources */,
 				B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */,
 				B56D68E91CA564B00097D5D7 /* Category.swift in Sources */,
 				B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */,

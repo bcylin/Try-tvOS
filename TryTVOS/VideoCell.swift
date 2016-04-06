@@ -98,8 +98,6 @@ class VideoCell: UICollectionViewCell {
     textLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 20).active = true
     textLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
     textLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
-
-    backgroundColor = UIColor.clearColor()
   }
 
   // MARK: - Public Methods

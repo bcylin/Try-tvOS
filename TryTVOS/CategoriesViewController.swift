@@ -29,7 +29,7 @@ import Alamofire
 import Freddy
 import Keys
 
-class CategoriesViewController: UIViewController,
+class CategoriesViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
@@ -101,6 +101,14 @@ class CategoriesViewController: UIViewController,
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let controller = CategoryViewController()
     navigationController?.pushViewController(controller, animated: true)
+  }
+
+  func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    if let cover = (context.nextFocusedView as? CategoryCell)?.imageView.image {
+      coordinator.addCoordinatedAnimations({
+        self.backgroundImage = cover
+      }, completion: nil)
+    }
   }
 
 }

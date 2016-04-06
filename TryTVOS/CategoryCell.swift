@@ -29,7 +29,12 @@ import Kingfisher
 
 class CategoryCell: UICollectionViewCell {
 
-  let imageView = UIImageView()
+  private(set) lazy var imageView: UIImageView = {
+    let _imageView = UIImageView()
+    _imageView.image = UIImage.image(withSize: self.bounds.size, fillColor: UIColor.lightGrayColor())
+    _imageView.contentMode = .ScaleAspectFill
+    return _imageView
+  }()
 
   private var urls = [Grid: NSURL]() {
     didSet {
@@ -84,8 +89,9 @@ class CategoryCell: UICollectionViewCell {
       tasks[index] = nil
     }
     imageOperationQueue.cancelAllOperations()
-    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.grayColor())
+    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.lightGrayColor())
   }
+
 
   // MARK: - Private Methods
 
@@ -111,7 +117,7 @@ class CategoryCell: UICollectionViewCell {
     if let currentImage = imageView.image where currentImage.size == coverSize {
       cover = currentImage
     } else {
-      cover = UIImage.image(withSize: coverSize, fillColor: UIColor.grayColor())
+      cover = UIImage.image(withSize: coverSize, fillColor: UIColor.lightGrayColor())
     }
 
     cover = cover.image(byReplacingImage: image, atCorner: corner)

@@ -29,7 +29,7 @@ import Alamofire
 import Freddy
 import Keys
 
-class CategoryViewController: UIViewController,
+class CategoryViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
@@ -66,7 +66,6 @@ class CategoryViewController: UIViewController,
     headerView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
     collectionView.frame = divided.remainder
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
-    collectionView.backgroundColor = UIColor.tvBackgroundColor()
 
     view.addSubview(headerView)
     view.addSubview(collectionView)
@@ -112,6 +111,14 @@ class CategoryViewController: UIViewController,
     let controller = VideoPlayerController(video: videos[indexPath.row], coverImage: cell?.imageView.image)
     presentViewController(controller, animated: true) {
       controller.player?.play()
+    }
+  }
+
+  func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    if let cover = (context.nextFocusedView as? VideoCell)?.imageView.image {
+      coordinator.addCoordinatedAnimations({
+        self.backgroundImage = cover
+      }, completion: nil)
     }
   }
 

@@ -1,8 +1,8 @@
 //
-//  UIColor+TV.swift
+//  BlurBackgroundViewController.swift
 //  TryTVOS
 //
-//  Created by Ben on 22/03/2016.
+//  Created by Ben on 05/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,20 +25,31 @@
 //
 
 import UIKit
-import Hue
 
-extension UIColor {
+class BlurBackgroundViewController: UIViewController {
 
-  enum Palette {
-    static let LightGray = UIColor.hex("#EFEDE8")
+  var backgroundImage: UIImage? {
+    didSet {
+      backgroundImageView.image = backgroundImage
+    }
   }
 
-  class func tvBackgroundColor() -> UIColor {
-    return Palette.LightGray
-  }
+  private let backgroundImageView = UIImageView()
+  private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
 
-  class func tvTitleColor() -> UIColor {
-    return UIColor.hex("#746C68")
+  // MARK: - UIViewController
+
+  override func loadView() {
+    super.loadView()
+    view.backgroundColor = UIColor.tvBackgroundColor()
+    backgroundImageView.frame = view.bounds
+    backgroundImageView.contentMode = .ScaleAspectFill
+    backgroundImageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    blurEffectView.frame = view.bounds
+    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+
+    view.addSubview(backgroundImageView)
+    view.addSubview(blurEffectView)
   }
 
 }
