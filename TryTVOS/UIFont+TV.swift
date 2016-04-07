@@ -40,22 +40,20 @@ extension UIFont {
     return UIFont(name: FontFamily.PingFangTC, size: 40) ?? UIFont.systemFontOfSize(40)
   }
 
+  class func tvFontForVideoCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
+  }
+
+  class func tvFontForFocusedVideoCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
+  }
+
   class func tvFontForMenuButton() -> UIFont {
     return UIFont(name: FontFamily.PingFangTC, size: 30) ?? UIFont.systemFontOfSize(30)
   }
 
   class func tvFontForHeaderTitle() -> UIFont {
     return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
-  }
-
-  class func tvFontForNormalCell() -> UIFont {
-    return UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-  }
-
-  class func tvFontForFocusedCell() -> UIFont {
-    let pointSize = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline).pointSize
-    let descriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleSubheadline)
-    return UIFont(descriptor: descriptor, size: pointSize + 5)
   }
 
 }

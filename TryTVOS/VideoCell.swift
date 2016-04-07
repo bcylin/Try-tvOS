@@ -33,8 +33,8 @@ class VideoCell: UICollectionViewCell {
 
   private(set) lazy var textLabel: UILabel = {
     let _label = UILabel()
-    _label.font = UIFont.tvFontForNormalCell()
-    _label.textColor = UIColor.grayColor()
+    _label.font = UIFont.tvFontForVideoCell()
+    _label.textColor = UIColor.tvTextColor()
     _label.textAlignment = .Center
     return _label
   }()
@@ -63,11 +63,11 @@ class VideoCell: UICollectionViewCell {
   // MARK: - UIFocusEnvironment
 
   override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
-    let restored = (context.previouslyFocusedView == self)
+    let focused = (context.nextFocusedView == self)
 
-    let color = restored ? UIColor.grayColor() : UIColor.whiteColor()
-    let transform = restored ? CGAffineTransformIdentity : CGAffineTransformMakeTranslation(0, 15)
-    let font = restored ? UIFont.tvFontForNormalCell() : UIFont.tvFontForFocusedCell()
+    let color = focused ? UIColor.tvFocusedTextColor() : UIColor.tvTextColor()
+    let transform = focused ?  CGAffineTransformMakeTranslation(0, 15) : CGAffineTransformIdentity
+    let font = focused ? UIFont.tvFontForVideoCell() : UIFont.tvFontForVideoCell()
 
     coordinator.addCoordinatedAnimations({
       self.textLabel.textColor = color
@@ -89,7 +89,7 @@ class VideoCell: UICollectionViewCell {
     imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
     imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
     imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
-    imageView.heightAnchor.constraintEqualToAnchor(contentView.widthAnchor, multiplier: 3/4).active = true
+    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
 
     textLabel.translatesAutoresizingMaskIntoConstraints = false
     textLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 20).active = true

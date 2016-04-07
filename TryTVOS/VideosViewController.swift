@@ -79,7 +79,6 @@ class VideosViewController: BlurBackgroundViewController,
     collectionView.frame = divided.remainder
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
-    collectionView.layer.borderWidth = 1
     view.backgroundColor = UIColor.tvBackgroundColor()
     view.addSubview(headerView)
     view.addSubview(collectionView)
