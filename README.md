@@ -1,6 +1,6 @@
 # Try-tvOS
 
-[![Build Status](https://travis-ci.org/bcylin/Try-tvOS.svg?branch=develop)](https://travis-ci.org/bcylin/Try-tvOS)
+[![Build Status](https://travis-ci.org/bcylin/Try-tvOS.svg)](https://travis-ci.org/bcylin/Try-tvOS)
 
 A demo tvOS app that plays YouTube videos.
 

@@ -10,7 +10,7 @@ xcodeproj "TryTVOS"
 pod "Alamofire"
 pod "Freddy"
 pod "HCYoutubeParser"
-pod "Hue", git: "git@github.com:bcylin/Hue.git", branch: "support-tvos"
+pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
 pod "Kingfisher"
 
 plugin "cocoapods-keys", {
