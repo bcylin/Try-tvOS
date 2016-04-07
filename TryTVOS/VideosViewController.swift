@@ -1,5 +1,5 @@
 //
-//  CategoryViewController.swift
+//  VideosViewController.swift
 //  TryTVOS
 //
 //  Created by Ben on 15/03/2016.
@@ -29,7 +29,7 @@ import Alamofire
 import Freddy
 import Keys
 
-class CategoryViewController: BlurBackgroundViewController,
+class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
