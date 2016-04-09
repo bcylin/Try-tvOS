@@ -92,7 +92,8 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    (cell as? CategoryCell)?.configure(withCategory: categories[indexPath.row])
+    let category = categories[indexPath.row]
+    (cell as? CategoryCell)?.configure(withCategory: category)
     return cell
   }
 

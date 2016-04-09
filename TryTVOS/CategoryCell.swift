@@ -36,6 +36,8 @@ class CategoryCell: UICollectionViewCell {
     return _imageView
   }()
 
+  private let coverBuilder = CoverBuilder()
+
   private var urls = [Grid: NSURL]() {
     didSet {
       // Cancel previous tasks
@@ -43,6 +45,7 @@ class CategoryCell: UICollectionViewCell {
         task.cancel()
         tasks[corner] = nil
       }
+
       for (corner, url) in urls {
         let downloading = ImageDownloader.defaultDownloader.downloadImageWithURL(url, progressBlock: nil) {
           [weak self] image, error, imageURL, originalData in
@@ -51,9 +54,14 @@ class CategoryCell: UICollectionViewCell {
           guard let image = image where imageURL == url else {
             return
           }
-          self?.imageOperationQueue.addOperation(NSBlockOperation {
-            self?.setImage(image, atCorner: corner)
-          })
+
+          self?.coverBuilder.addImage(image, atCorner: corner) { newCover in
+            if let current = self {
+              UIView.transitionWithView(current.imageView, duration: 0.3, options: [.TransitionCrossDissolve, .CurveEaseIn], animations: {
+                self?.imageView.image = newCover
+              }, completion: nil)
+            }
+          }
         }
         if let task = downloading {
           tasks[corner] = task
@@ -63,12 +71,6 @@ class CategoryCell: UICollectionViewCell {
   }
 
   private var tasks = [Grid: RetrieveImageDownloadTask]()
-
-  private lazy var imageOperationQueue: NSOperationQueue = {
-    let _queue = NSOperationQueue.mainQueue()
-    _queue.maxConcurrentOperationCount = 1
-    return _queue
-  }()
 
   // MARK: - Initialization
 
@@ -88,7 +90,7 @@ class CategoryCell: UICollectionViewCell {
       task.cancel()
       tasks[index] = nil
     }
-    imageOperationQueue.cancelAllOperations()
+    coverBuilder.resetCover()
     imageView.image = UIImage.placeholderImage(withSize: bounds.size)
   }
 
@@ -108,27 +110,6 @@ class CategoryCell: UICollectionViewCell {
     imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
 
     imageView.contentMode = .ScaleAspectFill
-  }
-
-  private func setImage(image: UIImage, atCorner corner: Grid) {
-    let coverSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
-    var cover: UIImage!
-
-    if let currentImage = imageView.image where currentImage.size == coverSize {
-      cover = currentImage
-    } else {
-      cover = UIImage.placeholderImage(withSize: coverSize)
-    }
-
-    cover = cover.image(byReplacingImage: image, atCorner: corner)
-    UIView.transitionWithView(
-      imageView,
-      duration: 0.3,
-      options: [.TransitionCrossDissolve, .CurveEaseIn],
-      animations: {
-        self.imageView.image = cover
-      }, completion: nil
-    )
   }
 
   // MARK: - Public Methods
