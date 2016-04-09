@@ -29,41 +29,22 @@ import Kingfisher
 
 class CategoryCell: UICollectionViewCell {
 
-  let imageView = UIImageView()
-
-  private var urls = [Grid: NSURL]() {
-    didSet {
-      // Cancel previous tasks
-      for (corner, task) in tasks {
-        task.cancel()
-        tasks[corner] = nil
-      }
-      for (corner, url) in urls {
-        let downloading = ImageDownloader.defaultDownloader.downloadImageWithURL(url, progressBlock: nil) {
-          [weak self] image, error, imageURL, originalData in
-
-          self?.tasks[corner] = nil
-          guard let image = image where imageURL == url else {
-            return
-          }
-          self?.imageOperationQueue.addOperation(NSBlockOperation {
-            self?.setImage(image, atCorner: corner)
-          })
-        }
-        if let task = downloading {
-          tasks[corner] = task
-        }
-      }
-    }
+  var hasDisplayedCover: Bool {
+    return tasks.isEmpty
   }
 
-  private var tasks = [Grid: RetrieveImageDownloadTask]()
+  // MARK: - Private Properties
 
-  private lazy var imageOperationQueue: NSOperationQueue = {
-    let _queue = NSOperationQueue.mainQueue()
-    _queue.maxConcurrentOperationCount = 1
-    return _queue
+  private(set) lazy var imageView: UIImageView = {
+    let _imageView = UIImageView()
+    _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
+    _imageView.contentMode = .ScaleAspectFill
+    return _imageView
   }()
+
+  private let coverBuilder = CoverBuilder()
+
+  private var tasks = [Grid: RetrieveImageDownloadTask]()
 
   // MARK: - Initialization
 
@@ -83,16 +64,17 @@ class CategoryCell: UICollectionViewCell {
       task.cancel()
       tasks[index] = nil
     }
-    imageOperationQueue.cancelAllOperations()
-    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.grayColor())
+    coverBuilder.resetCover()
+    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
   }
+
 
   // MARK: - Private Methods
 
   private func setUpSubviews() {
     contentView.addSubview(imageView)
     imageView.adjustsImageWhenAncestorFocused = true
-    imageView.image = UIImage.image(withSize: bounds.size, fillColor: UIColor.grayColor())
+    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
     imageView.contentMode = .ScaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -104,36 +86,55 @@ class CategoryCell: UICollectionViewCell {
     imageView.contentMode = .ScaleAspectFill
   }
 
-  private func setImage(image: UIImage, atCorner corner: Grid) {
-    let coverSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
-    var cover: UIImage!
-
-    if let currentImage = imageView.image where currentImage.size == coverSize {
-      cover = currentImage
-    } else {
-      cover = UIImage.image(withSize: coverSize, fillColor: UIColor.grayColor())
+  func setUpCover(urls: [Grid: NSURL], forCategory category: Category) {
+    // Cancel previous tasks
+    for (corner, task) in tasks {
+      task.cancel()
+      tasks[corner] = nil
     }
 
-    cover = cover.image(byReplacingImage: image, atCorner: corner)
-    UIView.transitionWithView(
-      imageView,
-      duration: 0.3,
-      options: [.TransitionCrossDissolve, .CurveEaseIn],
-      animations: {
-        self.imageView.image = cover
-      }, completion: nil
-    )
+    for (corner, url) in urls {
+      let downloading = ImageDownloader.defaultDownloader.downloadImageWithURL(url, progressBlock: nil) {
+        [weak self] image, error, imageURL, originalData in
+
+        self?.tasks[corner] = nil
+        guard let image = image where imageURL == url else {
+          return
+        }
+
+        self?.coverBuilder.addImage(image, atCorner: corner, categoryID: category.id) { newCover in
+          if let current = self {
+            UIView.transitionWithView(
+              current.imageView,
+              duration: 0.3,
+              options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
+              animations: {
+                self?.imageView.image = newCover
+              }, completion: nil
+            )
+          }
+        }
+      }
+      if let task = downloading {
+        tasks[corner] = task
+      }
+    }
   }
 
   // MARK: - Public Methods
 
   func configure(withCategory category: Category) {
-    var covers = [Grid: NSURL]()
+    if let cached = coverBuilder.coverForCategory(withID: category.id) {
+      imageView.image = cached
+      return
+    }
+
+    var urls = [Grid: NSURL]()
     for (index, value) in category.coverURLs.enumerate() {
       guard let corner = Grid(rawValue: index), let url = NSURL(string: value) else { continue }
-      covers[corner] = url
+      urls[corner] = url
     }
-    urls = covers
+    setUpCover(urls, forCategory: category)
   }
 
 }

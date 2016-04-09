@@ -29,7 +29,7 @@ import Alamofire
 import Freddy
 import Keys
 
-class CategoriesViewController: UIViewController,
+class CategoriesViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
@@ -64,6 +64,12 @@ class CategoriesViewController: UIViewController,
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: .handleCreatedCover,
+      name: CoverBuilder.DidCreateCoverNotification,
+      object: nil
+    )
     Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories.json")
       .responseJSON { [weak self] response in
         guard let data = response.data else { return }
@@ -92,15 +98,40 @@ class CategoriesViewController: UIViewController,
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    (cell as? CategoryCell)?.configure(withCategory: categories[indexPath.row])
+    let category = categories[indexPath.row]
+    (cell as? CategoryCell)?.configure(withCategory: category)
     return cell
   }
 
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let controller = CategoryViewController()
+    let controller = VideosViewController()
     navigationController?.pushViewController(controller, animated: true)
   }
 
+  func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image where cell.hasDisplayedCover {
+      self.backgroundImage = cover
+    }
+  }
+
+  // MARK: - NSNotification Callbacks
+
+  @objc private func handleCreatedCover(notification: NSNotification) {
+    // Update the background image when the first mosaic cover is created.
+    dispatch_async(dispatch_get_main_queue()) {
+      self.backgroundImage = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage
+    }
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: CoverBuilder.DidCreateCoverNotification, object: nil)
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension Selector {
+  static let handleCreatedCover = #selector(CategoriesViewController.handleCreatedCover(_:))
 }

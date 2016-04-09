@@ -29,12 +29,12 @@ import Hue
 
 extension UIColor {
 
-  class func tvBackgroundColor() -> UIColor {
-    return UIColor.hex("#EFEDE8").colorWithAlphaComponent(0.8)
+  enum Palette {
+    static let LightGray = UIColor.hex("#EFEDE8")
   }
 
-  class func tvNavigationBarColor() -> UIColor {
-    return UIColor.hex("#EFEDE8")
+  class func tvBackgroundColor() -> UIColor {
+    return Palette.LightGray
   }
 
   class func tvTitleColor() -> UIColor {
