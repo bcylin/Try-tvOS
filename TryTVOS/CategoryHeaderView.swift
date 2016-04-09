@@ -1,5 +1,5 @@
 //
-//  HeaderView.swift
+//  CategoryHeaderView.swift
 //  TryTVOS
 //
 //  Created by Ben on 21/03/2016.
@@ -26,20 +26,23 @@
 
 import UIKit
 
-/// A customized view with a layout of `V:|-[icon][title]-(>=0)-[accessory]-|`.
-class HeaderView: UICollectionReusableView {
+/// A customized view with a layout of `H:|-[icon]-[title]-(>=0)-[accessory]-|`.
+class CategoryHeaderView: UIView {
+
+  private let imageView = UIImageView()
 
   private(set) lazy var titleLabel: UILabel = {
     let _title = UILabel()
-    _title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
-    _title.textColor = UIColor.tvTitleColor()
+    _title.font = UIFont.tvFontForHeaderTitle()
+    _title.textColor = UIColor.tvHeaderTitleColor()
+    _title.text = "Try-tvOS".localizedString
     return _title
   }()
 
   private(set) lazy var accessoryLabel: UILabel = {
     let _accessory = UILabel()
-    _accessory.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
-    _accessory.textColor = UIColor.tvTitleColor()
+    _accessory.font = UIFont.tvFontForHeaderTitle()
+    _accessory.textColor = UIColor.tvHeaderTitleColor()
     return _accessory
   }()
 
@@ -58,16 +61,25 @@ class HeaderView: UICollectionReusableView {
   // MARK: - Private Methods
 
   private func setUpSubviews() {
+    addSubview(imageView)
     addSubview(titleLabel)
     addSubview(accessoryLabel)
 
+    imageView.layer.borderWidth = 1
+    imageView.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     accessoryLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    titleLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
-    titleLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    imageView.widthAnchor.constraintEqualToConstant(87).active = true
+    imageView.heightAnchor.constraintEqualToConstant(64).active = true
+    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
+    imageView.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
+
+    titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
+    titleLabel.bottomAnchor.constraintEqualToAnchor(bottomAnchor, constant: -10).active = true
+
     accessoryLabel.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -Metrics.EdgePadding.right).active = true
-    accessoryLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    accessoryLabel.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
   }
 
 }

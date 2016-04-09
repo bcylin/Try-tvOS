@@ -55,15 +55,15 @@ struct Metrics {
     let _grid = UICollectionViewFlowLayout()
     _grid.scrollDirection = .Vertical
     _grid.sectionInset = UIEdgeInsets(top: 90, left: 80, bottom: 90, right: 80)
-    _grid.minimumInteritemSpacing = 50
-    _grid.minimumLineSpacing = 75
+    _grid.minimumInteritemSpacing = 40
+    _grid.minimumLineSpacing = 130
 
     let numberOfItemsPerRow = 5
     let paddings = EdgePadding.left + EdgePadding.right
     let spaces = _grid.minimumInteritemSpacing * CGFloat(numberOfItemsPerRow - 1)
     let contentWidth = UIScreen.mainScreen().bounds.width - paddings - spaces
     let itemWidth = contentWidth / CGFloat(numberOfItemsPerRow)
-    _grid.itemSize = CGSize(width: itemWidth, height: itemWidth * 3 / 4 + 60) // 60 pt for the text label
+    _grid.itemSize = CGSize(width: itemWidth, height: 200)
 
     return _grid
   }
@@ -71,7 +71,7 @@ struct Metrics {
   static var showcaseLayout: UICollectionViewFlowLayout {
     let _showcase = UICollectionViewFlowLayout()
     _showcase.scrollDirection = .Horizontal
-    _showcase.sectionInset = EdgePadding
+    _showcase.sectionInset = UIEdgeInsets(top: 100, left: 100, bottom: 220, right: 100)
     _showcase.minimumLineSpacing = 80
     _showcase.itemSize = CGSize(width: 640, height: 480)
     return _showcase

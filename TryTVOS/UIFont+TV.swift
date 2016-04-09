@@ -1,8 +1,8 @@
 //
-//  UIColor+TV.swift
+//  UIFont+TV.swift
 //  TryTVOS
 //
-//  Created by Ben on 22/03/2016.
+//  Created by Ben on 05/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,44 +25,39 @@
 //
 
 import UIKit
-import Hue
 
-extension UIColor {
+extension UIFont {
 
-  enum Palette {
-    static let White = UIColor.whiteColor()
-    static let LightGray = UIColor.hex("#EFEDE8")
-    static let GreyishBrown = UIColor.hex("#564E4A")
-
-    enum Button {
-      static let TitleColor = White
-      static let BackgroundColor = GreyishBrown.colorWithAlphaComponent(0.6)
-    }
-
-    enum FocusedButton {
-      static let TitleColor = GreyishBrown
-      static let BackgroundColor = White
-    }
+  private enum FontFamily {
+    static let PingFangTC = "PingFang TC"
   }
 
-  class func tvTextColor() -> UIColor {
-    return Palette.GreyishBrown.colorWithAlphaComponent(0.6)
+  class func tvFontForCategoryCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
   }
 
-  class func tvFocusedTextColor() -> UIColor {
-    return Palette.GreyishBrown
+  class func tvFontForFocusedCategoryCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 40) ?? UIFont.systemFontOfSize(40)
   }
 
-  class func tvHeaderTitleColor() -> UIColor {
-    return Palette.GreyishBrown
+  class func tvFontForVideoCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
   }
 
-  class func tvBackgroundColor() -> UIColor {
-    return Palette.LightGray
+  class func tvFontForFocusedVideoCell() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
   }
 
-  class func tvMenuBarColor() -> UIColor {
-    return Palette.LightGray
+  class func tvFontForLogo() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 65) ?? UIFont.systemFontOfSize(65)
+  }
+
+  class func tvFontForMenuButton() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 30) ?? UIFont.systemFontOfSize(30)
+  }
+
+  class func tvFontForHeaderTitle() -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
   }
 
 }

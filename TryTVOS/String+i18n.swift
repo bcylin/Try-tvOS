@@ -1,8 +1,8 @@
 //
-//  UIColor+TV.swift
+//  String+i18n.swift
 //  TryTVOS
 //
-//  Created by Ben on 22/03/2016.
+//  Created by Ben on 09/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,45 +24,12 @@
 //  SOFTWARE.
 //
 
-import UIKit
-import Hue
+import Foundation
 
-extension UIColor {
+extension String {
 
-  enum Palette {
-    static let White = UIColor.whiteColor()
-    static let LightGray = UIColor.hex("#EFEDE8")
-    static let GreyishBrown = UIColor.hex("#564E4A")
-
-    enum Button {
-      static let TitleColor = White
-      static let BackgroundColor = GreyishBrown.colorWithAlphaComponent(0.6)
-    }
-
-    enum FocusedButton {
-      static let TitleColor = GreyishBrown
-      static let BackgroundColor = White
-    }
-  }
-
-  class func tvTextColor() -> UIColor {
-    return Palette.GreyishBrown.colorWithAlphaComponent(0.6)
-  }
-
-  class func tvFocusedTextColor() -> UIColor {
-    return Palette.GreyishBrown
-  }
-
-  class func tvHeaderTitleColor() -> UIColor {
-    return Palette.GreyishBrown
-  }
-
-  class func tvBackgroundColor() -> UIColor {
-    return Palette.LightGray
-  }
-
-  class func tvMenuBarColor() -> UIColor {
-    return Palette.LightGray
+  var localizedString: String {
+    return NSLocalizedString(self, comment: "")
   }
 
 }

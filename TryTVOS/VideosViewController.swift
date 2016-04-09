@@ -34,46 +34,65 @@ class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
 
+  private var categoryID = 0
   private var videos = [Video]() {
     didSet {
       collectionView.reloadData()
     }
   }
 
-  private lazy var headerView: HeaderView = {
-    let _headerView = HeaderView()
-    _headerView.titleLabel.text = "Title"
-    _headerView.accessoryLabel.text = "Category"
-    return _headerView
+  private lazy var dropdownMenuView: MenuView = {
+    let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
+    _menu.backgroundColor = UIColor.tvMenuBarColor()
+    return _menu
   }()
+
+  private let headerView = CategoryHeaderView()
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
+    _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self
     _collectionView.delegate = self
     return _collectionView
   }()
+
+  // MARK: - Initialization
+
+  convenience init(categoryID: Int, title: String? = nil) {
+    self.init(nibName: nil, bundle: nil)
+    self.categoryID = categoryID
+    self.title = title
+  }
 
   // MARK: - UIViewController
 
   override func loadView() {
     super.loadView()
     navigationItem.titleView = UIView()
+    headerView.accessoryLabel.text = title ?? "Category"
 
-    let divided = view.bounds.divide(200, fromEdge: .MinYEdge)
+    let divided = view.bounds.divide(140, fromEdge: .MinYEdge)
     headerView.frame = divided.slice
     headerView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
     collectionView.frame = divided.remainder
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
+    view.backgroundColor = UIColor.tvBackgroundColor()
     view.addSubview(headerView)
     view.addSubview(collectionView)
+    view.addSubview(dropdownMenuView)
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/1/videos.json")
+    if categoryID < 0 {
+      // TODO: handle error
+      return
+    }
+
+    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json")
       .responseJSON { [weak self] response in
         guard let data = response.data else { return }
         do {
@@ -90,6 +109,28 @@ class VideosViewController: BlurBackgroundViewController,
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  // MARK: - UIFocusEnvironment
+
+  override var preferredFocusedView: UIView? {
+    return collectionView
+  }
+
+  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    if context.nextFocusedView == dropdownMenuView.button {
+      let revealedFrame = CGRect(origin: CGPoint.zero, size: dropdownMenuView.frame.size)
+      coordinator.addCoordinatedAnimations({
+        self.dropdownMenuView.frame = revealedFrame
+      }, completion: nil)
+    }
+
+    if context.previouslyFocusedView == dropdownMenuView.button {
+      let hiddenFrame = dropdownMenuView.frame.offsetBy(dx: 0, dy: -dropdownMenuView.frame.height)
+      coordinator.addCoordinatedAnimations({
+        self.dropdownMenuView.frame = hiddenFrame
+      }, completion: nil)
+    }
   }
 
   // MARK: - UICollectionViewDataSource

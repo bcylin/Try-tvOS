@@ -1,8 +1,8 @@
 //
-//  UIColor+TV.swift
+//  HistoryButton.swift
 //  TryTVOS
 //
-//  Created by Ben on 22/03/2016.
+//  Created by Ben on 09/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,44 +25,28 @@
 //
 
 import UIKit
-import Hue
 
-extension UIColor {
+class HistoryButton: UIButton {
 
-  enum Palette {
-    static let White = UIColor.whiteColor()
-    static let LightGray = UIColor.hex("#EFEDE8")
-    static let GreyishBrown = UIColor.hex("#564E4A")
-
-    enum Button {
-      static let TitleColor = White
-      static let BackgroundColor = GreyishBrown.colorWithAlphaComponent(0.6)
-    }
-
-    enum FocusedButton {
-      static let TitleColor = GreyishBrown
-      static let BackgroundColor = White
-    }
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setUpAppearance()
   }
 
-  class func tvTextColor() -> UIColor {
-    return Palette.GreyishBrown.colorWithAlphaComponent(0.6)
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setUpAppearance()
   }
 
-  class func tvFocusedTextColor() -> UIColor {
-    return Palette.GreyishBrown
-  }
+  // MARK: - Private Methods
 
-  class func tvHeaderTitleColor() -> UIColor {
-    return Palette.GreyishBrown
-  }
-
-  class func tvBackgroundColor() -> UIColor {
-    return Palette.LightGray
-  }
-
-  class func tvMenuBarColor() -> UIColor {
-    return Palette.LightGray
+  private func setUpAppearance() {
+    setTitle("History".localizedString, forState: .Normal)
+    contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
+    setTitleColor(UIColor.Palette.Button.TitleColor, forState: .Normal)
+    setTitleColor(UIColor.Palette.FocusedButton.TitleColor, forState: .Focused)
+    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.Button.BackgroundColor), forState: .Normal)
+    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.FocusedButton.BackgroundColor), forState: .Focused)
   }
 
 }

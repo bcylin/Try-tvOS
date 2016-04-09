@@ -40,9 +40,12 @@ class CategoriesViewController: BlurBackgroundViewController,
     }
   }
 
+  private let titleView = MainMenuView()
+
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
     _collectionView.registerClass(CategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(CategoryCell.self))
+    _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self
     _collectionView.delegate = self
     return _collectionView
@@ -54,11 +57,13 @@ class CategoriesViewController: BlurBackgroundViewController,
     super.loadView()
     navigationItem.titleView = UIView()
 
-    let divided = view.bounds.divide(300, fromEdge: .MinYEdge)
-    collectionView.frame = divided.remainder
+    let divided = view.bounds.divide(800, fromEdge: .MaxYEdge)
+    titleView.frame = divided.remainder
+    titleView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
+    collectionView.frame = divided.slice
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
-    collectionView.layer.borderWidth = 1
+    view.addSubview(titleView)
     view.addSubview(collectionView)
   }
 
@@ -90,6 +95,12 @@ class CategoriesViewController: BlurBackgroundViewController,
     navigationController?.setNavigationBarHidden(true, animated: animated)
   }
 
+  // MARK: - UIFocusEnvironment
+
+  override var preferredFocusedView: UIView? {
+    return collectionView
+  }
+
   // MARK: - UICollectionViewDataSource
 
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -106,7 +117,8 @@ class CategoriesViewController: BlurBackgroundViewController,
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let controller = VideosViewController()
+    let category = categories[indexPath.row]
+    let controller = VideosViewController(categoryID: category.id, title: category.name)
     navigationController?.pushViewController(controller, animated: true)
   }
 
