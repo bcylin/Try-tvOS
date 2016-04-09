@@ -47,6 +47,8 @@ class MainMenuView: UIView {
   }()
 
   private let focusGuide = UIFocusGuide()
+  private var frontBannerConstraint: NSLayoutConstraint?
+  private var backBannerConstraint: NSLayoutConstraint?
 
   // MARK: - Initialization
 
@@ -58,6 +60,19 @@ class MainMenuView: UIView {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setUpSubviews()
+  }
+
+  // MARK: - UIFocusEnvironment
+
+  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    let focused = (context.nextFocusedView == button)
+    layoutIfNeeded()
+
+    coordinator.addCoordinatedAnimations({
+      self.frontBannerConstraint?.constant = focused ? -10 : 0
+      self.backBannerConstraint?.constant = focused ? 0 : -10
+      self.layoutIfNeeded()
+    }, completion: nil)
   }
 
   // MARK: - Private Methods
@@ -77,11 +92,13 @@ class MainMenuView: UIView {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
 
-    frontBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+    frontBannerConstraint = frontBanner.topAnchor.constraintEqualToAnchor(topAnchor)
+    frontBannerConstraint?.active = true
     frontBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
     frontBanner.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
 
-    backBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+    backBannerConstraint = backBanner.topAnchor.constraintEqualToAnchor(topAnchor, constant: -10)
+    backBannerConstraint?.active = true
     backBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
     backBanner.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
 
