@@ -1,8 +1,8 @@
 //
-//  UIFont+TV.swift
+//  HistoryButton.swift
 //  TryTVOS
 //
-//  Created by Ben on 05/04/2016.
+//  Created by Ben on 09/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,38 +26,27 @@
 
 import UIKit
 
-extension UIFont {
+class HistoryButton: UIButton {
 
-  private enum FontFamily {
-    static let PingFangTC = "PingFang TC"
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setUpAppearance()
   }
 
-  class func tvFontForCategoryCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setUpAppearance()
   }
 
-  class func tvFontForFocusedCategoryCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 40) ?? UIFont.systemFontOfSize(40)
-  }
+  // MARK: - Private Methods
 
-  class func tvFontForVideoCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
-  }
-
-  class func tvFontForFocusedVideoCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
-  }
-
-  class func tvFontForLogo() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 65) ?? UIFont.systemFontOfSize(65)
-  }
-
-  class func tvFontForMenuButton() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 30) ?? UIFont.systemFontOfSize(30)
-  }
-
-  class func tvFontForHeaderTitle() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
+  private func setUpAppearance() {
+    setTitle("History", forState: .Normal)
+    contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
+    setTitleColor(UIColor.Palette.Button.TitleColor, forState: .Normal)
+    setTitleColor(UIColor.Palette.FocusedButton.TitleColor, forState: .Focused)
+    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.Button.BackgroundColor), forState: .Normal)
+    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.FocusedButton.BackgroundColor), forState: .Focused)
   }
 
 }

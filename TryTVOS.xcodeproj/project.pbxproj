@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
+		B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D99E1CB93D0600622198 /* MainMenuView.swift */; };
+		B500D9A11CB93D8100622198 /* HistoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A01CB93D8100622198 /* HistoryButton.swift */; };
 		B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */; };
 		B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */; };
 		B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E39771CA1494000EB1EEE /* UIColor+TV.swift */; };
@@ -43,6 +45,8 @@
 		2BD09092652BB6C0A969FF39 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B500D99E1CB93D0600622198 /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		B500D9A01CB93D8100622198 /* HistoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryButton.swift; sourceTree = "<group>"; };
 		B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Grid.swift"; sourceTree = "<group>"; };
 		B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TV.swift"; sourceTree = "<group>"; };
 		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
 				B5C591141CA04BA50096B985 /* CategoryHeaderView.swift */,
+				B500D9A01CB93D8100622198 /* HistoryButton.swift */,
+				B500D99E1CB93D0600622198 /* MainMenuView.swift */,
 				B5DA8EDD1CB3BD1B0068E0E3 /* MenuView.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 			);
@@ -348,6 +354,8 @@
 				B5C591151CA04BA50096B985 /* CategoryHeaderView.swift in Sources */,
 				B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */,
 				B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */,
+				B500D9A11CB93D8100622198 /* HistoryButton.swift in Sources */,
+				B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */,
 				B5DA8EDE1CB3BD1B0068E0E3 /* MenuView.swift in Sources */,
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,
 				B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */,

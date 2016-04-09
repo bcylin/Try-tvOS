@@ -1,8 +1,8 @@
 //
-//  MenuView.swift
+//  MainMenuView.swift
 //  TryTVOS
 //
-//  Created by Ben on 05/04/2016.
+//  Created by Ben on 09/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,22 +26,23 @@
 
 import UIKit
 
-/// A customized view with a layout of `H:|[focusGuide][button]-|`.
-class MenuView: UIView {
+class MainMenuView: UIView {
 
+  private let frontBanner = UIImageView(image: UIImage(named: "tv-banner-food-1"))
+  private let backBanner = UIImageView(image: UIImage(named: "tv-banner-food-2"))
   private let imageView = UIImageView()
 
-  private lazy var titleLabel: UILabel = {
-    let _label = UILabel()
-    _label.font = UIFont.tvFontForHeaderTitle()
-    _label.textColor = UIColor.tvHeaderTitleColor()
-    _label.text = "Try-tvOS"
-    return _label
+  private(set) lazy var titleLabel: UILabel = {
+    let _title = UILabel()
+    _title.font = UIFont.tvFontForLogo()
+    _title.textColor = UIColor.tvHeaderTitleColor()
+    _title.text = "Try-tvOS"
+    return _title
   }()
 
   private(set) lazy var button: UIButton = {
     let _button = HistoryButton(type: .System)
-    _button.titleLabel?.font = UIFont.tvFontForMenuButton()
+    _button.titleLabel?.font = UIFont.tvFontForHeaderTitle()
     return _button
   }()
 
@@ -62,31 +63,43 @@ class MenuView: UIView {
   // MARK: - Private Methods
 
   private func setUpSubviews() {
+    addSubview(frontBanner)
+    addSubview(backBanner)
     addSubview(imageView)
     addSubview(titleLabel)
     addSubview(button)
     addLayoutGuide(focusGuide)
 
+    frontBanner.translatesAutoresizingMaskIntoConstraints = false
+    backBanner.translatesAutoresizingMaskIntoConstraints = false
     imageView.layer.borderWidth = 1
     imageView.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
+
+    frontBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+    frontBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
+    frontBanner.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
+
+    backBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+    backBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
+    backBanner.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
 
     focusGuide.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
     focusGuide.trailingAnchor.constraintEqualToAnchor(button.leadingAnchor).active = true
     focusGuide.heightAnchor.constraintEqualToAnchor(heightAnchor).active = true
     focusGuide.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
 
-    imageView.widthAnchor.constraintEqualToConstant(87).active = true
-    imageView.heightAnchor.constraintEqualToConstant(64).active = true
-    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
-    imageView.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    imageView.widthAnchor.constraintEqualToConstant(120).active = true
+    imageView.heightAnchor.constraintEqualToConstant(88).active = true
+    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 222).active = true
+    imageView.topAnchor.constraintEqualToAnchor(topAnchor, constant: 136).active = true
 
     titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
-    titleLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    titleLabel.topAnchor.constraintEqualToAnchor(topAnchor, constant: 150).active = true
 
-    button.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -Metrics.EdgePadding.right).active = true
-    button.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    button.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -148).active = true
+    button.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
   }
 
 }

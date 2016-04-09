@@ -40,7 +40,7 @@ class CategoriesViewController: BlurBackgroundViewController,
     }
   }
 
-  private let titleView = MenuView()
+  private let titleView = MainMenuView()
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
@@ -63,7 +63,6 @@ class CategoriesViewController: BlurBackgroundViewController,
     collectionView.frame = divided.slice
     collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 
-    collectionView.layer.borderWidth = 1
     view.addSubview(titleView)
     view.addSubview(collectionView)
   }
