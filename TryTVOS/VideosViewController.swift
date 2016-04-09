@@ -48,8 +48,6 @@ class VideosViewController: BlurBackgroundViewController,
     return _menu
   }()
 
-  private let headerView = CategoryHeaderView()
-
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
@@ -71,22 +69,23 @@ class VideosViewController: BlurBackgroundViewController,
 
   override func loadView() {
     super.loadView()
-    navigationItem.titleView = UIView()
-    headerView.accessoryLabel.text = title ?? "Category"
-
-    let divided = view.bounds.divide(140, fromEdge: .MinYEdge)
-    headerView.frame = divided.slice
-    headerView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
-    collectionView.frame = divided.remainder
-    collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
-
     view.backgroundColor = UIColor.tvBackgroundColor()
-    view.addSubview(headerView)
+    collectionView.frame = view.bounds
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
 
     dropdownMenuView.button.setTitle("History".localizedString, forState: .Normal)
     dropdownMenuView.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
+
+    if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      flowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: CategoryHeaderView.requiredHeight)
+    }
+
+    collectionView.registerClass(
+      CategoryHeaderView.self,
+      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+      withReuseIdentifier: String(CategoryHeaderView.self)
+    )
   }
 
   override func viewDidLoad() {
@@ -147,6 +146,20 @@ class VideosViewController: BlurBackgroundViewController,
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
     (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
     return cell
+  }
+
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    if kind == UICollectionElementKindSectionHeader {
+      let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
+        UICollectionElementKindSectionHeader,
+        withReuseIdentifier: String(CategoryHeaderView.self),
+        forIndexPath: indexPath
+      )
+      (headerView as? CategoryHeaderView)?.accessoryLabel.text = title ?? "Category"
+      return headerView
+    }
+
+    return UICollectionReusableView()
   }
 
   // MARK: - UICollectionViewDelegate
