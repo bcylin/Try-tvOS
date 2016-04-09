@@ -111,10 +111,8 @@ class CategoriesViewController: BlurBackgroundViewController,
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
-    if let cover = (context.nextFocusedView as? CategoryCell)?.imageView.image {
-      coordinator.addCoordinatedAnimations({
-        self.backgroundImageView.image = cover
-      }, completion: nil)
+    if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image where cell.hasDisplayedCover {
+      self.backgroundImage = cover
     }
   }
 
@@ -122,17 +120,8 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   @objc private func handleCreatedCover(notification: NSNotification) {
     // Update the background image when the first mosaic cover is created.
-    if let cover = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage {
-      dispatch_async(dispatch_get_main_queue()) {
-        UIView.transitionWithView(
-          self.backgroundImageView,
-          duration: 0.3,
-          options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
-          animations: {
-            self.backgroundImageView.image = cover
-          }, completion: nil
-        )
-      }
+    dispatch_async(dispatch_get_main_queue()) {
+      self.backgroundImage = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage
     }
     NSNotificationCenter.defaultCenter().removeObserver(self, name: CoverBuilder.DidCreateCoverNotification, object: nil)
   }

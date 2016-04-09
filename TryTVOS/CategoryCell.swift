@@ -29,6 +29,12 @@ import Kingfisher
 
 class CategoryCell: UICollectionViewCell {
 
+  var hasDisplayedCover: Bool {
+    return tasks.isEmpty
+  }
+
+  // MARK: - Private Properties
+
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
     _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)

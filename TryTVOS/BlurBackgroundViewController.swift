@@ -28,7 +28,15 @@ import UIKit
 
 class BlurBackgroundViewController: UIViewController {
 
-  let backgroundImageView = UIImageView()
+  var backgroundImage: UIImage? {
+    didSet {
+      // Throttle background image transition to avoid extensive changes in a short period of time.
+      NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: .animateBackgroundTransition, object: nil)
+      performSelector(.animateBackgroundTransition, withObject: nil, afterDelay: 0.2)
+    }
+  }
+
+  private let backgroundImageView = UIImageView()
 
   private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
 
@@ -47,4 +55,28 @@ class BlurBackgroundViewController: UIViewController {
     view.addSubview(blurEffectView)
   }
 
+  // MARK: - Private Methods
+
+  @objc private func animateBackgroundTransition() {
+    #if DEBUG
+      print(#function)
+    #endif
+    UIView.transitionWithView(
+      self.backgroundImageView,
+      duration: 0.5,
+      options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
+      animations: {
+        self.backgroundImageView.image = self.backgroundImage
+      }, completion: nil
+    )
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension Selector {
+  static let animateBackgroundTransition = #selector(BlurBackgroundViewController.animateBackgroundTransition)
 }
