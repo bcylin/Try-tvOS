@@ -64,6 +64,12 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: .handleCreatedCover,
+      name: CoverBuilder.DidCreateCoverNotification,
+      object: nil
+    )
     Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories.json")
       .responseJSON { [weak self] response in
         guard let data = response.data else { return }
@@ -107,9 +113,36 @@ class CategoriesViewController: BlurBackgroundViewController,
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
     if let cover = (context.nextFocusedView as? CategoryCell)?.imageView.image {
       coordinator.addCoordinatedAnimations({
-        self.backgroundImage = cover
+        self.backgroundImageView.image = cover
       }, completion: nil)
     }
   }
 
+  // MARK: - NSNotification Callbacks
+
+  @objc private func handleCreatedCover(notification: NSNotification) {
+    // Update the background image when the first mosaic cover is created.
+    if let cover = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage {
+      dispatch_async(dispatch_get_main_queue()) {
+        UIView.transitionWithView(
+          self.backgroundImageView,
+          duration: 0.3,
+          options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
+          animations: {
+            self.backgroundImageView.image = cover
+          }, completion: nil
+        )
+      }
+    }
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: CoverBuilder.DidCreateCoverNotification, object: nil)
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension Selector {
+  static let handleCreatedCover = #selector(CategoriesViewController.handleCreatedCover(_:))
 }

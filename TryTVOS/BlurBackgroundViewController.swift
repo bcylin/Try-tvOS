@@ -28,13 +28,8 @@ import UIKit
 
 class BlurBackgroundViewController: UIViewController {
 
-  var backgroundImage: UIImage? {
-    didSet {
-      backgroundImageView.image = backgroundImage
-    }
-  }
+  let backgroundImageView = UIImageView()
 
-  private let backgroundImageView = UIImageView()
   private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
 
   // MARK: - UIViewController

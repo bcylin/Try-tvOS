@@ -28,6 +28,9 @@ import UIKit
 
 class CoverBuilder {
 
+  static let DidCreateCoverNotification = "CoverBuilderDidCreateCoverNotification"
+  static let NotificationUserInfoCoverKey = "CoverBuilderNotificationUserInfoCoverKey"
+
   private lazy var operationQueue: NSOperationQueue = {
     let _queue = NSOperationQueue()
     _queue.maxConcurrentOperationCount = 1
@@ -39,6 +42,18 @@ class CoverBuilder {
   private static let imageCache = NSCache()
 
   private var filledGrids = Set<Grid>()
+
+  // MARK: - Private Methods
+
+  private func cacheImage(image: UIImage, forKey key: String) {
+    self.dynamicType.imageCache.setObject(image, forKey: key)
+
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      self.dynamicType.DidCreateCoverNotification,
+      object: self,
+      userInfo: [self.dynamicType.NotificationUserInfoCoverKey: image]
+    )
+  }
 
   // MARK: - Public Methods
 
@@ -58,7 +73,7 @@ class CoverBuilder {
       self?.filledGrids.insert(corner)
 
       if let id = id where self?.filledGrids.count == Grid.numberOfGrids {
-        self?.dynamicType.imageCache.setObject(cover, forKey: String(id))
+        self?.cacheImage(cover, forKey: String(id))
       }
 
       dispatch_async(dispatch_get_main_queue()) {

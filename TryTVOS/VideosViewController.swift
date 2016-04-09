@@ -117,7 +117,7 @@ class VideosViewController: BlurBackgroundViewController,
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
     if let cover = (context.nextFocusedView as? VideoCell)?.imageView.image {
       coordinator.addCoordinatedAnimations({
-        self.backgroundImage = cover
+        self.backgroundImageView.image = cover
       }, completion: nil)
     }
   }
