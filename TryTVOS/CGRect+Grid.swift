@@ -28,6 +28,12 @@ import UIKit
 
 enum Grid: Int {
   case TopLeft, TopRight, BottomLeft, BottomRight
+
+  static let numberOfGrids: Int = {
+    var count = 0
+    while let _ = Grid(rawValue: count) { count += 1 }
+    return count
+  }()
 }
 
 func == (lhs: Grid, rhs: Grid) -> Bool {

@@ -36,21 +36,30 @@ class CoverBuilder {
 
   private(set) var cover: UIImage?
 
+  private static let imageCache = NSCache()
+
+  private var filledGrids = Set<Grid>()
+
   // MARK: - Public Methods
 
-  func addImage(image: UIImage, atCorner corner: Grid, completion: (newCover: UIImage) -> Void) {
-    operationQueue.addOperation(NSBlockOperation {
+  func addImage(image: UIImage, atCorner corner: Grid, categoryID id: Int? = nil, completion: (newCover: UIImage) -> Void) {
+    operationQueue.addOperation(NSBlockOperation { [weak self] in
       let imageSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
 
       var canvas: UIImage!
-      if let currentImage = self.cover where currentImage.size == imageSize {
+      if let currentImage = self?.cover where currentImage.size == imageSize {
         canvas = currentImage
       } else {
         canvas = UIImage.placeholderImage(withSize: imageSize)
       }
 
       let cover = canvas.image(byReplacingImage: image, atCorner: corner)
-      self.cover = cover
+      self?.cover = cover
+      self?.filledGrids.insert(corner)
+
+      if let id = id where self?.filledGrids.count == Grid.numberOfGrids {
+        self?.dynamicType.imageCache.setObject(cover, forKey: String(id))
+      }
 
       dispatch_async(dispatch_get_main_queue()) {
         completion(newCover: cover)
@@ -58,8 +67,13 @@ class CoverBuilder {
     })
   }
 
+  func coverForCategory(withID id: Int) -> UIImage? {
+    return self.dynamicType.imageCache.objectForKey(String(id)) as? UIImage
+  }
+
   func resetCover() {
     cover = nil
+    filledGrids.removeAll()
   }
 
 }
