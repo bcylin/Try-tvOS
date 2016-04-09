@@ -35,7 +35,7 @@ class MenuView: UIView {
     let _label = UILabel()
     _label.font = UIFont.tvFontForHeaderTitle()
     _label.textColor = UIColor.tvHeaderTitleColor()
-    _label.text = "Try-tvOS"
+    _label.text = "Try-tvOS".localizedString
     return _label
   }()
 

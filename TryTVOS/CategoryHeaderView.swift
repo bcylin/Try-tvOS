@@ -35,7 +35,7 @@ class CategoryHeaderView: UIView {
     let _title = UILabel()
     _title.font = UIFont.tvFontForHeaderTitle()
     _title.textColor = UIColor.tvHeaderTitleColor()
-    _title.text = "Try-tvOS"
+    _title.text = "Try-tvOS".localizedString
     return _title
   }()
 

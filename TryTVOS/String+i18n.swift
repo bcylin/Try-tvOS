@@ -1,5 +1,5 @@
 //
-//  HistoryButton.swift
+//  String+i18n.swift
 //  TryTVOS
 //
 //  Created by Ben on 09/04/2016.
@@ -24,29 +24,12 @@
 //  SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
-class HistoryButton: UIButton {
+extension String {
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setUpAppearance()
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setUpAppearance()
-  }
-
-  // MARK: - Private Methods
-
-  private func setUpAppearance() {
-    setTitle("History".localizedString, forState: .Normal)
-    contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
-    setTitleColor(UIColor.Palette.Button.TitleColor, forState: .Normal)
-    setTitleColor(UIColor.Palette.FocusedButton.TitleColor, forState: .Focused)
-    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.Button.BackgroundColor), forState: .Normal)
-    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.FocusedButton.BackgroundColor), forState: .Focused)
+  var localizedString: String {
+    return NSLocalizedString(self, comment: "")
   }
 
 }
