@@ -45,6 +45,10 @@ extension UIColor {
     }
   }
 
+  class func tvTaglineColor() -> UIColor {
+    return Palette.GreyishBrown
+  }
+
   class func tvTextColor() -> UIColor {
     return Palette.GreyishBrown.colorWithAlphaComponent(0.6)
   }

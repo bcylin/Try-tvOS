@@ -40,6 +40,10 @@ extension UIFont {
 
   // MARK: - Public Methods
 
+  class func tvFontForTagline() -> UIFont {
+    return UIFont.tvFontOfSize(44)
+  }
+
   class func tvFontForCategoryCell() -> UIFont {
     return UIFont.tvFontOfSize(35)
   }
