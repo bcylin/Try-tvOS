@@ -148,11 +148,15 @@ class VideosViewController: BlurBackgroundViewController,
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let video = videos[indexPath.row]
     let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
-    let controller = VideoPlayerController(video: videos[indexPath.row], coverImage: cell?.imageView.image)
+    let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
     presentViewController(controller, animated: true) {
       controller.player?.play()
     }
+    #if DEBUG
+      print(try? video.toJSON().serialize())
+    #endif
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
