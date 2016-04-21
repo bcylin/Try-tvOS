@@ -151,8 +151,8 @@ class VideosViewController: BlurBackgroundViewController,
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
     presentViewController(controller, animated: true) {
       controller.player?.play()
+      HistoryManager.save(video: video)
     }
-    Debug.print(try? video.toJSON().serialize())
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
