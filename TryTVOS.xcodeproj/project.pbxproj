@@ -13,6 +13,7 @@
 		B500D9A31CB94AD300622198 /* String+i18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A21CB94AD300622198 /* String+i18n.swift */; };
 		B500D9A61CB94B5D00622198 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B500D9A81CB94B5D00622198 /* Localizable.strings */; };
 		B50BFC051CC88FA3004F853D /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC041CC88FA3004F853D /* Debug.swift */; };
+		B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC061CC8AF14004F853D /* HistoryViewController.swift */; };
 		B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */; };
 		B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */; };
 		B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115921CC69E7C00E75292 /* HistoryManager.swift */; };
@@ -56,6 +57,7 @@
 		B500D9A91CB94B6600622198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B500D9AA1CB94BA400622198 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B50BFC041CC88FA3004F853D /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		B50BFC061CC8AF14004F853D /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Grid.swift"; sourceTree = "<group>"; };
 		B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TV.swift"; sourceTree = "<group>"; };
 		B53115921CC69E7C00E75292 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				B5DA8EE11CB4C2B20068E0E3 /* BlurBackgroundViewController.swift */,
 				B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */,
+				B50BFC061CC8AF14004F853D /* HistoryViewController.swift */,
 				B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */,
 				B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */,
 			);
@@ -373,6 +376,7 @@
 				B50BFC051CC88FA3004F853D /* Debug.swift in Sources */,
 				B500D9A11CB93D8100622198 /* HistoryButton.swift in Sources */,
 				B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */,
+				B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */,
 				B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */,
 				B5DA8EDE1CB3BD1B0068E0E3 /* MenuView.swift in Sources */,
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,

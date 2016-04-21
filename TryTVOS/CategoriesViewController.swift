@@ -40,7 +40,11 @@ class CategoriesViewController: BlurBackgroundViewController,
     }
   }
 
-  private let titleView = MainMenuView()
+  private lazy var titleView: MainMenuView = {
+    let _menu = MainMenuView()
+    _menu.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
+    return _menu
+  }()
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
@@ -136,6 +140,12 @@ class CategoriesViewController: BlurBackgroundViewController,
     NSNotificationCenter.defaultCenter().removeObserver(self, name: CoverBuilder.DidCreateCoverNotification, object: nil)
   }
 
+  // MARK: - UIResponder Callbacks
+
+  @objc private func showHistory(sender: UIButton) {
+    navigationController?.pushViewController(HistoryViewController(), animated: true)
+  }
+
 }
 
 
@@ -144,4 +154,5 @@ class CategoriesViewController: BlurBackgroundViewController,
 
 private extension Selector {
   static let handleCreatedCover = #selector(CategoriesViewController.handleCreatedCover(_:))
+  static let showHistory = #selector(CategoriesViewController.showHistory(_:))
 }
