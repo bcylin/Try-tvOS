@@ -28,14 +28,14 @@ import Freddy
 
 struct Category {
 
-  let id: Int
+  let id: String
   let name: String
   let coverURLs: [String]
 
   init(json value: JSON) throws {
-    id = try value.int("id")
-    name = try value.string("name")
-    coverURLs = try value.array("cover_urls").map(String.init)
+    id = try value.string("id")
+    name = try value.string("attributes", "name", or: "")
+    coverURLs = try value.array("attributes", "cover-urls").map(String.init)
   }
 
 }
