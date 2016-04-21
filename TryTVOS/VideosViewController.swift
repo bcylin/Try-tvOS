@@ -99,9 +99,7 @@ class VideosViewController: BlurBackgroundViewController,
           let json = try JSON(data: data)
           self?.videos = try json.array("videos").map(Video.init)
         } catch {
-          #if DEBUG
-            print(error)
-          #endif
+          Debug.print(error)
         }
     }
   }
@@ -154,9 +152,7 @@ class VideosViewController: BlurBackgroundViewController,
     presentViewController(controller, animated: true) {
       controller.player?.play()
     }
-    #if DEBUG
-      print(try? video.toJSON().serialize())
-    #endif
+    Debug.print(try? video.toJSON().serialize())
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {

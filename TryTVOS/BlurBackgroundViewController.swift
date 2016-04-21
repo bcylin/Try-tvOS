@@ -58,9 +58,7 @@ class BlurBackgroundViewController: UIViewController {
   // MARK: - Private Methods
 
   @objc private func animateBackgroundTransition() {
-    #if DEBUG
-      print(#function)
-    #endif
+    Debug.print(#function)
     UIView.transitionWithView(
       self.backgroundImageView,
       duration: 0.5,

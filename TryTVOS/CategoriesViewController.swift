@@ -79,13 +79,11 @@ class CategoriesViewController: BlurBackgroundViewController,
       .responseJSON { [weak self] response in
         guard let data = response.data else { return }
         do {
-          print(response.result.value)
+          Debug.print(response.result.value)
           let json = try JSON(data: data)
           self?.categories = try json.array("categories").map(Category.init)
         } catch {
-          #if DEBUG
-            print(error)
-          #endif
+          Debug.print(error)
         }
     }
   }
