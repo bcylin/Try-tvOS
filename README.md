@@ -23,22 +23,24 @@ What is the key for BaseAPIURL
 
   > API details are hidden due to proprietary reasons. Any API output that contains the matched keys will suffice.
 
-## API Response
+## JSON API 1.0 Response
 
 The response of `categories`:
 
 ```json
 {
-  "categories": [
+  "data": [
     {
-      "id": 1,
-      "name": "",
-      "cover_urls": [
-        "https://imag.es/1.png",
-        "https://imag.es/2.png",
-        "https://imag.es/3.png",
-        "https://imag.es/4.png"
-      ]
+      "id": "1",
+      "attributes": {
+        "name": "",
+        "cover-urls": [
+          "https://imag.es/1.png",
+          "https://imag.es/2.png",
+          "https://imag.es/3.png",
+          "https://imag.es/4.png"
+        ]
+      }
     }
   ]
 }
@@ -48,16 +50,16 @@ The response of `categories/:id/videos`:
 
 ```json
 {
-  "name": "Category",
-  "videos": [
+  "data": [
     {
-      "id": 1,
-      "title": "Video",
-      "description": "",
-      "youtube_url": "",
-      "cover": {
-        "large_url": "https://imag.es/1920x1080.png",
-        "small_url": "https://imag.es/400x300.png"
+      "id": "1",
+      "attributes": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "length": 0.0,
+        "embed-url": "https://www.youtube.com/watch?v=",
+        "cover-url": "https://imag.es/400x300.png"
       }
     }
   ]
