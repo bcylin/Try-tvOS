@@ -42,9 +42,8 @@ class VideosViewController: BlurBackgroundViewController,
 
   private var categoryID = 0
 
-  private lazy var dropdownMenuView: MenuView = {
+  private(set) lazy var dropdownMenuView: MenuView = {
     let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
-    _menu.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
     _menu.backgroundColor = UIColor.tvMenuBarColor()
     return _menu
   }()
@@ -85,6 +84,9 @@ class VideosViewController: BlurBackgroundViewController,
     view.addSubview(headerView)
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
+
+    dropdownMenuView.button.setTitle("History".localizedString, forState: .Normal)
+    dropdownMenuView.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
   }
 
   override func viewDidLoad() {

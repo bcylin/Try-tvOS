@@ -1,5 +1,5 @@
 //
-//  HistoryButton.swift
+//  MenuButton.swift
 //  TryTVOS
 //
 //  Created by Ben on 09/04/2016.
@@ -26,7 +26,7 @@
 
 import UIKit
 
-class HistoryButton: UIButton {
+class MenuButton: UIButton {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -41,7 +41,6 @@ class HistoryButton: UIButton {
   // MARK: - Private Methods
 
   private func setUpAppearance() {
-    setTitle("History".localizedString, forState: .Normal)
     contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
     setTitleColor(UIColor.Palette.Button.TitleColor, forState: .Normal)
     setTitleColor(UIColor.Palette.FocusedButton.TitleColor, forState: .Focused)

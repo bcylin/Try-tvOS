@@ -41,7 +41,7 @@ class MainMenuView: UIView {
   }()
 
   private(set) lazy var button: UIButton = {
-    let _button = HistoryButton(type: .System)
+    let _button = MenuButton(type: .System)
     _button.titleLabel?.font = UIFont.tvFontForHeaderTitle()
     return _button
   }()

@@ -37,6 +37,12 @@ class HistoryViewController: VideosViewController {
     set {}
   }
 
+  override func loadView() {
+    super.loadView()
+    dropdownMenuView.button.setTitle("Home".localizedString, forState: .Normal)
+    dropdownMenuView.button.addTarget(self, action: .backToHome, forControlEvents: .PrimaryActionTriggered)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     isLoading = true
@@ -75,4 +81,18 @@ class HistoryViewController: VideosViewController {
     self.videos = reordered
   }
 
+  // MARK: - UIResponder Callbacks
+
+  @objc private func backToHome(sender: UIButton) {
+    navigationController?.popToRootViewControllerAnimated(true)
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension Selector {
+  static let backToHome = #selector(HistoryViewController.backToHome(_:))
 }
