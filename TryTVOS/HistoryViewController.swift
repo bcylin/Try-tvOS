@@ -49,6 +49,10 @@ class HistoryViewController: VideosViewController {
         }
       } catch {
         Debug.print(error)
+        // Remove the malformed cache.
+        HistoryManager.deleteCache() { _ in
+          self.isLoading = false
+        }
       }
     }
   }

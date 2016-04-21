@@ -75,4 +75,27 @@ struct HistoryManager {
     }
   }
 
+  /**
+   Deletes the video history in the background.
+
+   - parameter completion: A completion block that's called in the main thread when the action finishes.
+   */
+  static func deleteCache(completion: ((success: Bool) -> Void)? = nil) {
+    if let path = cache?.path {
+      dispatch_async(savingQueue) {
+        do {
+          try NSFileManager.defaultManager().removeItemAtPath(path)
+          dispatch_async(dispatch_get_main_queue()) {
+            completion?(success: true)
+          }
+        } catch {
+          Debug.print(error)
+          dispatch_async(dispatch_get_main_queue()) {
+            completion?(success: false)
+          }
+        }
+      }
+    }
+  }
+
 }
