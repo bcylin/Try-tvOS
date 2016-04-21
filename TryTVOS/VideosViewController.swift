@@ -102,7 +102,7 @@ class VideosViewController: BlurBackgroundViewController,
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          self?.videos = try json.array("videos").map(Video.init)
+          self?.videos = try json.array("data").map(Video.init)
           self?.isLoading = false
         } catch {
           Debug.print(error)

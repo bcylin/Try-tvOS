@@ -31,42 +31,51 @@ import HCYoutubeParser
 
 struct Video: JSONDecodable, JSONEncodable {
 
-  let id: Int
+  let id: String
   let title: String
   let subtitle: String?
   let description: String?
+  let length: Int
   let youtube: String
-  let cover: Cover?
+  let cover: String
+
+  var coverURL: NSURL? {
+    return NSURL(string: cover)
+  }
 
   // MARK: - JSONDecodable
 
   init(json value: JSON) throws {
-    id = try value.int("id")
-    title = try value.string("title")
-    subtitle = try value.string("subtitle", ifNull: true)
-    description = try value.string("description", ifNull: true)
-    youtube = try value.string("youtube_url")
-    cover = try value["cover"].map(Cover.init)
+    id = try value.string("id")
+    title = try value.string("attributes", "title")
+    subtitle = try value.string("attributes", "subtitle", ifNull: true)
+    description = try value.string("attributes", "description", ifNull: true)
+    length = try value.int("attributes", "length", or: 0)
+    youtube = try value.string("attributes", "embed-url")
+    cover = try value.string("attributes", "cover-url")
   }
 
   // MARK: - JSONEncodable
 
   func toJSON() -> JSON {
-    var json: [String: JSON] = [
-      "id": .Int(id),
+    var attributes: [String: JSON] = [
       "title": .String(title),
-      "youtube_url": .String(youtube),
+      "embed-url": .String(youtube),
+      "cover-url": .String(cover),
+      "length": .Int(length)
     ]
 
     if let subtitle = subtitle {
-      json["subtitle"] = .String(subtitle)
+      attributes["subtitle"] = .String(subtitle)
     }
     if let description = description {
-      json["description"] = .String(description)
+      attributes["description"] = .String(description)
     }
-    if let cover = cover {
-      json["cover"] = cover.toJSON()
-    }
+
+    let json: [String: JSON] = [
+      "id": .String(id),
+      "attributes": .Dictionary(attributes)
+    ]
 
     return .Dictionary(json)
   }
@@ -99,37 +108,6 @@ struct Video: JSONDecodable, JSONEncodable {
     _description.locale = NSLocale.currentLocale()
     _description.value = (subtitle == nil ? "" : subtitle! + "\n") + (description ?? "")
     return _description
-  }
-
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-struct Cover: JSONDecodable, JSONEncodable {
-
-  let large: String?
-  let small: String?
-
-  init(json value: JSON) throws {
-    large = try value.string("large_url", ifNotFound: true)
-    small = try value.string("small_url", ifNotFound: true)
-  }
-
-  // MARK: - JSONEncodable
-
-  func toJSON() -> JSON {
-    var json =  [String: JSON]()
-
-    if let large = large {
-      json["large_url"] = .String(large)
-    }
-    if let small = small {
-      json["small_url"] = .String(small)
-    }
-
-    return .Dictionary(json)
   }
 
 }
