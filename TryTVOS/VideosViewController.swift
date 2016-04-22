@@ -34,14 +34,15 @@ class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout {
 
-  private var categoryID = 0
-  private var videos = [Video]() {
+  var videos = [Video]() {
     didSet {
       collectionView.reloadData()
     }
   }
 
-  private lazy var dropdownMenuView: MenuView = {
+  private var categoryID = 0
+
+  private(set) lazy var dropdownMenuView: MenuView = {
     let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
     _menu.backgroundColor = UIColor.tvMenuBarColor()
     return _menu
@@ -83,6 +84,9 @@ class VideosViewController: BlurBackgroundViewController,
     view.addSubview(headerView)
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
+
+    dropdownMenuView.button.setTitle("History".localizedString, forState: .Normal)
+    dropdownMenuView.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
   }
 
   override func viewDidLoad() {
@@ -92,16 +96,16 @@ class VideosViewController: BlurBackgroundViewController,
       return
     }
 
+    isLoading = true
     Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json")
       .responseJSON { [weak self] response in
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
           self?.videos = try json.array("videos").map(Video.init)
+          self?.isLoading = false
         } catch {
-          #if DEBUG
-            print(error)
-          #endif
+          Debug.print(error)
         }
     }
   }
@@ -148,10 +152,13 @@ class VideosViewController: BlurBackgroundViewController,
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let video = videos[indexPath.row]
     let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
-    let controller = VideoPlayerController(video: videos[indexPath.row], coverImage: cell?.imageView.image)
-    presentViewController(controller, animated: true) {
+
+    let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
+    presentViewController(controller, animated: true) { [weak self] in
       controller.player?.play()
+      self?.saveToHistory(video, atIndex: indexPath.row)
     }
   }
 
@@ -161,4 +168,24 @@ class VideosViewController: BlurBackgroundViewController,
     }
   }
 
+  // MARK: - UIResponder Callbacks
+
+  @objc private func showHistory(sender: UIButton) {
+    navigationController?.pushViewController(HistoryViewController(), animated: true)
+  }
+
+  // MARK: - Public Methods
+
+  func saveToHistory(video: Video, atIndex index: Int) {
+    HistoryManager.save(video: video)
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension Selector {
+  static let showHistory = #selector(VideosViewController.showHistory(_:))
 }

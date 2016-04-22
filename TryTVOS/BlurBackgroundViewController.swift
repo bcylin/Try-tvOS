@@ -28,6 +28,16 @@ import UIKit
 
 class BlurBackgroundViewController: UIViewController {
 
+  var isLoading = false {
+    didSet {
+      if isLoading {
+        activityIndicator.startAnimating()
+      } else {
+        activityIndicator.stopAnimating()
+      }
+    }
+  }
+
   var backgroundImage: UIImage? {
     didSet {
       // Throttle background image transition to avoid extensive changes in a short period of time.
@@ -39,6 +49,13 @@ class BlurBackgroundViewController: UIViewController {
   private let backgroundImageView = UIImageView()
 
   private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+
+  private lazy var activityIndicator: UIActivityIndicatorView = {
+    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    _indicator.color = UIColor.Palette.GreyishBrown
+    _indicator.hidesWhenStopped = true
+    return _indicator
+  }()
 
   // MARK: - UIViewController
 
@@ -53,14 +70,17 @@ class BlurBackgroundViewController: UIViewController {
 
     view.addSubview(backgroundImageView)
     view.addSubview(blurEffectView)
+    view.addSubview(activityIndicator)
+
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    activityIndicator.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    activityIndicator.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
   }
 
   // MARK: - Private Methods
 
   @objc private func animateBackgroundTransition() {
-    #if DEBUG
-      print(#function)
-    #endif
+    Debug.print(#function)
     UIView.transitionWithView(
       self.backgroundImageView,
       duration: 0.5,

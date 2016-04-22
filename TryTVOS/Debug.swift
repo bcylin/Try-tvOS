@@ -1,8 +1,8 @@
 //
-//  HistoryButton.swift
+//  Debug.swift
 //  TryTVOS
 //
-//  Created by Ben on 09/04/2016.
+//  Created by Ben on 21/04/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,29 +24,43 @@
 //  SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
-class HistoryButton: UIButton {
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setUpAppearance()
+struct Debug {
+
+  private static let dateFormatter: NSDateFormatter = {
+    let _formatter = NSDateFormatter()
+    _formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+    return _formatter
+  }()
+
+  static func print(items: Any..., separator: String = " ", terminator: String = "\n", file: String = #file, function: String = #function, line: Int = #line) {
+    #if DEBUG
+      let prefix = dateFormatter.stringFromDate(NSDate()) + " \(file.typeName).\(function):[\(line)]"
+      let content = items.map { "\($0)" } .joinWithSeparator(separator)
+      Swift.print("\(prefix) \(content)", terminator: terminator)
+    #endif
   }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setUpAppearance()
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension String {
+
+  var typeName: String {
+    return lastPathComponent.stringByDeletingPathExtension
   }
 
-  // MARK: - Private Methods
+  var lastPathComponent: String {
+    return (self as NSString).lastPathComponent
+  }
 
-  private func setUpAppearance() {
-    setTitle("History".localizedString, forState: .Normal)
-    contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
-    setTitleColor(UIColor.Palette.Button.TitleColor, forState: .Normal)
-    setTitleColor(UIColor.Palette.FocusedButton.TitleColor, forState: .Focused)
-    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.Button.BackgroundColor), forState: .Normal)
-    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.FocusedButton.BackgroundColor), forState: .Focused)
+  var stringByDeletingPathExtension: String {
+    return (self as NSString).stringByDeletingPathExtension
   }
 
 }

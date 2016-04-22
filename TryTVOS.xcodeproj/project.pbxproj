@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
 		B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D99E1CB93D0600622198 /* MainMenuView.swift */; };
-		B500D9A11CB93D8100622198 /* HistoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A01CB93D8100622198 /* HistoryButton.swift */; };
+		B500D9A11CB93D8100622198 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A01CB93D8100622198 /* MenuButton.swift */; };
 		B500D9A31CB94AD300622198 /* String+i18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A21CB94AD300622198 /* String+i18n.swift */; };
 		B500D9A61CB94B5D00622198 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B500D9A81CB94B5D00622198 /* Localizable.strings */; };
+		B50BFC051CC88FA3004F853D /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC041CC88FA3004F853D /* Debug.swift */; };
+		B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC061CC8AF14004F853D /* HistoryViewController.swift */; };
 		B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */; };
 		B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */; };
+		B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115921CC69E7C00E75292 /* HistoryManager.swift */; };
 		B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E39771CA1494000EB1EEE /* UIColor+TV.swift */; };
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
@@ -48,13 +51,16 @@
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B500D99E1CB93D0600622198 /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
-		B500D9A01CB93D8100622198 /* HistoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryButton.swift; sourceTree = "<group>"; };
+		B500D9A01CB93D8100622198 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		B500D9A21CB94AD300622198 /* String+i18n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+i18n.swift"; sourceTree = "<group>"; };
 		B500D9A71CB94B5D00622198 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B500D9A91CB94B6600622198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B500D9AA1CB94BA400622198 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B50BFC041CC88FA3004F853D /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		B50BFC061CC8AF14004F853D /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Grid.swift"; sourceTree = "<group>"; };
 		B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TV.swift"; sourceTree = "<group>"; };
+		B53115921CC69E7C00E75292 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 			children = (
 				B56D68E81CA564B00097D5D7 /* Category.swift */,
 				B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */,
+				B53115921CC69E7C00E75292 /* HistoryManager.swift */,
 				B5BA618A1C7748B900548B38 /* Video.swift */,
 			);
 			name = Model;
@@ -141,8 +148,8 @@
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
 				B5C591141CA04BA50096B985 /* CategoryHeaderView.swift */,
-				B500D9A01CB93D8100622198 /* HistoryButton.swift */,
 				B500D99E1CB93D0600622198 /* MainMenuView.swift */,
+				B500D9A01CB93D8100622198 /* MenuButton.swift */,
 				B5DA8EDD1CB3BD1B0068E0E3 /* MenuView.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 			);
@@ -154,6 +161,7 @@
 			children = (
 				B5DA8EE11CB4C2B20068E0E3 /* BlurBackgroundViewController.swift */,
 				B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */,
+				B50BFC061CC8AF14004F853D /* HistoryViewController.swift */,
 				B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */,
 				B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */,
 			);
@@ -189,6 +197,7 @@
 				B5AAAE5C1C85DD16002DDFC8 /* View */,
 				B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */,
 				B5F7BF521BA9C95F00A75099 /* Assets.xcassets */,
+				B50BFC041CC88FA3004F853D /* Debug.swift */,
 				B5F7BF541BA9C95F00A75099 /* Info.plist */,
 				B500D9A81CB94B5D00622198 /* Localizable.strings */,
 				B5AEEE311C82D4BC001CF112 /* Metrics.swift */,
@@ -364,8 +373,11 @@
 				B5C591151CA04BA50096B985 /* CategoryHeaderView.swift in Sources */,
 				B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */,
 				B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */,
-				B500D9A11CB93D8100622198 /* HistoryButton.swift in Sources */,
+				B50BFC051CC88FA3004F853D /* Debug.swift in Sources */,
+				B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */,
+				B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */,
 				B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */,
+				B500D9A11CB93D8100622198 /* MenuButton.swift in Sources */,
 				B5DA8EDE1CB3BD1B0068E0E3 /* MenuView.swift in Sources */,
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,
 				B500D9A31CB94AD300622198 /* String+i18n.swift in Sources */,

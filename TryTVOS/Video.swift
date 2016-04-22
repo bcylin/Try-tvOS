@@ -29,7 +29,7 @@ import Foundation
 import Freddy
 import HCYoutubeParser
 
-struct Video {
+struct Video: JSONDecodable, JSONEncodable {
 
   let id: Int
   let title: String
@@ -37,6 +37,8 @@ struct Video {
   let description: String?
   let youtube: String
   let cover: Cover?
+
+  // MARK: - JSONDecodable
 
   init(json value: JSON) throws {
     id = try value.int("id")
@@ -46,6 +48,30 @@ struct Video {
     youtube = try value.string("youtube_url")
     cover = try value["cover"].map(Cover.init)
   }
+
+  // MARK: - JSONEncodable
+
+  func toJSON() -> JSON {
+    var json: [String: JSON] = [
+      "id": .Int(id),
+      "title": .String(title),
+      "youtube_url": .String(youtube),
+    ]
+
+    if let subtitle = subtitle {
+      json["subtitle"] = .String(subtitle)
+    }
+    if let description = description {
+      json["description"] = .String(description)
+    }
+    if let cover = cover {
+      json["cover"] = cover.toJSON()
+    }
+
+    return .Dictionary(json)
+  }
+
+  // MARK: - Helpers
 
   var playerItemURL: NSURL? {
     guard
@@ -81,7 +107,7 @@ struct Video {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-struct Cover {
+struct Cover: JSONDecodable, JSONEncodable {
 
   let large: String?
   let small: String?
@@ -89,6 +115,21 @@ struct Cover {
   init(json value: JSON) throws {
     large = try value.string("large_url", ifNotFound: true)
     small = try value.string("small_url", ifNotFound: true)
+  }
+
+  // MARK: - JSONEncodable
+
+  func toJSON() -> JSON {
+    var json =  [String: JSON]()
+
+    if let large = large {
+      json["large_url"] = .String(large)
+    }
+    if let small = small {
+      json["small_url"] = .String(small)
+    }
+
+    return .Dictionary(json)
   }
 
 }
