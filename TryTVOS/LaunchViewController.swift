@@ -37,7 +37,7 @@ class LaunchViewController: UIViewController {
     let _label = UILabel()
     _label.font = UIFont.tvFontForTagline()
     _label.textColor = UIColor.tvTaglineColor()
-    _label.text = "Tagline"
+    _label.text = "Tagline".localizedString
     return _label
   }()
 

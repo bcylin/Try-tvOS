@@ -6,6 +6,10 @@
   Copyright © 2016 bcylin. All rights reserved.
 */
 
-"Try-tvOS" = "測試 App";
+"iCook TV" = "愛料理 TV";
 
 "History" = "瀏覽紀錄";
+
+"Home" = "首頁";
+
+"Tagline" = "愛料理食譜社群\nicook.tw";
