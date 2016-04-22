@@ -56,6 +56,10 @@ extension UIFont {
     return UIFont.tvFontOfSize(29)
   }
 
+  class func tvFontForVideoLength() -> UIFont {
+    return UIFont.systemFontOfSize(20)
+  }
+
   class func tvFontForFocusedVideoCell() -> UIFont {
     return UIFont.tvFontOfSize(29)
   }

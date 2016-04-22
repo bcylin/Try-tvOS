@@ -50,7 +50,7 @@ extension UIColor {
   }
 
   class func tvTextColor() -> UIColor {
-    return Palette.GreyishBrown.colorWithAlphaComponent(0.6)
+    return Palette.GreyishBrown.colorWithAlphaComponent(0.8)
   }
 
   class func tvFocusedTextColor() -> UIColor {

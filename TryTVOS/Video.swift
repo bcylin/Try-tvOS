@@ -43,6 +43,13 @@ struct Video: JSONDecodable, JSONEncodable {
     return NSURL(string: cover)
   }
 
+  var timestamp: String {
+    let seconds = length % 60
+    let minutes = (length / 60) % 60
+    let hours = length / 3600
+    return (hours > 0 ? "\(hours):" : "") + String(format: "%d:%02d", minutes, seconds)
+  }
+
   // MARK: - JSONDecodable
 
   init(json value: JSON) throws {

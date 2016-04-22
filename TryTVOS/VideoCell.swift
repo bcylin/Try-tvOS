@@ -36,13 +36,31 @@ class VideoCell: UICollectionViewCell {
     return _imageView
   }()
 
-  private(set) lazy var textLabel: UILabel = {
-    let _label = UILabel()
-    _label.font = UIFont.tvFontForVideoCell()
-    _label.textColor = UIColor.tvTextColor()
-    _label.textAlignment = .Center
-    return _label
+  private(set) lazy var titleLabel: UILabel = {
+    let _title = UILabel()
+    _title.font = UIFont.tvFontForVideoCell()
+    _title.textColor = UIColor.tvTextColor()
+    _title.textAlignment = .Center
+    return _title
   }()
+
+  private(set) lazy var timeLabel: UILabel = {
+    let _time = InsetLabel(contentEdgeInsets: UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20))
+    _time.font = UIFont.tvFontForVideoLength()
+    _time.textColor = UIColor.whiteColor()
+    _time.backgroundColor = UIColor.Palette.GreyishBrown
+    _time.textAlignment = .Center
+    _time.alpha = 0
+    return _time
+  }()
+
+  private var timeLabelConstraints = (left: NSLayoutConstraint(), bottom: NSLayoutConstraint())
+
+  /// Offsets due to the adjusted image bounds when focused.
+  private let timeLabelOffsets = (
+    left: (normal: CGFloat(0), focused: CGFloat(-20)),
+    bottom: (normal: CGFloat(0), focused: CGFloat(-10))
+  )
 
   // MARK: - Initialization
 
@@ -62,7 +80,7 @@ class VideoCell: UICollectionViewCell {
     super.prepareForReuse()
     imageView.kf_cancelDownloadTask()
     imageView.image = UIImage.placeholderImage(withSize: bounds.size)
-    textLabel.text = nil
+    titleLabel.text = nil
   }
 
   // MARK: - UIFocusEnvironment
@@ -73,11 +91,20 @@ class VideoCell: UICollectionViewCell {
     let color = focused ? UIColor.tvFocusedTextColor() : UIColor.tvTextColor()
     let transform = focused ?  CGAffineTransformMakeTranslation(0, 15) : CGAffineTransformIdentity
     let font = focused ? UIFont.tvFontForVideoCell() : UIFont.tvFontForVideoCell()
+    let alpha: CGFloat = focused ? 1 : 0
+    let offset = (
+      left: focused ? self.timeLabelOffsets.left.focused : self.timeLabelOffsets.left.normal,
+      bottom: focused ? self.timeLabelOffsets.bottom.focused : self.timeLabelOffsets.bottom.normal
+    )
 
     coordinator.addCoordinatedAnimations({
-      self.textLabel.textColor = color
-      self.textLabel.transform = transform
-      self.textLabel.font = font
+      self.titleLabel.textColor = color
+      self.titleLabel.transform = transform
+      self.titleLabel.font = font
+      self.timeLabel.alpha = alpha
+      self.timeLabelConstraints.left.constant = offset.left
+      self.timeLabelConstraints.bottom.constant = offset.bottom
+      self.contentView.layoutIfNeeded()
     }, completion: nil)
   }
 
@@ -88,7 +115,8 @@ class VideoCell: UICollectionViewCell {
     imageView.adjustsImageWhenAncestorFocused = true
 
     contentView.addSubview(imageView)
-    contentView.addSubview(textLabel)
+    contentView.addSubview(titleLabel)
+    contentView.addSubview(timeLabel)
 
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
@@ -96,10 +124,16 @@ class VideoCell: UICollectionViewCell {
     imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
     imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
 
-    textLabel.translatesAutoresizingMaskIntoConstraints = false
-    textLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 20).active = true
-    textLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    textLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 20).active = true
+    titleLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
+    titleLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+
+    timeLabel.translatesAutoresizingMaskIntoConstraints = false
+    timeLabelConstraints.left = timeLabel.leadingAnchor.constraintEqualToAnchor(imageView.leadingAnchor, constant: timeLabelOffsets.left.normal)
+    timeLabelConstraints.bottom = imageView.bottomAnchor.constraintEqualToAnchor(timeLabel.bottomAnchor, constant: timeLabelOffsets.bottom.normal)
+    timeLabelConstraints.left.active = true
+    timeLabelConstraints.bottom.active = true
   }
 
   // MARK: - Public Methods
@@ -108,7 +142,8 @@ class VideoCell: UICollectionViewCell {
     if let url = video.coverURL {
       imageView.kf_setImageWithURL(url, placeholderImage: UIImage.placeholderImage(withSize: bounds.size))
     }
-    textLabel.text = video.title
+    titleLabel.text = video.title
+    timeLabel.text = video.timestamp
   }
 
 }
