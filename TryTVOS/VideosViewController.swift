@@ -94,19 +94,7 @@ class VideosViewController: BlurBackgroundViewController,
       // TODO: handle error
       return
     }
-
-    isLoading = true
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json")
-      .responseJSON { [weak self] response in
-        guard let data = response.data else { return }
-        do {
-          let json = try JSON(data: data)
-          self?.videos = try json.array("data").map(Video.init)
-          self?.isLoading = false
-        } catch {
-          Debug.print(error)
-        }
-    }
+    fetchVideos()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -185,6 +173,28 @@ class VideosViewController: BlurBackgroundViewController,
 
   @objc private func showHistory(sender: UIButton) {
     navigationController?.pushViewController(HistoryViewController(), animated: true)
+  }
+
+  // MARK: - Private Methods
+
+  private func fetchVideos() {
+    isLoading = true
+    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json").responseJSON { [weak self] response in
+      guard let data = response.data else {
+        self?.showAlert(response.result.error)
+        return
+      }
+
+      do {
+        let json = try JSON(data: data)
+        self?.videos = try json.array("data").map(Video.init)
+        self?.isLoading = false
+      } catch {
+        self?.showAlert(error) { _ in
+          self?.fetchVideos()
+        }
+      }
+    }
   }
 
   // MARK: - Public Methods

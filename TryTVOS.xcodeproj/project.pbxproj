@@ -19,6 +19,7 @@
 		B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115921CC69E7C00E75292 /* HistoryManager.swift */; };
 		B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E39771CA1494000EB1EEE /* UIColor+TV.swift */; };
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
+		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
 		B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */; };
 		B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A8F7081CA259120069F836 /* CategoryCell.swift */; };
@@ -63,6 +64,7 @@
 		B53115921CC69E7C00E75292 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverBuilder.swift; sourceTree = "<group>"; };
 		B5A8F7081CA259120069F836 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				B53E39771CA1494000EB1EEE /* UIColor+TV.swift */,
 				B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */,
 				B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */,
+				B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */,
 				B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */,
 				B5C85D041CA97981000AE0CF /* UIImage+Grid.swift in Sources */,
+				B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */,
 				B5BA618B1C7748B900548B38 /* Video.swift in Sources */,
 				B5BA61891C77431400548B38 /* VideoCell.swift in Sources */,
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,
