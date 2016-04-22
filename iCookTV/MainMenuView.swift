@@ -28,8 +28,8 @@ import UIKit
 
 class MainMenuView: UIView {
 
-  private let frontBanner = UIImageView(image: UIImage(named: "tv-banner-food-1"))
-  private let backBanner = UIImageView(image: UIImage(named: "tv-banner-food-2"))
+  private let frontBanner = UIImageView(image: UIImage(named: "icook-tv-banner-food-front"))
+  private let backBanner = UIImageView(image: UIImage(named: "icook-tv-banner-food-back"))
   private let imageView = UIImageView()
 
   private(set) lazy var titleLabel: UILabel = {
@@ -50,6 +50,11 @@ class MainMenuView: UIView {
   private var frontBannerConstraint: NSLayoutConstraint?
   private var backBannerConstraint: NSLayoutConstraint?
 
+  private let bannerOffset = (
+    front: (normal: CGFloat(0), focused: CGFloat(-20)),
+    back: (normal: CGFloat(-20), focused: CGFloat(0))
+  )
+
   // MARK: - Initialization
 
   override init(frame: CGRect) {
@@ -69,8 +74,8 @@ class MainMenuView: UIView {
     layoutIfNeeded()
 
     coordinator.addCoordinatedAnimations({
-      self.frontBannerConstraint?.constant = focused ? -10 : 0
-      self.backBannerConstraint?.constant = focused ? 0 : -10
+      self.frontBannerConstraint?.constant = focused ? self.bannerOffset.front.focused : self.bannerOffset.front.normal
+      self.backBannerConstraint?.constant = focused ? self.bannerOffset.back.focused : self.bannerOffset.back.normal
       self.layoutIfNeeded()
     }, completion: nil)
   }
@@ -78,8 +83,8 @@ class MainMenuView: UIView {
   // MARK: - Private Methods
 
   private func setUpSubviews() {
-    addSubview(frontBanner)
     addSubview(backBanner)
+    addSubview(frontBanner)
     addSubview(imageView)
     addSubview(titleLabel)
     addSubview(button)
@@ -92,15 +97,13 @@ class MainMenuView: UIView {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
 
-    frontBannerConstraint = frontBanner.topAnchor.constraintEqualToAnchor(topAnchor)
+    frontBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+    frontBannerConstraint = frontBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: bannerOffset.front.normal)
     frontBannerConstraint?.active = true
-    frontBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-    frontBanner.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
 
-    backBannerConstraint = backBanner.topAnchor.constraintEqualToAnchor(topAnchor, constant: -10)
+    backBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+    backBannerConstraint = backBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: bannerOffset.back.normal)
     backBannerConstraint?.active = true
-    backBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-    backBanner.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
 
     focusGuide.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
     focusGuide.trailingAnchor.constraintEqualToAnchor(button.leadingAnchor).active = true
