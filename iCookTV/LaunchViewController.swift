@@ -42,8 +42,15 @@ class LaunchViewController: UIViewController {
     _label.font = UIFont.tvFontForTagline()
     _label.textColor = UIColor.tvTaglineColor()
     _label.text = "Tagline".localizedString
+    _label.textAlignment = .Center
+    _label.numberOfLines = 0
+    _label.alpha = 0
     return _label
   }()
+
+  private var taglineConstraint: NSLayoutConstraint?
+
+  // MARK: - UIViewController
 
   override func loadView() {
     super.loadView()
@@ -57,7 +64,8 @@ class LaunchViewController: UIViewController {
     loadingImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
     loadingImageView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -45).active = true
 
-    taglineLabel.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 50).active = true
+    taglineConstraint = taglineLabel.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 100)
+    taglineConstraint?.active = true
     taglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
   }
 
@@ -69,6 +77,15 @@ class LaunchViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    UIView.animateWithDuration(0.5) {
+      self.taglineLabel.alpha = 1
+      self.taglineConstraint?.constant = 50
+      self.view.layoutIfNeeded()
+    }
   }
 
   // MARK: - Private Methods
