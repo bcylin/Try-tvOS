@@ -40,7 +40,7 @@ class VideosViewController: BlurBackgroundViewController,
     }
   }
 
-  private var categoryID = 0
+  private var categoryID = ""
 
   private(set) lazy var dropdownMenuView: MenuView = {
     let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
@@ -61,7 +61,7 @@ class VideosViewController: BlurBackgroundViewController,
 
   // MARK: - Initialization
 
-  convenience init(categoryID: Int, title: String? = nil) {
+  convenience init(categoryID: String, title: String? = nil) {
     self.init(nibName: nil, bundle: nil)
     self.categoryID = categoryID
     self.title = title
@@ -91,7 +91,7 @@ class VideosViewController: BlurBackgroundViewController,
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    if categoryID < 0 {
+    if categoryID.isEmpty {
       // TODO: handle error
       return
     }
@@ -102,7 +102,7 @@ class VideosViewController: BlurBackgroundViewController,
         guard let data = response.data else { return }
         do {
           let json = try JSON(data: data)
-          self?.videos = try json.array("videos").map(Video.init)
+          self?.videos = try json.array("data").map(Video.init)
           self?.isLoading = false
         } catch {
           Debug.print(error)

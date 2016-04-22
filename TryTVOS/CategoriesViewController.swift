@@ -86,7 +86,7 @@ class CategoriesViewController: BlurBackgroundViewController,
         do {
           Debug.print(response.result.value)
           let json = try JSON(data: data)
-          self?.categories = try json.array("categories").map(Category.init)
+          self?.categories = try json.array("data").map(Category.init)
         } catch {
           Debug.print(error)
         }

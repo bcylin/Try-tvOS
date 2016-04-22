@@ -57,7 +57,7 @@ class CoverBuilder {
 
   // MARK: - Public Methods
 
-  func addImage(image: UIImage, atCorner corner: Grid, categoryID id: Int? = nil, completion: (newCover: UIImage) -> Void) {
+  func addImage(image: UIImage, atCorner corner: Grid, categoryID id: String? = nil, completion: (newCover: UIImage) -> Void) {
     operationQueue.addOperation(NSBlockOperation { [weak self] in
       let imageSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
 
@@ -72,8 +72,8 @@ class CoverBuilder {
       self?.cover = cover
       self?.filledGrids.insert(corner)
 
-      if let id = id where self?.filledGrids.count == Grid.numberOfGrids {
-        self?.cacheImage(cover, forKey: String(id))
+      if let key = id where self?.filledGrids.count == Grid.numberOfGrids {
+        self?.cacheImage(cover, forKey: key)
       }
 
       dispatch_async(dispatch_get_main_queue()) {
@@ -82,8 +82,8 @@ class CoverBuilder {
     })
   }
 
-  func coverForCategory(withID id: Int) -> UIImage? {
-    return self.dynamicType.imageCache.objectForKey(String(id)) as? UIImage
+  func coverForCategory(withID id: String) -> UIImage? {
+    return self.dynamicType.imageCache.objectForKey(id) as? UIImage
   }
 
   func resetCover() {
