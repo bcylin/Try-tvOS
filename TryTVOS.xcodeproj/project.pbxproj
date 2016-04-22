@@ -559,7 +559,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TryTVOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.TryTVOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thepolydice.icook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -573,7 +573,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TryTVOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.TryTVOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thepolydice.icook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
