@@ -57,6 +57,10 @@ class VideosViewController: BlurBackgroundViewController,
     return _collectionView
   }()
 
+  private weak var currentRequest: Request?
+  private let paginationQueue = dispatch_queue_create("io.github.bcylin.paginationQueue", DISPATCH_QUEUE_SERIAL)
+  private var hasNextPage = true
+
   // MARK: - Initialization
 
   convenience init(categoryID: String, title: String? = nil) {
@@ -94,7 +98,7 @@ class VideosViewController: BlurBackgroundViewController,
       // TODO: handle error
       return
     }
-    fetchVideos()
+    fetchNextPage()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -152,6 +156,12 @@ class VideosViewController: BlurBackgroundViewController,
 
   // MARK: - UICollectionViewDelegate
 
+  func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    if indexPath.row == videos.count - 1 && hasNextPage {
+      fetchNextPage()
+    }
+  }
+
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let video = videos[indexPath.row]
     let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
@@ -177,21 +187,47 @@ class VideosViewController: BlurBackgroundViewController,
 
   // MARK: - Private Methods
 
-  private func fetchVideos() {
-    isLoading = true
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json").responseJSON { [weak self] response in
+  private func fetchNextPage() {
+    if let _ = currentRequest {
+      return
+    }
+
+    isLoading = videos.isEmpty
+
+    let url = TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json"
+    let parameters = [
+      "page[size]": 20,
+      "page[number]": Int(videos.count / 20) + 1
+    ]
+
+    currentRequest = Alamofire.request(.GET, url, parameters: parameters).responseJSON { [weak self] response in
+      self?.isLoading = false
+
       guard let data = response.data else {
         self?.showAlert(response.result.error)
         return
       }
 
-      do {
-        let json = try JSON(data: data)
-        self?.videos = try json.array("data").map(Video.init)
-        self?.isLoading = false
-      } catch {
-        self?.showAlert(error) { _ in
-          self?.fetchVideos()
+      guard let pagination = self?.paginationQueue else {
+        return
+      }
+
+      var videos = self?.videos ?? []
+      dispatch_async(pagination) {
+        do {
+          let json = try JSON(data: data)
+          videos += try json.array("data").map(Video.init)
+
+          dispatch_sync(dispatch_get_main_queue()) {
+            self?.hasNextPage = json["links"]?["next"] != nil
+            self?.videos = videos
+          }
+        } catch {
+          dispatch_sync(dispatch_get_main_queue()) {
+            self?.showAlert(error) { _ in
+              self?.fetchNextPage()
+            }
+          }
         }
       }
     }
