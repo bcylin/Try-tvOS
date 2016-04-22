@@ -90,7 +90,7 @@ class VideoCell: UICollectionViewCell {
 
     let color = focused ? UIColor.tvFocusedTextColor() : UIColor.tvTextColor()
     let transform = focused ?  CGAffineTransformMakeTranslation(0, 15) : CGAffineTransformIdentity
-    let font = focused ? UIFont.tvFontForVideoCell() : UIFont.tvFontForVideoCell()
+    let font = focused ? UIFont.tvFontForFocusedVideoCell() : UIFont.tvFontForVideoCell()
     let alpha: CGFloat = focused ? 1 : 0
     let offset = (
       left: focused ? self.timeLabelOffsets.left.focused : self.timeLabelOffsets.left.normal,
