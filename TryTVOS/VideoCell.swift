@@ -29,7 +29,12 @@ import Kingfisher
 
 class VideoCell: UICollectionViewCell {
 
-  let imageView = UIImageView()
+  private(set) lazy var imageView: UIImageView = {
+    let _imageView = UIImageView()
+    _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
+    _imageView.contentMode = .ScaleAspectFill
+    return _imageView
+  }()
 
   private(set) lazy var textLabel: UILabel = {
     let _label = UILabel()
@@ -56,7 +61,7 @@ class VideoCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     imageView.kf_cancelDownloadTask()
-    imageView.image = nil
+    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
     textLabel.text = nil
   }
 
@@ -101,7 +106,7 @@ class VideoCell: UICollectionViewCell {
 
   func configure(withVideo video: Video) {
     if let url = video.coverURL {
-      imageView.kf_setImageWithURL(url)
+      imageView.kf_setImageWithURL(url, placeholderImage: UIImage.placeholderImage(withSize: bounds.size))
     }
     textLabel.text = video.title
   }
