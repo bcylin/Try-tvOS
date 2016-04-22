@@ -81,6 +81,12 @@ class HistoryViewController: VideosViewController {
     self.videos = reordered
   }
 
+  // MARK: - UICollectionViewDelegate
+
+  override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    // History doesn't need pagination.
+  }
+
   // MARK: - UIResponder Callbacks
 
   @objc private func backToHome(sender: UIButton) {
