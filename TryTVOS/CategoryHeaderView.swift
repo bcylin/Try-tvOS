@@ -27,7 +27,9 @@
 import UIKit
 
 /// A customized view with a layout of `H:|-[icon]-[title]-(>=0)-[accessory]-|`.
-class CategoryHeaderView: UIView {
+class CategoryHeaderView: UICollectionReusableView {
+
+  static let requiredHeight = CGFloat(140)
 
   private let imageView = UIImageView()
 

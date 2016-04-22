@@ -32,28 +32,40 @@ extension UIFont {
     static let PingFangTC = "PingFang TC"
   }
 
+  // MARK: - Private Methods
+
+  private class func tvFontOfSize(fontSize: CGFloat) -> UIFont {
+    return UIFont(name: FontFamily.PingFangTC, size: fontSize) ?? UIFont.systemFontOfSize(fontSize)
+  }
+
+  // MARK: - Public Methods
+
+  class func tvFontForTagline() -> UIFont {
+    return UIFont.tvFontOfSize(44)
+  }
+
   class func tvFontForCategoryCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
+    return UIFont.tvFontOfSize(35)
   }
 
   class func tvFontForFocusedCategoryCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 40) ?? UIFont.systemFontOfSize(40)
+    return UIFont.tvFontOfSize(40)
   }
 
   class func tvFontForVideoCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
+    return UIFont.tvFontOfSize(29)
   }
 
   class func tvFontForFocusedVideoCell() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 29) ?? UIFont.systemFontOfSize(29)
+    return UIFont.tvFontOfSize(29)
   }
 
   class func tvFontForLogo() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 65) ?? UIFont.systemFontOfSize(65)
+    return UIFont.tvFontOfSize(65)
   }
 
   class func tvFontForMenuButton() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 30) ?? UIFont.systemFontOfSize(30)
+    return UIFont.tvFontOfSize(30)
   }
 
   class func tvFontForHeaderTitle() -> UIFont {

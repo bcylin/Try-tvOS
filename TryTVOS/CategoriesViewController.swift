@@ -25,9 +25,6 @@
 //
 
 import UIKit
-import Alamofire
-import Freddy
-import Keys
 
 class CategoriesViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
@@ -56,6 +53,13 @@ class CategoriesViewController: BlurBackgroundViewController,
     return _collectionView
   }()
 
+  // MARK: - Initialization
+
+  convenience init(categories: [Category]) {
+    self.init()
+    self.categories = categories
+  }
+
   // MARK: - UIViewController
 
   override func loadView() {
@@ -80,17 +84,6 @@ class CategoriesViewController: BlurBackgroundViewController,
       name: CoverBuilder.DidCreateCoverNotification,
       object: nil
     )
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories.json")
-      .responseJSON { [weak self] response in
-        guard let data = response.data else { return }
-        do {
-          Debug.print(response.result.value)
-          let json = try JSON(data: data)
-          self?.categories = try json.array("data").map(Category.init)
-        } catch {
-          Debug.print(error)
-        }
-    }
   }
 
   override func viewWillAppear(animated: Bool) {

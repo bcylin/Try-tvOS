@@ -48,8 +48,6 @@ class VideosViewController: BlurBackgroundViewController,
     return _menu
   }()
 
-  private let headerView = CategoryHeaderView()
-
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
@@ -71,22 +69,23 @@ class VideosViewController: BlurBackgroundViewController,
 
   override func loadView() {
     super.loadView()
-    navigationItem.titleView = UIView()
-    headerView.accessoryLabel.text = title ?? "Category"
-
-    let divided = view.bounds.divide(140, fromEdge: .MinYEdge)
-    headerView.frame = divided.slice
-    headerView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
-    collectionView.frame = divided.remainder
-    collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
-
     view.backgroundColor = UIColor.tvBackgroundColor()
-    view.addSubview(headerView)
+    collectionView.frame = view.bounds
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
 
     dropdownMenuView.button.setTitle("History".localizedString, forState: .Normal)
     dropdownMenuView.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
+
+    if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      flowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: CategoryHeaderView.requiredHeight)
+    }
+
+    collectionView.registerClass(
+      CategoryHeaderView.self,
+      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+      withReuseIdentifier: String(CategoryHeaderView.self)
+    )
   }
 
   override func viewDidLoad() {
@@ -95,19 +94,7 @@ class VideosViewController: BlurBackgroundViewController,
       // TODO: handle error
       return
     }
-
-    isLoading = true
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json")
-      .responseJSON { [weak self] response in
-        guard let data = response.data else { return }
-        do {
-          let json = try JSON(data: data)
-          self?.videos = try json.array("data").map(Video.init)
-          self?.isLoading = false
-        } catch {
-          Debug.print(error)
-        }
-    }
+    fetchVideos()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -149,6 +136,20 @@ class VideosViewController: BlurBackgroundViewController,
     return cell
   }
 
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    if kind == UICollectionElementKindSectionHeader {
+      let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
+        UICollectionElementKindSectionHeader,
+        withReuseIdentifier: String(CategoryHeaderView.self),
+        forIndexPath: indexPath
+      )
+      (headerView as? CategoryHeaderView)?.accessoryLabel.text = title ?? "Category"
+      return headerView
+    }
+
+    return UICollectionReusableView()
+  }
+
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -172,6 +173,28 @@ class VideosViewController: BlurBackgroundViewController,
 
   @objc private func showHistory(sender: UIButton) {
     navigationController?.pushViewController(HistoryViewController(), animated: true)
+  }
+
+  // MARK: - Private Methods
+
+  private func fetchVideos() {
+    isLoading = true
+    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json").responseJSON { [weak self] response in
+      guard let data = response.data else {
+        self?.showAlert(response.result.error)
+        return
+      }
+
+      do {
+        let json = try JSON(data: data)
+        self?.videos = try json.array("data").map(Video.init)
+        self?.isLoading = false
+      } catch {
+        self?.showAlert(error) { _ in
+          self?.fetchVideos()
+        }
+      }
+    }
   }
 
   // MARK: - Public Methods
