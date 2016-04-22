@@ -30,7 +30,12 @@ import Freddy
 
 class LaunchViewController: UIViewController {
 
-  private let loadingImageView = UIImageView()
+  private lazy var loadingImageView: UIImageView = {
+    let _imageView = UIImageView()
+    _imageView.image = UIImage(named: "icook-tv-cat")
+    _imageView.contentMode = .ScaleAspectFill
+    return _imageView
+  }()
 
   private lazy var taglineLabel: UILabel = {
     let _label = UILabel()
@@ -46,14 +51,11 @@ class LaunchViewController: UIViewController {
     view.addSubview(loadingImageView)
     view.addSubview(taglineLabel)
 
-    loadingImageView.layer.borderWidth = 1
     loadingImageView.translatesAutoresizingMaskIntoConstraints = false
     taglineLabel.translatesAutoresizingMaskIntoConstraints = false
 
     loadingImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
     loadingImageView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -45).active = true
-    loadingImageView.widthAnchor.constraintEqualToConstant(280).active = true
-    loadingImageView.heightAnchor.constraintEqualToConstant(350).active = true
 
     taglineLabel.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 50).active = true
     taglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true

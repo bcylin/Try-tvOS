@@ -29,7 +29,7 @@ import UIKit
 /// A customized view with a layout of `H:|[focusGuide][button]-|`.
 class MenuView: UIView {
 
-  private let imageView = UIImageView()
+  private let imageView = UIImageView(image: UIImage(named: "icook-tv-logo"))
 
   private lazy var titleLabel: UILabel = {
     let _label = UILabel()
@@ -67,7 +67,6 @@ class MenuView: UIView {
     addSubview(button)
     addLayoutGuide(focusGuide)
 
-    imageView.layer.borderWidth = 1
     imageView.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +76,7 @@ class MenuView: UIView {
     focusGuide.heightAnchor.constraintEqualToAnchor(heightAnchor).active = true
     focusGuide.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
 
+    imageView.contentMode = .ScaleAspectFill
     imageView.widthAnchor.constraintEqualToConstant(87).active = true
     imageView.heightAnchor.constraintEqualToConstant(64).active = true
     imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true

@@ -31,7 +31,7 @@ class CategoryHeaderView: UICollectionReusableView {
 
   static let requiredHeight = CGFloat(140)
 
-  private let imageView = UIImageView()
+  private let imageView = UIImageView(image: UIImage(named: "icook-tv-logo"))
 
   private(set) lazy var titleLabel: UILabel = {
     let _title = UILabel()
@@ -67,11 +67,11 @@ class CategoryHeaderView: UICollectionReusableView {
     addSubview(titleLabel)
     addSubview(accessoryLabel)
 
-    imageView.layer.borderWidth = 1
     imageView.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     accessoryLabel.translatesAutoresizingMaskIntoConstraints = false
 
+    imageView.contentMode = .ScaleAspectFill
     imageView.widthAnchor.constraintEqualToConstant(87).active = true
     imageView.heightAnchor.constraintEqualToConstant(64).active = true
     imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true

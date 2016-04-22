@@ -30,7 +30,7 @@ class MainMenuView: UIView {
 
   private let frontBanner = UIImageView(image: UIImage(named: "icook-tv-banner-food-front"))
   private let backBanner = UIImageView(image: UIImage(named: "icook-tv-banner-food-back"))
-  private let imageView = UIImageView()
+  private let imageView = UIImageView(image: UIImage(named: "icook-tv-logo"))
 
   private(set) lazy var titleLabel: UILabel = {
     let _title = UILabel()
@@ -92,7 +92,6 @@ class MainMenuView: UIView {
 
     frontBanner.translatesAutoresizingMaskIntoConstraints = false
     backBanner.translatesAutoresizingMaskIntoConstraints = false
-    imageView.layer.borderWidth = 1
     imageView.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -110,6 +109,7 @@ class MainMenuView: UIView {
     focusGuide.heightAnchor.constraintEqualToAnchor(heightAnchor).active = true
     focusGuide.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
 
+    imageView.contentMode = .ScaleAspectFill
     imageView.widthAnchor.constraintEqualToConstant(120).active = true
     imageView.heightAnchor.constraintEqualToConstant(88).active = true
     imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 222).active = true
