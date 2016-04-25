@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (3.3.1)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - Freddy (2.0.2)
   - HCYoutubeParser (0.0.5)
   - Hue (1.1)
@@ -10,6 +13,8 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Crashlytics
+  - Fabric
   - Freddy
   - HCYoutubeParser
   - Hue (from `https://github.com/hyperoslo/Hue.git`, commit `89ae5e1`)
@@ -32,6 +37,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Freddy: e53713b8d5be02dbf5f4132c44d899d99eb09a6b
   HCYoutubeParser: bc1db8c062e4b835eda381f2be2f9970f6a8d071
   Hue: c7d6a7206bac669ed69e78cc6c14a4d7bd28277c

@@ -319,6 +319,7 @@
 				B5F7BF461BA9C95F00A75099 /* Resources */,
 				12CA44DA10A8A1B1AB272160 /* Embed Pods Frameworks */,
 				9D9FFB70B49EF5F4755D57F7 /* Copy Pods Resources */,
+				B51A95351CCDFFEB00E5ED97 /* Run Fabric Script */,
 			);
 			buildRules = (
 			);
@@ -485,6 +486,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B51A95351CCDFFEB00E5ED97 /* Run Fabric Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Fabric Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FABRIC_APIKEY=$(cat ${SRCROOT}/keys/fabric.apikey);\nFABRIC_BUILDSECRET=$(cat ${SRCROOT}/keys/fabric.buildsecret);\n${PODS_ROOT}/Fabric/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET};";
 		};
 		D9978D18C40807D1F1F33F9B /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

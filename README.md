@@ -20,7 +20,10 @@ bundle exec pod install
 
 ### Required Keys
 
-`pod install` will prompt for `BaseAPIURL`, which is required to run the app:
+`pod install` will prompt for the keys which are required to run the app:
+
+* BaseAPIURL
+* CrashlyticsAPIKey
 
 ```
 CocoaPods-Keys has detected a keys mismatch for your setup.

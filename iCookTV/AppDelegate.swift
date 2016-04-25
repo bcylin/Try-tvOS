@@ -25,6 +25,8 @@
 //
 
 import UIKit
+import Crashlytics
+import Fabric
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,12 +36,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     GroundControl.sync()
+    setUpAnalytics()
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window?.rootViewController = UINavigationController(rootViewController: LaunchViewController())
     window?.makeKeyAndVisible()
 
     return true
+  }
+
+  // MARK: - Private Methods
+
+  private func setUpAnalytics() {
+    Crashlytics.startWithAPIKey(iCookTVKeys.CrashlyticsAPIKey)
+    Fabric.with([Crashlytics.self])
   }
 
 }
