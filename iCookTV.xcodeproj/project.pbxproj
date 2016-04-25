@@ -38,7 +38,7 @@
 		B5DCF9341C985E1600D19FC0 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */; };
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F7BF521BA9C95F00A75099 /* Assets.xcassets */; };
-		B5F7BF5E1BA9C95F00A75099 /* TryTVOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF5D1BA9C95F00A75099 /* TryTVOSTests.swift */; };
+		B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 			containerPortal = B5F7BF401BA9C95F00A75099 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B5F7BF471BA9C95F00A75099;
-			remoteInfo = TryTVOS;
+			remoteInfo = iCookTV;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -87,12 +87,12 @@
 		B5DA8EDD1CB3BD1B0068E0E3 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B5DA8EE11CB4C2B20068E0E3 /* BlurBackgroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackgroundViewController.swift; sourceTree = "<group>"; };
 		B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
-		B5F7BF481BA9C95F00A75099 /* TryTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TryTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F7BF481BA9C95F00A75099 /* iCookTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCookTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F7BF521BA9C95F00A75099 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F7BF541BA9C95F00A75099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5F7BF591BA9C95F00A75099 /* TryTVOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TryTVOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F7BF5D1BA9C95F00A75099 /* TryTVOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryTVOSTests.swift; sourceTree = "<group>"; };
+		B5F7BF591BA9C95F00A75099 /* iCookTV.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iCookTV.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCookTVTests.swift; sourceTree = "<group>"; };
 		B5F7BF5F1BA9C95F00A75099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,47 +212,47 @@
 			isa = PBXGroup;
 			children = (
 				B3905D87568D2378B131901C /* Frameworks */,
+				B5F7BF4A1BA9C95F00A75099 /* iCookTV */,
+				B5F7BF5C1BA9C95F00A75099 /* iCookTVTests */,
 				7750AF6ED0BDF4B685809ED3 /* Pods */,
 				B5F7BF491BA9C95F00A75099 /* Products */,
-				B5F7BF4A1BA9C95F00A75099 /* TryTVOS */,
-				B5F7BF5C1BA9C95F00A75099 /* TryTVOSTests */,
 			);
 			sourceTree = "<group>";
 		};
 		B5F7BF491BA9C95F00A75099 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B5F7BF481BA9C95F00A75099 /* TryTVOS.app */,
-				B5F7BF591BA9C95F00A75099 /* TryTVOSTests.xctest */,
+				B5F7BF481BA9C95F00A75099 /* iCookTV.app */,
+				B5F7BF591BA9C95F00A75099 /* iCookTV.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B5F7BF4A1BA9C95F00A75099 /* TryTVOS */ = {
+		B5F7BF4A1BA9C95F00A75099 /* iCookTV */ = {
 			isa = PBXGroup;
 			children = (
 				B5A614FD1CCA0884004A3CD5 /* Classes */,
 				B5A614FC1CCA0848004A3CD5 /* Supporting Files */,
 				B5F7BF521BA9C95F00A75099 /* Assets.xcassets */,
 			);
-			path = TryTVOS;
+			path = iCookTV;
 			sourceTree = "<group>";
 		};
-		B5F7BF5C1BA9C95F00A75099 /* TryTVOSTests */ = {
+		B5F7BF5C1BA9C95F00A75099 /* iCookTVTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */,
 				B5F7BF5F1BA9C95F00A75099 /* Info.plist */,
-				B5F7BF5D1BA9C95F00A75099 /* TryTVOSTests.swift */,
 			);
-			path = TryTVOSTests;
+			path = iCookTVTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B5F7BF471BA9C95F00A75099 /* TryTVOS */ = {
+		B5F7BF471BA9C95F00A75099 /* iCookTV */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B5F7BF621BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "TryTVOS" */;
+			buildConfigurationList = B5F7BF621BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTV" */;
 			buildPhases = (
 				2A73C8D189C5044B72F5BA92 /* Check Pods Manifest.lock */,
 				B5F7BF441BA9C95F00A75099 /* Sources */,
@@ -265,14 +265,14 @@
 			);
 			dependencies = (
 			);
-			name = TryTVOS;
-			productName = TryTVOS;
-			productReference = B5F7BF481BA9C95F00A75099 /* TryTVOS.app */;
+			name = iCookTV;
+			productName = iCookTV;
+			productReference = B5F7BF481BA9C95F00A75099 /* iCookTV.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B5F7BF581BA9C95F00A75099 /* TryTVOSTests */ = {
+		B5F7BF581BA9C95F00A75099 /* iCookTVTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B5F7BF651BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "TryTVOSTests" */;
+			buildConfigurationList = B5F7BF651BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTVTests" */;
 			buildPhases = (
 				B5F7BF551BA9C95F00A75099 /* Sources */,
 				B5F7BF561BA9C95F00A75099 /* Frameworks */,
@@ -283,9 +283,9 @@
 			dependencies = (
 				B5F7BF5B1BA9C95F00A75099 /* PBXTargetDependency */,
 			);
-			name = TryTVOSTests;
-			productName = TryTVOSTests;
-			productReference = B5F7BF591BA9C95F00A75099 /* TryTVOSTests.xctest */;
+			name = iCookTVTests;
+			productName = iCookTVTests;
+			productReference = B5F7BF591BA9C95F00A75099 /* iCookTV.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -306,7 +306,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B5F7BF431BA9C95F00A75099 /* Build configuration list for PBXProject "TryTVOS" */;
+			buildConfigurationList = B5F7BF431BA9C95F00A75099 /* Build configuration list for PBXProject "iCookTV" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -320,8 +320,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B5F7BF471BA9C95F00A75099 /* TryTVOS */,
-				B5F7BF581BA9C95F00A75099 /* TryTVOSTests */,
+				B5F7BF471BA9C95F00A75099 /* iCookTV */,
+				B5F7BF581BA9C95F00A75099 /* iCookTVTests */,
 			);
 		};
 /* End PBXProject section */
@@ -433,7 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F7BF5E1BA9C95F00A75099 /* TryTVOSTests.swift in Sources */,
+				B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +442,7 @@
 /* Begin PBXTargetDependency section */
 		B5F7BF5B1BA9C95F00A75099 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B5F7BF471BA9C95F00A75099 /* TryTVOS */;
+			target = B5F7BF471BA9C95F00A75099 /* iCookTV */;
 			targetProxy = B5F7BF5A1BA9C95F00A75099 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -561,10 +561,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = TryTVOS/Info.plist;
+				INFOPLIST_FILE = iCookTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thepolydice.icook;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iCookTV;
 			};
 			name = Debug;
 		};
@@ -575,10 +575,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = TryTVOS/Info.plist;
+				INFOPLIST_FILE = iCookTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thepolydice.icook;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iCookTV;
 			};
 			name = Release;
 		};
@@ -586,11 +586,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = TryTVOSTests/Info.plist;
+				INFOPLIST_FILE = iCookTVTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.TryTVOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TryTVOS.app/TryTVOS";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.iCookTVTests;
+				PRODUCT_NAME = iCookTV;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCookTV.app/iCookTV";
 			};
 			name = Debug;
 		};
@@ -598,18 +598,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = TryTVOSTests/Info.plist;
+				INFOPLIST_FILE = iCookTVTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.TryTVOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TryTVOS.app/TryTVOS";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.iCookTVTests;
+				PRODUCT_NAME = iCookTV;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCookTV.app/iCookTV";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B5F7BF431BA9C95F00A75099 /* Build configuration list for PBXProject "TryTVOS" */ = {
+		B5F7BF431BA9C95F00A75099 /* Build configuration list for PBXProject "iCookTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F7BF601BA9C95F00A75099 /* Debug */,
@@ -618,7 +618,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5F7BF621BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "TryTVOS" */ = {
+		B5F7BF621BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F7BF631BA9C95F00A75099 /* Debug */,
@@ -627,7 +627,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5F7BF651BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "TryTVOSTests" */ = {
+		B5F7BF651BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTVTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F7BF661BA9C95F00A75099 /* Debug */,

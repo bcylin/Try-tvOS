@@ -4,8 +4,8 @@ platform :tvos, "9.0"
 use_frameworks!
 inhibit_all_warnings!
 
-workspace "TryTVOS"
-xcodeproj "TryTVOS"
+workspace "iCookTV"
+xcodeproj "iCookTV"
 
 pod "Alamofire"
 pod "Freddy"
@@ -14,6 +14,6 @@ pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
 pod "Kingfisher"
 
 plugin "cocoapods-keys", {
-  project: "TryTVOS",
+  project: "iCookTV",
   keys: ["BaseAPIURL"]
 }

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B5F7BF471BA9C95F00A75099"
-               BuildableName = "TryTVOS.app"
-               BlueprintName = "TryTVOS"
-               ReferencedContainer = "container:TryTVOS.xcodeproj">
+               BuildableName = "iCookTV.app"
+               BlueprintName = "iCookTV"
+               ReferencedContainer = "container:iCookTV.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B5F7BF581BA9C95F00A75099"
-               BuildableName = "TryTVOSTests.xctest"
-               BlueprintName = "TryTVOSTests"
-               ReferencedContainer = "container:TryTVOS.xcodeproj">
+               BuildableName = "iCookTV.xctest"
+               BlueprintName = "iCookTVTests"
+               ReferencedContainer = "container:iCookTV.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5F7BF471BA9C95F00A75099"
-            BuildableName = "TryTVOS.app"
-            BlueprintName = "TryTVOS"
-            ReferencedContainer = "container:TryTVOS.xcodeproj">
+            BuildableName = "iCookTV.app"
+            BlueprintName = "iCookTV"
+            ReferencedContainer = "container:iCookTV.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5F7BF471BA9C95F00A75099"
-            BuildableName = "TryTVOS.app"
-            BlueprintName = "TryTVOS"
-            ReferencedContainer = "container:TryTVOS.xcodeproj">
+            BuildableName = "iCookTV.app"
+            BlueprintName = "iCookTV"
+            ReferencedContainer = "container:iCookTV.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5F7BF471BA9C95F00A75099"
-            BuildableName = "TryTVOS.app"
-            BlueprintName = "TryTVOS"
-            ReferencedContainer = "container:TryTVOS.xcodeproj">
+            BuildableName = "iCookTV.app"
+            BlueprintName = "iCookTV"
+            ReferencedContainer = "container:iCookTV.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
