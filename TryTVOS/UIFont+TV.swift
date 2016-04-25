@@ -29,13 +29,18 @@ import UIKit
 extension UIFont {
 
   private enum FontFamily {
-    static let PingFangTC = "PingFang TC"
+    static let PingFangTCRegular = "PingFangTC-Regular"
+    static let PingFangTCMedium = "PingFangTC-Medium"
   }
 
   // MARK: - Private Methods
 
   private class func tvFontOfSize(fontSize: CGFloat) -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: fontSize) ?? UIFont.systemFontOfSize(fontSize)
+    return UIFont(name: FontFamily.PingFangTCRegular, size: fontSize) ?? UIFont.systemFontOfSize(fontSize)
+  }
+
+  private class func tvBoldFontOfSize(fontSize: CGFloat) -> UIFont {
+    return UIFont(name: FontFamily.PingFangTCMedium, size: fontSize) ?? UIFont.boldSystemFontOfSize(fontSize)
   }
 
   // MARK: - Public Methods
@@ -57,7 +62,11 @@ extension UIFont {
   }
 
   class func tvFontForFocusedVideoCell() -> UIFont {
-    return UIFont.tvFontOfSize(29)
+    return UIFont.tvBoldFontOfSize(29)
+  }
+
+  class func tvFontForVideoLength() -> UIFont {
+    return UIFont.systemFontOfSize(20)
   }
 
   class func tvFontForLogo() -> UIFont {
@@ -69,7 +78,7 @@ extension UIFont {
   }
 
   class func tvFontForHeaderTitle() -> UIFont {
-    return UIFont(name: FontFamily.PingFangTC, size: 35) ?? UIFont.systemFontOfSize(35)
+    return UIFont.tvFontOfSize(35)
   }
 
 }
