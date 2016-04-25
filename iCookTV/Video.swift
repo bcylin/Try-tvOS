@@ -92,7 +92,7 @@ struct Video: JSONDecodable, JSONEncodable {
   var playerItemURL: NSURL? {
     guard
       let youtubeURL = NSURL(string: youtube),
-      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["medium"] as? String
+      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
       else {
         return nil
     }
