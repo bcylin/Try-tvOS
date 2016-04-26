@@ -27,7 +27,6 @@
 import UIKit
 import Alamofire
 import Freddy
-import Keys
 
 class LaunchViewController: UIViewController {
 
@@ -73,7 +72,7 @@ class LaunchViewController: UIViewController {
   // MARK: - Private Methods
 
   private func fetchCategories() {
-    Alamofire.request(.GET, TrytvosKeys().baseAPIURL() + "categories.json").responseJSON { [weak self] response in
+    Alamofire.request(.GET, iCookTVKeys.baseAPIURL + "categories.json").responseJSON { [weak self] response in
       guard let data = response.data where response.result.error == nil else {
         self?.showAlert(response.result.error)
         return
