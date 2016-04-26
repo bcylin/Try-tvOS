@@ -1,5 +1,5 @@
 //
-//  ResourceHelper.swift
+//  VideoSpec.swift
 //  iCookTV
 //
 //  Created by Ben on 26/04/2016.
@@ -24,20 +24,32 @@
 //  SOFTWARE.
 //
 
-import Foundation
+@testable import iCookTV
+import Freddy
+import Nimble
+import Quick
 
-class Resources {
+class VideoSpec: QuickSpec {
 
-  private class func pathForResource(relativePath: String) -> String? {
-    let bundlePath: NSString = NSBundle(forClass: Resources.self).resourcePath!
-    return bundlePath.stringByAppendingPathComponent(relativePath)
-  }
+  override func spec() {
 
-  class func testData(named filename: String) -> NSData? {
-    if let path = pathForResource(filename) {
-      return NSData(contentsOfFile: path)
+    let data: NSData = Resources.testData(named: "Video.json")!
+
+    describe("init(json:)") {
+      it("should parse JSON as Video") {
+        let json = try! JSON(data: data)
+        let video = try! Video(json: json)
+
+        expect(video.id).to(equal("42"))
+        expect(video.title).to(equal("Lorem"))
+        expect(video.subtitle).to(equal("ipsum"))
+        expect(video.description).to(equal("dolor sit amet"))
+        expect(video.length).to(equal(123))
+        expect(video.youtube).to(equal("https://www.youtube.com/watch?v=3345678"))
+        expect(video.cover).to(equal("https://imag.es/cover.jpg"))
+      }
     }
-    return nil
+
   }
 
 }
