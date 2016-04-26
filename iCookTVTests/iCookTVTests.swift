@@ -25,9 +25,8 @@
 //
 
 import XCTest
-@testable import TryTVOS
 
-class TryTVOSTests: XCTestCase {
+class iCookTVTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
