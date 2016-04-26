@@ -11,6 +11,9 @@ install:
   - bundle install --without development --deployment --jobs=3 --retry=3
   - bundle exec pod install
 script:
-  - set -o pipefail && xcodebuild -workspace TryTVOS.xcworkspace -scheme TryTVOS -destination "name=Apple TV 1080p,OS=latest" clean build | xcpretty -c
+  - set -o pipefail && xcodebuild -workspace iCookTV.xcworkspace -scheme iCookTV -destination "name=Apple TV 1080p,OS=latest" clean build test | xcpretty -c
 notifications:
   email: false
+  slack:
+    rooms:
+      secure: y2qggWMP3S8aF2ENvq4zoMjvFkLVQ3cnb7N5MslyM1Y0iW/i9UABZpDDwCl2YcGamGTeoBBux3q5L6Jh6QWjeOHXUlrp/rBJKP7ARAn0k0Pti86lp+xWvSUELHtGz5gtSWuEUi+BYdPJC1OReNcRNzm1f+QQpzDk2aj69flW4LjckDntnidqDc2Ygn8ANW4I+VgOrz/CnlXZjglhHRy3/Hg37tkl9a6grCzi8lueXbLbcWSfYcoro8y2EDrQXGxJK5wYvverkzP2TZv5KtslBzoXuoBfjbveAoic4FtIiptZ2+VkvYD0iuucp+qYV/6dcF37WEKzL39uGLX2C4AiO/VOyPZg0VUYefXoo0mAS+uK0bohltCcM0uqoL/KJCsH/K3vvt8r993w/SScTFYbP43RlKT8OMKml3GDjlmJ4WpxWbt4MS9nulHNue7cSagH8vYiudGqiS62trsZjjn72NCHLI7R6wApWbLrWLeDwhuRC2ZtZ1RF0DBnHdZIjsv222aCMWBTRiQss653ZZUHvchvTsiE367dPY/b7yj3Kw4UsCFBCBV6b4UtOXB3wVvZmVmjYeCGLqscaNDyuFNyE43UItFfUd7devnPXCDrvW0vSqGdDPIZ1mbm3XO6nWDwUGYRDK1sCEX5ROqpYmutl+0OAPAEwYb+DnHzthfVE2A=

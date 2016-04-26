@@ -1,4 +1,4 @@
-# Try-tvOS
+# iCook tvOS App
 
 [![Build Status](https://travis-ci.org/bcylin/Try-tvOS.svg)](https://travis-ci.org/bcylin/Try-tvOS)
 
@@ -21,51 +21,15 @@ What is the key for BaseAPIURL
 >
 ```
 
-  > API details are hidden due to proprietary reasons. Any API output that contains the matched keys will suffice.
+  > TBD: API details are hidden due to proprietary reasons.
 
-## JSON API 1.0 Response
+## Contact
 
-The response of `categories`:
-
-```json
-{
-  "data": [
-    {
-      "id": "1",
-      "attributes": {
-        "name": "",
-        "cover-urls": [
-          "https://imag.es/1.png",
-          "https://imag.es/2.png",
-          "https://imag.es/3.png",
-          "https://imag.es/4.png"
-        ]
-      }
-    }
-  ]
-}
-```
-
-The response of `categories/:id/videos`:
-
-```json
-{
-  "data": [
-    {
-      "id": "1",
-      "attributes": {
-        "title": "",
-        "subtitle": "",
-        "description": "",
-        "length": 0.0,
-        "embed-url": "https://www.youtube.com/watch?v=",
-        "cover-url": "https://imag.es/400x300.png"
-      }
-    }
-  ]
-}
-```
+[![Twitter](https://img.shields.io/badge/twitter-@polydice-blue.svg?style=flat)](https://twitter.com/polydice)
 
 ## License
 
-This demo app is released under the MIT license. See [LICENSE](https://github.com/bcylin/Try-tvOS/blob/master/LICENSE) for more info.
+The names and icons for iCook are trademarks of [Polydice, Inc.](https://polydice.com/) Please refer to the guidelines at [iCook Newsroom](https://newsroom.icook.tw/downloads).
+
+* All image assets are Copyright © 2016 Polydice, inc. All rights reserved.
+* The source code is released under the MIT license. See [LICENSE](https://github.com/bcylin/Try-tvOS/blob/master/LICENSE) for more info.

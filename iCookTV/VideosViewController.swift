@@ -194,7 +194,7 @@ class VideosViewController: BlurBackgroundViewController,
 
     isLoading = videos.isEmpty
 
-    let url = TrytvosKeys().baseAPIURL() + "categories/\(categoryID)/videos.json"
+    let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
     let parameters = [
       "page[size]": 20,
       "page[number]": Int(videos.count / 20) + 1

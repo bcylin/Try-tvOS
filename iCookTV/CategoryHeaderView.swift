@@ -37,7 +37,7 @@ class CategoryHeaderView: UICollectionReusableView {
     let _title = UILabel()
     _title.font = UIFont.tvFontForHeaderTitle()
     _title.textColor = UIColor.tvHeaderTitleColor()
-    _title.text = "Try-tvOS".localizedString
+    _title.text = "iCook TV".localizedString
     return _title
   }()
 
