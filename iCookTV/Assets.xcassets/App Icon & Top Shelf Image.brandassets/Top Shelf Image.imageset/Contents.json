@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "tv",
+      "filename" : "icook-tv-top-shelf-image.png",
       "scale" : "1x"
     }
   ],
