@@ -1,9 +1,9 @@
 //
-//  TryTVOSTests.swift
-//  TryTVOSTests
+//  VideoSpec.swift
+//  iCookTV
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 26/04/2016.
+//  Copyright © 2016 Polydice, Inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,31 +25,31 @@
 //
 
 @testable import iCookTV
-import XCTest
+import Freddy
+import Nimble
+import Quick
 
-class iCookTVTests: XCTestCase {
+class VideoSpec: QuickSpec {
 
-  override func setUp() {
-    super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-  }
+  override func spec() {
 
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
-  }
+    let data: NSData = Resources.testData(named: "Video.json")!
 
-  func testExample() {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    Debug.print("Test")
-  }
+    describe("init(json:)") {
+      it("should parse JSON as Video") {
+        let json = try! JSON(data: data)
+        let video = try! Video(json: json)
 
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measureBlock {
-      // Put the code you want to measure the time of here.
+        expect(video.id).to(equal("42"))
+        expect(video.title).to(equal("Lorem"))
+        expect(video.subtitle).to(equal("ipsum"))
+        expect(video.description).to(equal("dolor sit amet"))
+        expect(video.length).to(equal(123))
+        expect(video.youtube).to(equal("https://www.youtube.com/watch?v=3345678"))
+        expect(video.cover).to(equal("https://imag.es/cover.jpg"))
+      }
     }
+
   }
 
 }

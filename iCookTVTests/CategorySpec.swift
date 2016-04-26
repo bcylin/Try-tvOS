@@ -1,9 +1,9 @@
 //
-//  TryTVOSTests.swift
-//  TryTVOSTests
+//  CategorySpec.swift
+//  iCookTV
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 26/04/2016.
+//  Copyright © 2016 Polydice, Inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,31 +25,32 @@
 //
 
 @testable import iCookTV
-import XCTest
+import Freddy
+import Nimble
+import Quick
 
-class iCookTVTests: XCTestCase {
+class CategorySpec: QuickSpec {
 
-  override func setUp() {
-    super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-  }
+  override func spec() {
 
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
-  }
+    let data: NSData = Resources.testData(named: "Category.json")!
 
-  func testExample() {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    Debug.print("Test")
-  }
+    describe("init(json:)") {
+      it("should parse JSON as Category") {
+        let json = try! JSON(data: data)
+        let category = try! Category(json: json)
 
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measureBlock {
-      // Put the code you want to measure the time of here.
+        expect(category.id).to(equal("9527"))
+        expect(category.name).to(equal("愛料理廚房"))
+        expect(category.coverURLs).to(equal([
+          "https://imag.es/1.jpg",
+          "https://imag.es/2.jpg",
+          "https://imag.es/3.jpg",
+          "https://imag.es/4.jpg"
+        ]))
+      }
     }
+
   }
 
 }

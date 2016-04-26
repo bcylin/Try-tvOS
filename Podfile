@@ -7,11 +7,18 @@ inhibit_all_warnings!
 workspace "iCookTV"
 xcodeproj "iCookTV"
 
-pod "Alamofire"
-pod "Freddy"
-pod "HCYoutubeParser"
-pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
-pod "Kingfisher"
+target :iCookTV do
+  pod "Alamofire"
+  pod "Freddy"
+  pod "HCYoutubeParser"
+  pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
+  pod "Kingfisher"
+end
+
+target :iCookTVTests do
+  pod "Nimble"
+  pod "Quick"
+end
 
 plugin "cocoapods-keys", {
   project: "iCookTV",

@@ -11,7 +11,7 @@ install:
   - bundle install --without development --deployment --jobs=3 --retry=3
   - bundle exec pod install
 script:
-  - set -o pipefail && xcodebuild -workspace iCookTV.xcworkspace -scheme iCookTV -destination "name=Apple TV 1080p,OS=latest" clean build test | xcpretty -c
+  - bundle exec scan
 notifications:
   email: false
   slack:

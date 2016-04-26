@@ -1,9 +1,9 @@
 //
-//  TryTVOSTests.swift
-//  TryTVOSTests
+//  ResourceHelper.swift
+//  iCookTV
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 26/04/2016.
+//  Copyright © 2016 Polydice, Inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,20 @@
 //  SOFTWARE.
 //
 
-@testable import iCookTV
-import XCTest
+import Foundation
 
-class iCookTVTests: XCTestCase {
+class Resources {
 
-  override func setUp() {
-    super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+  private class func pathForResource(relativePath: String) -> String? {
+    let bundlePath: NSString = NSBundle(forClass: Resources.self).resourcePath!
+    return bundlePath.stringByAppendingPathComponent(relativePath)
   }
 
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
-  }
-
-  func testExample() {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    Debug.print("Test")
-  }
-
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measureBlock {
-      // Put the code you want to measure the time of here.
+  class func testData(named filename: String) -> NSData? {
+    if let path = pathForResource(filename) {
+      return NSData(contentsOfFile: path)
     }
+    return nil
   }
 
 }

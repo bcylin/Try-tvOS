@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6739EDF573EA7D9D1E3D4D /* Pods_iCookTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6020CDC8FD0483AD46B5B93 /* Pods_iCookTV.framework */; };
 		54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D1C41705680DAFFCD179E /* Pods.framework */; };
+		7887664CB3168BE692EF9A3C /* Pods_iCookTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E17D5A7354F281B689F9AD9 /* Pods_iCookTVTests.framework */; };
 		B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D99E1CB93D0600622198 /* MainMenuView.swift */; };
 		B500D9A11CB93D8100622198 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A01CB93D8100622198 /* MenuButton.swift */; };
 		B500D9A31CB94AD300622198 /* String+i18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A21CB94AD300622198 /* String+i18n.swift */; };
@@ -23,6 +25,13 @@
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
 		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
+		B5761A4E1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */; };
+		B5761A4F1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */; };
+		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
+		B5761A561CCF5569008CCC08 /* Category.json in Resources */ = {isa = PBXBuildFile; fileRef = B5761A551CCF5569008CCC08 /* Category.json */; };
+		B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A571CCF5752008CCC08 /* ResourceHelper.swift */; };
+		B5761A5A1CCF6CCD008CCC08 /* VideoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A591CCF6CCD008CCC08 /* VideoSpec.swift */; };
+		B5761A5C1CCF6D78008CCC08 /* Video.json in Resources */ = {isa = PBXBuildFile; fileRef = B5761A5B1CCF6D78008CCC08 /* Video.json */; };
 		B586EFDB1CCA21B300EA8218 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */; };
 		B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */; };
 		B5A614F71CCA05B4004A3CD5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5A614F91CCA05B4004A3CD5 /* InfoPlist.strings */; };
@@ -54,6 +63,7 @@
 /* Begin PBXFileReference section */
 		2BD09092652BB6C0A969FF39 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8E17D5A7354F281B689F9AD9 /* Pods_iCookTVTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iCookTVTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A3D1C41705680DAFFCD179E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B500D99E1CB93D0600622198 /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		B500D9A01CB93D8100622198 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -72,6 +82,13 @@
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.debug.xcconfig"; sourceTree = "<group>"; };
+		B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.release.xcconfig"; sourceTree = "<group>"; };
+		B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySpec.swift; sourceTree = "<group>"; };
+		B5761A551CCF5569008CCC08 /* Category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Category.json; sourceTree = "<group>"; };
+		B5761A571CCF5752008CCC08 /* ResourceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceHelper.swift; sourceTree = "<group>"; };
+		B5761A591CCF6CCD008CCC08 /* VideoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSpec.swift; sourceTree = "<group>"; };
+		B5761A5B1CCF6D78008CCC08 /* Video.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Video.json; sourceTree = "<group>"; };
 		B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverBuilder.swift; sourceTree = "<group>"; };
 		B5A614F81CCA05B4004A3CD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -94,6 +111,9 @@
 		B5F7BF591BA9C95F00A75099 /* iCookTV.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iCookTV.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCookTVTests.swift; sourceTree = "<group>"; };
 		B5F7BF5F1BA9C95F00A75099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6020CDC8FD0483AD46B5B93 /* Pods_iCookTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iCookTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1E048B0619F561850ABA2F /* Pods-iCookTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCookTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTVTests/Pods-iCookTVTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB5584D9D4EE052A9659726B /* Pods-iCookTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCookTVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTVTests/Pods-iCookTVTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C0F94D259B3F4040FB0E9C /* Pods.framework in Frameworks */,
+				1A6739EDF573EA7D9D1E3D4D /* Pods_iCookTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7887664CB3168BE692EF9A3C /* Pods_iCookTVTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +140,10 @@
 		7750AF6ED0BDF4B685809ED3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */,
+				B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */,
+				CD1E048B0619F561850ABA2F /* Pods-iCookTVTests.debug.xcconfig */,
+				EB5584D9D4EE052A9659726B /* Pods-iCookTVTests.release.xcconfig */,
 				2BD09092652BB6C0A969FF39 /* Pods.debug.xcconfig */,
 				79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */,
 			);
@@ -128,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				9A3D1C41705680DAFFCD179E /* Pods.framework */,
+				C6020CDC8FD0483AD46B5B93 /* Pods_iCookTV.framework */,
+				8E17D5A7354F281B689F9AD9 /* Pods_iCookTVTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,6 +171,16 @@
 				B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		B5761A541CCF555D008CCC08 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5761A551CCF5569008CCC08 /* Category.json */,
+				B5F7BF5F1BA9C95F00A75099 /* Info.plist */,
+				B5761A5B1CCF6D78008CCC08 /* Video.json */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		B5A614FC1CCA0848004A3CD5 /* Supporting Files */ = {
@@ -241,8 +279,11 @@
 		B5F7BF5C1BA9C95F00A75099 /* iCookTVTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5761A541CCF555D008CCC08 /* Supporting Files */,
+				B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */,
 				B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */,
-				B5F7BF5F1BA9C95F00A75099 /* Info.plist */,
+				B5761A571CCF5752008CCC08 /* ResourceHelper.swift */,
+				B5761A591CCF6CCD008CCC08 /* VideoSpec.swift */,
 			);
 			path = iCookTVTests;
 			sourceTree = "<group>";
@@ -274,9 +315,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5F7BF651BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTVTests" */;
 			buildPhases = (
+				D9978D18C40807D1F1F33F9B /* Check Pods Manifest.lock */,
 				B5F7BF551BA9C95F00A75099 /* Sources */,
 				B5F7BF561BA9C95F00A75099 /* Frameworks */,
 				B5F7BF571BA9C95F00A75099 /* Resources */,
+				7332CBB2F6D028D0B57AB6DF /* Embed Pods Frameworks */,
+				3F3A07CF76C2A9FFB4957379 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -334,6 +378,8 @@
 				B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */,
 				B5A614F71CCA05B4004A3CD5 /* InfoPlist.strings in Resources */,
 				B500D9A61CB94B5D00622198 /* Localizable.strings in Resources */,
+				B5761A4E1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig in Resources */,
+				B5761A4F1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +387,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5761A561CCF5569008CCC08 /* Category.json in Resources */,
+				B5761A5C1CCF6D78008CCC08 /* Video.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +407,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2A73C8D189C5044B72F5BA92 /* Check Pods Manifest.lock */ = {
@@ -377,6 +425,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		3F3A07CF76C2A9FFB4957379 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTVTests/Pods-iCookTVTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7332CBB2F6D028D0B57AB6DF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTVTests/Pods-iCookTVTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9D9FFB70B49EF5F4755D57F7 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,7 +467,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9978D18C40807D1F1F33F9B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -433,7 +526,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */,
 				B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */,
+				B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */,
+				B5761A5A1CCF6CCD008CCC08 /* VideoSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +652,7 @@
 		};
 		B5F7BF631BA9C95F00A75099 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BD09092652BB6C0A969FF39 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -570,7 +666,7 @@
 		};
 		B5F7BF641BA9C95F00A75099 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79F5283AAD15EFA40C525968 /* Pods.release.xcconfig */;
+			baseConfigurationReference = B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -584,11 +680,13 @@
 		};
 		B5F7BF661BA9C95F00A75099 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD1E048B0619F561850ABA2F /* Pods-iCookTVTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = iCookTVTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.iCookTVTests;
+				PRODUCT_MODULE_NAME = iCookTVTests;
 				PRODUCT_NAME = iCookTV;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCookTV.app/iCookTV";
 			};
@@ -596,11 +694,13 @@
 		};
 		B5F7BF671BA9C95F00A75099 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB5584D9D4EE052A9659726B /* Pods-iCookTVTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = iCookTVTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.bcylin.iCookTVTests;
+				PRODUCT_MODULE_NAME = iCookTVTests;
 				PRODUCT_NAME = iCookTV;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCookTV.app/iCookTV";
 			};
