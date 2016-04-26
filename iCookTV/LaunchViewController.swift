@@ -30,15 +30,27 @@ import Freddy
 
 class LaunchViewController: UIViewController {
 
-  private let loadingImageView = UIImageView()
+  private lazy var loadingImageView: UIImageView = {
+    let _imageView = UIImageView()
+    _imageView.image = UIImage(named: "icook-tv-cat")
+    _imageView.contentMode = .ScaleAspectFill
+    return _imageView
+  }()
 
   private lazy var taglineLabel: UILabel = {
     let _label = UILabel()
     _label.font = UIFont.tvFontForTagline()
     _label.textColor = UIColor.tvTaglineColor()
     _label.text = "Tagline".localizedString
+    _label.textAlignment = .Center
+    _label.numberOfLines = 0
+    _label.alpha = 0
     return _label
   }()
+
+  private var taglineConstraint: NSLayoutConstraint?
+
+  // MARK: - UIViewController
 
   override func loadView() {
     super.loadView()
@@ -46,16 +58,14 @@ class LaunchViewController: UIViewController {
     view.addSubview(loadingImageView)
     view.addSubview(taglineLabel)
 
-    loadingImageView.layer.borderWidth = 1
     loadingImageView.translatesAutoresizingMaskIntoConstraints = false
     taglineLabel.translatesAutoresizingMaskIntoConstraints = false
 
     loadingImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
     loadingImageView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -45).active = true
-    loadingImageView.widthAnchor.constraintEqualToConstant(280).active = true
-    loadingImageView.heightAnchor.constraintEqualToConstant(350).active = true
 
-    taglineLabel.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 50).active = true
+    taglineConstraint = taglineLabel.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 100)
+    taglineConstraint?.active = true
     taglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
   }
 
@@ -67,6 +77,15 @@ class LaunchViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    UIView.animateWithDuration(0.5) {
+      self.taglineLabel.alpha = 1
+      self.taglineConstraint?.constant = 50
+      self.view.layoutIfNeeded()
+    }
   }
 
   // MARK: - Private Methods
