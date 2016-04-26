@@ -27,6 +27,9 @@
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
 		B5761A4E1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */; };
 		B5761A4F1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */; };
+		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
+		B5761A561CCF5569008CCC08 /* Category.json in Resources */ = {isa = PBXBuildFile; fileRef = B5761A551CCF5569008CCC08 /* Category.json */; };
+		B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A571CCF5752008CCC08 /* ResourceHelper.swift */; };
 		B586EFDB1CCA21B300EA8218 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */; };
 		B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */; };
 		B5A614F71CCA05B4004A3CD5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5A614F91CCA05B4004A3CD5 /* InfoPlist.strings */; };
@@ -79,6 +82,9 @@
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.debug.xcconfig"; sourceTree = "<group>"; };
 		B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.release.xcconfig"; sourceTree = "<group>"; };
+		B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySpec.swift; sourceTree = "<group>"; };
+		B5761A551CCF5569008CCC08 /* Category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Category.json; sourceTree = "<group>"; };
+		B5761A571CCF5752008CCC08 /* ResourceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceHelper.swift; sourceTree = "<group>"; };
 		B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverBuilder.swift; sourceTree = "<group>"; };
 		B5A614F81CCA05B4004A3CD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -161,6 +167,15 @@
 				B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		B5761A541CCF555D008CCC08 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5761A551CCF5569008CCC08 /* Category.json */,
+				B5F7BF5F1BA9C95F00A75099 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		B5A614FC1CCA0848004A3CD5 /* Supporting Files */ = {
@@ -259,8 +274,10 @@
 		B5F7BF5C1BA9C95F00A75099 /* iCookTVTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5761A541CCF555D008CCC08 /* Supporting Files */,
+				B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */,
 				B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */,
-				B5F7BF5F1BA9C95F00A75099 /* Info.plist */,
+				B5761A571CCF5752008CCC08 /* ResourceHelper.swift */,
 			);
 			path = iCookTVTests;
 			sourceTree = "<group>";
@@ -364,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5761A561CCF5569008CCC08 /* Category.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,7 +519,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */,
 				B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */,
+				B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
