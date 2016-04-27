@@ -25,8 +25,6 @@
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
 		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
-		B5761A4E1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */; };
-		B5761A4F1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B5761A4D1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig */; };
 		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
 		B5761A561CCF5569008CCC08 /* Category.json in Resources */ = {isa = PBXBuildFile; fileRef = B5761A551CCF5569008CCC08 /* Category.json */; };
 		B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A571CCF5752008CCC08 /* ResourceHelper.swift */; };
@@ -338,7 +336,7 @@
 		B5F7BF401BA9C95F00A75099 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Polydice, Inc.";
 				TargetAttributes = {
 					B5F7BF471BA9C95F00A75099 = {
@@ -378,8 +376,6 @@
 				B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */,
 				B5A614F71CCA05B4004A3CD5 /* InfoPlist.strings in Resources */,
 				B500D9A61CB94B5D00622198 /* Localizable.strings in Resources */,
-				B5761A4E1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig in Resources */,
-				B5761A4F1CCF4C06008CCC08 /* Pods-iCookTV.release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

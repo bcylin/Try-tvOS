@@ -71,7 +71,6 @@ class MainMenuView: UIView {
 
   override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
     let focused = (context.nextFocusedView == button)
-    layoutIfNeeded()
 
     coordinator.addCoordinatedAnimations({
       self.frontBannerConstraint?.constant = focused ? self.bannerOffset.front.focused : self.bannerOffset.front.normal

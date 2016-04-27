@@ -118,9 +118,7 @@ class VideosViewController: BlurBackgroundViewController,
       coordinator.addCoordinatedAnimations({
         self.dropdownMenuView.frame = revealedFrame
       }, completion: nil)
-    }
-
-    if context.previouslyFocusedView == dropdownMenuView.button {
+    } else if context.previouslyFocusedView == dropdownMenuView.button {
       let hiddenFrame = dropdownMenuView.frame.offsetBy(dx: 0, dy: -dropdownMenuView.frame.height)
       coordinator.addCoordinatedAnimations({
         self.dropdownMenuView.frame = hiddenFrame
