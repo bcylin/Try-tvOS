@@ -7,8 +7,12 @@ A demo tvOS app that plays YouTube videos.
 
 ## Setup
 
-* Set up dependencies:
+* Install required dependencies using [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
 
+  ```
+brew tap homebrew/bundle
+brew bundle
+```
   ```
 bundle install
 bundle exec pod install
