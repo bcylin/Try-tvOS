@@ -23,6 +23,8 @@
 		B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115921CC69E7C00E75292 /* HistoryManager.swift */; };
 		B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E39771CA1494000EB1EEE /* UIColor+TV.swift */; };
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
+		B543C3EA1CD1E85E008C512B /* OverlayEnabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */; };
+		B543C3ED1CD1EF26008C512B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */; };
 		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
 		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
@@ -78,6 +80,8 @@
 		B53115921CC69E7C00E75292 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayEnabled.swift; sourceTree = "<group>"; };
+		B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +175,14 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
+		B543C3EB1CD1E93B008C512B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
 		B5761A541CCF555D008CCC08 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 				B5AAAE5D1C85DD1D002DDFC8 /* Controller */,
 				B53E39791CA1494600EB1EEE /* Extension */,
 				B5AAAE5B1C85DD0A002DDFC8 /* Model */,
+				B543C3EB1CD1E93B008C512B /* Protocol */,
 				B5AAAE5C1C85DD16002DDFC8 /* View */,
 				B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */,
 				B50BFC041CC88FA3004F853D /* Debug.swift */,
@@ -222,6 +235,7 @@
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
 				B5C591141CA04BA50096B985 /* CategoryHeaderView.swift */,
+				B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */,
 				B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */,
 				B500D99E1CB93D0600622198 /* MainMenuView.swift */,
 				B500D9A01CB93D8100622198 /* MenuButton.swift */,
@@ -497,6 +511,7 @@
 				B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */,
 				B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */,
 				B50BFC051CC88FA3004F853D /* Debug.swift in Sources */,
+				B543C3ED1CD1EF26008C512B /* EmptyStateView.swift in Sources */,
 				B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */,
 				B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */,
 				B51A95391CCF1C5100E5ED97 /* iCookTVKeys.swift in Sources */,
@@ -506,6 +521,7 @@
 				B500D9A11CB93D8100622198 /* MenuButton.swift in Sources */,
 				B5DA8EDE1CB3BD1B0068E0E3 /* MenuView.swift in Sources */,
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,
+				B543C3EA1CD1E85E008C512B /* OverlayEnabled.swift in Sources */,
 				B500D9A31CB94AD300622198 /* String+i18n.swift in Sources */,
 				B53E39781CA1494000EB1EEE /* UIColor+TV.swift in Sources */,
 				B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */,

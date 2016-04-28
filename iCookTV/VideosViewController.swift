@@ -32,11 +32,13 @@ import Keys
 class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
-  UICollectionViewDelegateFlowLayout {
+  UICollectionViewDelegateFlowLayout,
+  OverlayEnabled {
 
   var videos = [Video]() {
     didSet {
       collectionView.reloadData()
+      setOverlayViewHidden(!videos.isEmpty, animated: true)
     }
   }
 
@@ -95,7 +97,7 @@ class VideosViewController: BlurBackgroundViewController,
   override func viewDidLoad() {
     super.viewDidLoad()
     if categoryID.isEmpty {
-      // TODO: handle error
+      setOverlayViewHidden(false, animated: true)
       return
     }
     fetchNextPage()
@@ -175,6 +177,25 @@ class VideosViewController: BlurBackgroundViewController,
     if let cover = (context.nextFocusedView as? VideoCell)?.imageView.image {
       self.backgroundImage = cover
     }
+  }
+
+  // MARK: - OverlayEnabled
+
+  private lazy var emptyStateOverlay: UIView = { EmptyStateView() }()
+
+  var overlayView: UIView {
+    return emptyStateOverlay
+  }
+
+  func containerViewForOverlayView(overlayView: UIView) -> UIView {
+    return view
+  }
+
+  func constraintsForOverlayView(overlayView: UIView) -> [NSLayoutConstraint] {
+    return [
+      overlayView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
+      overlayView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor)
+    ]
   }
 
   // MARK: - UIResponder Callbacks
