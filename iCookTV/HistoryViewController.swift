@@ -87,6 +87,18 @@ class HistoryViewController: VideosViewController {
     // History doesn't need pagination.
   }
 
+  // MARK: - OverlayEnabled
+
+  private lazy var emptyStateOverlay: UIView = {
+    let _empty = EmptyStateView()
+    _empty.textLabel.text = "You haven't watched any video.".localizedString
+    return _empty
+  }()
+
+  override var overlayView: UIView {
+    return emptyStateOverlay
+  }
+
   // MARK: - UIResponder Callbacks
 
   @objc private func backToHome(sender: UIButton) {
