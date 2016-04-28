@@ -25,6 +25,7 @@
 		B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */; };
 		B543C3EA1CD1E85E008C512B /* OverlayEnabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */; };
 		B543C3ED1CD1EF26008C512B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */; };
+		B543C3EF1CD1FD0B008C512B /* GroundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3EE1CD1FD0B008C512B /* GroundControl.swift */; };
 		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
 		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
@@ -82,6 +83,7 @@
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayEnabled.swift; sourceTree = "<group>"; };
 		B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		B543C3EE1CD1FD0B008C512B /* GroundControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundControl.swift; sourceTree = "<group>"; };
 		B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				B56D68E81CA564B00097D5D7 /* Category.swift */,
 				B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */,
+				B543C3EE1CD1FD0B008C512B /* GroundControl.swift */,
 				B53115921CC69E7C00E75292 /* HistoryManager.swift */,
 				B5BA618A1C7748B900548B38 /* Video.swift */,
 			);
@@ -512,6 +515,7 @@
 				B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */,
 				B50BFC051CC88FA3004F853D /* Debug.swift in Sources */,
 				B543C3ED1CD1EF26008C512B /* EmptyStateView.swift in Sources */,
+				B543C3EF1CD1FD0B008C512B /* GroundControl.swift in Sources */,
 				B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */,
 				B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */,
 				B51A95391CCF1C5100E5ED97 /* iCookTVKeys.swift in Sources */,

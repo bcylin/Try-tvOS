@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let tabBarController = UITabBarController()
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    let navigatonController = UINavigationController(rootViewController: LaunchViewController())
+    GroundControl.sync()
 
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = navigatonController
+    window?.rootViewController = UINavigationController(rootViewController: LaunchViewController())
     window?.makeKeyAndVisible()
 
     return true

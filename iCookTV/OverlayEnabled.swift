@@ -25,6 +25,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol OverlayEnabled {
   /// A view used as the decorative overlay.
@@ -37,7 +38,7 @@ protocol OverlayEnabled {
   func constraintsForOverlayView(overlayView: UIView) -> [NSLayoutConstraint]
 }
 
-extension OverlayEnabled where Self: UIViewController {
+extension OverlayEnabled where Self: BlurBackgroundViewController {
 
   func setOverlayViewHidden(hidden: Bool, animated: Bool) {
     if !hidden {
@@ -53,6 +54,12 @@ extension OverlayEnabled where Self: UIViewController {
       UIView.animateWithDuration(0.3, animations: transition)
     } else {
       transition()
+    }
+
+    if let url = GroundControl.defaultBackgroundURL where !hidden {
+      KingfisherManager.sharedManager.downloader.downloadImageWithURL(url, progressBlock: nil) { [weak self] in
+        self?.backgroundImage = $0.image
+      }
     }
   }
 
