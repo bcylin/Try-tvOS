@@ -92,13 +92,18 @@ struct Video: JSONDecodable, JSONEncodable {
   // MARK: - Helpers
 
   var playerItemURL: NSURL? {
-    guard
-      let youtubeURL = NSURL(string: youtube),
-      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
+    switch GroundControl.videoSource {
+    case .HLS:
+      return NSURL(string: source)
+    case .YouTube:
+      guard
+        let youtubeURL = NSURL(string: youtube),
+        let videoURL = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
       else {
         return nil
+      }
+      return NSURL(string: videoURL)
     }
-    return NSURL(string: medium)
   }
 
   var titleMetaData: AVMetadataItem {
