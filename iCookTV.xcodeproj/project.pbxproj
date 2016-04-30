@@ -26,6 +26,7 @@
 		B543C3EA1CD1E85E008C512B /* OverlayEnabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */; };
 		B543C3ED1CD1EF26008C512B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */; };
 		B543C3EF1CD1FD0B008C512B /* GroundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3EE1CD1FD0B008C512B /* GroundControl.swift */; };
+		B543C3F31CD34419008C512B /* Video+PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3F21CD34419008C512B /* Video+PlayerItem.swift */; };
 		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
 		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
@@ -84,6 +85,7 @@
 		B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayEnabled.swift; sourceTree = "<group>"; };
 		B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		B543C3EE1CD1FD0B008C512B /* GroundControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundControl.swift; sourceTree = "<group>"; };
+		B543C3F21CD34419008C512B /* Video+PlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+PlayerItem.swift"; sourceTree = "<group>"; };
 		B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B5761A4C1CCF4C06008CCC08 /* Pods-iCookTV.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */,
 				B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */,
 				B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */,
+				B543C3F21CD34419008C512B /* Video+PlayerItem.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */,
 				B5C85D041CA97981000AE0CF /* UIImage+Grid.swift in Sources */,
 				B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */,
+				B543C3F31CD34419008C512B /* Video+PlayerItem.swift in Sources */,
 				B5BA618B1C7748B900548B38 /* Video.swift in Sources */,
 				B5BA61891C77431400548B38 /* VideoCell.swift in Sources */,
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,

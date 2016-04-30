@@ -29,31 +29,52 @@ import AVKit
 
 class VideoPlayerController: AVPlayerViewController {
 
+  private var video: Video?
+  private var coverImage: UIImage?
+
+  /// An activity indicator displayed before the player item is ready.
+  private lazy var loadingIndicator: UIActivityIndicatorView = {
+    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    _indicator.hidesWhenStopped = true
+    return _indicator
+  }()
+
+  // MARK: - Initialization
+
   convenience init(video: Video, coverImage image: UIImage? = nil) {
     self.init(nibName: nil, bundle: nil)
-    guard let url = video.playerItemURL else { return }
-
-    let playerItem = AVPlayerItem(URL: url)
-    playerItem.externalMetadata = [video.titleMetaData, video.descriptionMetaData]
-    if let cover = image {
-      playerItem.externalMetadata.append(cover.metadataItem)
-    }
-    player = AVPlayer(playerItem: playerItem)
-
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: #selector(handlePlayerItemDidPlayToEndTime(_:)),
-      name: AVPlayerItemDidPlayToEndTimeNotification,
-      object: playerItem
-    )
+    self.video = video
+    self.coverImage = image
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self,
+    NSNotificationCenter.defaultCenter().removeObserver(
+      self,
       name: AVPlayerItemDidPlayToEndTimeNotification,
-      object: nil)
+      object: nil
+    )
   }
 
   // MARK: - UIViewController
+
+  override func loadView() {
+    super.loadView()
+    if let contentView = contentOverlayView {
+      contentView.addSubview(loadingIndicator)
+      loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+      // AVPlayerViewController's own indicator has a 5 pt offset from the center.
+      loadingIndicator.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor, constant: -5).active = true
+      loadingIndicator.centerYAnchor.constraintEqualToAnchor(contentView.centerYAnchor).active = true
+    }
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    loadingIndicator.startAnimating()
+    video?.convertToPlayerItemWithCover(coverImage) { [weak self] in
+      self?.setPlayerItem($0)
+    }
+  }
 
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
@@ -63,30 +84,30 @@ class VideoPlayerController: AVPlayerViewController {
   // MARK: - NSNotification Callbacks
 
   @objc private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
-    if let navigationController = navigationController {
-      navigationController.popViewControllerAnimated(true)
+    if let navigation = navigationController {
+      navigation.popViewControllerAnimated(true)
     } else if let presenter = presentingViewController {
       presenter.dismissViewControllerAnimated(true, completion: nil)
     }
   }
 
-}
+  // MARK: - Private Methods
 
+  private func setPlayerItem(playerItem: AVPlayerItem?) {
+    guard let playerItem = playerItem else {
+      return
+    }
 
-////////////////////////////////////////////////////////////////////////////////
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(handlePlayerItemDidPlayToEndTime(_:)),
+      name: AVPlayerItemDidPlayToEndTimeNotification,
+      object: playerItem
+    )
 
-
-extension UIImage {
-
-  private static let JPEGLeastCompressionQuality = CGFloat(1)
-
-  var metadataItem: AVMetadataItem {
-    let _item = AVMutableMetadataItem()
-    _item.key = AVMetadataCommonKeyArtwork
-    _item.keySpace = AVMetadataKeySpaceCommon
-    _item.locale = NSLocale.currentLocale()
-    _item.value = UIImageJPEGRepresentation(self, UIImage.JPEGLeastCompressionQuality)
-    return _item
+    loadingIndicator.stopAnimating()
+    player = AVPlayer(playerItem: playerItem)
+    player?.play()
   }
 
 }

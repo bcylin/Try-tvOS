@@ -168,7 +168,6 @@ class VideosViewController: BlurBackgroundViewController,
 
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
     presentViewController(controller, animated: true) { [weak self] in
-      controller.player?.play()
       self?.saveToHistory(video, atIndex: indexPath.row)
     }
   }
