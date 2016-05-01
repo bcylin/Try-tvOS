@@ -7,7 +7,7 @@
     "subtitle": "ipsum",
     "description": "dolor sit amet",
     "length": 123.0,
-    "video-url": "",
+    "video-url": "https://vide.os/source.m3u8",
     "embed-url": "https://www.youtube.com/watch?v=3345678",
     "cover-url": "https://imag.es/cover.jpg"
   }

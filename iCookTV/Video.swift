@@ -24,10 +24,8 @@
 //  SOFTWARE.
 //
 
-import AVKit
 import Foundation
 import Freddy
-import HCYoutubeParser
 
 struct Video: JSONDecodable, JSONEncodable {
 
@@ -37,6 +35,7 @@ struct Video: JSONDecodable, JSONEncodable {
   let description: String?
   let length: Int
   let youtube: String
+  let source: String
   let cover: String
 
   var coverURL: NSURL? {
@@ -59,6 +58,7 @@ struct Video: JSONDecodable, JSONEncodable {
     description = try value.string("attributes", "description", ifNull: true)
     length = try value.int("attributes", "length", or: 0)
     youtube = try value.string("attributes", "embed-url")
+    source = try value.string("attributes", "video-url")
     cover = try value.string("attributes", "cover-url")
   }
 
@@ -85,36 +85,6 @@ struct Video: JSONDecodable, JSONEncodable {
     ]
 
     return .Dictionary(json)
-  }
-
-  // MARK: - Helpers
-
-  var playerItemURL: NSURL? {
-    guard
-      let youtubeURL = NSURL(string: youtube),
-      let medium = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
-      else {
-        return nil
-    }
-    return NSURL(string: medium)
-  }
-
-  var titleMetaData: AVMetadataItem {
-    let _title = AVMutableMetadataItem()
-    _title.key = AVMetadataCommonKeyTitle
-    _title.keySpace = AVMetadataKeySpaceCommon
-    _title.locale = NSLocale.currentLocale()
-    _title.value = title
-    return _title
-  }
-
-  var descriptionMetaData: AVMetadataItem {
-    let _description = AVMutableMetadataItem()
-    _description.key = AVMetadataCommonKeyDescription
-    _description.keySpace = AVMetadataKeySpaceCommon
-    _description.locale = NSLocale.currentLocale()
-    _description.value = (subtitle == nil ? "" : subtitle! + "\n") + (description ?? "")
-    return _description
   }
 
 }

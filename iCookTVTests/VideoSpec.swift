@@ -46,6 +46,7 @@ class VideoSpec: QuickSpec {
         expect(video.description).to(equal("dolor sit amet"))
         expect(video.length).to(equal(123))
         expect(video.youtube).to(equal("https://www.youtube.com/watch?v=3345678"))
+        expect(video.source).to(equal("https://vide.os/source.m3u8"))
         expect(video.cover).to(equal("https://imag.es/cover.jpg"))
       }
     }
