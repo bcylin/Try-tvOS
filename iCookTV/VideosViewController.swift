@@ -33,7 +33,8 @@ class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
-  OverlayEnabled {
+  OverlayEnabled,
+  Trackable {
 
   var videos = [Video]() {
     didSet {
@@ -103,11 +104,6 @@ class VideosViewController: BlurBackgroundViewController,
     fetchNextPage()
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
   // MARK: - UIFocusEnvironment
 
   override var preferredFocusedView: UIView? {
@@ -167,9 +163,8 @@ class VideosViewController: BlurBackgroundViewController,
     let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
 
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
-    presentViewController(controller, animated: true) { [weak self] in
-      self?.saveToHistory(video, atIndex: indexPath.row)
-    }
+    navigationController?.pushViewController(controller, animated: true)
+    saveToHistory(video, atIndex: indexPath.row)
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
@@ -195,6 +190,15 @@ class VideosViewController: BlurBackgroundViewController,
       overlayView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
       overlayView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor)
     ]
+  }
+
+  // MARK: - Trackable
+
+  var pageView: PageView?{
+    return PageView(name: "Videos", details: [
+      "Category ID": categoryID,
+      "Category Title": title ?? ""
+    ])
   }
 
   // MARK: - UIResponder Callbacks

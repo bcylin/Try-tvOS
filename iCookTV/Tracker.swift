@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
-//  TryTVOS
+//  Tracker.swift
+//  iCookTV
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 28/04/2016.
+//  Copyright © 2016 Polydice, Inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,12 @@
 //  SOFTWARE.
 //
 
-import UIKit
-import Crashlytics
-import Fabric
+import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+enum Tracker {
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
-
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    GroundControl.sync()
-    setUpAnalytics()
-
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = TrackableNavigationController(rootViewController: LaunchViewController())
-    window?.makeKeyAndVisible()
-
-    return true
-  }
-
-  // MARK: - Private Methods
-
-  private func setUpAnalytics() {
-    Crashlytics.startWithAPIKey(iCookTVKeys.CrashlyticsAPIKey)
-    Fabric.with([Crashlytics.self])
+  static func track(pageView: PageView) {
+    Debug.print(pageView)
   }
 
 }

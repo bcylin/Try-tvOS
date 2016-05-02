@@ -74,11 +74,6 @@ class LaunchViewController: UIViewController {
     fetchCategories()
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     UIView.animateWithDuration(0.5) {

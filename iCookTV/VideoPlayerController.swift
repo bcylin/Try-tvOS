@@ -27,7 +27,7 @@
 import UIKit
 import AVKit
 
-class VideoPlayerController: AVPlayerViewController {
+class VideoPlayerController: AVPlayerViewController, Trackable {
 
   private var video: Video?
   private var coverImage: UIImage?
@@ -79,6 +79,15 @@ class VideoPlayerController: AVPlayerViewController {
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     player?.pause()
+  }
+
+  // MARK: - Trackable
+
+  var pageView: PageView? {
+    return PageView(name: "Player", details: [
+      "Video ID": video?.id ?? "",
+      "Video Title": video?.title ?? ""
+    ])
   }
 
   // MARK: - NSNotification Callbacks

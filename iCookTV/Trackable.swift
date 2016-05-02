@@ -1,9 +1,9 @@
 //
-//  AppDelegate.swift
-//  TryTVOS
+//  Trackable.swift
+//  iCookTV
 //
-//  Created by Ben on 16/09/2015.
-//  Copyright © 2015 bcylin.
+//  Created by Ben on 03/05/2016.
+//  Copyright © 2016 Polydice, Inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,35 @@
 //  SOFTWARE.
 //
 
-import UIKit
-import Crashlytics
-import Fabric
+import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+/// Required properties of a trackable view controller class.
+protocol Trackable: class {
+  var pageView: PageView? { get }
+}
 
-  var window: UIWindow?
-  let tabBarController = UITabBarController()
+////////////////////////////////////////////////////////////////////////////////
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    GroundControl.sync()
-    setUpAnalytics()
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = TrackableNavigationController(rootViewController: LaunchViewController())
-    window?.makeKeyAndVisible()
+protocol TrackableAttributes {
+  var name: String { get }
+  var details: [String: AnyObject] { get }
+}
 
-    return true
+
+extension TrackableAttributes where Self: CustomStringConvertible {
+  var description: String {
+    return "{\n  name: \(name),\n  details: \(details)\n}"
   }
+}
 
-  // MARK: - Private Methods
 
-  private func setUpAnalytics() {
-    Crashlytics.startWithAPIKey(iCookTVKeys.CrashlyticsAPIKey)
-    Fabric.with([Crashlytics.self])
+struct PageView: TrackableAttributes, CustomStringConvertible {
+  let name: String
+  let details: [String: AnyObject]
+
+  init(name: String, details: [String: AnyObject] = [:]) {
+    self.name = name
+    self.details = details
   }
-
 }
