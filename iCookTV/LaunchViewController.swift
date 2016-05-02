@@ -103,9 +103,7 @@ class LaunchViewController: UIViewController {
         let categories = try json.array("data").map(Category.init)
         self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
       } catch {
-        self?.showAlert(error) { _ in
-          self?.fetchCategories()
-        }
+        self?.showAlert(error, retry: self?.fetchCategories)
       }
     }
   }

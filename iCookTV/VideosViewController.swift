@@ -242,9 +242,7 @@ class VideosViewController: BlurBackgroundViewController,
           }
         } catch {
           dispatch_sync(dispatch_get_main_queue()) {
-            self?.showAlert(error) { _ in
-              self?.fetchNextPage()
-            }
+            self?.showAlert(error, retry: self?.fetchNextPage)
           }
         }
       }
