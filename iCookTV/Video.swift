@@ -68,6 +68,7 @@ struct Video: JSONDecodable, JSONEncodable {
     var attributes: [String: JSON] = [
       "title": .String(title),
       "embed-url": .String(youtube),
+      "video-url": .String(source),
       "cover-url": .String(cover),
       "length": .Int(length)
     ]

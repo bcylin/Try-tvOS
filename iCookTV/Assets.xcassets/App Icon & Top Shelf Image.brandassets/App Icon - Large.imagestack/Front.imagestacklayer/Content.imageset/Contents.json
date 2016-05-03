@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "tv",
-      "filename" : "icook-tv-app-icon-large-front.pdf"
+      "filename" : "icook-tv-app-icon-large-front.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

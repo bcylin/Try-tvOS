@@ -34,12 +34,11 @@ class VideoSpec: QuickSpec {
   override func spec() {
 
     let data: NSData = Resources.testData(named: "Video.json")!
+    let json = try! JSON(data: data)
+    let video = try! Video(json: json)
 
     describe("init(json:)") {
       it("should parse JSON as Video") {
-        let json = try! JSON(data: data)
-        let video = try! Video(json: json)
-
         expect(video.id).to(equal("42"))
         expect(video.title).to(equal("Lorem"))
         expect(video.subtitle).to(equal("ipsum"))
@@ -48,6 +47,18 @@ class VideoSpec: QuickSpec {
         expect(video.youtube).to(equal("https://www.youtube.com/watch?v=3345678"))
         expect(video.source).to(equal("https://vide.os/source.m3u8"))
         expect(video.cover).to(equal("https://imag.es/cover.jpg"))
+      }
+    }
+
+    describe("toJSON()") {
+      let converted = video.toJSON()
+
+      it("should convert Video to JSON") {
+        expect(converted["id"]).to(equal(json["id"]))
+
+        for key in ["title", "embed-url", "video-url", "cover-url", "length", "subtitle", "description"] {
+          expect(converted["attributes"]?[key]).to(equal(json["attributes"]?[key]))
+        }
       }
     }
 

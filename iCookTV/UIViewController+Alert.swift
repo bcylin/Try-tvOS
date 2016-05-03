@@ -28,12 +28,14 @@ import UIKit
 
 extension UIViewController {
 
-  func showAlert(error: ErrorType?, retry: ((UIAlertAction) -> Void)? = nil) {
+  func showAlert(error: ErrorType?, retry: (() -> Void)? = nil) {
     Debug.print(error)
     let message = (error as? NSError)?.localizedDescription ?? "\(error)"
 
     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-    alert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: retry))
+    alert.addAction(UIAlertAction(title: "Retry", style: .Default) { _ in
+      retry?()
+    })
     presentViewController(alert, animated: true, completion: nil)
   }
 
