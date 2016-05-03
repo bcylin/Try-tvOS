@@ -43,6 +43,16 @@ class VideosViewController: BlurBackgroundViewController,
     }
   }
 
+  var pagingTracking: Event? {
+    return Event(name: "Fetched Page", details: [
+      "Category ID": categoryID,
+      "Page": String(currentPage),
+      "Title": title ?? "",
+    ])
+  }
+
+  // MARK: - Private Properties
+
   private var categoryID = ""
 
   private(set) lazy var dropdownMenuView: MenuView = {
@@ -63,6 +73,12 @@ class VideosViewController: BlurBackgroundViewController,
   private weak var currentRequest: Request?
   private let paginationQueue = dispatch_queue_create("io.github.bcylin.paginationQueue", DISPATCH_QUEUE_SERIAL)
   private var hasNextPage = true
+
+  private var currentPage: Int {
+    return Int(videos.count / self.dynamicType.pageSize)
+  }
+
+  private static let pageSize = 20
 
   // MARK: - Initialization
 
@@ -102,6 +118,17 @@ class VideosViewController: BlurBackgroundViewController,
       return
     }
     fetchNextPage()
+  }
+
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    guard let stack = navigationController?.viewControllers else {
+      return
+    }
+    // Track the event when popped off the navigation stack.
+    if let event = pagingTracking where !stack.contains(self) {
+      Tracker.track(event)
+    }
   }
 
   // MARK: - UIFocusEnvironment
@@ -218,8 +245,8 @@ class VideosViewController: BlurBackgroundViewController,
 
     let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
     let parameters = [
-      "page[size]": 20,
-      "page[number]": Int(videos.count / 20) + 1
+      "page[size]": self.dynamicType.pageSize,
+      "page[number]": currentPage + 1
     ]
 
     currentRequest = Alamofire.request(.GET, url, parameters: parameters).responseJSON { [weak self] response in

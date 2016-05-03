@@ -56,3 +56,9 @@ struct PageView: TrackableAttributes, CustomStringConvertible {
     self.details = details
   }
 }
+
+
+struct Event: TrackableAttributes, CustomStringConvertible {
+  let name: String
+  let details: [String: AnyObject]
+}

@@ -73,6 +73,10 @@ class HistoryViewController: VideosViewController {
 
   // MARK: - VideosViewController
 
+  override var pagingTracking: Event? {
+    return nil
+  }
+
   override func saveToHistory(video: Video, atIndex index: Int) {
     super.saveToHistory(video, atIndex: index)
     // Reorder current displayed contents

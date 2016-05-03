@@ -32,4 +32,8 @@ enum Tracker {
     Debug.print(pageView)
   }
 
+  static func track(event: Event) {
+    Debug.print(event)
+  }
+
 }
