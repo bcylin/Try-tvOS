@@ -7,26 +7,36 @@ A demo tvOS app that plays YouTube videos.
 
 ## Setup
 
-* Install required dependencies using [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
+Install required dependencies using [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
 
-  ```
+```
 brew tap homebrew/bundle
 brew bundle
 ```
-  ```
+```
 bundle install
 bundle exec pod install
 ```
 
-* `pod install` will prompt for `BaseAPIURL`, which is required to run the app:
+### Required Keys
 
-  ```
+`pod install` will prompt for `BaseAPIURL`, which is required to run the app:
+
+```
 CocoaPods-Keys has detected a keys mismatch for your setup.
 What is the key for BaseAPIURL
 >
 ```
 
-  > TBD: API details are hidden due to proprietary reasons.
+> TBD: API details are hidden for now due to proprietary reasons.
+
+### Ignored
+
+* `icook-tv-top-shelf-image.png` is not included in the repo due to the license of image.
+
+## Demo
+
+Install the beta version via <https://testflight.icook.tw>.
 
 ## Contact
 
@@ -36,5 +46,5 @@ What is the key for BaseAPIURL
 
 The names and icons for iCook are trademarks of [Polydice, Inc.](https://polydice.com/) Please refer to the guidelines at [iCook Newsroom](https://newsroom.icook.tw/downloads).
 
-* All image assets are Copyright © 2016 Polydice, inc. All rights reserved.
+* All image assets are Copyright © 2016 Polydice, Inc. All rights reserved.
 * The source code is released under the MIT license. See [LICENSE](https://github.com/bcylin/Try-tvOS/blob/master/LICENSE) for more info.
