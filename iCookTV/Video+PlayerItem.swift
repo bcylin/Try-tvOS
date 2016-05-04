@@ -35,7 +35,7 @@ extension Video {
   private var playerItemURL: NSURL? {
     switch GroundControl.videoSource {
     case .HLS:
-      return NSURL(string: source)
+      return source == nil ? nil : NSURL(string: source!)
     case .YouTube:
       guard
         let youtubeURL = NSURL(string: youtube),

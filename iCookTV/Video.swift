@@ -35,7 +35,7 @@ struct Video: JSONDecodable, JSONEncodable {
   let description: String?
   let length: Int
   let youtube: String
-  let source: String
+  let source: String?
   let cover: String
 
   var coverURL: NSURL? {
@@ -58,7 +58,7 @@ struct Video: JSONDecodable, JSONEncodable {
     description = try value.string("attributes", "description", ifNull: true)
     length = try value.int("attributes", "length", or: 0)
     youtube = try value.string("attributes", "embed-url")
-    source = try value.string("attributes", "video-url")
+    source = try value.string("attributes", "video-url", ifNull: true)
     cover = try value.string("attributes", "cover-url")
   }
 
@@ -68,14 +68,18 @@ struct Video: JSONDecodable, JSONEncodable {
     var attributes: [String: JSON] = [
       "title": .String(title),
       "embed-url": .String(youtube),
-      "video-url": .String(source),
       "cover-url": .String(cover),
       "length": .Int(length)
     ]
 
+    if let source = source {
+      attributes["video-url"] = .String(source)
+    }
+
     if let subtitle = subtitle {
       attributes["subtitle"] = .String(subtitle)
     }
+
     if let description = description {
       attributes["description"] = .String(description)
     }

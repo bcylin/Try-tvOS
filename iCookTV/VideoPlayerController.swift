@@ -84,6 +84,12 @@ class VideoPlayerController: AVPlayerViewController {
   // MARK: - NSNotification Callbacks
 
   @objc private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
+    dismiss()
+  }
+
+  // MARK: - Private Methods
+
+  private func dismiss() {
     if let navigation = navigationController {
       navigation.popViewControllerAnimated(true)
     } else if let presenter = presentingViewController {
@@ -91,10 +97,16 @@ class VideoPlayerController: AVPlayerViewController {
     }
   }
 
-  // MARK: - Private Methods
-
   private func setPlayerItem(playerItem: AVPlayerItem?) {
+    loadingIndicator.stopAnimating()
+
     guard let playerItem = playerItem else {
+      let message = "There's something wrong with this video.".localizedString
+      let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .Default) { [weak self] _ in
+        self?.dismiss()
+      })
+      presentViewController(alert, animated: true, completion: nil)
       return
     }
 
@@ -105,7 +117,6 @@ class VideoPlayerController: AVPlayerViewController {
       object: playerItem
     )
 
-    loadingIndicator.stopAnimating()
     player = AVPlayer(playerItem: playerItem)
     player?.play()
   }
