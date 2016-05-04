@@ -6,10 +6,13 @@ PODS:
   - Freddy (2.0.2)
   - HCYoutubeParser (0.0.5)
   - Hue (1.1)
+  - KeenClientTD (3.2.25)
   - Keys (1.0.0)
   - Kingfisher (2.2.2)
   - Nimble (4.0.1)
   - Quick (0.9.2)
+  - TreasureData-tvOS-SDK (0.1.14):
+    - KeenClientTD (= 3.2.25)
 
 DEPENDENCIES:
   - Alamofire
@@ -22,6 +25,7 @@ DEPENDENCIES:
   - Kingfisher
   - Nimble
   - Quick
+  - TreasureData-tvOS-SDK
 
 EXTERNAL SOURCES:
   Hue:
@@ -42,9 +46,11 @@ SPEC CHECKSUMS:
   Freddy: e53713b8d5be02dbf5f4132c44d899d99eb09a6b
   HCYoutubeParser: bc1db8c062e4b835eda381f2be2f9970f6a8d071
   Hue: c7d6a7206bac669ed69e78cc6c14a4d7bd28277c
+  KeenClientTD: ffe8b9a67e71643f59a9fda7ce51941ed5c49a42
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
   Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
+  TreasureData-tvOS-SDK: 2ed7df548cada40f8e2dc82de97cfc2753b2e15b
 
 COCOAPODS: 0.39.0

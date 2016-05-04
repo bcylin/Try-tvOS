@@ -38,4 +38,8 @@ struct iCookTVKeys {
     IcooktvKeys().crashlyticsAPIKey()
   }()
 
+  static let TreasureDataAPIKey: String = {
+    IcooktvKeys().treasureDataAPIKey()
+  }()
+
 }

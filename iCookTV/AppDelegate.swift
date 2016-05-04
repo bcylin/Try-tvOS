@@ -27,6 +27,7 @@
 import UIKit
 import Crashlytics
 import Fabric
+import TreasureData_tvOS_SDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func setUpAnalytics() {
     Crashlytics.startWithAPIKey(iCookTVKeys.CrashlyticsAPIKey)
     Fabric.with([Crashlytics.self])
+
+    TreasureData.initializeApiEndpoint("https://in.treasuredata.com")
+    TreasureData.initializeWithApiKey(iCookTVKeys.TreasureDataAPIKey)
   }
 
 }

@@ -1,4 +1,5 @@
 source "https://github.com/CocoaPods/Specs.git"
+source "https://github.com/bcylin/Specs.git"
 
 platform :tvos, "9.0"
 use_frameworks!
@@ -15,6 +16,7 @@ target :iCookTV do
   pod "HCYoutubeParser"
   pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
   pod "Kingfisher"
+  pod "TreasureData-tvOS-SDK"
 end
 
 target :iCookTVTests do
@@ -24,5 +26,5 @@ end
 
 plugin "cocoapods-keys", {
   project: "iCookTV",
-  keys: ["BaseAPIURL", "CrashlyticsAPIKey"]
+  keys: ["BaseAPIURL", "CrashlyticsAPIKey", "TreasureDataAPIKey"]
 }
