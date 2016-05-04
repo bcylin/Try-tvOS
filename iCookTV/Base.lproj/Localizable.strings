@@ -6,10 +6,6 @@
   Copyright © 2016 Polydice, Inc. All rights reserved.
 */
 
-"iCook TV" = "iCook TV";
-
-"History" = "History";
-
-"Home" = "Home";
-
 "Tagline" = "icook.tw";
+
+"\nContact hi@icook.tw for support." = "Please contact us at hi@icook.tw if this issue keeps happening.";

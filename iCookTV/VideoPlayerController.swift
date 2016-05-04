@@ -101,9 +101,10 @@ class VideoPlayerController: AVPlayerViewController {
     loadingIndicator.stopAnimating()
 
     guard let playerItem = playerItem else {
-      let message = "There's something wrong with this video.".localizedString
-      let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-      alert.addAction(UIAlertAction(title: "OK", style: .Default) { [weak self] _ in
+      let message = "There's something wrong with this video.".localizedString +
+                    "\nContact hi@icook.tw for support.".localizedString
+      let alert = UIAlertController(title: "Error\n".localizedString, message: message, preferredStyle: .Alert)
+      alert.addAction(UIAlertAction(title: "OK".localizedString, style: .Default) { [weak self] _ in
         self?.dismiss()
       })
       presentViewController(alert, animated: true, completion: nil)
