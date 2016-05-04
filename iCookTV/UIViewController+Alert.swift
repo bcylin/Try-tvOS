@@ -29,8 +29,7 @@ import UIKit
 extension UIViewController {
 
   func showAlert(error: ErrorType?, retry: (() -> Void)? = nil) {
-    let message = (error as? NSError)?.localizedDescription ?? "\(error)"
-    Debug.print(message)
+    Tracker.track(error)
 
     let alert = UIAlertController(
       title: "Error\n".localizedString,

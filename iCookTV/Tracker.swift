@@ -25,15 +25,24 @@
 //
 
 import Foundation
+import Crashlytics
 
 enum Tracker {
 
   static func track(pageView: PageView) {
     Debug.print(pageView)
+    Answers.logCustomEventWithName(pageView.name, customAttributes: pageView.details)
   }
 
   static func track(event: Event) {
     Debug.print(event)
+    Answers.logCustomEventWithName(event.name, customAttributes: event.details)
+  }
+
+  static func track(error: ErrorType?) {
+    let description = (error as? NSError)?.localizedDescription ?? "\(error)"
+    Debug.print(description)
+    Answers.logCustomEventWithName("Error", customAttributes: ["Description": description])
   }
 
 }
