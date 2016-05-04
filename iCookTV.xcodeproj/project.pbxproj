@@ -508,7 +508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FABRIC_APIKEY=$(cat ${SRCROOT}/keys/fabric.apikey);\nFABRIC_BUILDSECRET=$(cat ${SRCROOT}/keys/fabric.buildsecret);\n${PODS_ROOT}/Fabric/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET};";
+			shellScript = "if [ \"$CI\" != true ]; then\n  FABRIC_APIKEY=$(cat ${SRCROOT}/keys/fabric.apikey);\n  FABRIC_BUILDSECRET=$(cat ${SRCROOT}/keys/fabric.buildsecret);\n  ${PODS_ROOT}/Fabric/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET};\nfi";
 		};
 		D9978D18C40807D1F1F33F9B /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

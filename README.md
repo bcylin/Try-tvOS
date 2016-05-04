@@ -37,6 +37,15 @@ What is the key for BaseAPIURL
 
 Managed by CocoaPods-Keys, they can be real API keys or any arbitrary strings.
 
+### Required Files
+
+```
+./keys/fabric.apikey
+./keys/fabric.buildsecret
+```
+
+Required by the Fabric script. The file contents can also be arbitrary texts.
+
 ### Ignored
 
 * `icook-tv-top-shelf-image.png` is not included in the repo due to the license of image.
