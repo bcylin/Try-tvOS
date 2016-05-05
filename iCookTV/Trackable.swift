@@ -44,6 +44,12 @@ extension TrackableAttributes where Self: CustomStringConvertible {
   var description: String {
     return "{\n  name: \(name),\n  details: \(details)\n}"
   }
+
+  var attributes: [String: AnyObject] {
+    var attributes = details
+    attributes["name"] = name
+    return attributes
+  }
 }
 
 

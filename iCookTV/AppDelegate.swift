@@ -34,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   let tabBarController = UITabBarController()
+  private var backgroundTask = UIBackgroundTaskInvalid
+
+  // MARK: - UIApplicationDelegate
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     GroundControl.sync()
@@ -46,7 +49,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
 
+  func applicationDidEnterBackground(application: UIApplication) {
+    backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
+      self?.endBackgroundTask(inApplication: application)
+    }
+
+    TreasureData.sharedInstance().uploadEventsWithCallback({ [weak self] in
+      self?.endBackgroundTask(inApplication: application)
+    }) { [weak self] _ in
+      self?.endBackgroundTask(inApplication: application)
+    }
+  }
+
   // MARK: - Private Methods
+
+  private func endBackgroundTask(inApplication application: UIApplication) {
+    application.endBackgroundTask(backgroundTask)
+    backgroundTask = UIBackgroundTaskInvalid
+  }
 
   private func setUpAnalytics() {
     Crashlytics.startWithAPIKey(iCookTVKeys.CrashlyticsAPIKey)
@@ -54,6 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     TreasureData.initializeApiEndpoint("https://in.treasuredata.com")
     TreasureData.initializeWithApiKey(iCookTVKeys.TreasureDataAPIKey)
+    TreasureData.sharedInstance().enableAutoAppendUniqId()
+    TreasureData.sharedInstance().enableAutoAppendModelInformation()
   }
 
 }

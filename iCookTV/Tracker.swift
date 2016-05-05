@@ -26,23 +26,35 @@
 
 import Foundation
 import Crashlytics
+import TreasureData_tvOS_SDK
 
 enum Tracker {
 
+  private static let name = "icook_tvos"
+
   static func track(pageView: PageView) {
-    Debug.print(pageView)
-    Answers.logCustomEventWithName(pageView.name, customAttributes: pageView.details)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      Debug.print(pageView)
+      Answers.logCustomEventWithName(pageView.name, customAttributes: pageView.details)
+      TreasureData.sharedInstance().addEvent(pageView.attributes, database: name, table: "screens")
+    }
   }
 
   static func track(event: Event) {
-    Debug.print(event)
-    Answers.logCustomEventWithName(event.name, customAttributes: event.details)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      Debug.print(event)
+      Answers.logCustomEventWithName(event.name, customAttributes: event.details)
+      TreasureData.sharedInstance().addEvent(event.attributes, database: name, table: "events")
+    }
   }
 
   static func track(error: ErrorType?) {
-    let description = (error as? NSError)?.localizedDescription ?? "\(error)"
-    Debug.print(description)
-    Answers.logCustomEventWithName("Error", customAttributes: ["Description": description])
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      let description = (error as? NSError)?.localizedDescription ?? "\(error)"
+      Debug.print(description)
+      Answers.logCustomEventWithName("Error", customAttributes: ["Description": description])
+      TreasureData.sharedInstance().addEvent(["description": description], database: name, table: "errors")
+    }
   }
 
 }
