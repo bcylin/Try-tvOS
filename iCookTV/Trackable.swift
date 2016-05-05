@@ -62,3 +62,19 @@ struct Event: TrackableAttributes, CustomStringConvertible {
   let name: String
   let details: [String: AnyObject]
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+struct TrackableKey {
+  static let numberOfItems = "number_of_items"
+  static let categoryID = "category_id"
+  static let categoryTitle = "category_title"
+  static let videoID = "video_id"
+  static let videoTitle = "video_title"
+  static let page = "page"
+  static let currentTime = "current_time"
+  static let duration = "duration"
+  static let fraction = "fraction"
+  static let percentage = "percentage"
+}

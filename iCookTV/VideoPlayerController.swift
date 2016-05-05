@@ -85,10 +85,15 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
     if let playerItem = player?.currentItem {
       let duration: NSTimeInterval = CMTimeGetSeconds(playerItem.duration)
       let currentTime: NSTimeInterval = CMTimeGetSeconds(playerItem.currentTime())
+      let fraction = currentTime / duration
 
       Tracker.track(Event(name: "Played Video", details: [
-        "Duration": currentTime,
-        "Fraction": currentTime / duration
+        TrackableKey.videoID: video?.id ?? "",
+        TrackableKey.videoTitle: video?.title ?? "",
+        TrackableKey.currentTime: currentTime,
+        TrackableKey.duration: duration,
+        TrackableKey.fraction: fraction,
+        TrackableKey.percentage: fraction * 100
       ]))
     }
   }
@@ -97,8 +102,8 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
   var pageView: PageView? {
     return PageView(name: "Player", details: [
-      "Video ID": video?.id ?? "",
-      "Video Title": video?.title ?? ""
+      TrackableKey.videoID: video?.id ?? "",
+      TrackableKey.videoTitle: video?.title ?? ""
     ])
   }
 

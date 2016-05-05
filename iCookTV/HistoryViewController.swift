@@ -60,7 +60,9 @@ class HistoryViewController: VideosViewController {
           self.isLoading = false
         }
       }
-      Tracker.track(PageView(name: "History", details: ["Number of Items": self.videos.count]))
+      Tracker.track(PageView(name: "History", details: [
+        TrackableKey.numberOfItems: self.videos.count
+      ]))
     }
   }
 
