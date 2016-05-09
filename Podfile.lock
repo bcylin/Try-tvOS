@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.3.1)
+  - Alamofire (3.4.0)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
@@ -40,7 +40,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/hyperoslo/Hue.git
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Freddy: e53713b8d5be02dbf5f4132c44d899d99eb09a6b
