@@ -191,7 +191,7 @@ class VideosViewController: BlurBackgroundViewController,
 
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
     navigationController?.pushViewController(controller, animated: true)
-    saveToHistory(video, atIndex: indexPath.row)
+    HistoryManager.save(video: video)
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
@@ -278,12 +278,6 @@ class VideosViewController: BlurBackgroundViewController,
         }
       }
     }
-  }
-
-  // MARK: - Public Methods
-
-  func saveToHistory(video: Video, atIndex index: Int) {
-    HistoryManager.save(video: video)
   }
 
 }
