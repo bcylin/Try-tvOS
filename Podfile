@@ -16,7 +16,7 @@ target :iCookTV do
   pod "HCYoutubeParser"
   pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
   pod "Kingfisher"
-  pod "TreasureData-tvOS-SDK"
+  pod "TreasureData-tvOS-SDK", "0.1.14"
 end
 
 target :iCookTVTests do

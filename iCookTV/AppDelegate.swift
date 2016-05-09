@@ -76,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     TreasureData.initializeWithApiKey(iCookTVKeys.TreasureDataAPIKey)
     TreasureData.sharedInstance().enableAutoAppendUniqId()
     TreasureData.sharedInstance().enableAutoAppendModelInformation()
+    TreasureData.sharedInstance().enableAutoAppendAppInformation()
+    TreasureData.sharedInstance().enableAutoAppendLocaleInformation()
   }
 
 }

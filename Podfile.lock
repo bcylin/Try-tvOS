@@ -25,7 +25,7 @@ DEPENDENCIES:
   - Kingfisher
   - Nimble
   - Quick
-  - TreasureData-tvOS-SDK
+  - TreasureData-tvOS-SDK (= 0.1.14)
 
 EXTERNAL SOURCES:
   Hue:
@@ -51,6 +51,6 @@ SPEC CHECKSUMS:
   Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
   Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
-  TreasureData-tvOS-SDK: 2ed7df548cada40f8e2dc82de97cfc2753b2e15b
+  TreasureData-tvOS-SDK: 18c6a68471e6df592ed5c50bf2c07507ee6e3b77
 
 COCOAPODS: 0.39.0
