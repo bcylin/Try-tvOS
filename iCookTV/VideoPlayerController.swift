@@ -26,6 +26,8 @@
 
 import UIKit
 import AVKit
+import Alamofire
+import Freddy
 
 class VideoPlayerController: AVPlayerViewController, Trackable {
 
@@ -73,8 +75,29 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
   override func viewDidLoad() {
     super.viewDidLoad()
     loadingIndicator.startAnimating()
-    video?.convertToPlayerItemWithCover(coverImage) { [weak self] in
-      self?.setPlayerItem($0)
+
+    guard let id = video?.id else {
+      setPlayerItem(nil)
+      return
+    }
+
+    let url = iCookTVKeys.baseAPIURL + "videos/\(id).json"
+    Alamofire.request(.GET, url).responseJSON { [weak self] response in
+      guard let data = response.data else {
+        self?.setPlayerItem(nil)
+        return
+      }
+
+      do {
+        let json = try JSON(data: data)
+        let video = try Video(json: json["data"] ?? nil)
+        video.convertToPlayerItemWithCover(self?.coverImage) { [weak self] in
+          self?.setPlayerItem($0)
+        }
+      } catch {
+        Debug.print(error)
+        self?.setPlayerItem(nil)
+      }
     }
   }
 
