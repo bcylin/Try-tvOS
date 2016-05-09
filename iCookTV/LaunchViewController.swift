@@ -37,18 +37,27 @@ class LaunchViewController: UIViewController {
     return _imageView
   }()
 
-  private lazy var taglineLabel: UILabel = {
-    let _label = UILabel()
-    _label.font = UIFont.tvFontForTagline()
-    _label.textColor = UIColor.tvTaglineColor()
-    _label.text = "Tagline".localizedString
-    _label.textAlignment = .Center
-    _label.numberOfLines = 0
-    _label.alpha = 0
-    return _label
+  private lazy var activityIndicator: UIActivityIndicatorView = {
+    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    _indicator.color = UIColor.Palette.GreyishBrown
+    _indicator.hidesWhenStopped = true
+    return _indicator
   }()
 
-  private var taglineConstraint: NSLayoutConstraint?
+  private lazy var upperTaglineLabel: UILabel = {
+    let _upper = UILabel.taglineLabel()
+    _upper.text = "Upper tagline".localizedString
+    return _upper
+  }()
+
+  private lazy var lowerTaglineLabel: UILabel = {
+    let _lower = UILabel.taglineLabel()
+    _lower.text = "Lower tagline".localizedString
+    return _lower
+  }()
+
+  private var upperTaglineConstraint: NSLayoutConstraint?
+  private var lowerTaglineConstraint: NSLayoutConstraint?
 
   // MARK: - UIViewController
 
@@ -56,31 +65,51 @@ class LaunchViewController: UIViewController {
     super.loadView()
     view.backgroundColor = UIColor.tvBackgroundColor()
     view.addSubview(loadingImageView)
-    view.addSubview(taglineLabel)
+    view.addSubview(activityIndicator)
+    view.addSubview(upperTaglineLabel)
+    view.addSubview(lowerTaglineLabel)
 
     loadingImageView.translatesAutoresizingMaskIntoConstraints = false
-    taglineLabel.translatesAutoresizingMaskIntoConstraints = false
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    upperTaglineLabel.translatesAutoresizingMaskIntoConstraints = false
+    lowerTaglineLabel.translatesAutoresizingMaskIntoConstraints = false
 
     loadingImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-    loadingImageView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -45).active = true
+    loadingImageView.bottomAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: 50).active = true
 
-    taglineConstraint = taglineLabel.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 100)
-    taglineConstraint?.active = true
-    taglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    activityIndicator.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor, constant: 5).active = true
+    activityIndicator.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 60).active = true
+
+    upperTaglineConstraint = upperTaglineLabel.topAnchor.constraintEqualToAnchor(activityIndicator.bottomAnchor, constant: 100)
+    upperTaglineConstraint?.active = true
+    upperTaglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+
+    lowerTaglineConstraint = lowerTaglineLabel.topAnchor.constraintEqualToAnchor(upperTaglineLabel.bottomAnchor, constant: 100)
+    lowerTaglineConstraint?.active = true
+    lowerTaglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    activityIndicator.startAnimating()
     fetchCategories()
   }
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    UIView.animateWithDuration(0.5) {
-      self.taglineLabel.alpha = 1
-      self.taglineConstraint?.constant = 50
-      self.view.layoutIfNeeded()
-    }
+
+    UIView.animateKeyframesWithDuration(0.9, delay: 0, options: [], animations: {
+      UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.6) {
+        self.upperTaglineLabel.alpha = 1
+        self.upperTaglineConstraint?.constant = 40
+        self.view.layoutIfNeeded()
+      }
+      UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.7) {
+        self.lowerTaglineLabel.alpha = 1
+        self.lowerTaglineConstraint?.constant = 0
+        self.view.layoutIfNeeded()
+      }
+    }, completion: nil)
   }
 
   // MARK: - Private Methods
@@ -101,6 +130,24 @@ class LaunchViewController: UIViewController {
         self?.showAlert(error, retry: self?.fetchCategories)
       }
     }
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension UILabel {
+
+  private class func taglineLabel() -> UILabel {
+    let label = UILabel()
+    label.font = UIFont.tvFontForTagline()
+    label.textColor = UIColor.tvTaglineColor()
+    label.textAlignment = .Center
+    label.numberOfLines = 0
+    label.alpha = 0
+    return label
   }
 
 }

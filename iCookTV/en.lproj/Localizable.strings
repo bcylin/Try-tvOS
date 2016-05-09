@@ -6,6 +6,8 @@
   Copyright © 2016 Polydice, Inc. All rights reserved.
 */
 
-"Tagline" = "icook.tw";
+"Upper tagline" = "icook.tw";
+
+"Lower tagline" = "";
 
 "\nContact hi@icook.tw for support." = "Please contact us at hi@icook.tw if this issue keeps happening.";
