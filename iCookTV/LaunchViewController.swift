@@ -98,7 +98,8 @@ class LaunchViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    UIView.animateKeyframesWithDuration(0.9, delay: 0, options: [], animations: {
+    UIView.animateKeyframesWithDuration(0.9, delay: 0, options: [],
+                                        animations: {
       UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.6) {
         self.upperTaglineLabel.alpha = 1
         self.upperTaglineConstraint?.constant = 40
