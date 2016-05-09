@@ -61,7 +61,9 @@ extension Video {
     _description.key = AVMetadataCommonKeyDescription
     _description.keySpace = AVMetadataKeySpaceCommon
     _description.locale = NSLocale.currentLocale()
-    _description.value = (subtitle == nil ? "" : subtitle! + "\n") + (description ?? "")
+    _description.value = (description ?? "")
+      .componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+      .joinWithSeparator("")
     return _description
   }
 
