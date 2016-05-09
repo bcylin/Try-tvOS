@@ -52,13 +52,14 @@ struct Video: JSONDecodable, JSONEncodable {
   // MARK: - JSONDecodable
 
   init(json value: JSON) throws {
+    let nullable: JSON.SubscriptingOptions = [.NullBecomesNil, .MissingKeyBecomesNil]
     id = try value.string("id")
     title = try value.string("attributes", "title")
-    subtitle = try value.string("attributes", "subtitle", ifNull: true)
-    description = try value.string("attributes", "description", ifNull: true)
+    subtitle = try value.string("attributes", "subtitle", alongPath: nullable)
+    description = try value.string("attributes", "description", alongPath: nullable)
     length = try value.int("attributes", "length", or: 0)
     youtube = try value.string("attributes", "embed-url")
-    source = try value.string("attributes", "video-url", ifNull: true)
+    source = try value.string("attributes", "video-url", alongPath: nullable)
     cover = try value.string("attributes", "cover-url")
   }
 
