@@ -48,12 +48,19 @@ enum Tracker {
     }
   }
 
-  static func track(error: ErrorType?) {
+  static func track(error: ErrorType?, file: String = #file, function: String = #function, line: Int = #line) {
+    guard let error = error else {
+      return
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-      let description = (error as? NSError)?.localizedDescription ?? "\(error)"
+      let description = String(error)
       Debug.print(description)
       Answers.logCustomEventWithName("Error", customAttributes: ["Description": description])
-      TreasureData.sharedInstance().addEvent(["description": description], database: name, table: "errors")
+      TreasureData.sharedInstance().addEvent([
+        "description": description,
+        "function": "\(file.typeName).\(function)",
+        "line": line
+      ], database: name, table: "errors")
     }
   }
 

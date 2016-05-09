@@ -95,7 +95,7 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
           self?.setPlayerItem($0)
         }
       } catch {
-        Debug.print(error)
+        Tracker.track(error)
         self?.setPlayerItem(nil)
       }
     }

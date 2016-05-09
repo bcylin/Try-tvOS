@@ -54,7 +54,7 @@ class HistoryViewController: VideosViewController {
           self.isLoading = false
         }
       } catch {
-        Debug.print(error)
+        Tracker.track(error)
         // Remove the malformed cache.
         HistoryManager.deleteCache() { _ in
           self.isLoading = false

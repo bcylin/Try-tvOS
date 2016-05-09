@@ -49,17 +49,17 @@ struct Debug {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-private extension String {
+extension String {
 
   var typeName: String {
     return lastPathComponent.stringByDeletingPathExtension
   }
 
-  var lastPathComponent: String {
+  private var lastPathComponent: String {
     return (self as NSString).lastPathComponent
   }
 
-  var stringByDeletingPathExtension: String {
+  private var stringByDeletingPathExtension: String {
     return (self as NSString).stringByDeletingPathExtension
   }
 
