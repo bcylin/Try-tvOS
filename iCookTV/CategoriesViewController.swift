@@ -29,7 +29,8 @@ import UIKit
 class CategoriesViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
-  UICollectionViewDelegateFlowLayout {
+  UICollectionViewDelegateFlowLayout,
+  Trackable {
 
   private var categories = [Category]() {
     didSet {
@@ -86,11 +87,6 @@ class CategoriesViewController: BlurBackgroundViewController,
     )
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
   // MARK: - UIFocusEnvironment
 
   override var preferredFocusedView: UIView? {
@@ -122,6 +118,12 @@ class CategoriesViewController: BlurBackgroundViewController,
     if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image where cell.hasDisplayedCover {
       self.backgroundImage = cover
     }
+  }
+
+  // MARK: - Trackable
+
+  var pageView: PageView? {
+    return PageView(name: "Categories")
   }
 
   // MARK: - NSNotification Callbacks

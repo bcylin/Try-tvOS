@@ -27,7 +27,7 @@
 import UIKit
 import AVKit
 
-class VideoPlayerController: AVPlayerViewController {
+class VideoPlayerController: AVPlayerViewController, Trackable {
 
   private var video: Video?
   private var coverImage: UIImage?
@@ -39,6 +39,10 @@ class VideoPlayerController: AVPlayerViewController {
     return _indicator
   }()
 
+  private let playerItemNotifications = [
+    AVPlayerItemDidPlayToEndTimeNotification
+  ]
+
   // MARK: - Initialization
 
   convenience init(video: Video, coverImage image: UIImage? = nil) {
@@ -48,11 +52,9 @@ class VideoPlayerController: AVPlayerViewController {
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(
-      self,
-      name: AVPlayerItemDidPlayToEndTimeNotification,
-      object: nil
-    )
+    for notification in playerItemNotifications {
+      NSNotificationCenter.defaultCenter().removeObserver(self, name: notification, object: nil)
+    }
   }
 
   // MARK: - UIViewController
@@ -79,12 +81,41 @@ class VideoPlayerController: AVPlayerViewController {
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     player?.pause()
+
+    if let playerItem = player?.currentItem {
+      let duration: NSTimeInterval = CMTimeGetSeconds(playerItem.duration)
+      let currentTime: NSTimeInterval = CMTimeGetSeconds(playerItem.currentTime())
+      let fraction = currentTime / duration
+
+      Tracker.track(Event(name: "Played Video", details: [
+        TrackableKey.videoID: video?.id ?? "",
+        TrackableKey.videoTitle: video?.title ?? "",
+        TrackableKey.currentTime: currentTime,
+        TrackableKey.duration: duration,
+        TrackableKey.fraction: fraction,
+        TrackableKey.percentage: fraction * 100
+      ]))
+    }
+  }
+
+  // MARK: - Trackable
+
+  var pageView: PageView? {
+    return PageView(name: "Player", details: [
+      TrackableKey.videoID: video?.id ?? "",
+      TrackableKey.videoTitle: video?.title ?? ""
+    ])
   }
 
   // MARK: - NSNotification Callbacks
 
-  @objc private func handlePlayerItemDidPlayToEndTime(notification: NSNotification) {
-    dismiss()
+  @objc private func handlePlayerItemNotification(notification: NSNotification) {
+    switch notification.name {
+    case AVPlayerItemDidPlayToEndTimeNotification:
+      dismiss()
+    default:
+      break
+    }
   }
 
   // MARK: - Private Methods
@@ -111,15 +142,25 @@ class VideoPlayerController: AVPlayerViewController {
       return
     }
 
-    NSNotificationCenter.defaultCenter().addObserver(
-      self,
-      selector: #selector(handlePlayerItemDidPlayToEndTime(_:)),
-      name: AVPlayerItemDidPlayToEndTimeNotification,
-      object: playerItem
-    )
+    for notification in playerItemNotifications {
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: .handlePlayerItemNotification,
+        name: notification,
+        object: playerItem
+      )
+    }
 
     player = AVPlayer(playerItem: playerItem)
     player?.play()
   }
 
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+private extension Selector {
+  static let handlePlayerItemNotification = #selector(VideoPlayerController.handlePlayerItemNotification(_:))
 }

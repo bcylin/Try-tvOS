@@ -1,9 +1,9 @@
 //
-//  UIViewController+Alert.swift
-//  TryTVOS
+//  TrackableNavigationController.swift
+//  iCookTV
 //
-//  Created by Ben on 12/04/2016.
-//  Copyright © 2016 bcylin.
+//  Created by Ben on 02/05/2016.
+//  Copyright © 2016 Polydice, Inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,20 +26,41 @@
 
 import UIKit
 
-extension UIViewController {
+class TrackableNavigationController: UINavigationController {
 
-  func showAlert(error: ErrorType?, retry: (() -> Void)? = nil) {
-    Tracker.track(error)
+  // MARK: - UIViewController
 
-    let alert = UIAlertController(
-      title: "Error\n".localizedString,
-      message: "\nContact hi@icook.tw for support.".localizedString,
-      preferredStyle: .Alert
-    )
-    alert.addAction(UIAlertAction(title: "Retry".localizedString, style: .Default) { _ in
-      retry?()
-    })
-    presentViewController(alert, animated: true, completion: nil)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setNavigationBarHidden(true, animated: false)
+
+    // Track the root view controller.
+    for controller in viewControllers {
+      track(controller as? Trackable)
+    }
+  }
+
+  // MARK: - UINavigationController
+
+  override func pushViewController(viewController: UIViewController, animated: Bool) {
+    super.pushViewController(viewController, animated: animated)
+    track(viewController as? Trackable)
+  }
+
+  override func setViewControllers(viewControllers: [UIViewController], animated: Bool) {
+    super.setViewControllers(viewControllers, animated: animated)
+    for controller in viewControllers {
+      track(controller as? Trackable)
+    }
+  }
+
+  // MARK: - Private Methods
+
+  private func track(navigation: Trackable?) {
+    guard let pageView = navigation?.pageView else {
+      return
+    }
+    Tracker.track(pageView)
   }
 
 }

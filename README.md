@@ -18,9 +18,9 @@ bundle install
 bundle exec pod install
 ```
 
-### Required Keys
+### API
 
-`pod install` will prompt for `BaseAPIURL`, which is required to run the app:
+`pod install` will prompt for the `BaseAPIURL` and other keys, which are required to run the app:
 
 ```
 CocoaPods-Keys has detected a keys mismatch for your setup.
@@ -29,6 +29,22 @@ What is the key for BaseAPIURL
 ```
 
 > TBD: API details are hidden for now due to proprietary reasons.
+
+### Required Keys
+
+* CrashlyticsAPIKey
+* TreasureDataAPIKey
+
+Managed by CocoaPods-Keys, they can be real API keys or any arbitrary strings.
+
+### Required Files
+
+```
+./keys/fabric.apikey
+./keys/fabric.buildsecret
+```
+
+Required by the Fabric script. The file contents can also be arbitrary texts.
 
 ### Ignored
 

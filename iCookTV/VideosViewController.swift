@@ -33,7 +33,8 @@ class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
-  OverlayEnabled {
+  OverlayEnabled,
+  Trackable {
 
   var videos = [Video]() {
     didSet {
@@ -41,6 +42,16 @@ class VideosViewController: BlurBackgroundViewController,
       setOverlayViewHidden(!videos.isEmpty, animated: true)
     }
   }
+
+  var pagingTracking: Event? {
+    return Event(name: "Fetched Page", details: [
+      TrackableKey.categoryID: categoryID,
+      TrackableKey.categoryTitle: title ?? "",
+      TrackableKey.page: String(currentPage)
+    ])
+  }
+
+  // MARK: - Private Properties
 
   private var categoryID = ""
 
@@ -62,6 +73,12 @@ class VideosViewController: BlurBackgroundViewController,
   private weak var currentRequest: Request?
   private let paginationQueue = dispatch_queue_create("io.github.bcylin.paginationQueue", DISPATCH_QUEUE_SERIAL)
   private var hasNextPage = true
+
+  private var currentPage: Int {
+    return Int(videos.count / self.dynamicType.pageSize)
+  }
+
+  private static let pageSize = 20
 
   // MARK: - Initialization
 
@@ -103,9 +120,15 @@ class VideosViewController: BlurBackgroundViewController,
     fetchNextPage()
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    guard let stack = navigationController?.viewControllers else {
+      return
+    }
+    // Track the event when popped off the navigation stack.
+    if let event = pagingTracking where !stack.contains(self) {
+      Tracker.track(event)
+    }
   }
 
   // MARK: - UIFocusEnvironment
@@ -167,9 +190,8 @@ class VideosViewController: BlurBackgroundViewController,
     let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
 
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
-    presentViewController(controller, animated: true) { [weak self] in
-      self?.saveToHistory(video, atIndex: indexPath.row)
-    }
+    navigationController?.pushViewController(controller, animated: true)
+    saveToHistory(video, atIndex: indexPath.row)
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
@@ -197,6 +219,15 @@ class VideosViewController: BlurBackgroundViewController,
     ]
   }
 
+  // MARK: - Trackable
+
+  var pageView: PageView?{
+    return PageView(name: "Videos", details: [
+      TrackableKey.categoryID: categoryID,
+      TrackableKey.categoryTitle: title ?? ""
+    ])
+  }
+
   // MARK: - UIResponder Callbacks
 
   @objc private func showHistory(sender: UIButton) {
@@ -214,8 +245,8 @@ class VideosViewController: BlurBackgroundViewController,
 
     let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
     let parameters = [
-      "page[size]": 20,
-      "page[number]": Int(videos.count / 20) + 1
+      "page[size]": self.dynamicType.pageSize,
+      "page[number]": currentPage + 1
     ]
 
     currentRequest = Alamofire.request(.GET, url, parameters: parameters).responseJSON { [weak self] response in

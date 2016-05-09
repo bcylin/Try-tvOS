@@ -49,7 +49,7 @@ class HistoryViewController: VideosViewController {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       do {
         let history = try HistoryManager.history.map(Video.init)
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_sync(dispatch_get_main_queue()) {
           self.videos = history
           self.isLoading = false
         }
@@ -60,6 +60,9 @@ class HistoryViewController: VideosViewController {
           self.isLoading = false
         }
       }
+      Tracker.track(PageView(name: "History", details: [
+        TrackableKey.numberOfItems: self.videos.count
+      ]))
     }
   }
 
@@ -71,6 +74,10 @@ class HistoryViewController: VideosViewController {
   }
 
   // MARK: - VideosViewController
+
+  override var pagingTracking: Event? {
+    return nil
+  }
 
   override func saveToHistory(video: Video, atIndex index: Int) {
     super.saveToHistory(video, atIndex: index)
@@ -97,6 +104,13 @@ class HistoryViewController: VideosViewController {
 
   override var overlayView: UIView {
     return emptyStateOverlay
+  }
+
+  // MARK: - Trackable
+
+  override var pageView: PageView? {
+    // Track History PV when the number of items is retrived.
+    return nil
   }
 
   // MARK: - UIResponder Callbacks
