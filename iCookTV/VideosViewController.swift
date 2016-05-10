@@ -252,7 +252,7 @@ class VideosViewController: BlurBackgroundViewController,
     currentRequest = Alamofire.request(.GET, url, parameters: parameters).responseJSON { [weak self] response in
       self?.isLoading = false
 
-      guard let data = response.data else {
+      guard let data = response.data where response.result.error == nil else {
         self?.showAlert(response.result.error)
         return
       }

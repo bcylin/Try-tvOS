@@ -83,8 +83,9 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
     let url = iCookTVKeys.baseAPIURL + "videos/\(id).json"
     Alamofire.request(.GET, url).responseJSON { [weak self] response in
-      guard let data = response.data else {
+      guard let data = response.data where response.result.error == nil else {
         self?.setPlayerItem(nil)
+        Tracker.track(response.result.error)
         return
       }
 
