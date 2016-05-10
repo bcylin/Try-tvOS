@@ -116,7 +116,6 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
         TrackableKey.videoTitle: video?.title ?? "",
         TrackableKey.currentTime: currentTime,
         TrackableKey.duration: duration,
-        TrackableKey.fraction: fraction,
         TrackableKey.percentage: fraction * 100
       ]))
     }
