@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/polydice/iCook-tvOS.svg)](https://travis-ci.org/polydice/iCook-tvOS)
 ![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg)
 
-A demo tvOS app that plays YouTube videos.
+A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
 ## Setup
 
