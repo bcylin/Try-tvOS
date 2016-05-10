@@ -30,13 +30,17 @@ import TreasureData_tvOS_SDK
 
 enum Tracker {
 
-  private static let name = "icook_tvos"
+  static let defaultDatabase = "icook_tvos"
+  static let sessionsTable = "sessions"
 
   static func track(pageView: PageView) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       Debug.print(pageView)
       Answers.logCustomEventWithName(pageView.name, customAttributes: pageView.details)
-      TreasureData.sharedInstance().addEvent(pageView.attributes, database: name, table: "screens")
+      TreasureData.sharedInstance().addEvent(pageView.attributes, database: defaultDatabase, table: "screens")
+      #if DEBUG
+        TreasureData.sharedInstance().uploadEvents()
+      #endif
     }
   }
 
@@ -44,7 +48,10 @@ enum Tracker {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       Debug.print(event)
       Answers.logCustomEventWithName(event.name, customAttributes: event.details)
-      TreasureData.sharedInstance().addEvent(event.attributes, database: name, table: "events")
+      TreasureData.sharedInstance().addEvent(event.attributes, database: defaultDatabase, table: "events")
+      #if DEBUG
+        TreasureData.sharedInstance().uploadEvents()
+      #endif
     }
   }
 
@@ -60,7 +67,10 @@ enum Tracker {
         "description": description,
         "function": "\(file.typeName).\(function)",
         "line": line
-      ], database: name, table: "errors")
+      ], database: defaultDatabase, table: "errors")
+      #if DEBUG
+        TreasureData.sharedInstance().uploadEvents()
+      #endif
     }
   }
 
