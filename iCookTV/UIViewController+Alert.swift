@@ -33,7 +33,7 @@ extension UIViewController {
 
     let alert = UIAlertController(
       title: "Error\n".localizedString,
-      message: "\nContact hi@icook.tw for support.".localizedString,
+      message: "Contact hi@icook.tw for support.".localizedString,
       preferredStyle: .Alert
     )
     alert.addAction(UIAlertAction(title: "Retry".localizedString, style: .Default) { _ in
