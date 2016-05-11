@@ -6,7 +6,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 workspace "iCookTV"
-xcodeproj "iCookTV"
+project "iCookTV"
 
 target :iCookTV do
   pod "Alamofire"
@@ -17,12 +17,13 @@ target :iCookTV do
   pod "Hue", git: "https://github.com/hyperoslo/Hue.git", commit: "89ae5e1"
   pod "Kingfisher"
   pod "TreasureData-tvOS-SDK", "0.1.14"
+
+  target :iCookTVTests do
+    pod "Nimble"
+    pod "Quick"
+  end
 end
 
-target :iCookTVTests do
-  pod "Nimble"
-  pod "Quick"
-end
 
 plugin "cocoapods-keys", {
   project: "iCookTV",
