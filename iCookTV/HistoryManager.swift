@@ -51,7 +51,7 @@ struct HistoryManager {
       do {
         return try records.map { try JSON(data: $0) }
       } catch {
-        Debug.print(error)
+        Tracker.track(error)
         return [JSON]()
       }
     } else {
@@ -88,7 +88,7 @@ struct HistoryManager {
         let data = try records.map { try $0.serialize() } as NSArray
         data.writeToFile(path, atomically: true)
       } catch {
-        Debug.print(error)
+        Tracker.track(error)
       }
     }
   }
@@ -107,7 +107,7 @@ struct HistoryManager {
             completion?(success: true)
           }
         } catch {
-          Debug.print(error)
+          Tracker.track(error)
           dispatch_async(dispatch_get_main_queue()) {
             completion?(success: false)
           }

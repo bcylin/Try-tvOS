@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
+    TreasureData.sharedInstance().endSession(Tracker.sessionsTable)
+
     backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
       self?.endBackgroundTask(inApplication: application)
     }
@@ -78,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     TreasureData.sharedInstance().enableAutoAppendModelInformation()
     TreasureData.sharedInstance().enableAutoAppendAppInformation()
     TreasureData.sharedInstance().enableAutoAppendLocaleInformation()
+
+    TreasureData.sharedInstance().defaultDatabase = Tracker.defaultDatabase
+    TreasureData.sharedInstance().startSession(Tracker.sessionsTable)
   }
 
 }

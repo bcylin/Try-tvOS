@@ -26,6 +26,8 @@
 
 import UIKit
 import AVKit
+import Alamofire
+import Freddy
 
 class VideoPlayerController: AVPlayerViewController, Trackable {
 
@@ -73,8 +75,30 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
   override func viewDidLoad() {
     super.viewDidLoad()
     loadingIndicator.startAnimating()
-    video?.convertToPlayerItemWithCover(coverImage) { [weak self] in
-      self?.setPlayerItem($0)
+
+    guard let id = video?.id else {
+      setPlayerItem(nil)
+      return
+    }
+
+    let url = iCookTVKeys.baseAPIURL + "videos/\(id).json"
+    Alamofire.request(.GET, url).responseJSON { [weak self] response in
+      guard let data = response.data where response.result.error == nil else {
+        self?.setPlayerItem(nil)
+        Tracker.track(response.result.error)
+        return
+      }
+
+      do {
+        let json = try JSON(data: data)
+        let video = try Video(json: json["data"] ?? nil)
+        video.convertToPlayerItemWithCover(self?.coverImage) { [weak self] in
+          self?.setPlayerItem($0)
+        }
+      } catch {
+        Tracker.track(error)
+        self?.setPlayerItem(nil)
+      }
     }
   }
 
@@ -92,7 +116,6 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
         TrackableKey.videoTitle: video?.title ?? "",
         TrackableKey.currentTime: currentTime,
         TrackableKey.duration: duration,
-        TrackableKey.fraction: fraction,
         TrackableKey.percentage: fraction * 100
       ]))
     }
@@ -132,8 +155,8 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
     loadingIndicator.stopAnimating()
 
     guard let playerItem = playerItem else {
-      let message = "There's something wrong with this video.".localizedString +
-                    "\nContact hi@icook.tw for support.".localizedString
+      let message = "There's something wrong with this video.".localizedString + "\n" +
+                    "Contact hi@icook.tw for support.".localizedString
       let alert = UIAlertController(title: "Error\n".localizedString, message: message, preferredStyle: .Alert)
       alert.addAction(UIAlertAction(title: "OK".localizedString, style: .Default) { [weak self] _ in
         self?.dismiss()

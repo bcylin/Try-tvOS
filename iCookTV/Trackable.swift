@@ -48,6 +48,8 @@ extension TrackableAttributes where Self: CustomStringConvertible {
   var attributes: [String: AnyObject] {
     var attributes = details
     attributes["name"] = name
+    attributes[TrackableKey.categoryTitle] = nil
+    attributes[TrackableKey.videoTitle] = nil
     return attributes
   }
 }
@@ -81,6 +83,5 @@ struct TrackableKey {
   static let page = "page"
   static let currentTime = "current_time"
   static let duration = "duration"
-  static let fraction = "fraction"
   static let percentage = "percentage"
 }

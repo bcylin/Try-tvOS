@@ -54,7 +54,7 @@ class HistoryViewController: VideosViewController {
           self.isLoading = false
         }
       } catch {
-        Debug.print(error)
+        Tracker.track(error)
         // Remove the malformed cache.
         HistoryManager.deleteCache() { _ in
           self.isLoading = false
@@ -79,19 +79,24 @@ class HistoryViewController: VideosViewController {
     return nil
   }
 
-  override func saveToHistory(video: Video, atIndex index: Int) {
-    super.saveToHistory(video, atIndex: index)
-    // Reorder current displayed contents
-    var reordered = self.videos
-    reordered.removeAtIndex(index)
-    reordered.insert(video, atIndex: 0)
-    self.videos = reordered
-  }
-
   // MARK: - UICollectionViewDelegate
 
   override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
     // History doesn't need pagination.
+  }
+
+  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    super.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+
+    let video = videos[indexPath.row]
+    var reordered = videos
+    reordered.removeAtIndex(indexPath.row)
+    reordered.insert(video, atIndex: 0)
+
+    // Reorder current displayed contents after the video player is presented.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+      self.videos = reordered
+    }
   }
 
   // MARK: - OverlayEnabled
