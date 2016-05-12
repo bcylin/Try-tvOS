@@ -5,6 +5,8 @@
 
 A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
+<img src="https://d13yacurqjgara.cloudfront.net/users/342052/screenshots/2705425/test-2.1.gif" width= 400px>
+
 ## Setup
 
 Install required dependencies using [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
