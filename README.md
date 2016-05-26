@@ -22,13 +22,15 @@ bundle exec pod install
 
 ### API
 
-`pod install` will prompt for the `BaseAPIURL` and other keys, which are required to run the app:
+`pod install` will prompt for the required configuration to run the app:
 
 ```
 CocoaPods-Keys has detected a keys mismatch for your setup.
 What is the key for BaseAPIURL
 >
 ```
+
+Input `https://polydice.com/iCook-tvOS/demo/` for `BaseAPIURL`.
 
 > TBD: API details are hidden for now due to proprietary reasons.
 
