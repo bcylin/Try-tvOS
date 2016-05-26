@@ -46,13 +46,13 @@ class LaunchViewController: UIViewController {
 
   private lazy var upperTaglineLabel: UILabel = {
     let _upper = UILabel.taglineLabel()
-    _upper.text = "Upper tagline".localizedString
+    _upper.text = "launch-screen-upper-tagline".localizedString
     return _upper
   }()
 
   private lazy var lowerTaglineLabel: UILabel = {
     let _lower = UILabel.taglineLabel()
-    _lower.text = "Lower tagline".localizedString
+    _lower.text = "launch-screen-lower-tagline".localizedString
     return _lower
   }()
 

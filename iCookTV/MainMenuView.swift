@@ -36,7 +36,7 @@ class MainMenuView: UIView {
     let _title = UILabel()
     _title.font = UIFont.tvFontForLogo()
     _title.textColor = UIColor.tvHeaderTitleColor()
-    _title.text = "iCook TV".localizedString
+    _title.text = "icook-tv".localizedString
     return _title
   }()
 
