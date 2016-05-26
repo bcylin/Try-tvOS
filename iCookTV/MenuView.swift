@@ -29,7 +29,7 @@ import UIKit
 /// A customized view with a layout of `H:|[focusGuide][button]-|`.
 class MenuView: UIView {
 
-  private let imageView = UIImageView(image: UIImage(named: "icook-tv-logo"))
+  private let imageView = UIImageView(image: R.image.icookTvLogo())
 
   private lazy var titleLabel: UILabel = {
     let _label = UILabel()

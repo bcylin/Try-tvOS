@@ -32,7 +32,7 @@ class LaunchViewController: UIViewController {
 
   private lazy var loadingImageView: UIImageView = {
     let _imageView = UIImageView()
-    _imageView.image = UIImage(named: "icook-tv-cat")
+    _imageView.image = R.image.icookTvCat()
     _imageView.contentMode = .ScaleAspectFill
     return _imageView
   }()
