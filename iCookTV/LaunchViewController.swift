@@ -30,9 +30,9 @@ import Freddy
 
 class LaunchViewController: UIViewController {
 
-  private lazy var loadingImageView: UIImageView = {
+  private lazy var launchImageView: UIImageView = {
     let _imageView = UIImageView()
-    _imageView.image = R.image.icookTvCat()
+    _imageView.image = R.image.launchImage()
     _imageView.contentMode = .ScaleAspectFill
     return _imageView
   }()
@@ -64,21 +64,20 @@ class LaunchViewController: UIViewController {
   override func loadView() {
     super.loadView()
     view.backgroundColor = UIColor.tvBackgroundColor()
-    view.addSubview(loadingImageView)
+    view.addSubview(launchImageView)
     view.addSubview(activityIndicator)
     view.addSubview(upperTaglineLabel)
     view.addSubview(lowerTaglineLabel)
 
-    loadingImageView.translatesAutoresizingMaskIntoConstraints = false
+    launchImageView.frame = view.bounds
+    launchImageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
     upperTaglineLabel.translatesAutoresizingMaskIntoConstraints = false
     lowerTaglineLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    loadingImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-    loadingImageView.bottomAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: 50).active = true
-
     activityIndicator.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor, constant: 5).active = true
-    activityIndicator.topAnchor.constraintEqualToAnchor(loadingImageView.bottomAnchor, constant: 60).active = true
+    activityIndicator.topAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: 110).active = true
 
     upperTaglineConstraint = upperTaglineLabel.topAnchor.constraintEqualToAnchor(activityIndicator.bottomAnchor, constant: 100)
     upperTaglineConstraint?.active = true
