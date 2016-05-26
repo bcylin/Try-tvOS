@@ -39,7 +39,7 @@ class EmptyStateView: UIView {
     let _label = UILabel()
     _label.font = UIFont.tvFontForTagline()
     _label.textColor = UIColor.tvTaglineColor()
-    _label.text = "no-video-found".localizedString
+    _label.text = R.string.localizable.noVideoFound()
     _label.textAlignment = .Center
     return _label
   }()

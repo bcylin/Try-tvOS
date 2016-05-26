@@ -32,14 +32,14 @@ class HistoryViewController: VideosViewController {
 
   override var title: String? {
     get {
-      return "history".localizedString
+      return R.string.localizable.history()
     }
     set {}
   }
 
   override func loadView() {
     super.loadView()
-    dropdownMenuView.button.setTitle("home".localizedString, forState: .Normal)
+    dropdownMenuView.button.setTitle(R.string.localizable.home(), forState: .Normal)
     dropdownMenuView.button.addTarget(self, action: .backToHome, forControlEvents: .PrimaryActionTriggered)
   }
 
@@ -103,7 +103,7 @@ class HistoryViewController: VideosViewController {
 
   private lazy var emptyStateOverlay: UIView = {
     let _empty = EmptyStateView()
-    _empty.textLabel.text = "no-history-found".localizedString
+    _empty.textLabel.text = R.string.localizable.noHistoryFound()
     return _empty
   }()
 

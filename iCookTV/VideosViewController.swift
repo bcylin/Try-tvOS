@@ -97,7 +97,7 @@ class VideosViewController: BlurBackgroundViewController,
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
 
-    dropdownMenuView.button.setTitle("history".localizedString, forState: .Normal)
+    dropdownMenuView.button.setTitle(R.string.localizable.history(), forState: .Normal)
     dropdownMenuView.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
 
     if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
