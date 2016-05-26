@@ -59,6 +59,15 @@ class LaunchViewController: UIViewController {
   private var upperTaglineConstraint: NSLayoutConstraint?
   private var lowerTaglineConstraint: NSLayoutConstraint?
 
+  private var isAnimating = false
+  private let semaphore = dispatch_semaphore_create(0)
+
+  private enum Animation {
+    static let duration = NSTimeInterval(0.9)
+    static let first = (begin: Double(0), duration: Double(0.6))
+    static let second = (begin: Double(0.2), duration: Double(0.7))
+  }
+
   // MARK: - UIViewController
 
   override func loadView() {
@@ -97,19 +106,22 @@ class LaunchViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    UIView.animateKeyframesWithDuration(0.9, delay: 0, options: [],
-                                        animations: {
-      UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.6) {
+    isAnimating = true
+    UIView.animateKeyframesWithDuration(Animation.duration, delay: 0, options: [], animations: {
+      UIView.addKeyframeWithRelativeStartTime(Animation.first.begin, relativeDuration: Animation.first.duration) {
         self.upperTaglineLabel.alpha = 1
         self.upperTaglineConstraint?.constant = 40
         self.view.layoutIfNeeded()
       }
-      UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.7) {
+      UIView.addKeyframeWithRelativeStartTime(Animation.second.begin, relativeDuration: Animation.second.duration) {
         self.lowerTaglineLabel.alpha = 1
         self.lowerTaglineConstraint?.constant = 0
         self.view.layoutIfNeeded()
       }
-    }, completion: nil)
+    }) { _ in
+      dispatch_semaphore_signal(self.semaphore)
+      self.isAnimating = false
+    }
   }
 
   // MARK: - Private Methods
@@ -125,7 +137,19 @@ class LaunchViewController: UIViewController {
         Debug.print(response.result.value)
         let json = try JSON(data: data)
         let categories = try json.array("data").map(Category.init)
-        self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
+        let showCategories: () -> Void = {
+          self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
+        }
+
+        if let this = self where this.isAnimating {
+          // Wait until the animation finishes
+          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_semaphore_wait(this.semaphore, Animation.duration.dispatchTime)
+            dispatch_async(dispatch_get_main_queue(), showCategories)
+          }
+        } else {
+          showCategories()
+        }
       } catch {
         self?.showAlert(error, retry: self?.fetchCategories)
       }
@@ -140,7 +164,7 @@ class LaunchViewController: UIViewController {
 
 private extension UILabel {
 
-  private class func taglineLabel() -> UILabel {
+  class func taglineLabel() -> UILabel {
     let label = UILabel()
     label.font = UIFont.tvFontForTagline()
     label.textColor = UIColor.tvTaglineColor()
@@ -148,6 +172,15 @@ private extension UILabel {
     label.numberOfLines = 0
     label.alpha = 0
     return label
+  }
+
+}
+
+
+private extension NSTimeInterval {
+
+  var dispatchTime: dispatch_time_t {
+    return dispatch_time(DISPATCH_TIME_NOW, Int64(self * 1e+9))
   }
 
 }
