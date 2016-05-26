@@ -32,14 +32,14 @@ class HistoryViewController: VideosViewController {
 
   override var title: String? {
     get {
-      return "History".localizedString
+      return R.string.localizable.history()
     }
     set {}
   }
 
   override func loadView() {
     super.loadView()
-    dropdownMenuView.button.setTitle("Home".localizedString, forState: .Normal)
+    dropdownMenuView.button.setTitle(R.string.localizable.home(), forState: .Normal)
     dropdownMenuView.button.addTarget(self, action: .backToHome, forControlEvents: .PrimaryActionTriggered)
   }
 
@@ -60,7 +60,7 @@ class HistoryViewController: VideosViewController {
           self.isLoading = false
         }
       }
-      Tracker.track(PageView(name: "History", details: [
+      Tracker.track(PageView(name: "history", details: [
         TrackableKey.numberOfItems: self.videos.count
       ]))
     }
@@ -103,7 +103,7 @@ class HistoryViewController: VideosViewController {
 
   private lazy var emptyStateOverlay: UIView = {
     let _empty = EmptyStateView()
-    _empty.textLabel.text = "You haven't watched any video.".localizedString
+    _empty.textLabel.text = R.string.localizable.noHistoryFound()
     return _empty
   }()
 

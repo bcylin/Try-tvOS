@@ -28,15 +28,15 @@ import UIKit
 
 class MainMenuView: UIView {
 
-  private let frontBanner = UIImageView(image: UIImage(named: "icook-tv-banner-food-front"))
-  private let backBanner = UIImageView(image: UIImage(named: "icook-tv-banner-food-back"))
-  private let imageView = UIImageView(image: UIImage(named: "icook-tv-logo"))
+  private let frontBanner = UIImageView(image: R.image.icookTvBannerFoodFront())
+  private let backBanner = UIImageView(image: R.image.icookTvBannerFoodBack())
+  private let imageView = UIImageView(image: R.image.icookTvLogo())
 
   private(set) lazy var titleLabel: UILabel = {
     let _title = UILabel()
     _title.font = UIFont.tvFontForLogo()
     _title.textColor = UIColor.tvHeaderTitleColor()
-    _title.text = "iCook TV".localizedString
+    _title.text = R.string.localizable.icookTv()
     return _title
   }()
 

@@ -32,7 +32,7 @@ class LaunchViewController: UIViewController {
 
   private lazy var loadingImageView: UIImageView = {
     let _imageView = UIImageView()
-    _imageView.image = UIImage(named: "icook-tv-cat")
+    _imageView.image = R.image.icookTvCat()
     _imageView.contentMode = .ScaleAspectFill
     return _imageView
   }()
@@ -46,13 +46,13 @@ class LaunchViewController: UIViewController {
 
   private lazy var upperTaglineLabel: UILabel = {
     let _upper = UILabel.taglineLabel()
-    _upper.text = "Upper tagline".localizedString
+    _upper.text = R.string.localizable.launchScreenUpperTagline()
     return _upper
   }()
 
   private lazy var lowerTaglineLabel: UILabel = {
     let _lower = UILabel.taglineLabel()
-    _lower.text = "Lower tagline".localizedString
+    _lower.text = R.string.localizable.launchScreenLowerTagline()
     return _lower
   }()
 
