@@ -29,7 +29,7 @@ import UIKit
 extension UIImage {
 
   func image(byReplacingImage image: UIImage, atCorner corner: Grid) -> UIImage! {
-    UIGraphicsBeginImageContextWithOptions(size, true, 0);
+    UIGraphicsBeginImageContextWithOptions(size, true, 0)
 
     let canvas = CGRect(origin: CGPoint.zero, size: size)
     self.drawInRect(canvas)

@@ -221,7 +221,7 @@ class VideosViewController: BlurBackgroundViewController,
 
   // MARK: - Trackable
 
-  var pageView: PageView?{
+  var pageView: PageView? {
     return PageView(name: "Videos", details: [
       TrackableKey.categoryID: categoryID,
       TrackableKey.categoryTitle: title ?? ""
