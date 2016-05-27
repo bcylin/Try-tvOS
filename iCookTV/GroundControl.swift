@@ -30,7 +30,7 @@ import Alamofire
 struct GroundControl {
 
   enum VideoSource {
-    case HLS ,YouTube
+    case HLS, YouTube
   }
 
   /// Returns the URL of default background image URL.

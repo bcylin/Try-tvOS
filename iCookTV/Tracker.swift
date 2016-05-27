@@ -61,7 +61,7 @@ enum Tracker {
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       let description = String(error)
-      Debug.print(description)
+      Debug.print(description, file: file, function: function, line: line)
       Answers.logCustomEventWithName("Error", customAttributes: ["Description": description])
       TreasureData.sharedInstance().addEvent([
         "description": description,
