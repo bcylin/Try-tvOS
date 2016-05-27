@@ -15,7 +15,6 @@
 		B50BFC051CC88FA3004F853D /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC041CC88FA3004F853D /* Debug.swift */; };
 		B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC061CC8AF14004F853D /* HistoryViewController.swift */; };
 		B51A95391CCF1C5100E5ED97 /* iCookTVKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51A95381CCF1C5100E5ED97 /* iCookTVKeys.swift */; };
-		B52DFA9E1CF81A8A005B9D67 /* BreakRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DFA9D1CF81A8A005B9D67 /* BreakRules.swift */; };
 		B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */; };
 		B52EC3B31CB3A02E0072762C /* UIFont+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */; };
 		B53115931CC69E7C00E75292 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115921CC69E7C00E75292 /* HistoryManager.swift */; };
@@ -80,7 +79,6 @@
 		B50BFC041CC88FA3004F853D /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		B50BFC061CC8AF14004F853D /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B51A95381CCF1C5100E5ED97 /* iCookTVKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iCookTVKeys.swift; sourceTree = "<group>"; };
-		B52DFA9D1CF81A8A005B9D67 /* BreakRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakRules.swift; sourceTree = "<group>"; };
 		B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Grid.swift"; sourceTree = "<group>"; };
 		B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TV.swift"; sourceTree = "<group>"; };
 		B53115921CC69E7C00E75292 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 		B5A614FC1CCA0848004A3CD5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B52DFA9D1CF81A8A005B9D67 /* BreakRules.swift */,
 				B5F7BF541BA9C95F00A75099 /* Info.plist */,
 				B5A614F91CCA05B4004A3CD5 /* InfoPlist.strings */,
 				B500D9A81CB94B5D00622198 /* Localizable.strings */,
@@ -561,7 +558,6 @@
 			files = (
 				B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */,
 				B5DA8EE21CB4C2B20068E0E3 /* BlurBackgroundViewController.swift in Sources */,
-				B52DFA9E1CF81A8A005B9D67 /* BreakRules.swift in Sources */,
 				B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */,
 				B56D68E91CA564B00097D5D7 /* Category.swift in Sources */,
 				B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */,
