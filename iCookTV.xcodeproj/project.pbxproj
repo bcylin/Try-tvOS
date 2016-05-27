@@ -319,6 +319,7 @@
 				24D096314DA4D14E4EDFA5EB /* 📦 Check Pods Manifest.lock */,
 				B5BA3B4A1CF6D19800B0A022 /* Run R.swift Script */,
 				B5F7BF441BA9C95F00A75099 /* Sources */,
+				B52DFA9C1CF8006E005B9D67 /* Swiftlint */,
 				B5F7BF451BA9C95F00A75099 /* Frameworks */,
 				B5F7BF461BA9C95F00A75099 /* Resources */,
 				B51A95351CCDFFEB00E5ED97 /* Run Fabric Script */,
@@ -489,6 +490,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$CI\" != true ]; then\n  FABRIC_APIKEY=$(cat ${SRCROOT}/keys/fabric.apikey);\n  FABRIC_BUILDSECRET=$(cat ${SRCROOT}/keys/fabric.buildsecret);\n  ${PODS_ROOT}/Fabric/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET};\nfi";
+		};
+		B52DFA9C1CF8006E005B9D67 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then swiftlint; fi";
 		};
 		B5BA3B4A1CF6D19800B0A022 /* Run R.swift Script */ = {
 			isa = PBXShellScriptBuildPhase;

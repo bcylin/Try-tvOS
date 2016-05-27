@@ -1,0 +1,18 @@
+disabled_rules:
+  - conditional_binding_cascade
+  - force_cast
+  - force_try
+  - line_length
+  - nesting
+type_name:
+  excluded:
+    - iCookTVKeys
+    - iCookTVTests
+variable_name:
+  excluded:
+    - id
+    - URL
+excluded:
+  - Carthage
+  - Pods
+  - iCookTV/R.generated.swift
