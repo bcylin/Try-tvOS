@@ -4,11 +4,10 @@ GEM
     RubyInline (3.12.4)
       ZenTest (~> 4.3)
     ZenTest (4.11.0)
-    activesupport (4.2.6)
+    activesupport (5.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
-      json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
     babosa (1.0.2)
@@ -36,7 +35,7 @@ GEM
       fuzzy_match (~> 2.0.4)
       nap (~> 1.0)
     cocoapods-deintegrate (1.0.0)
-    cocoapods-downloader (1.0.0)
+    cocoapods-downloader (1.1.0)
     cocoapods-keys (1.6.1)
       dotenv
       osx_keychain
@@ -47,10 +46,11 @@ GEM
     cocoapods-trunk (1.0.0)
       nap (>= 0.8, < 2.0)
       netrc (= 0.7.8)
-    cocoapods-try (1.0.0)
+    cocoapods-try (1.1.0)
     colored (1.2)
     commander (4.3.5)
       highline (~> 1.7.2)
+    concurrent-ruby (1.0.2)
     credentials_manager (0.16.0)
       colored
       commander (>= 4.3.5)
@@ -78,7 +78,7 @@ GEM
       rubyzip (~> 1.1.6)
       terminal-table (~> 1.4.5)
     ffi (1.9.10)
-    fourflusher (0.3.0)
+    fourflusher (0.3.2)
     fuzzy_match (2.0.4)
     gh (0.14.0)
       addressable
@@ -89,7 +89,7 @@ GEM
       net-http-pipeline
     highline (1.7.8)
     i18n (0.7.0)
-    json (1.8.3)
+    json (2.0.1)
     launchy (2.4.3)
       addressable (~> 2.3)
     minitest (5.9.0)
@@ -154,4 +154,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.12.4
+   1.12.5
