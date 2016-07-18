@@ -5,7 +5,7 @@
 
 A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
-<img src="https://d13yacurqjgara.cloudfront.net/users/342052/screenshots/2705425/test-2.1.gif" width= 400px>
+<img src="https://polydice.github.io/iCook-tvOS/images/Screenshot.png" width=800px>
 
 ## Setup
 
