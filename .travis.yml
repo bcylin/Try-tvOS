@@ -16,6 +16,7 @@ script:
   - bundle exec scan
 after_success:
   - make coverage
+  - bash <(curl -s https://codecov.io/bash)
 notifications:
   email: false
   slack:
