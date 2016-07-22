@@ -1,6 +1,7 @@
 # iCook tvOS App
 
 [![Build Status](https://travis-ci.org/polydice/iCook-tvOS.svg)](https://travis-ci.org/polydice/iCook-tvOS)
+[![codecov.io](https://codecov.io/github/polydice/iCook-tvOS/coverage.svg?branch=develop)](https://codecov.io/github/polydice/iCook-tvOS?branch=develop)
 ![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg)
 
 A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
