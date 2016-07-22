@@ -1,0 +1,10 @@
+coverage_service: cobertura_xml
+workspace: iCookTV.xcworkspace
+xcodeproj: iCookTV.xcodeproj
+scheme: iCookTV
+source_directory: iCookTV
+output_directory: test_output/xml_report
+ignore:
+  - iCookTV/*.generated.swift
+  - iCookTVTests/*
+  - Pods/*

@@ -13,6 +13,8 @@ install:
   - bundle exec pod install
 script:
   - bundle exec scan
+after_success:
+  - make coverage
 notifications:
   email: false
   slack:
