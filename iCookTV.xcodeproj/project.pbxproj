@@ -316,15 +316,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5F7BF621BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTV" */;
 			buildPhases = (
-				24D096314DA4D14E4EDFA5EB /* 📦 Check Pods Manifest.lock */,
+				24D096314DA4D14E4EDFA5EB /* [CP] Check Pods Manifest.lock */,
 				B5BA3B4A1CF6D19800B0A022 /* Run R.swift Script */,
 				B5F7BF441BA9C95F00A75099 /* Sources */,
 				B52DFA9C1CF8006E005B9D67 /* Swiftlint */,
 				B5F7BF451BA9C95F00A75099 /* Frameworks */,
 				B5F7BF461BA9C95F00A75099 /* Resources */,
 				B51A95351CCDFFEB00E5ED97 /* Run Fabric Script */,
-				AA754957F6C9D01CFBA353B7 /* 📦 Embed Pods Frameworks */,
-				EBDC1687F0692BDEB7D3F35D /* 📦 Copy Pods Resources */,
+				AA754957F6C9D01CFBA353B7 /* [CP] Embed Pods Frameworks */,
+				EBDC1687F0692BDEB7D3F35D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,12 +339,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5F7BF651BA9C95F00A75099 /* Build configuration list for PBXNativeTarget "iCookTVTests" */;
 			buildPhases = (
-				9C2EB9E93A1775F7EBF52165 /* 📦 Check Pods Manifest.lock */,
+				9C2EB9E93A1775F7EBF52165 /* [CP] Check Pods Manifest.lock */,
 				B5F7BF551BA9C95F00A75099 /* Sources */,
 				B5F7BF561BA9C95F00A75099 /* Frameworks */,
 				B5F7BF571BA9C95F00A75099 /* Resources */,
-				D98BF45783F7971E01068E78 /* 📦 Embed Pods Frameworks */,
-				274F955E84B2D8EB3E68D8D7 /* 📦 Copy Pods Resources */,
+				D98BF45783F7971E01068E78 /* [CP] Embed Pods Frameworks */,
+				274F955E84B2D8EB3E68D8D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -417,14 +417,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24D096314DA4D14E4EDFA5EB /* 📦 Check Pods Manifest.lock */ = {
+		24D096314DA4D14E4EDFA5EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,14 +432,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		274F955E84B2D8EB3E68D8D7 /* 📦 Copy Pods Resources */ = {
+		274F955E84B2D8EB3E68D8D7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,14 +447,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV-iCookTVTests/Pods-iCookTV-iCookTVTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9C2EB9E93A1775F7EBF52165 /* 📦 Check Pods Manifest.lock */ = {
+		9C2EB9E93A1775F7EBF52165 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,14 +462,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AA754957F6C9D01CFBA353B7 /* 📦 Embed Pods Frameworks */ = {
+		AA754957F6C9D01CFBA353B7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,14 +519,14 @@
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/R.swift/rswift ${SRCROOT}/iCookTV";
 		};
-		D98BF45783F7971E01068E78 /* 📦 Embed Pods Frameworks */ = {
+		D98BF45783F7971E01068E78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,14 +534,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV-iCookTVTests/Pods-iCookTV-iCookTVTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EBDC1687F0692BDEB7D3F35D /* 📦 Copy Pods Resources */ = {
+		EBDC1687F0692BDEB7D3F35D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
