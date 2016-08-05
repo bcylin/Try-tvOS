@@ -36,6 +36,7 @@
 		B5761A5C1CCF6D78008CCC08 /* Video.json in Resources */ = {isa = PBXBuildFile; fileRef = B5761A5B1CCF6D78008CCC08 /* Video.json */; };
 		B586EFDB1CCA21B300EA8218 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */; };
 		B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */; };
+		B594CB3B1D53998900CB5630 /* CategoriesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B594CB3A1D53998900CB5630 /* CategoriesDataSource.swift */; };
 		B5A614F71CCA05B4004A3CD5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5A614F91CCA05B4004A3CD5 /* InfoPlist.strings */; };
 		B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A8F7081CA259120069F836 /* CategoryCell.swift */; };
 		B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEEE311C82D4BC001CF112 /* Metrics.swift */; };
@@ -100,6 +101,7 @@
 		B5761A5B1CCF6D78008CCC08 /* Video.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Video.json; sourceTree = "<group>"; };
 		B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverBuilder.swift; sourceTree = "<group>"; };
+		B594CB3A1D53998900CB5630 /* CategoriesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesDataSource.swift; sourceTree = "<group>"; };
 		B5A614F81CCA05B4004A3CD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B5A614FA1CCA05B6004A3CD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B5A614FB1CCA05B7004A3CD5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		B5AAAE5B1C85DD0A002DDFC8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B594CB3A1D53998900CB5630 /* CategoriesDataSource.swift */,
 				B56D68E81CA564B00097D5D7 /* Category.swift */,
 				B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */,
 				B543C3EE1CD1FD0B008C512B /* GroundControl.swift */,
@@ -558,6 +561,7 @@
 			files = (
 				B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */,
 				B5DA8EE21CB4C2B20068E0E3 /* BlurBackgroundViewController.swift in Sources */,
+				B594CB3B1D53998900CB5630 /* CategoriesDataSource.swift in Sources */,
 				B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */,
 				B56D68E91CA564B00097D5D7 /* Category.swift in Sources */,
 				B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */,
