@@ -1,8 +1,8 @@
 //
-//  CategoriesDataSource.swift
+//  DataSource.swift
 //  TryTVOS
 //
-//  Created by Ben on 04/08/2016.
+//  Created by Ben on 05/08/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,26 +26,22 @@
 
 import UIKit
 
-class CategoriesDataSource: DataSource {
+class DataSource: NSObject, SourceType {
 
-  subscript(index: Int) -> Category? {
-    return (data as? CategoriesData)?[index]
-  }
+  private(set) var data: DataType
 
-  // MARK: - Initialization
-
-  init(categories: [Category]) {
-    super.init(data: CategoriesData(categories: categories))
+  init<T: DataType>(data: T) {
+    self.data = data
   }
 
   // MARK: - UICollectionViewDataSource
 
-  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    if let category = self[indexPath.row] {
-      (cell as? CategoryCell)?.configure(withCategory: category)
-    }
-    return cell
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return data.numberOfItems
+  }
+
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    return UICollectionViewCell()
   }
 
 }
