@@ -1,6 +1,4 @@
 disabled_rules:
-  - conditional_binding_cascade
-  - force_cast
   - force_try
   - line_length
   - nesting

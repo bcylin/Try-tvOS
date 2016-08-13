@@ -163,7 +163,7 @@ class CategoryCell: UICollectionViewCell {
 
     var urls = [Grid: NSURL]()
     for (index, value) in category.coverURLs.enumerate() {
-      guard let corner = Grid(rawValue: index), let url = NSURL(string: value) else { continue }
+      guard let corner = Grid(rawValue: index), url = NSURL(string: value) else { continue }
       urls[corner] = url
     }
 
