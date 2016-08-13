@@ -115,7 +115,7 @@ class CategoriesViewController: BlurBackgroundViewController,
   }
 
   func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
-    if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image where cell.hasDisplayedCover {
+    if let cell = context.nextFocusedView as? CategoryCell, cover = cell.imageView.image where cell.hasDisplayedCover {
       self.backgroundImage = cover
     }
   }

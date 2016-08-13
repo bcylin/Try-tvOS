@@ -32,9 +32,9 @@ struct HistoryManager {
   // MARK: - Private Properties
 
   private static var cache: NSURL? {
-    guard
-      let directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first,
-      let url = NSURL(string: directory)
+    guard let
+      directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first,
+      url = NSURL(string: directory)
     else {
       return nil
     }
@@ -47,7 +47,7 @@ struct HistoryManager {
 
   /// Returns the deserialized video history read from the cache directory.
   static var history: [JSON] {
-    if let path = cache?.path, let records = NSArray(contentsOfFile: path) as? [NSData] {
+    if let path = cache?.path, records = NSArray(contentsOfFile: path) as? [NSData] {
       do {
         return try records.map { try JSON(data: $0) }
       } catch {

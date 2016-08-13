@@ -37,9 +37,9 @@ extension Video {
     case .HLS:
       return source == nil ? nil : NSURL(string: source!)
     case .YouTube:
-      guard
-        let youtubeURL = NSURL(string: youtube),
-        let videoURL = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
+      guard let
+        youtubeURL = NSURL(string: youtube),
+        videoURL = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
       else {
         return nil
       }
