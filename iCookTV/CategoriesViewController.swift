@@ -100,7 +100,7 @@ class CategoriesViewController: BlurBackgroundViewController,
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    guard let category = dataSource[indexPath.row] else { return }
+    let category = dataSource[indexPath.row]
     let controller = VideosViewController(categoryID: category.id, title: category.name)
     navigationController?.pushViewController(controller, animated: true)
   }

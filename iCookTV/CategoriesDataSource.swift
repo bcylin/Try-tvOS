@@ -26,25 +26,37 @@
 
 import UIKit
 
-class CategoriesDataSource: DataSource {
+class CategoriesDataSource: NSObject, SourceType {
 
-  subscript(index: Int) -> Category? {
-    return (data as? CategoriesData)?[index]
-  }
+  typealias DataType = Category
+
+  private let categories: [Category]
 
   // MARK: - Initialization
 
   init(categories: [Category]) {
-    super.init(data: CategoriesData(categories: categories))
+    self.categories = categories
+  }
+
+  // MARK: - SourceType
+
+  subscript(index: Int) -> Category {
+    return categories[index]
+  }
+
+  var numberOfItems: Int {
+    return categories.count
   }
 
   // MARK: - UICollectionViewDataSource
 
-  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return numberOfItems
+  }
+
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    if let category = self[indexPath.row] {
-      (cell as? CategoryCell)?.configure(withCategory: category)
-    }
+    (cell as? CategoryCell)?.configure(withCategory: categories[indexPath.row])
     return cell
   }
 
