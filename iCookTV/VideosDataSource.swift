@@ -28,8 +28,6 @@ import UIKit
 
 class VideosDataSource: NSObject, SourceType {
 
-  typealias DataType = Video
-
   var currentPage: Int {
     return Int(numberOfItems / self.dynamicType.pageSize)
   }
@@ -37,7 +35,11 @@ class VideosDataSource: NSObject, SourceType {
   static let pageSize = 20
 
   private let title: String
-  private var videos = [Video]()
+  private(set) var dataCollection = VideosCollection()
+
+  subscript(index: Int) -> Video {
+    return dataCollection[index]
+  }
 
   // MARK: - Initialization
 
@@ -47,12 +49,8 @@ class VideosDataSource: NSObject, SourceType {
 
   // MARK: - SourceType
 
-  subscript(index: Int) -> Video {
-    return videos[index]
-  }
-
   var numberOfItems: Int {
-    return videos.count
+    return dataCollection.count
   }
 
   // MARK: - UICollectionViewDataSource
@@ -63,7 +61,7 @@ class VideosDataSource: NSObject, SourceType {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
-    (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
+    (cell as? VideoCell)?.configure(withVideo: dataCollection[indexPath.row])
     return cell
   }
 
@@ -84,16 +82,12 @@ class VideosDataSource: NSObject, SourceType {
   // MARK: - Public Methods
 
   func append(videos: [Video], toCollectionView collectionView: UICollectionView) {
-    self.videos += videos
+    dataCollection = dataCollection.appendItems(videos)
     collectionView.reloadData()
   }
 
   func bringVideo(atIndexPath indexPath: NSIndexPath, toTopOfCollectionView collectionView: UICollectionView) {
-    let target = videos[indexPath.row]
-    var newOrder = videos
-    newOrder.removeAtIndex(indexPath.row)
-    newOrder.insert(target, atIndex: 0)
-    videos = newOrder
+    dataCollection = dataCollection.moveItem(indexPath.row, toIndex: 0)
     collectionView.reloadData()
   }
 
