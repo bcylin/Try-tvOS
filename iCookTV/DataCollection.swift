@@ -30,11 +30,53 @@ protocol DataCollection {
 
   associatedtype DataType
 
-  subscript(index: Int) -> DataType { get }
+  init(items: [DataType])
+
+  var items: [DataType] { get }
   var count: Int { get }
 
-  func appendItems(items: [DataType]) -> Self
-  func insertItem(item: DataType, atIndex index: Int) -> Self
-  func deleteItemAtIndex(index: Int) -> Self
-  func moveItem(fromIndex: Int, toIndex: Int) -> Self
+  subscript(index: Int) -> DataType { get }
+
+  func append(items: [DataType]) -> Self
+  func insert(item: DataType, atIndex index: Int) -> Self
+  func deleteItem(atIndex index: Int) -> Self
+  func moveItem(fromIndex fromIndex: Int, toIndex: Int) -> Self
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+extension DataCollection {
+
+  var count: Int {
+    return items.count
+  }
+
+  subscript(index: Int) -> DataType {
+    return items[index]
+  }
+
+  func append(items: [DataType]) -> Self {
+    var mutableCollection = self.items
+    mutableCollection += items
+    return Self(items: mutableCollection)
+  }
+
+  func insert(item: DataType, atIndex index: Int) -> Self {
+    var mutableCollection = items
+    mutableCollection.insert(item, atIndex: index)
+    return Self(items: mutableCollection)
+  }
+
+  func deleteItem(atIndex index: Int) -> Self {
+    var mutableCollection = items
+    mutableCollection.removeAtIndex(index)
+    return Self(items: mutableCollection)
+  }
+
+  func moveItem(fromIndex fromIndex: Int, toIndex: Int) -> Self {
+    return deleteItem(atIndex: fromIndex).insert(items[fromIndex], atIndex: toIndex)
+  }
+
 }

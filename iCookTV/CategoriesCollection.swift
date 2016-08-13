@@ -30,44 +30,6 @@ struct CategoriesCollection: DataCollection {
 
   typealias DataType = Category
 
-  private var categories: [Category]
-
-  // MARK: - Initializer
-
-  init(categories: [Category]) {
-    self.categories = categories
-  }
-
-  // MARK: - DataCollection
-
-  subscript(index: Int) -> Category {
-    return categories[index]
-  }
-
-  var count: Int {
-    return categories.count
-  }
-
-  func appendItems(items: [Category]) -> CategoriesCollection {
-    var mutableCollection = categories
-    mutableCollection += items
-    return CategoriesCollection(categories: mutableCollection)
-  }
-
-  func insertItem(item: Category, atIndex index: Int) -> CategoriesCollection {
-    var mutableCollection = categories
-    mutableCollection.insert(item, atIndex: index)
-    return CategoriesCollection(categories: mutableCollection)
-  }
-
-  func deleteItemAtIndex(index: Int) -> CategoriesCollection {
-    var mutableCollection = categories
-    mutableCollection.removeAtIndex(index)
-    return CategoriesCollection(categories: mutableCollection)
-  }
-
-  func moveItem(fromIndex: Int, toIndex: Int) -> CategoriesCollection {
-    return deleteItemAtIndex(fromIndex).insertItem(categories[fromIndex], atIndex: toIndex)
-  }
+  private(set) var items: [Category]
 
 }

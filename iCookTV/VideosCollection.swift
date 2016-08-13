@@ -30,38 +30,6 @@ struct VideosCollection: DataCollection {
 
   typealias DataType = Video
 
-  private var videos = [Video]()
-
-  // MARK: - DataCollection
-
-  subscript(index: Int) -> Video {
-    return videos[index]
-  }
-
-  var count: Int {
-    return videos.count
-  }
-
-  func appendItems(items: [Video]) -> VideosCollection {
-    var mutableCollection = self.videos
-    mutableCollection += items
-    return VideosCollection(videos: mutableCollection)
-  }
-
-  func insertItem(item: Video, atIndex index: Int) -> VideosCollection {
-    var mutableCollection = videos
-    mutableCollection.insert(item, atIndex: index)
-    return VideosCollection(videos: mutableCollection)
-  }
-
-  func deleteItemAtIndex(index: Int) -> VideosCollection {
-    var mutableCollection = videos
-    mutableCollection.removeAtIndex(index)
-    return VideosCollection(videos: mutableCollection)
-  }
-
-  func moveItem(fromIndex: Int, toIndex: Int) -> VideosCollection {
-    return deleteItemAtIndex(fromIndex).insertItem(videos[fromIndex], atIndex: toIndex)
-  }
+  private(set) var items = [Video]()
 
 }

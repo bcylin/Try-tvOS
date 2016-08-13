@@ -35,11 +35,6 @@ class VideosDataSource: NSObject, SourceType {
   static let pageSize = 20
 
   private let title: String
-  private(set) var dataCollection = VideosCollection()
-
-  subscript(index: Int) -> Video {
-    return dataCollection[index]
-  }
 
   // MARK: - Initialization
 
@@ -49,9 +44,7 @@ class VideosDataSource: NSObject, SourceType {
 
   // MARK: - SourceType
 
-  var numberOfItems: Int {
-    return dataCollection.count
-  }
+  private(set) var dataCollection = VideosCollection()
 
   // MARK: - UICollectionViewDataSource
 

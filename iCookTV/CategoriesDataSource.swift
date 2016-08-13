@@ -28,25 +28,15 @@ import UIKit
 
 class CategoriesDataSource: NSObject, SourceType {
 
-  typealias DataType = Category
-
-  private(set) var dataCollection: CategoriesCollection
-
   // MARK: - Initialization
 
   init(categories: [Category]) {
-    self.dataCollection = CategoriesCollection(categories: categories)
+    self.dataCollection = CategoriesCollection(items: categories)
   }
 
   // MARK: - SourceType
 
-  subscript(index: Int) -> Category {
-    return dataCollection[index]
-  }
-
-  var numberOfItems: Int {
-    return dataCollection.count
-  }
+  private(set) var dataCollection: CategoriesCollection
 
   // MARK: - UICollectionViewDataSource
 
