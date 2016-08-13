@@ -1,8 +1,8 @@
 //
-//  CategoriesDataSource.swift
+//  CategoriesCollection.swift
 //  TryTVOS
 //
-//  Created by Ben on 04/08/2016.
+//  Created by Ben on 14/08/2016.
 //  Copyright © 2016 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,40 +24,50 @@
 //  SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
-class CategoriesDataSource: NSObject, SourceType {
+struct CategoriesCollection: DataCollection {
 
   typealias DataType = Category
 
-  private(set) var dataCollection: CategoriesCollection
+  private var categories: [Category]
 
-  // MARK: - Initialization
+  // MARK: - Initializer
 
   init(categories: [Category]) {
-    self.dataCollection = CategoriesCollection(categories: categories)
+    self.categories = categories
   }
 
-  // MARK: - SourceType
+  // MARK: - DataCollection
 
   subscript(index: Int) -> Category {
-    return dataCollection[index]
+    return categories[index]
   }
 
-  var numberOfItems: Int {
-    return dataCollection.count
+  var count: Int {
+    return categories.count
   }
 
-  // MARK: - UICollectionViewDataSource
-
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return numberOfItems
+  func appendItems(items: [Category]) -> CategoriesCollection {
+    var mutableCollection = categories
+    mutableCollection += items
+    return CategoriesCollection(categories: mutableCollection)
   }
 
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    (cell as? CategoryCell)?.configure(withCategory: dataCollection[indexPath.row])
-    return cell
+  func insertItem(item: Category, atIndex index: Int) -> CategoriesCollection {
+    var mutableCollection = categories
+    mutableCollection.insert(item, atIndex: index)
+    return CategoriesCollection(categories: mutableCollection)
+  }
+
+  func deleteItemAtIndex(index: Int) -> CategoriesCollection {
+    var mutableCollection = categories
+    mutableCollection.removeAtIndex(index)
+    return CategoriesCollection(categories: mutableCollection)
+  }
+
+  func moveItem(fromIndex: Int, toIndex: Int) -> CategoriesCollection {
+    return deleteItemAtIndex(fromIndex).insertItem(categories[fromIndex], atIndex: toIndex)
   }
 
 }

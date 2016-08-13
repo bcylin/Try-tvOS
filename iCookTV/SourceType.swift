@@ -28,8 +28,8 @@ import UIKit
 
 protocol SourceType: UICollectionViewDataSource {
 
-  associatedtype DataType
+  associatedtype Collection: DataCollection
 
-  subscript(index: Int) -> DataType { get }
+  var dataCollection: Collection { get }
   var numberOfItems: Int { get }
 }

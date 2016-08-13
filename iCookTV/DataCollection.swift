@@ -30,7 +30,9 @@ protocol DataCollection {
 
   associatedtype DataType
 
+  subscript(index: Int) -> DataType { get }
   var count: Int { get }
+
   func appendItems(items: [DataType]) -> Self
   func insertItem(item: DataType, atIndex index: Int) -> Self
   func deleteItemAtIndex(index: Int) -> Self
