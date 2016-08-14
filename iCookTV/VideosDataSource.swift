@@ -26,7 +26,7 @@
 
 import UIKit
 
-class VideosDataSource: NSObject, SourceType {
+class VideosDataSource: DataSource<VideosCollection> {
 
   var currentPage: Int {
     return Int(numberOfItems / self.dynamicType.pageSize)
@@ -40,19 +40,12 @@ class VideosDataSource: NSObject, SourceType {
 
   init(title: String) {
     self.title = title
+    super.init(dataCollection: VideosCollection())
   }
-
-  // MARK: - SourceType
-
-  private(set) var dataCollection = VideosCollection()
 
   // MARK: - UICollectionViewDataSource
 
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return numberOfItems
-  }
-
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
     (cell as? VideoCell)?.configure(withVideo: dataCollection[indexPath.row])
     return cell
@@ -70,18 +63,6 @@ class VideosDataSource: NSObject, SourceType {
     }
 
     return UICollectionReusableView()
-  }
-
-  // MARK: - Public Methods
-
-  func append(videos: [Video], toCollectionView collectionView: UICollectionView) {
-    dataCollection = dataCollection.appendItems(videos)
-    collectionView.reloadData()
-  }
-
-  func bringVideo(atIndexPath indexPath: NSIndexPath, toTopOfCollectionView collectionView: UICollectionView) {
-    dataCollection = dataCollection.moveItem(indexPath.row, toIndex: 0)
-    collectionView.reloadData()
   }
 
 }

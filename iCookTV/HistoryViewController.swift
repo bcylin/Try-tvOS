@@ -91,7 +91,7 @@ class HistoryViewController: VideosViewController {
     super.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
     // Reorder current displayed contents after the video player is presented.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-      self.dataSource.bringVideo(atIndexPath: indexPath, toTopOfCollectionView: collectionView)
+      self.dataSource.moveItem(atIndexPathToTop: indexPath, inCollectionView: collectionView)
     }
   }
 
