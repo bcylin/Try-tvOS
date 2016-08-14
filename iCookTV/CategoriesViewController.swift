@@ -27,12 +27,11 @@
 import UIKit
 
 class CategoriesViewController: BlurBackgroundViewController,
-  UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
   Trackable {
 
-  private var categories = [Category]() {
+  private var dataSource: CategoriesDataSource {
     didSet {
       collectionView.reloadData()
     }
@@ -49,16 +48,21 @@ class CategoriesViewController: BlurBackgroundViewController,
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
     _collectionView.registerClass(CategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(CategoryCell.self))
     _collectionView.remembersLastFocusedIndexPath = true
-    _collectionView.dataSource = self
+    _collectionView.dataSource = self.dataSource
     _collectionView.delegate = self
     return _collectionView
   }()
 
   // MARK: - Initialization
 
-  convenience init(categories: [Category]) {
-    self.init()
-    self.categories = categories
+  init(categories: [Category]) {
+    dataSource = CategoriesDataSource(categories: categories)
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    dataSource = CategoriesDataSource(categories: [])
+    super.init(coder: aDecoder)
   }
 
   // MARK: - UIViewController
@@ -93,23 +97,10 @@ class CategoriesViewController: BlurBackgroundViewController,
     return collectionView
   }
 
-  // MARK: - UICollectionViewDataSource
-
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return categories.count
-  }
-
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(CategoryCell.self), forIndexPath: indexPath)
-    let category = categories[indexPath.row]
-    (cell as? CategoryCell)?.configure(withCategory: category)
-    return cell
-  }
-
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let category = categories[indexPath.row]
+    let category = dataSource[indexPath.row]
     let controller = VideosViewController(categoryID: category.id, title: category.name)
     navigationController?.pushViewController(controller, animated: true)
   }

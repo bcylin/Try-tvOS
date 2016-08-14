@@ -45,12 +45,14 @@ class HistoryViewController: VideosViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setOverlayViewHidden(false, animated: false)
     isLoading = true
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       do {
         let history = try HistoryManager.history.map(Video.init)
         dispatch_sync(dispatch_get_main_queue()) {
-          self.videos = history
+          self.dataSource.append(history, toCollectionView: self.collectionView)
+          self.setOverlayViewHidden(self.dataSource.numberOfItems > 0, animated: true)
           self.isLoading = false
         }
       } catch {
@@ -61,14 +63,14 @@ class HistoryViewController: VideosViewController {
         }
       }
       Tracker.track(PageView(name: "history", details: [
-        TrackableKey.numberOfItems: self.videos.count
+        TrackableKey.numberOfItems: self.dataSource.numberOfItems
       ]))
     }
   }
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    if !videos.isEmpty {
+    if dataSource.numberOfItems > 0 {
       collectionView.reloadData()
     }
   }
@@ -87,15 +89,9 @@ class HistoryViewController: VideosViewController {
 
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     super.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
-
-    let video = videos[indexPath.row]
-    var reordered = videos
-    reordered.removeAtIndex(indexPath.row)
-    reordered.insert(video, atIndex: 0)
-
     // Reorder current displayed contents after the video player is presented.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-      self.videos = reordered
+      self.dataSource.moveItem(atIndexPathToTop: indexPath, inCollectionView: collectionView)
     }
   }
 

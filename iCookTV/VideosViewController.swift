@@ -30,24 +30,20 @@ import Freddy
 import Keys
 
 class VideosViewController: BlurBackgroundViewController,
-  UICollectionViewDataSource,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
   OverlayEnabled,
   Trackable {
 
-  var videos = [Video]() {
-    didSet {
-      collectionView.reloadData()
-      setOverlayViewHidden(!videos.isEmpty, animated: true)
-    }
-  }
+  private(set) lazy var dataSource: VideosDataSource = {
+    VideosDataSource(title: self.title ?? "")
+  }()
 
   var pagingTracking: Event? {
     return Event(name: "Fetched Page", details: [
       TrackableKey.categoryID: categoryID,
       TrackableKey.categoryTitle: title ?? "",
-      TrackableKey.page: String(currentPage)
+      TrackableKey.page: String(dataSource.currentPage)
     ])
   }
 
@@ -64,8 +60,13 @@ class VideosViewController: BlurBackgroundViewController,
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
+    _collectionView.registerClass(
+      CategoryHeaderView.self,
+      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+      withReuseIdentifier: String(CategoryHeaderView.self)
+    )
     _collectionView.remembersLastFocusedIndexPath = true
-    _collectionView.dataSource = self
+    _collectionView.dataSource = self.dataSource
     _collectionView.delegate = self
     return _collectionView
   }()
@@ -73,12 +74,6 @@ class VideosViewController: BlurBackgroundViewController,
   private weak var currentRequest: Request?
   private let paginationQueue = dispatch_queue_create("io.github.bcylin.paginationQueue", DISPATCH_QUEUE_SERIAL)
   private var hasNextPage = true
-
-  private var currentPage: Int {
-    return Int(videos.count / self.dynamicType.pageSize)
-  }
-
-  private static let pageSize = 20
 
   // MARK: - Initialization
 
@@ -103,12 +98,6 @@ class VideosViewController: BlurBackgroundViewController,
     if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
       flowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: CategoryHeaderView.requiredHeight)
     }
-
-    collectionView.registerClass(
-      CategoryHeaderView.self,
-      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-      withReuseIdentifier: String(CategoryHeaderView.self)
-    )
   }
 
   override func viewDidLoad() {
@@ -151,42 +140,16 @@ class VideosViewController: BlurBackgroundViewController,
     }
   }
 
-  // MARK: - UICollectionViewDataSource
-
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return videos.count
-  }
-
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
-    (cell as? VideoCell)?.configure(withVideo: videos[indexPath.row])
-    return cell
-  }
-
-  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    if kind == UICollectionElementKindSectionHeader {
-      let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
-        UICollectionElementKindSectionHeader,
-        withReuseIdentifier: String(CategoryHeaderView.self),
-        forIndexPath: indexPath
-      )
-      (headerView as? CategoryHeaderView)?.accessoryLabel.text = title ?? "Category"
-      return headerView
-    }
-
-    return UICollectionReusableView()
-  }
-
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-    if indexPath.row == videos.count - 1 && hasNextPage {
+    if indexPath.row == dataSource.numberOfItems - 1 && hasNextPage {
       fetchNextPage()
     }
   }
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let video = videos[indexPath.row]
+    let video = dataSource[indexPath.row]
     let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
 
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
@@ -241,12 +204,12 @@ class VideosViewController: BlurBackgroundViewController,
       return
     }
 
-    isLoading = videos.isEmpty
+    isLoading = (dataSource.numberOfItems == 0)
 
     let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
     let parameters = [
-      "page[size]": self.dynamicType.pageSize,
-      "page[number]": currentPage + 1
+      "page[size]": dataSource.dynamicType.pageSize,
+      "page[number]": dataSource.currentPage + 1
     ]
 
     currentRequest = Alamofire.request(.GET, url, parameters: parameters).responseJSON { [weak self] response in
@@ -257,19 +220,22 @@ class VideosViewController: BlurBackgroundViewController,
         return
       }
 
-      guard let pagination = self?.paginationQueue else {
+      guard let
+        collectionView = self?.collectionView,
+        pagination = self?.paginationQueue
+      else {
         return
       }
 
-      var videos = self?.videos ?? []
       dispatch_async(pagination) {
         do {
           let json = try JSON(data: data)
-          videos += try json.array("data").map(Video.init)
+          let videos = try json.array("data").map(Video.init)
 
           dispatch_sync(dispatch_get_main_queue()) {
             self?.hasNextPage = json["links"]?["next"] != nil
-            self?.videos = videos
+            self?.dataSource.append(videos, toCollectionView: collectionView)
+            self?.setOverlayViewHidden(self?.dataSource.numberOfItems > 0, animated: true)
           }
         } catch {
           dispatch_sync(dispatch_get_main_queue()) {
