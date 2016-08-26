@@ -14,6 +14,8 @@ install:
   - bundle install --without development --deployment --jobs=3 --retry=3
   - bundle exec pod repo update
   - bundle exec pod install
+before_script:
+  - bundle exec danger
 script:
   - bundle exec scan
 after_success:
