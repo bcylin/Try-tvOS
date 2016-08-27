@@ -8,6 +8,7 @@ cache:
 before_install:
   - export LANG=en_US.UTF-8
   - rvm get head
+  - brew update
   - brew tap homebrew/bundle
   - brew bundle
 install:
