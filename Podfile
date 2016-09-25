@@ -9,19 +9,19 @@ workspace "iCookTV"
 project "iCookTV"
 
 target :iCookTV do
-  pod "Alamofire", "~> 3.5.1"
+  pod "Alamofire", "~> 4.0.0"
   pod "Crashlytics"
   pod "Fabric"
-  pod "Freddy"
+  pod "Freddy", "~> 3.0.0"
   pod "HCYoutubeParser"
-  pod "Hue", git: "https://github.com/bcylin/Hue.git", commit: "190aa15"
-  pod "R.swift"
-  pod "Kingfisher", "~> 2.6.0"
+  pod "Hue", "~> 2.0.0"
+  pod "R.swift", "~> 3.0.0"
+  pod "Kingfisher", "~> 3.1.0"
   pod "TreasureData-tvOS-SDK", "0.1.14"
 
   target :iCookTVTests do
-    pod "Nimble"
-    pod "Quick"
+    pod "Nimble", "~> 5.0.0"
+    pod "Quick", "~> 0.10.0"
   end
 end
 
@@ -35,16 +35,8 @@ plugin "cocoapods-keys", {
 # Specify Swift version in the configs for all the pods installed.
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-    next if target.name.start_with? "Pods-"
-
-    config = "#{Dir.pwd}/Pods/Target Support Files/#{target.name}/#{target.name}.xcconfig"
-    if not File.exists? config
-      puts "Missing #{config}"
-      next
+    target.build_configurations.each do |config|
+      config.build_settings["SWIFT_VERSION"] = "3.0"
     end
-
-    puts "Adding SWIFT_VERSION=2.3 to #{config}"
-    File.open(config, "a") { |file| file << "SWIFT_VERSION=2.3\n" }
-    puts "Done"
   end
 end
