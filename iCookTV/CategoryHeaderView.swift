@@ -71,13 +71,13 @@ class CategoryHeaderView: UICollectionReusableView {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     accessoryLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    imageView.contentMode = .ScaleAspectFill
-    imageView.widthAnchor.constraintEqualToConstant(87).active = true
-    imageView.heightAnchor.constraintEqualToConstant(64).active = true
-    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
-    imageView.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
+    imageView.contentMode = .scaleAspectFill
+    imageView.widthAnchor.constraint(equalToConstant: 87).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.EdgePadding.left).isActive = true
+    imageView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
 
-    titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
+    titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
     titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
 
     accessoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.EdgePadding.right).isActive = true

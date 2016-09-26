@@ -156,11 +156,11 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
     guard let playerItem = playerItem else {
       let message = R.string.localizable.videoError() + "\n" + R.string.localizable.contactInfo()
-      let alert = UIAlertController(title: R.string.localizable.errorTitle(), message: message, preferredStyle: .Alert)
-      alert.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .Default) { [weak self] _ in
+      let alert = UIAlertController(title: R.string.localizable.errorTitle(), message: message, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default) { [weak self] _ in
         self?.dismiss()
       })
-      presentViewController(alert, animated: true, completion: nil)
+      present(alert, animated: true, completion: nil)
       return
     }
 

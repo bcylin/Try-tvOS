@@ -46,7 +46,7 @@ extension UIImage {
   class func placeholderImage(withSize size: CGSize) -> UIImage! {
     let layer = CAGradientLayer()
     layer.frame = CGRect(origin: CGPoint.zero, size: size)
-    layer.colors = [UIColor.white.CGColor, UIColor.Palette.LightGray.CGColor]
+    layer.colors = [UIColor.white.cgColor, UIColor.Palette.LightGray.cgColor]
     layer.startPoint = CGPoint(x: 0, y: 0)
     layer.endPoint = CGPoint(x: 1, y: 1)
 
@@ -59,7 +59,7 @@ extension UIImage {
     return image
   }
 
-  class func resizableImageWithFillColor(color: UIColor) -> UIImage? {
+  class func resizableImage(withFillColor color: UIColor) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 0)
 
     color.setFill()
@@ -68,7 +68,7 @@ extension UIImage {
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
 
-    return image?.resizableImageWithCapInsets(UIEdgeInsetsZero)
+    return image?.resizableImage(withCapInsets: UIEdgeInsets.zero)
   }
 
 }

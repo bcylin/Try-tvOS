@@ -95,12 +95,12 @@ class MainMenuView: UIView {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
 
-    frontBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-    frontBannerConstraint = frontBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: bannerOffset.front.normal)
+    frontBanner.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    frontBannerConstraint = frontBanner.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bannerOffset.front.normal)
     frontBannerConstraint?.isActive = true
 
-    backBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-    backBannerConstraint = backBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: bannerOffset.back.normal)
+    backBanner.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    backBannerConstraint = backBanner.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bannerOffset.back.normal)
     backBannerConstraint?.isActive = true
 
     focusGuide.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -108,13 +108,13 @@ class MainMenuView: UIView {
     focusGuide.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     focusGuide.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
-    imageView.contentMode = .ScaleAspectFill
-    imageView.widthAnchor.constraintEqualToConstant(120).active = true
-    imageView.heightAnchor.constraintEqualToConstant(88).active = true
-    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 222).active = true
-    imageView.topAnchor.constraintEqualToAnchor(topAnchor, constant: 136).active = true
+    imageView.contentMode = .scaleAspectFill
+    imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: 88).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 222).isActive = true
+    imageView.topAnchor.constraint(equalTo: topAnchor, constant: 136).isActive = true
 
-    titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
+    titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
     titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 150).isActive = true
 
     button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -148).isActive = true

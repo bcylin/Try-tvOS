@@ -92,7 +92,7 @@ class VideosViewController: BlurBackgroundViewController,
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
 
-    dropdownMenuView.button.setTitle(R.string.localizable.history(), for: .Normal)
+    dropdownMenuView.button.setTitle(R.string.localizable.history(), for: .normal)
     dropdownMenuView.button.addTarget(self, action: .showHistory, for: .primaryActionTriggered)
 
     if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -235,7 +235,11 @@ class VideosViewController: BlurBackgroundViewController,
           dispatch_sync(dispatch_get_main_queue()) {
             self?.hasNextPage = json["links"]?["next"] != nil
             self?.dataSource.append(videos, toCollectionView: collectionView)
-            self?.setOverlayViewHidden(self?.dataSource.numberOfItems > 0, animated: true)
+            if let numberOfItems = self?.dataSource.numberOfItems {
+              self?.setOverlayViewHidden(numberOfItems > 0, animated: true)
+            } else {
+              self?.setOverlayViewHidden(false, animated: true)
+            }
           }
         } catch {
           dispatch_sync(dispatch_get_main_queue()) {

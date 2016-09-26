@@ -134,10 +134,10 @@ class CategoryCell: UICollectionViewCell {
 
         self?.coverBuilder.addImage(image, atCorner: corner, categoryID: category.id) { newCover in
           if let current = self {
-            UIView.transitionWithView(
-              current.imageView,
+            UIView.transition(
+              with: current.imageView,
               duration: 0.3,
-              options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
+              options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseIn],
               animations: {
                 self?.imageView.image = newCover
               }, completion: nil

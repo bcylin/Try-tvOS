@@ -69,9 +69,9 @@ struct GroundControl {
       }
       Debug.print(results)
       for key in [Keys.DefaultBackgroundURL, Keys.VideoSource] {
-        NSUserDefaults.standardUserDefaults().setObject(results[key], forKey: key)
+        UserDefaults.standard.set(results[key], forKey: key)
       }
-      NSUserDefaults.standardUserDefaults().synchronize()
+      UserDefaults.standard.synchronize()
     }
   }
 

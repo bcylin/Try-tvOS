@@ -39,14 +39,14 @@ class CoverBuilder {
 
   private(set) var cover: UIImage?
 
-  private static let imageCache = NSCache()
+  private static let imageCache = NSCache<NSString, UIImage>()
 
   private var filledGrids = Set<Grid>()
 
   // MARK: - Private Methods
 
   private func cacheImage(_ image: UIImage, forKey key: String) {
-    type(of: self).imageCache.setObject(image, forKey: key)
+    type(of: self).imageCache.setObject(image, forKey: key as NSString)
 
     NotificationCenter.default.post(
       name: Notification.Name(rawValue: type(of: self).DidCreateCoverNotification),
@@ -83,7 +83,7 @@ class CoverBuilder {
   }
 
   func coverForCategory(withID id: String) -> UIImage? {
-    return type(of: self).imageCache.object(forKey: id) as? UIImage
+    return type(of: self).imageCache.object(forKey: id as NSString)
   }
 
   func resetCover() {

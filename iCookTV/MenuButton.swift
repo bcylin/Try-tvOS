@@ -43,9 +43,9 @@ class MenuButton: UIButton {
   private func setUpAppearance() {
     contentEdgeInsets = UIEdgeInsets(top: 15, left: 40, bottom: 15, right: 40)
     setTitleColor(UIColor.Palette.Button.TitleColor, for: UIControlState())
-    setTitleColor(UIColor.Palette.FocusedButton.TitleColor, for: .Focused)
-    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.Button.BackgroundColor), for: .Normal)
-    setImage(UIImage.resizableImageWithFillColor(UIColor.Palette.FocusedButton.BackgroundColor), for: .focused)
+    setTitleColor(UIColor.Palette.FocusedButton.TitleColor, for: .focused)
+    setImage(UIImage.resizableImage(withFillColor: UIColor.Palette.Button.BackgroundColor), for: .normal)
+    setImage(UIImage.resizableImage(withFillColor: UIColor.Palette.FocusedButton.BackgroundColor), for: .focused)
   }
 
 }

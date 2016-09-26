@@ -33,7 +33,7 @@ class CategorySpec: QuickSpec {
 
   override func spec() {
 
-    let data: NSData = Resources.testData(named: "Category.json")!
+    let data: Data = Resources.testData(named: "Category.json")!
 
     describe("init(json:)") {
       it("should parse JSON as Category") {

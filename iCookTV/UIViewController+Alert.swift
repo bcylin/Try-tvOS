@@ -34,12 +34,12 @@ extension UIViewController {
     let alert = UIAlertController(
       title: R.string.localizable.errorTitle(),
       message: R.string.localizable.contactInfo(),
-      preferredStyle: .Alert
+      preferredStyle: .alert
     )
-    alert.addAction(UIAlertAction(title: R.string.localizable.retry(), style: .Default) { _ in
+    alert.addAction(UIAlertAction(title: R.string.localizable.retry(), style: .default) { _ in
       retry?()
     })
-    presentViewController(alert, animated: true, completion: nil)
+    present(alert, animated: true, completion: nil)
   }
 
 }

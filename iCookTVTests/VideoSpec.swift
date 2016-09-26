@@ -33,7 +33,7 @@ class VideoSpec: QuickSpec {
 
   override func spec() {
 
-    let data: NSData = Resources.testData(named: "Video.json")!
+    let data: Data = Resources.testData(named: "Video.json")!
     let json = try! JSON(data: data as Data)
     let video = try! Video(json: json)
 

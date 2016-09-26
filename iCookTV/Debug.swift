@@ -37,8 +37,8 @@ struct Debug {
 
   static func print(_ items: Any..., separator: String = " ", terminator: String = "\n", file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
-      let prefix = dateFormatter.stringFromDate(NSDate()) + " \(file.typeName).\(function):[\(line)]"
-      let content = items.map { "\($0)" } .joinWithSeparator(separator)
+      let prefix = dateFormatter.string(from: Date()) + " \(file.typeName).\(function):[\(line)]"
+      let content = items.map { "\($0)" } .joined(separator: separator)
       Swift.print("\(prefix) \(content)\n", terminator: terminator)
     #endif
   }

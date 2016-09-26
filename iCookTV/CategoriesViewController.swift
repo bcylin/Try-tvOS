@@ -39,7 +39,7 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   private lazy var titleView: MainMenuView = {
     let _menu = MainMenuView()
-    _menu.button.setTitle(R.string.localizable.history(), for: .Normal)
+    _menu.button.setTitle(R.string.localizable.history(), for: .normal)
     _menu.button.addTarget(self, action: .showHistory, for: .primaryActionTriggered)
     return _menu
   }()

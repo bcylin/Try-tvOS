@@ -58,7 +58,7 @@ class VideosDataSource: DataSource<VideosCollection> {
         withReuseIdentifier: String(describing: CategoryHeaderView.self),
         for: indexPath
       )
-      (headerView as? CategoryHeaderView)?.accessoryLabel.text = title ?? "Category"
+      (headerView as? CategoryHeaderView)?.accessoryLabel.text = title
       return headerView
     }
 
