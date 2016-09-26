@@ -31,23 +31,23 @@ struct HistoryManager {
 
   // MARK: - Private Properties
 
-  private static var cache: NSURL? {
+  private static var cache: URL? {
     guard let
-      directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first,
-      url = NSURL(string: directory)
+      directory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first,
+      let url = URL(string: directory)
     else {
       return nil
     }
-    return url.URLByAppendingPathComponent("history.dat")
+    return url.appendingPathComponent("history.dat")
   }
 
-  private static let savingQueue = dispatch_queue_create("io.github.bcylin.savingQueue", DISPATCH_QUEUE_SERIAL)
+  private static let savingQueue = DispatchQueue(label: "io.github.bcylin.savingQueue", attributes: [])
 
   // MARK: - Public Methods
 
   /// Returns the deserialized video history read from the cache directory.
   static var history: [JSON] {
-    if let path = cache?.path, records = NSArray(contentsOfFile: path) as? [NSData] {
+    if let path = cache?.path, let records = NSArray(contentsOfFile: path) as? [Data] {
       do {
         return try records.map { try JSON(data: $0) }
       } catch {
@@ -64,8 +64,8 @@ struct HistoryManager {
 
    - parameter video: A video object.
    */
-  static func save(video video: Video) {
-    dispatch_async(savingQueue) {
+  static func save(video: Video) {
+    savingQueue.async {
       guard let path = self.cache?.path else {
         return
       }
@@ -75,18 +75,18 @@ struct HistoryManager {
       var records = history
 
       // Keep the latest video at top.
-      for (index, element) in self.history.enumerate() {
+      for (index, element) in self.history.enumerated() {
         if element["id"] == json["id"] {
-          records.removeAtIndex(index)
+          records.remove(at: index)
           break
         }
       }
-      records.insert(json, atIndex: 0)
+      records.insert(json, at: 0)
       Debug.print("records.count =", records.count)
 
       do {
         let data = try records.map { try $0.serialize() } as NSArray
-        data.writeToFile(path, atomically: true)
+        data.write(toFile: path, atomically: true)
       } catch {
         Tracker.track(error)
       }
@@ -98,18 +98,18 @@ struct HistoryManager {
 
    - parameter completion: A completion block that's called in the main thread when the action finishes.
    */
-  static func deleteCache(completion: ((success: Bool) -> Void)? = nil) {
+  static func deleteCache(_ completion: ((_ success: Bool) -> Void)? = nil) {
     if let path = cache?.path {
-      dispatch_async(savingQueue) {
+      savingQueue.async {
         do {
-          try NSFileManager.defaultManager().removeItemAtPath(path)
-          dispatch_async(dispatch_get_main_queue()) {
-            completion?(success: true)
+          try FileManager.default.removeItem(atPath: path)
+          DispatchQueue.main.async {
+            completion?(true)
           }
         } catch {
           Tracker.track(error)
-          dispatch_async(dispatch_get_main_queue()) {
-            completion?(success: false)
+          DispatchQueue.main.async {
+            completion?(false)
           }
         }
       }

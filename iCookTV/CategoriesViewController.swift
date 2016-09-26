@@ -39,14 +39,14 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   private lazy var titleView: MainMenuView = {
     let _menu = MainMenuView()
-    _menu.button.setTitle(R.string.localizable.history(), forState: .Normal)
-    _menu.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
+    _menu.button.setTitle(R.string.localizable.history(), for: .Normal)
+    _menu.button.addTarget(self, action: .showHistory, for: .primaryActionTriggered)
     return _menu
   }()
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
-    _collectionView.registerClass(CategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(CategoryCell.self))
+    _collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: NSStringFromClass(CategoryCell.self))
     _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self.dataSource
     _collectionView.delegate = self
@@ -71,11 +71,11 @@ class CategoriesViewController: BlurBackgroundViewController,
     super.loadView()
     navigationItem.titleView = UIView()
 
-    let divided = view.bounds.divide(800, fromEdge: .MaxYEdge)
+    let divided = view.bounds.divided(atDistance: 800, from: .maxYEdge)
     titleView.frame = divided.remainder
-    titleView.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
+    titleView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
     collectionView.frame = divided.slice
-    collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
+    collectionView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
 
     view.addSubview(titleView)
     view.addSubview(collectionView)
@@ -83,10 +83,10 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: .handleCreatedCover,
-      name: CoverBuilder.DidCreateCoverNotification,
+      name: NSNotification.Name(rawValue: CoverBuilder.DidCreateCoverNotification),
       object: nil
     )
   }
@@ -99,14 +99,14 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   // MARK: - UICollectionViewDelegate
 
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let category = dataSource[indexPath.row]
     let controller = VideosViewController(categoryID: category.id, title: category.name)
     navigationController?.pushViewController(controller, animated: true)
   }
 
-  func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
-    if let cell = context.nextFocusedView as? CategoryCell, cover = cell.imageView.image where cell.hasDisplayedCover {
+  func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image, cell.hasDisplayedCover {
       self.backgroundImage = cover
     }
   }
@@ -119,17 +119,17 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   // MARK: - NSNotification Callbacks
 
-  @objc private func handleCreatedCover(notification: NSNotification) {
+  @objc fileprivate func handleCreatedCover(_ notification: Notification) {
     // Update the background image when the first mosaic cover is created.
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
       self.backgroundImage = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage
     }
-    NSNotificationCenter.defaultCenter().removeObserver(self, name: CoverBuilder.DidCreateCoverNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: CoverBuilder.DidCreateCoverNotification), object: nil)
   }
 
   // MARK: - UIResponder Callbacks
 
-  @objc private func showHistory(sender: UIButton) {
+  @objc fileprivate func showHistory(_ sender: UIButton) {
     navigationController?.pushViewController(HistoryViewController(), animated: true)
   }
 

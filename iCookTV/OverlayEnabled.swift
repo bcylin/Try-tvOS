@@ -32,18 +32,18 @@ protocol OverlayEnabled {
   var overlayView: UIView { get }
 
   /// Provides the superview of a given overlay view.
-  func containerViewForOverlayView(overlayView: UIView) -> UIView
+  func containerViewForOverlayView(_ overlayView: UIView) -> UIView
 
   /// Provides the constraints for a given overlay view.
-  func constraintsForOverlayView(overlayView: UIView) -> [NSLayoutConstraint]
+  func constraintsForOverlayView(_ overlayView: UIView) -> [NSLayoutConstraint]
 }
 
 extension OverlayEnabled where Self: BlurBackgroundViewController {
 
-  func setOverlayViewHidden(hidden: Bool, animated: Bool) {
+  func setOverlayViewHidden(_ hidden: Bool, animated: Bool) {
     if !hidden {
       layoutOverlayViewIfNeeded()
-      overlayView.superview?.bringSubviewToFront(overlayView)
+      overlayView.superview?.bringSubview(toFront: overlayView)
     }
 
     let transition = {
@@ -51,12 +51,12 @@ extension OverlayEnabled where Self: BlurBackgroundViewController {
     }
 
     if animated {
-      UIView.animateWithDuration(0.3, animations: transition)
+      UIView.animate(withDuration: 0.3, animations: transition)
     } else {
       transition()
     }
 
-    if let url = GroundControl.defaultBackgroundURL where !hidden {
+    if let url = GroundControl.defaultBackgroundURL, !hidden {
       KingfisherManager.sharedManager.downloader.downloadImageWithURL(url, progressBlock: nil) { [weak self] in
         self?.backgroundImage = $0.image
       }
@@ -70,7 +70,7 @@ extension OverlayEnabled where Self: BlurBackgroundViewController {
 
     containerViewForOverlayView(overlayView).addSubview(overlayView)
     overlayView.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activateConstraints(constraintsForOverlayView(overlayView))
+    NSLayoutConstraint.activate(constraintsForOverlayView(overlayView))
   }
 
 }

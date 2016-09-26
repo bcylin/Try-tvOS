@@ -32,7 +32,7 @@ class VideoCell: UICollectionViewCell {
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
     _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
-    _imageView.contentMode = .ScaleAspectFill
+    _imageView.contentMode = .scaleAspectFill
     return _imageView
   }()
 
@@ -40,16 +40,16 @@ class VideoCell: UICollectionViewCell {
     let _title = UILabel()
     _title.font = UIFont.tvFontForVideoCell()
     _title.textColor = UIColor.tvTextColor()
-    _title.textAlignment = .Center
+    _title.textAlignment = .center
     return _title
   }()
 
   private(set) lazy var timeLabel: UILabel = {
     let _time = InsetLabel(contentEdgeInsets: UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20))
     _time.font = UIFont.tvFontForVideoLength()
-    _time.textColor = UIColor.whiteColor()
+    _time.textColor = UIColor.white
     _time.backgroundColor = UIColor.Palette.GreyishBrown
-    _time.textAlignment = .Center
+    _time.textAlignment = .center
     _time.alpha = 0
     return _time
   }()
@@ -85,11 +85,11 @@ class VideoCell: UICollectionViewCell {
 
   // MARK: - UIFocusEnvironment
 
-  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+  override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     let focused = (context.nextFocusedView == self)
 
     let color = focused ? UIColor.tvFocusedTextColor() : UIColor.tvTextColor()
-    let transform = focused ?  CGAffineTransformMakeTranslation(0, 15) : CGAffineTransformIdentity
+    let transform = focused ?  CGAffineTransform(translationX: 0, y: 15) : CGAffineTransform.identity
     let font = focused ? UIFont.tvFontForFocusedVideoCell() : UIFont.tvFontForVideoCell()
     let alpha: CGFloat = focused ? 1 : 0
     let offset = (
@@ -119,21 +119,21 @@ class VideoCell: UICollectionViewCell {
     contentView.addSubview(timeLabel)
 
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
-    imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
-    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
+    imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 20).active = true
-    titleLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    titleLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+    titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
+    titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
 
     timeLabel.translatesAutoresizingMaskIntoConstraints = false
-    timeLabelConstraints.left = timeLabel.leadingAnchor.constraintEqualToAnchor(imageView.leadingAnchor, constant: timeLabelOffsets.left.normal)
-    timeLabelConstraints.bottom = imageView.bottomAnchor.constraintEqualToAnchor(timeLabel.bottomAnchor, constant: timeLabelOffsets.bottom.normal)
-    timeLabelConstraints.left.active = true
-    timeLabelConstraints.bottom.active = true
+    timeLabelConstraints.left = timeLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: timeLabelOffsets.left.normal)
+    timeLabelConstraints.bottom = imageView.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: timeLabelOffsets.bottom.normal)
+    timeLabelConstraints.left.isActive = true
+    timeLabelConstraints.bottom.isActive = true
   }
 
   // MARK: - Public Methods

@@ -29,7 +29,7 @@ import UIKit
 class VideosDataSource: DataSource<VideosCollection> {
 
   var currentPage: Int {
-    return Int(numberOfItems / self.dynamicType.pageSize)
+    return Int(numberOfItems / type(of: self).pageSize)
   }
 
   static let pageSize = 20
@@ -45,18 +45,18 @@ class VideosDataSource: DataSource<VideosCollection> {
 
   // MARK: - UICollectionViewDataSource
 
-  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(VideoCell.self), forIndexPath: indexPath)
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(VideoCell.self), for: indexPath)
     (cell as? VideoCell)?.configure(withVideo: dataCollection[indexPath.row])
     return cell
   }
 
-  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> UICollectionReusableView {
     if kind == UICollectionElementKindSectionHeader {
-      let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
-        UICollectionElementKindSectionHeader,
-        withReuseIdentifier: String(CategoryHeaderView.self),
-        forIndexPath: indexPath
+      let headerView = collectionView.dequeueReusableSupplementaryView(
+        ofKind: UICollectionElementKindSectionHeader,
+        withReuseIdentifier: String(describing: CategoryHeaderView.self),
+        for: indexPath
       )
       (headerView as? CategoryHeaderView)?.accessoryLabel.text = title ?? "Category"
       return headerView

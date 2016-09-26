@@ -47,7 +47,7 @@ extension TrackableAttributes where Self: CustomStringConvertible {
 
   var attributes: [String: AnyObject] {
     var attributes = details
-    attributes["name"] = name
+    attributes["name"] = name as AnyObject?
     attributes[TrackableKey.categoryTitle] = nil
     attributes[TrackableKey.videoTitle] = nil
     return attributes

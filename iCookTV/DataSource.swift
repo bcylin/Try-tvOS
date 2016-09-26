@@ -40,22 +40,22 @@ class DataSource<Collection: DataCollection>: NSObject, SourceType {
 
   // MARK: - UICollectionViewDataSource
 
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return numberOfItems
   }
 
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     fatalError("Subclass must override this method.")
   }
 
   // MARK: - Public Methods
 
-  func append(items: [Collection.DataType], toCollectionView collectionView: UICollectionView) {
+  func append(_ items: [Collection.DataType], toCollectionView collectionView: UICollectionView) {
     dataCollection = dataCollection.append(items)
     collectionView.reloadData()
   }
 
-  func moveItem(atIndexPathToTop indexPath: NSIndexPath, inCollectionView collectionView: UICollectionView) {
+  func moveItem(atIndexPathToTop indexPath: IndexPath, inCollectionView collectionView: UICollectionView) {
     dataCollection = dataCollection.moveItem(fromIndex: indexPath.row, toIndex: 0)
     collectionView.reloadData()
   }

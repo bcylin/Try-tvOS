@@ -42,12 +42,12 @@ class TrackableNavigationController: UINavigationController {
 
   // MARK: - UINavigationController
 
-  override func pushViewController(viewController: UIViewController, animated: Bool) {
+  override func pushViewController(_ viewController: UIViewController, animated: Bool) {
     super.pushViewController(viewController, animated: animated)
     track(viewController as? Trackable)
   }
 
-  override func setViewControllers(viewControllers: [UIViewController], animated: Bool) {
+  override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
     super.setViewControllers(viewControllers, animated: animated)
     for controller in viewControllers {
       track(controller as? Trackable)
@@ -56,7 +56,7 @@ class TrackableNavigationController: UINavigationController {
 
   // MARK: - Private Methods
 
-  private func track(navigation: Trackable?) {
+  private func track(_ navigation: Trackable?) {
     guard let pageView = navigation?.pageView else {
       return
     }

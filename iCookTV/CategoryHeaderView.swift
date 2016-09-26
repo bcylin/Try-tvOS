@@ -78,10 +78,10 @@ class CategoryHeaderView: UICollectionReusableView {
     imageView.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
 
     titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
-    titleLabel.bottomAnchor.constraintEqualToAnchor(bottomAnchor, constant: -10).active = true
+    titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
 
-    accessoryLabel.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -Metrics.EdgePadding.right).active = true
-    accessoryLabel.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
+    accessoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.EdgePadding.right).isActive = true
+    accessoryLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
   }
 
 }

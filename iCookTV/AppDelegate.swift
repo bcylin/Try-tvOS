@@ -38,25 +38,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // MARK: - UIApplicationDelegate
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     GroundControl.sync()
     setUpAnalytics()
 
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = TrackableNavigationController(rootViewController: LaunchViewController())
     window?.makeKeyAndVisible()
 
     return true
   }
 
-  func applicationDidEnterBackground(application: UIApplication) {
+  func applicationDidEnterBackground(_ application: UIApplication) {
     TreasureData.sharedInstance().endSession(Tracker.sessionsTable)
 
-    backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
+    backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
       self?.endBackgroundTask(inApplication: application)
-    }
+    })
 
-    TreasureData.sharedInstance().uploadEventsWithCallback({ [weak self] in
+    TreasureData.sharedInstance().uploadEvents(callback: { [weak self] in
       self?.endBackgroundTask(inApplication: application)
     }) { [weak self] _ in
       self?.endBackgroundTask(inApplication: application)
@@ -71,11 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   private func setUpAnalytics() {
-    Crashlytics.startWithAPIKey(iCookTVKeys.CrashlyticsAPIKey)
+    Crashlytics.start(withAPIKey: iCookTVKeys.CrashlyticsAPIKey)
     Fabric.with([Crashlytics.self])
 
     TreasureData.initializeApiEndpoint("https://in.treasuredata.com")
-    TreasureData.initializeWithApiKey(iCookTVKeys.TreasureDataAPIKey)
+    TreasureData.initialize(withApiKey: iCookTVKeys.TreasureDataAPIKey)
     TreasureData.sharedInstance().enableAutoAppendUniqId()
     TreasureData.sharedInstance().enableAutoAppendModelInformation()
     TreasureData.sharedInstance().enableAutoAppendAppInformation()

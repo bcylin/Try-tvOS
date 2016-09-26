@@ -32,10 +32,10 @@ extension UIImage {
     UIGraphicsBeginImageContextWithOptions(size, true, 0)
 
     let canvas = CGRect(origin: CGPoint.zero, size: size)
-    self.drawInRect(canvas)
+    self.draw(in: canvas)
 
     let rect = canvas.rect(bySize: image.size, atCorner: corner)
-    image.drawInRect(rect)
+    image.draw(in: rect)
 
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
@@ -46,12 +46,12 @@ extension UIImage {
   class func placeholderImage(withSize size: CGSize) -> UIImage! {
     let layer = CAGradientLayer()
     layer.frame = CGRect(origin: CGPoint.zero, size: size)
-    layer.colors = [UIColor.whiteColor().CGColor, UIColor.Palette.LightGray.CGColor]
+    layer.colors = [UIColor.white.CGColor, UIColor.Palette.LightGray.CGColor]
     layer.startPoint = CGPoint(x: 0, y: 0)
     layer.endPoint = CGPoint(x: 1, y: 1)
 
     UIGraphicsBeginImageContext(size)
-    layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    layer.render(in: UIGraphicsGetCurrentContext()!)
 
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()

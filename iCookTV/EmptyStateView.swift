@@ -31,7 +31,7 @@ class EmptyStateView: UIView {
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
     _imageView.image = R.image.icookTvCat()
-    _imageView.contentMode = .ScaleAspectFill
+    _imageView.contentMode = .scaleAspectFill
     return _imageView
   }()
 
@@ -40,7 +40,7 @@ class EmptyStateView: UIView {
     _label.font = UIFont.tvFontForTagline()
     _label.textColor = UIColor.tvTaglineColor()
     _label.text = R.string.localizable.noVideoFound()
-    _label.textAlignment = .Center
+    _label.textAlignment = .center
     return _label
   }()
 
@@ -65,26 +65,26 @@ class EmptyStateView: UIView {
     imageView.translatesAutoresizingMaskIntoConstraints = false
     textLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    imageView.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+    imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
     let views = [
       "image": imageView,
       "text": textLabel
-    ]
-    addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-      "H:|-(>=0)-[image(280)]-(>=0)-|",
+    ] as [String : Any]
+    addConstraints(NSLayoutConstraint.constraints(
+      withVisualFormat: "H:|-(>=0)-[image(280)]-(>=0)-|",
       options: [],
       metrics: nil,
       views: views
     ))
-    addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-      "H:|[text]|",
+    addConstraints(NSLayoutConstraint.constraints(
+      withVisualFormat: "H:|[text]|",
       options: [],
       metrics: nil,
       views: views
     ))
-    addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-      "V:|[image(350)]-50-[text]|",
+    addConstraints(NSLayoutConstraint.constraints(
+      withVisualFormat: "V:|[image(350)]-50-[text]|",
       options: [],
       metrics: nil,
       views: views

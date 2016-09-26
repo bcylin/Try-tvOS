@@ -35,12 +35,12 @@ extension UIFont {
 
   // MARK: - Private Methods
 
-  private class func tvFontOfSize(fontSize: CGFloat) -> UIFont {
-    return UIFont(name: FontFamily.PingFangTCRegular, size: fontSize) ?? UIFont.systemFontOfSize(fontSize)
+  private class func tvFontOfSize(_ fontSize: CGFloat) -> UIFont {
+    return UIFont(name: FontFamily.PingFangTCRegular, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
   }
 
-  private class func tvBoldFontOfSize(fontSize: CGFloat) -> UIFont {
-    return UIFont(name: FontFamily.PingFangTCMedium, size: fontSize) ?? UIFont.boldSystemFontOfSize(fontSize)
+  private class func tvBoldFontOfSize(_ fontSize: CGFloat) -> UIFont {
+    return UIFont(name: FontFamily.PingFangTCMedium, size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize)
   }
 
   // MARK: - Public Methods
@@ -66,7 +66,7 @@ extension UIFont {
   }
 
   class func tvFontForVideoLength() -> UIFont {
-    return UIFont.systemFontOfSize(20)
+    return UIFont.systemFont(ofSize: 20)
   }
 
   class func tvFontForLogo() -> UIFont {

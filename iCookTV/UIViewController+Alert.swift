@@ -28,7 +28,7 @@ import UIKit
 
 extension UIViewController {
 
-  func showAlert(error: ErrorType?, retry: (() -> Void)? = nil) {
+  func showAlert(_ error: Error?, retry: (() -> Void)? = nil) {
     Tracker.track(error)
 
     let alert = UIAlertController(

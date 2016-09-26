@@ -41,7 +41,7 @@ class MainMenuView: UIView {
   }()
 
   private(set) lazy var button: UIButton = {
-    let _button = MenuButton(type: .System)
+    let _button = MenuButton(type: .system)
     _button.titleLabel?.font = UIFont.tvFontForHeaderTitle()
     return _button
   }()
@@ -69,7 +69,7 @@ class MainMenuView: UIView {
 
   // MARK: - UIFocusEnvironment
 
-  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+  override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     let focused = (context.nextFocusedView == button)
 
     coordinator.addCoordinatedAnimations({
@@ -97,16 +97,16 @@ class MainMenuView: UIView {
 
     frontBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
     frontBannerConstraint = frontBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: bannerOffset.front.normal)
-    frontBannerConstraint?.active = true
+    frontBannerConstraint?.isActive = true
 
     backBanner.topAnchor.constraintEqualToAnchor(topAnchor).active = true
     backBannerConstraint = backBanner.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: bannerOffset.back.normal)
-    backBannerConstraint?.active = true
+    backBannerConstraint?.isActive = true
 
-    focusGuide.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-    focusGuide.trailingAnchor.constraintEqualToAnchor(button.leadingAnchor).active = true
-    focusGuide.heightAnchor.constraintEqualToAnchor(heightAnchor).active = true
-    focusGuide.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    focusGuide.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    focusGuide.trailingAnchor.constraint(equalTo: button.leadingAnchor).isActive = true
+    focusGuide.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+    focusGuide.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
     imageView.contentMode = .ScaleAspectFill
     imageView.widthAnchor.constraintEqualToConstant(120).active = true
@@ -115,10 +115,10 @@ class MainMenuView: UIView {
     imageView.topAnchor.constraintEqualToAnchor(topAnchor, constant: 136).active = true
 
     titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
-    titleLabel.topAnchor.constraintEqualToAnchor(topAnchor, constant: 150).active = true
+    titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 150).isActive = true
 
-    button.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -148).active = true
-    button.centerYAnchor.constraintEqualToAnchor(titleLabel.centerYAnchor).active = true
+    button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -148).isActive = true
+    button.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
   }
 
 }

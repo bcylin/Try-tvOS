@@ -39,18 +39,18 @@ class HistoryViewController: VideosViewController {
 
   override func loadView() {
     super.loadView()
-    dropdownMenuView.button.setTitle(R.string.localizable.home(), forState: .Normal)
-    dropdownMenuView.button.addTarget(self, action: .backToHome, forControlEvents: .PrimaryActionTriggered)
+    dropdownMenuView.button.setTitle(R.string.localizable.home(), for: .Normal)
+    dropdownMenuView.button.addTarget(self, action: .backToHome, for: .primaryActionTriggered)
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setOverlayViewHidden(false, animated: false)
     isLoading = true
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
       do {
         let history = try HistoryManager.history.map(Video.init)
-        dispatch_sync(dispatch_get_main_queue()) {
+        DispatchQueue.main.sync {
           self.dataSource.append(history, toCollectionView: self.collectionView)
           self.setOverlayViewHidden(self.dataSource.numberOfItems > 0, animated: true)
           self.isLoading = false
@@ -68,7 +68,7 @@ class HistoryViewController: VideosViewController {
     }
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     if dataSource.numberOfItems > 0 {
       collectionView.reloadData()
@@ -83,14 +83,14 @@ class HistoryViewController: VideosViewController {
 
   // MARK: - UICollectionViewDelegate
 
-  override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+  override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     // History doesn't need pagination.
   }
 
-  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    super.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    super.collectionView(collectionView, didSelectItemAt: indexPath)
     // Reorder current displayed contents after the video player is presented.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
       self.dataSource.moveItem(atIndexPathToTop: indexPath, inCollectionView: collectionView)
     }
   }
@@ -116,8 +116,8 @@ class HistoryViewController: VideosViewController {
 
   // MARK: - UIResponder Callbacks
 
-  @objc private func backToHome(sender: UIButton) {
-    navigationController?.popToRootViewControllerAnimated(true)
+  @objc fileprivate func backToHome(_ sender: UIButton) {
+    navigationController?.popToRootViewController(animated: true)
   }
 
 }

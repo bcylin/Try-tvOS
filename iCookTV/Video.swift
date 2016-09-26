@@ -38,8 +38,8 @@ struct Video: JSONDecodable, JSONEncodable {
   let source: String?
   let cover: String
 
-  var coverURL: NSURL? {
-    return NSURL(string: cover)
+  var coverURL: URL? {
+    return URL(string: cover)
   }
 
   var timestamp: String {
