@@ -143,9 +143,9 @@ class LaunchViewController: UIViewController {
 
         if let this = self, this.isAnimating {
           // Wait until the animation finishes
-          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            dispatch_semaphore_wait(this.semaphore, Animation.duration.dispatchTime)
-            dispatch_async(dispatch_get_main_queue(), showCategories)
+          DispatchQueue.global().async {
+            _ = this.semaphore.wait(timeout: Animation.duration.dispatchTime)
+            DispatchQueue.main.async(execute: showCategories)
           }
         } else {
           showCategories()

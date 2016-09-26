@@ -227,12 +227,12 @@ class VideosViewController: BlurBackgroundViewController,
         return
       }
 
-      dispatch_async(pagination) {
+      pagination.async {
         do {
           let json = try JSON(data: data)
-          let videos = try json.array("data").map(Video.init)
+          let videos = try json.getArray(at: "data").map(Video.init)
 
-          dispatch_sync(dispatch_get_main_queue()) {
+          DispatchQueue.main.sync {
             self?.hasNextPage = json["links"]?["next"] != nil
             self?.dataSource.append(videos, toCollectionView: collectionView)
             if let numberOfItems = self?.dataSource.numberOfItems {
@@ -242,7 +242,7 @@ class VideosViewController: BlurBackgroundViewController,
             }
           }
         } catch {
-          dispatch_sync(dispatch_get_main_queue()) {
+          DispatchQueue.main.sync {
             self?.showAlert(error, retry: self?.fetchNextPage)
           }
         }

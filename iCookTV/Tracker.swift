@@ -34,7 +34,7 @@ enum Tracker {
   static let sessionsTable = "sessions"
 
   static func track(_ pageView: PageView) {
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global().async {
       Debug.print(pageView)
       Answers.logCustomEvent(withName: pageView.name, customAttributes: pageView.details)
       TreasureData.sharedInstance().addEvent(pageView.attributes, database: defaultDatabase, table: "screens")
@@ -45,7 +45,7 @@ enum Tracker {
   }
 
   static func track(_ event: Event) {
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global().async {
       Debug.print(event)
       Answers.logCustomEvent(withName: event.name, customAttributes: event.details)
       TreasureData.sharedInstance().addEvent(event.attributes, database: defaultDatabase, table: "events")
@@ -59,7 +59,7 @@ enum Tracker {
     guard let error = error else {
       return
     }
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global().async {
       let description = String(describing: error)
       Debug.print(description, file: file, function: function, line: line)
       Answers.logCustomEvent(withName: "Error", customAttributes: ["Description": description])

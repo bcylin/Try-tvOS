@@ -70,7 +70,7 @@ extension Video {
   // MARK: - Public Methods
 
   func convertToPlayerItemWithCover(_ image: UIImage?, completion: @escaping (AVPlayerItem?) -> Void) {
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global().async {
       guard let url = self.playerItemURL else {
         DispatchQueue.main.async {
           completion(nil)

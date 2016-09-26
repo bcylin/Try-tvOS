@@ -47,7 +47,7 @@ class HistoryViewController: VideosViewController {
     super.viewDidLoad()
     setOverlayViewHidden(false, animated: false)
     isLoading = true
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global().async {
       do {
         let history = try HistoryManager.history.map(Video.init)
         DispatchQueue.main.sync {
