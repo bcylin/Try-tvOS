@@ -82,7 +82,7 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
     }
 
     let url = iCookTVKeys.baseAPIURL + "videos/\(id).json"
-    Alamofire.request(.GET, url).responseJSON { [weak self] response in
+    Alamofire.request(url, method: .get).responseJSON { [weak self] response in
       guard let data = response.data, response.result.error == nil else {
         self?.setPlayerItem(nil)
         Tracker.track(response.result.error)
@@ -112,11 +112,11 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
       let fraction = currentTime / duration
 
       Tracker.track(Event(name: "Played Video", details: [
-        TrackableKey.videoID: video?.id ?? "",
-        TrackableKey.videoTitle: video?.title ?? "",
-        TrackableKey.currentTime: currentTime,
-        TrackableKey.duration: duration,
-        TrackableKey.percentage: fraction * 100
+        TrackableKey.videoID: NSString(format: "%@", video?.id ?? ""),
+        TrackableKey.videoTitle: NSString(format: "%@", video?.title ?? ""),
+        TrackableKey.currentTime: NSNumber(value: currentTime),
+        TrackableKey.duration: NSNumber(value: duration),
+        TrackableKey.percentage: NSNumber(value: fraction * 100)
       ]))
     }
   }

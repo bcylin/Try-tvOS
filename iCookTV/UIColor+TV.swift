@@ -31,8 +31,8 @@ extension UIColor {
 
   enum Palette {
     static let White = UIColor.white
-    static let LightGray = UIColor.hex("#EFEDE8")
-    static let GreyishBrown = UIColor.hex("#564E4A")
+    static let LightGray = UIColor(hex: "#EFEDE8")
+    static let GreyishBrown = UIColor(hex: "#564E4A")
 
     enum Button {
       static let TitleColor = White

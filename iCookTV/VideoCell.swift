@@ -78,7 +78,7 @@ class VideoCell: UICollectionViewCell {
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    imageView.kf_cancelDownloadTask()
+    imageView.kf.cancelDownloadTask()
     imageView.image = UIImage.placeholderImage(withSize: bounds.size)
     titleLabel.text = nil
   }
@@ -140,7 +140,7 @@ class VideoCell: UICollectionViewCell {
 
   func configure(withVideo video: Video) {
     if let url = video.coverURL {
-      imageView.kf_setImageWithURL(url, placeholderImage: UIImage.placeholderImage(withSize: bounds.size))
+      imageView.kf.setImage(with: url, placeholder: UIImage.placeholderImage(withSize: bounds.size))
     }
     titleLabel.text = video.title
     timeLabel.text = video.timestamp

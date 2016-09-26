@@ -124,7 +124,7 @@ class CategoryCell: UICollectionViewCell {
     }
 
     for (corner, url) in urls {
-      let downloading = ImageDownloader.defaultDownloader.downloadImageWithURL(url, progressBlock: nil) {
+      let downloading = ImageDownloader.default.downloadImage(with: url, progressBlock: nil) {
         [weak self] image, error, imageURL, originalData in
 
         self?.tasks[corner] = nil

@@ -57,9 +57,9 @@ extension OverlayEnabled where Self: BlurBackgroundViewController {
     }
 
     if let url = GroundControl.defaultBackgroundURL, !hidden {
-      KingfisherManager.sharedManager.downloader.downloadImageWithURL(url, progressBlock: nil) { [weak self] in
-        self?.backgroundImage = $0.image
-      }
+      KingfisherManager.shared.downloader.downloadImage(with: url, completionHandler: { [weak self] image, _, _, _ in
+        self?.backgroundImage = image
+      })
     }
   }
 

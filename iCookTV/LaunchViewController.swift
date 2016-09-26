@@ -127,7 +127,7 @@ class LaunchViewController: UIViewController {
   // MARK: - Private Methods
 
   private func fetchCategories() {
-    Alamofire.request(.GET, iCookTVKeys.baseAPIURL + "categories.json").responseJSON { [weak self] response in
+    Alamofire.request(iCookTVKeys.baseAPIURL + "categories.json", method: .get).responseJSON { [weak self] response in
       guard let data = response.data, response.result.error == nil else {
         self?.showAlert(response.result.error)
         return
@@ -136,7 +136,7 @@ class LaunchViewController: UIViewController {
       do {
         Debug.print(response.result.value)
         let json = try JSON(data: data)
-        let categories = try json.array("data").map(Category.init)
+        let categories = try json.getArray(at: "data").map(Category.init)
         let showCategories: () -> Void = {
           self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
         }

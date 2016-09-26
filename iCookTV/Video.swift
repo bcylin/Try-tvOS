@@ -53,44 +53,44 @@ struct Video: JSONDecodable, JSONEncodable {
 
   init(json value: JSON) throws {
     let nullable: JSON.SubscriptingOptions = [.NullBecomesNil, .MissingKeyBecomesNil]
-    id = try value.string("id")
-    title = try value.string("attributes", "title")
-    subtitle = try value.string("attributes", "subtitle", alongPath: nullable)
-    description = try value.string("attributes", "description", alongPath: nullable)
-    length = try value.int("attributes", "length", or: 0)
-    youtube = try value.string("attributes", "embed-url")
-    source = try value.string("attributes", "video-url", alongPath: nullable)
-    cover = try value.string("attributes", "cover-url")
+    id = try value.getString(at: "id")
+    title = try value.getString(at: "attributes", "title")
+    subtitle = try value.getString(at: "attributes", "subtitle", alongPath: nullable)
+    description = try value.getString(at: "attributes", "description", alongPath: nullable)
+    length = try value.getInt(at: "attributes", "length", or: 0)
+    youtube = try value.getString(at: "attributes", "embed-url")
+    source = try value.getString(at: "attributes", "video-url", alongPath: nullable)
+    cover = try value.getString(at: "attributes", "cover-url")
   }
 
   // MARK: - JSONEncodable
 
   func toJSON() -> JSON {
     var attributes: [String: JSON] = [
-      "title": .String(title),
-      "embed-url": .String(youtube),
-      "cover-url": .String(cover),
-      "length": .Int(length)
+      "title": .string(title),
+      "embed-url": .string(youtube),
+      "cover-url": .string(cover),
+      "length": .int(length)
     ]
 
     if let source = source {
-      attributes["video-url"] = .String(source)
+      attributes["video-url"] = .string(source)
     }
 
     if let subtitle = subtitle {
-      attributes["subtitle"] = .String(subtitle)
+      attributes["subtitle"] = .string(subtitle)
     }
 
     if let description = description {
-      attributes["description"] = .String(description)
+      attributes["description"] = .string(description)
     }
 
     let json: [String: JSON] = [
-      "id": .String(id),
-      "attributes": .Dictionary(attributes)
+      "id": .string(id),
+      "attributes": .dictionary(attributes)
     ]
 
-    return .Dictionary(json)
+    return .dictionary(json)
   }
 
 }

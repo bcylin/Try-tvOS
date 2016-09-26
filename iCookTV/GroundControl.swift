@@ -63,7 +63,7 @@ struct GroundControl {
   // MARK: - Public Methods
 
   static func sync() {
-    Alamofire.request(.GET, groundControlURL).responseJSON { response in
+    Alamofire.request(groundControlURL, method: .get).responseJSON { response in
       guard let results = response.result.value as? NSDictionary, response.result.error == nil else {
         return
       }

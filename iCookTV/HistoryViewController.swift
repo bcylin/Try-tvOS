@@ -63,7 +63,7 @@ class HistoryViewController: VideosViewController {
         }
       }
       Tracker.track(PageView(name: "history", details: [
-        TrackableKey.numberOfItems: self.dataSource.numberOfItems
+        TrackableKey.numberOfItems: NSNumber(value: self.dataSource.numberOfItems)
       ]))
     }
   }
