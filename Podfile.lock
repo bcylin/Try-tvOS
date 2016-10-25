@@ -1,14 +1,14 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (3.5.1)
   - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
   - Freddy (2.1.0)
   - HCYoutubeParser (0.0.5)
-  - Hue (1.1)
+  - Hue (1.1.1)
   - KeenClientTD (3.2.25)
   - Keys (1.0.0)
-  - Kingfisher (2.4.2)
+  - Kingfisher (2.6.0)
   - Nimble (4.1.0)
   - Quick (0.9.3)
   - R.swift (2.4.0):
@@ -18,14 +18,14 @@ PODS:
     - KeenClientTD (= 3.2.25)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 3.5.1)
   - Crashlytics
   - Fabric
   - Freddy
   - HCYoutubeParser
-  - Hue (from `https://github.com/hyperoslo/Hue.git`, commit `89ae5e1`)
+  - Hue (from `https://github.com/bcylin/Hue.git`, commit `190aa15`)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher
+  - Kingfisher (~> 2.6.0)
   - Nimble
   - Quick
   - R.swift
@@ -33,32 +33,32 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Hue:
-    :commit: 89ae5e1
-    :git: https://github.com/hyperoslo/Hue.git
+    :commit: 190aa15
+    :git: https://github.com/bcylin/Hue.git
   Keys:
     :path: Pods/CocoaPodsKeys
 
 CHECKOUT OPTIONS:
   Hue:
-    :commit: 89ae5e1
-    :git: https://github.com/hyperoslo/Hue.git
+    :commit: 190aa15
+    :git: https://github.com/bcylin/Hue.git
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
   Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Freddy: bbdca013977db29638b24baf6572ce94452bec29
   HCYoutubeParser: bc1db8c062e4b835eda381f2be2f9970f6a8d071
-  Hue: c7d6a7206bac669ed69e78cc6c14a4d7bd28277c
+  Hue: 931aeeadcb29ce5de5b97589aa936be4638a1501
   KeenClientTD: ffe8b9a67e71643f59a9fda7ce51941ed5c49a42
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
+  Kingfisher: d84c5fd176ea86cc7b8aac65fd55feda6f70f130
   Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
   Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
   R.swift: 0ef9c42dc6c94ac44a3c78a7639c73f855a8e159
   R.swift.Library: 31a487b65381f37a7d203a6f1f935b43c9be35b0
   TreasureData-tvOS-SDK: 18c6a68471e6df592ed5c50bf2c07507ee6e3b77
 
-PODFILE CHECKSUM: 24af2f39326f96eb7f133564ab8e09bc07cb77ef
+PODFILE CHECKSUM: 338c7bd4e86bfb018dd207d708fe00bb3523223a
 
 COCOAPODS: 1.0.1
