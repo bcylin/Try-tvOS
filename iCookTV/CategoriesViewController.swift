@@ -26,14 +26,23 @@
 
 import UIKit
 
-class CategoriesViewController: BlurBackgroundViewController,
+class CategoriesViewController: UIViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
+  BlurBackgroundPresentable,
   Trackable {
 
   private var dataSource: CategoriesDataSource {
     didSet {
       collectionView.reloadData()
+    }
+  }
+
+  private var backgroundImage: UIImage? {
+    didSet {
+      // Throttle background image transition to avoid extensive changes in a short period of time.
+      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: .updateBackground, object: nil)
+      perform(.updateBackground, with: backgroundImage, afterDelay: 0.2)
     }
   }
 
@@ -53,6 +62,10 @@ class CategoriesViewController: BlurBackgroundViewController,
     return _collectionView
   }()
 
+  // MARK: - BlurBackgroundPresentable
+
+  let backgroundImageView = UIImageView()
+
   // MARK: - Initialization
 
   init(categories: [Category]) {
@@ -69,6 +82,7 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   override func loadView() {
     super.loadView()
+    setUpBlurBackground()
     navigationItem.titleView = UIView()
 
     let divided = view.bounds.divided(atDistance: 800, from: .maxYEdge)
@@ -133,6 +147,10 @@ class CategoriesViewController: BlurBackgroundViewController,
     navigationController?.pushViewController(HistoryViewController(), animated: true)
   }
 
+  @objc fileprivate func updateBackground(with image: UIImage) {
+    animateBackgroundTransition(to: image)
+  }
+
 }
 
 
@@ -142,4 +160,5 @@ class CategoriesViewController: BlurBackgroundViewController,
 private extension Selector {
   static let handleCreatedCover = #selector(CategoriesViewController.handleCreatedCover(_:))
   static let showHistory = #selector(CategoriesViewController.showHistory(_:))
+  static let updateBackground = #selector(CategoriesViewController.updateBackground(with:))
 }
