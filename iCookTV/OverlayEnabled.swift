@@ -36,9 +36,13 @@ protocol OverlayEnabled {
 
   /// Provides the constraints for a given overlay view.
   func constraintsForOverlayView(_ overlayView: UIView) -> [NSLayoutConstraint]
+
+  /// Required method to update the background image behind the overlay view.
+  func updateBackground(with image: UIImage?)
 }
 
-extension OverlayEnabled where Self: BlurBackgroundViewController {
+
+extension OverlayEnabled where Self: UIViewController {
 
   func setOverlayViewHidden(_ hidden: Bool, animated: Bool) {
     if !hidden {
@@ -58,7 +62,7 @@ extension OverlayEnabled where Self: BlurBackgroundViewController {
 
     if let url = GroundControl.defaultBackgroundURL, !hidden {
       KingfisherManager.shared.downloader.downloadImage(with: url, completionHandler: { [weak self] image, _, _, _ in
-        self?.backgroundImage = image
+        self?.updateBackground(with: image)
       })
     }
   }

@@ -29,9 +29,10 @@ import Alamofire
 import Freddy
 import Keys
 
-class VideosViewController: BlurBackgroundViewController,
+class VideosViewController: UIViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
+  BlurBackgroundPresentable,
   LoadingIndicatorPresentable,
   OverlayEnabled,
   Trackable {
@@ -51,6 +52,14 @@ class VideosViewController: BlurBackgroundViewController,
   // MARK: - Private Properties
 
   private var categoryID = ""
+
+  private var backgroundImage: UIImage? {
+    didSet {
+      // Throttle background image transition to avoid extensive changes in a short period of time.
+      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: .updateBackground, object: nil)
+      perform(.updateBackground, with: backgroundImage, afterDelay: 0.2)
+    }
+  }
 
   private(set) lazy var dropdownMenuView: MenuView = {
     let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
@@ -76,6 +85,10 @@ class VideosViewController: BlurBackgroundViewController,
   private let paginationQueue = DispatchQueue(label: "io.github.bcylin.paginationQueue", attributes: [])
   private var hasNextPage = true
 
+  // MARK: - BlurBackgroundPresentable
+
+  let backgroundImageView = UIImageView()
+
   // MARK: - LoadingIndicatorPresentable
 
   private(set) lazy var loadingIndicator: UIActivityIndicatorView = type(of: self).defaultLoadingIndicator()
@@ -92,7 +105,8 @@ class VideosViewController: BlurBackgroundViewController,
 
   override func loadView() {
     super.loadView()
-    view.backgroundColor = UIColor.tvBackgroundColor()
+    setUpBlurBackground()
+
     collectionView.frame = view.bounds
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
@@ -187,6 +201,10 @@ class VideosViewController: BlurBackgroundViewController,
     ]
   }
 
+  func updateBackground(with image: UIImage?) {
+    animateBackgroundTransition(to: image)
+  }
+
   // MARK: - Trackable
 
   var pageView: PageView? {
@@ -263,4 +281,5 @@ class VideosViewController: BlurBackgroundViewController,
 
 private extension Selector {
   static let showHistory = #selector(VideosViewController.showHistory(_:))
+  static let updateBackground = #selector(VideosViewController.updateBackground(with:))
 }
