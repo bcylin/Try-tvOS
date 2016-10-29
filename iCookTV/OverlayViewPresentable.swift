@@ -1,5 +1,5 @@
 //
-//  OverlayEnabled.swift
+//  OverlayViewPresentable.swift
 //  iCookTV
 //
 //  Created by Ben on 28/04/2016.
@@ -27,7 +27,7 @@
 import UIKit
 import Kingfisher
 
-protocol OverlayEnabled {
+protocol OverlayViewPresentable {
   /// A view used as the decorative overlay.
   var overlayView: UIView { get }
 
@@ -42,7 +42,7 @@ protocol OverlayEnabled {
 }
 
 
-extension OverlayEnabled where Self: UIViewController {
+extension OverlayViewPresentable where Self: UIViewController {
 
   func setOverlayViewHidden(_ hidden: Bool, animated: Bool) {
     if !hidden {

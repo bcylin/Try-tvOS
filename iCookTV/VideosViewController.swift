@@ -34,7 +34,7 @@ class VideosViewController: UIViewController,
   UICollectionViewDelegateFlowLayout,
   BlurBackgroundPresentable,
   LoadingIndicatorPresentable,
-  OverlayEnabled,
+  OverlayViewPresentable,
   Trackable {
 
   private(set) lazy var dataSource: VideosDataSource = {
@@ -182,7 +182,7 @@ class VideosViewController: UIViewController,
     }
   }
 
-  // MARK: - OverlayEnabled
+  // MARK: - OverlayViewPresentable
 
   private lazy var emptyStateOverlay: UIView = { EmptyStateView() }()
 

@@ -95,7 +95,7 @@ class HistoryViewController: VideosViewController {
     }
   }
 
-  // MARK: - OverlayEnabled
+  // MARK: - OverlayViewPresentable
 
   private lazy var emptyStateOverlay: UIView = {
     let _empty = EmptyStateView()
