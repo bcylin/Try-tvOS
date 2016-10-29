@@ -33,6 +33,7 @@ class VideosViewController: UIViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
   BlurBackgroundPresentable,
+  DataFetching,
   LoadingIndicatorPresentable,
   OverlayViewPresentable,
   Trackable {
@@ -73,13 +74,13 @@ class VideosViewController: UIViewController,
     return _collectionView
   }()
 
-  private weak var currentRequest: Request?
-  private let paginationQueue = DispatchQueue(label: "io.github.bcylin.paginationQueue", attributes: [])
-  private var hasNextPage = true
-
   // MARK: - BlurBackgroundPresentable
 
   let imageAnimationQueue = ImageAnimationQueue(imageView: UIImageView())
+
+  // MARK: - DataFetching
+
+  let pagination = Pagination(name: "io.github.bcylin.paginationQueue")
 
   // MARK: - LoadingIndicatorPresentable
 
@@ -154,7 +155,7 @@ class VideosViewController: UIViewController,
   // MARK: - UICollectionViewDelegate
 
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    if indexPath.row == dataSource.numberOfItems - 1 && hasNextPage {
+    if indexPath.row == dataSource.numberOfItems - 1 {
       fetchNextPage()
     }
   }
@@ -215,7 +216,7 @@ class VideosViewController: UIViewController,
   // MARK: - Private Methods
 
   private func fetchNextPage() {
-    if let _ = currentRequest {
+    guard pagination.isReady else {
       return
     }
 
@@ -227,41 +228,23 @@ class VideosViewController: UIViewController,
       "page[number]": dataSource.currentPage + 1
     ]
 
-    currentRequest = Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self] response in
-      self?.isLoading = false
-
-      guard let data = response.data, response.result.error == nil else {
-        self?.showAlert(response.result.error)
-        return
-      }
-
-      guard let
-        collectionView = self?.collectionView,
-        let pagination = self?.paginationQueue
-      else {
-        return
-      }
-
-      pagination.async {
-        do {
-          let json = try JSON(data: data)
-          let videos = try json.getArray(at: "data").map(Video.init)
-
-          DispatchQueue.main.sync {
-            self?.hasNextPage = json["links"]?["next"] != nil
-            self?.dataSource.append(videos, toCollectionView: collectionView)
-            if let numberOfItems = self?.dataSource.numberOfItems {
-              self?.setOverlayViewHidden(numberOfItems > 0, animated: true)
-            } else {
-              self?.setOverlayViewHidden(false, animated: true)
-            }
+    do {
+      let urlRequest = try URLRequest(url: url, method: .get)
+      let encodedURLRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+      fetch(request: encodedURLRequest) { [weak self] (result: Result<[Video]>) in
+        switch result {
+        case let .success(videos):
+          guard let current = self else {
+            return
           }
-        } catch {
-          DispatchQueue.main.sync {
-            self?.showAlert(error, retry: self?.fetchNextPage)
-          }
+          self?.dataSource.append(videos, toCollectionView: current.collectionView)
+          self?.setOverlayViewHidden(current.dataSource.numberOfItems > 0, animated: true)
+        case let .failure(error):
+          self?.showAlert(error, retry: self?.fetchNextPage)
         }
       }
+    } catch {
+      Debug.print(error)
     }
   }
 
