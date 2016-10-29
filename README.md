@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/polydice/iCook-tvOS.svg)](https://travis-ci.org/polydice/iCook-tvOS)
 [![codecov.io](https://codecov.io/github/polydice/iCook-tvOS/coverage.svg?branch=develop)](https://codecov.io/github/polydice/iCook-tvOS?branch=develop)
-![Swift 2.3](https://img.shields.io/badge/Swift-2.3-orange.svg)
+![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg)
 
 A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
@@ -54,6 +54,10 @@ Required by the Fabric script for the `Release` configuration.
 ### Ignored
 
 * `icook-tv-top-shelf-image.png` is not included in the repo due to the license of image.
+
+### Known Issues
+
+* Initializing generic `DataSource` will cause `EXC_BAD_ACCESS` in Xcode 8. Fixed in Xcode 8.1.
 
 ## Demo
 
