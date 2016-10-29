@@ -28,16 +28,6 @@ import UIKit
 
 class BlurBackgroundViewController: UIViewController {
 
-  var isLoading = false {
-    didSet {
-      if isLoading {
-        activityIndicator.startAnimating()
-      } else {
-        activityIndicator.stopAnimating()
-      }
-    }
-  }
-
   var backgroundImage: UIImage? {
     didSet {
       // Throttle background image transition to avoid extensive changes in a short period of time.
@@ -49,13 +39,6 @@ class BlurBackgroundViewController: UIViewController {
   private let backgroundImageView = UIImageView()
 
   private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-
-  private lazy var activityIndicator: UIActivityIndicatorView = {
-    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-    _indicator.color = UIColor.Palette.GreyishBrown
-    _indicator.hidesWhenStopped = true
-    return _indicator
-  }()
 
   // MARK: - UIViewController
 
@@ -70,11 +53,6 @@ class BlurBackgroundViewController: UIViewController {
 
     view.addSubview(backgroundImageView)
     view.addSubview(blurEffectView)
-    view.addSubview(activityIndicator)
-
-    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
   }
 
   // MARK: - Private Methods

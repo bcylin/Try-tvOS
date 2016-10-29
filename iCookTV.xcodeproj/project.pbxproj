@@ -12,6 +12,7 @@
 		B500D9A11CB93D8100622198 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9A01CB93D8100622198 /* MenuButton.swift */; };
 		B500D9A61CB94B5D00622198 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B500D9A81CB94B5D00622198 /* Localizable.strings */; };
 		B500D9AF1CBA3B7900622198 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500D9AE1CBA3B7900622198 /* LaunchViewController.swift */; };
+		B50A202B1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A202A1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift */; };
 		B50BFC051CC88FA3004F853D /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC041CC88FA3004F853D /* Debug.swift */; };
 		B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BFC061CC8AF14004F853D /* HistoryViewController.swift */; };
 		B516E78B1D54D73B00A3FCB9 /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516E78A1D54D73B00A3FCB9 /* SourceType.swift */; };
@@ -86,6 +87,7 @@
 		B500D9A91CB94B6600622198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B500D9AA1CB94BA400622198 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B500D9AE1CBA3B7900622198 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		B50A202A1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorPresentable.swift; sourceTree = "<group>"; };
 		B50BFC041CC88FA3004F853D /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		B50BFC061CC8AF14004F853D /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B516E78A1D54D73B00A3FCB9 /* SourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceType.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			children = (
 				B5C79B151DBFBCF80069837A /* BlurBackgroundPresentable.swift */,
 				B52BD6741D5F94320023D4E9 /* DataCollection.swift */,
+				B50A202A1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift */,
 				B543C3E91CD1E85E008C512B /* OverlayEnabled.swift */,
 				B516E78A1D54D73B00A3FCB9 /* SourceType.swift */,
 				B5501BE81CD8ACEC001C3281 /* Trackable.swift */,
@@ -617,6 +620,7 @@
 				B51A95391CCF1C5100E5ED97 /* iCookTVKeys.swift in Sources */,
 				B586EFDB1CCA21B300EA8218 /* InsetLabel.swift in Sources */,
 				B500D9AF1CBA3B7900622198 /* LaunchViewController.swift in Sources */,
+				B50A202B1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift in Sources */,
 				B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */,
 				B500D9A11CB93D8100622198 /* MenuButton.swift in Sources */,
 				B5DA8EDE1CB3BD1B0068E0E3 /* MenuView.swift in Sources */,

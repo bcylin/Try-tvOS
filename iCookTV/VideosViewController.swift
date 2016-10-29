@@ -32,6 +32,7 @@ import Keys
 class VideosViewController: BlurBackgroundViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
+  LoadingIndicatorPresentable,
   OverlayEnabled,
   Trackable {
 
@@ -74,6 +75,10 @@ class VideosViewController: BlurBackgroundViewController,
   private weak var currentRequest: Request?
   private let paginationQueue = DispatchQueue(label: "io.github.bcylin.paginationQueue", attributes: [])
   private var hasNextPage = true
+
+  // MARK: - LoadingIndicatorPresentable
+
+  private(set) lazy var loadingIndicator: UIActivityIndicatorView = type(of: self).defaultLoadingIndicator()
 
   // MARK: - Initialization
 
