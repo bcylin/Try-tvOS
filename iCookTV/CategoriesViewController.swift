@@ -38,14 +38,6 @@ class CategoriesViewController: UIViewController,
     }
   }
 
-  private var backgroundImage: UIImage? {
-    didSet {
-      // Throttle background image transition to avoid extensive changes in a short period of time.
-      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: .updateBackground, object: nil)
-      perform(.updateBackground, with: backgroundImage, afterDelay: 0.2)
-    }
-  }
-
   private lazy var titleView: MainMenuView = {
     let _menu = MainMenuView()
     _menu.button.setTitle(R.string.localizable.history(), for: .normal)
@@ -64,7 +56,7 @@ class CategoriesViewController: UIViewController,
 
   // MARK: - BlurBackgroundPresentable
 
-  let backgroundImageView = UIImageView()
+  let imageAnimationQueue = ImageAnimationQueue(imageView: UIImageView())
 
   // MARK: - Initialization
 
@@ -121,7 +113,7 @@ class CategoriesViewController: UIViewController,
 
   func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image, cell.hasDisplayedCover {
-      self.backgroundImage = cover
+      animateBackgroundTransition(to: cover)
     }
   }
 
@@ -135,8 +127,10 @@ class CategoriesViewController: UIViewController,
 
   @objc fileprivate func handleCreatedCover(_ notification: Notification) {
     // Update the background image when the first mosaic cover is created.
-    DispatchQueue.main.async {
-      self.backgroundImage = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage
+    if let cover = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage {
+      DispatchQueue.main.async {
+        self.animateBackgroundTransition(to: cover)
+      }
     }
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: CoverBuilder.DidCreateCoverNotification), object: nil)
   }

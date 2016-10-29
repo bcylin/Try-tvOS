@@ -53,14 +53,6 @@ class VideosViewController: UIViewController,
 
   private var categoryID = ""
 
-  private var backgroundImage: UIImage? {
-    didSet {
-      // Throttle background image transition to avoid extensive changes in a short period of time.
-      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: .updateBackground, object: nil)
-      perform(.updateBackground, with: backgroundImage, afterDelay: 0.2)
-    }
-  }
-
   private(set) lazy var dropdownMenuView: MenuView = {
     let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
     _menu.backgroundColor = UIColor.tvMenuBarColor()
@@ -87,7 +79,7 @@ class VideosViewController: UIViewController,
 
   // MARK: - BlurBackgroundPresentable
 
-  let backgroundImageView = UIImageView()
+  let imageAnimationQueue = ImageAnimationQueue(imageView: UIImageView())
 
   // MARK: - LoadingIndicatorPresentable
 
@@ -178,7 +170,7 @@ class VideosViewController: UIViewController,
 
   func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     if let cover = (context.nextFocusedView as? VideoCell)?.imageView.image {
-      self.backgroundImage = cover
+      animateBackgroundTransition(to: cover)
     }
   }
 
