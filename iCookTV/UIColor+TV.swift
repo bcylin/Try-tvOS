@@ -30,13 +30,13 @@ import Hue
 extension UIColor {
 
   enum Palette {
-    static let White = UIColor.whiteColor()
-    static let LightGray = UIColor.hex("#EFEDE8")
-    static let GreyishBrown = UIColor.hex("#564E4A")
+    static let White = UIColor.white
+    static let LightGray = UIColor(hex: "#EFEDE8")
+    static let GreyishBrown = UIColor(hex: "#564E4A")
 
     enum Button {
       static let TitleColor = White
-      static let BackgroundColor = GreyishBrown.colorWithAlphaComponent(0.6)
+      static let BackgroundColor = GreyishBrown.withAlphaComponent(0.6)
     }
 
     enum FocusedButton {
@@ -50,7 +50,7 @@ extension UIColor {
   }
 
   class func tvTextColor() -> UIColor {
-    return Palette.GreyishBrown.colorWithAlphaComponent(0.8)
+    return Palette.GreyishBrown.withAlphaComponent(0.8)
   }
 
   class func tvFocusedTextColor() -> UIColor {

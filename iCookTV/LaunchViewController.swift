@@ -33,12 +33,12 @@ class LaunchViewController: UIViewController {
   private lazy var launchImageView: UIImageView = {
     let _imageView = UIImageView()
     _imageView.image = R.image.launchImage()
-    _imageView.contentMode = .ScaleAspectFill
+    _imageView.contentMode = .scaleAspectFill
     return _imageView
   }()
 
   private lazy var activityIndicator: UIActivityIndicatorView = {
-    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     _indicator.color = UIColor.Palette.GreyishBrown
     _indicator.hidesWhenStopped = true
     return _indicator
@@ -60,10 +60,10 @@ class LaunchViewController: UIViewController {
   private var lowerTaglineConstraint: NSLayoutConstraint?
 
   private var isAnimating = false
-  private let semaphore = dispatch_semaphore_create(0)
+  private let semaphore = DispatchSemaphore(value: 0)
 
   private enum Animation {
-    static let duration = NSTimeInterval(0.9)
+    static let duration = TimeInterval(0.9)
     static let first = (begin: Double(0), duration: Double(0.6))
     static let second = (begin: Double(0.2), duration: Double(0.7))
   }
@@ -79,22 +79,22 @@ class LaunchViewController: UIViewController {
     view.addSubview(lowerTaglineLabel)
 
     launchImageView.frame = view.bounds
-    launchImageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    launchImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
     upperTaglineLabel.translatesAutoresizingMaskIntoConstraints = false
     lowerTaglineLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    activityIndicator.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor, constant: 5).active = true
-    activityIndicator.topAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: 110).active = true
+    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 5).isActive = true
+    activityIndicator.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 110).isActive = true
 
-    upperTaglineConstraint = upperTaglineLabel.topAnchor.constraintEqualToAnchor(activityIndicator.bottomAnchor, constant: 100)
-    upperTaglineConstraint?.active = true
-    upperTaglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    upperTaglineConstraint = upperTaglineLabel.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 100)
+    upperTaglineConstraint?.isActive = true
+    upperTaglineLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-    lowerTaglineConstraint = lowerTaglineLabel.topAnchor.constraintEqualToAnchor(upperTaglineLabel.bottomAnchor, constant: 100)
-    lowerTaglineConstraint?.active = true
-    lowerTaglineLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    lowerTaglineConstraint = lowerTaglineLabel.topAnchor.constraint(equalTo: upperTaglineLabel.bottomAnchor, constant: 100)
+    lowerTaglineConstraint?.isActive = true
+    lowerTaglineLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
   }
 
   override func viewDidLoad() {
@@ -103,23 +103,23 @@ class LaunchViewController: UIViewController {
     fetchCategories()
   }
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     isAnimating = true
-    UIView.animateKeyframesWithDuration(Animation.duration, delay: 0, options: [], animations: {
-      UIView.addKeyframeWithRelativeStartTime(Animation.first.begin, relativeDuration: Animation.first.duration) {
+    UIView.animateKeyframes(withDuration: Animation.duration, delay: 0, options: [], animations: {
+      UIView.addKeyframe(withRelativeStartTime: Animation.first.begin, relativeDuration: Animation.first.duration) {
         self.upperTaglineLabel.alpha = 1
         self.upperTaglineConstraint?.constant = 40
         self.view.layoutIfNeeded()
       }
-      UIView.addKeyframeWithRelativeStartTime(Animation.second.begin, relativeDuration: Animation.second.duration) {
+      UIView.addKeyframe(withRelativeStartTime: Animation.second.begin, relativeDuration: Animation.second.duration) {
         self.lowerTaglineLabel.alpha = 1
         self.lowerTaglineConstraint?.constant = 0
         self.view.layoutIfNeeded()
       }
     }) { _ in
-      dispatch_semaphore_signal(self.semaphore)
+      self.semaphore.signal()
       self.isAnimating = false
     }
   }
@@ -127,8 +127,8 @@ class LaunchViewController: UIViewController {
   // MARK: - Private Methods
 
   private func fetchCategories() {
-    Alamofire.request(.GET, iCookTVKeys.baseAPIURL + "categories.json").responseJSON { [weak self] response in
-      guard let data = response.data where response.result.error == nil else {
+    Alamofire.request(iCookTVKeys.baseAPIURL + "categories.json", method: .get).responseJSON { [weak self] response in
+      guard let data = response.data, response.result.error == nil else {
         self?.showAlert(response.result.error)
         return
       }
@@ -136,16 +136,16 @@ class LaunchViewController: UIViewController {
       do {
         Debug.print(response.result.value)
         let json = try JSON(data: data)
-        let categories = try json.array("data").map(Category.init)
+        let categories = try json.getArray(at: "data").map(Category.init)
         let showCategories: () -> Void = {
           self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
         }
 
-        if let this = self where this.isAnimating {
+        if let this = self, this.isAnimating {
           // Wait until the animation finishes
-          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            dispatch_semaphore_wait(this.semaphore, Animation.duration.dispatchTime)
-            dispatch_async(dispatch_get_main_queue(), showCategories)
+          DispatchQueue.global().async {
+            _ = this.semaphore.wait(timeout: Animation.duration.dispatchTime)
+            DispatchQueue.main.async(execute: showCategories)
           }
         } else {
           showCategories()
@@ -168,7 +168,7 @@ private extension UILabel {
     let label = UILabel()
     label.font = UIFont.tvFontForTagline()
     label.textColor = UIColor.tvTaglineColor()
-    label.textAlignment = .Center
+    label.textAlignment = .center
     label.numberOfLines = 0
     label.alpha = 0
     return label
@@ -177,10 +177,10 @@ private extension UILabel {
 }
 
 
-private extension NSTimeInterval {
+private extension TimeInterval {
 
-  var dispatchTime: dispatch_time_t {
-    return dispatch_time(DISPATCH_TIME_NOW, Int64(self * 1e+9))
+  var dispatchTime: DispatchTime {
+    return DispatchTime.now() + Double(Int64(self * 1e+9)) / Double(NSEC_PER_SEC)
   }
 
 }

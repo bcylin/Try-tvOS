@@ -30,13 +30,13 @@ import Alamofire
 struct GroundControl {
 
   enum VideoSource {
-    case HLS, YouTube
+    case hls, youTube
   }
 
   /// Returns the URL of default background image URL.
-  static var defaultBackgroundURL: NSURL? {
-    if let url = NSUserDefaults.standardUserDefaults().stringForKey(Keys.DefaultBackgroundURL) {
-      return NSURL(string: url)
+  static var defaultBackgroundURL: URL? {
+    if let url = UserDefaults.standard.string(forKey: Keys.DefaultBackgroundURL) {
+      return URL(string: url)
     } else {
       return nil
     }
@@ -44,10 +44,10 @@ struct GroundControl {
 
   /// Returns the preferred video source.
   static var videoSource: VideoSource {
-    if NSUserDefaults.standardUserDefaults().stringForKey(Keys.VideoSource) == "youtube" {
-      return .YouTube
+    if UserDefaults.standard.string(forKey: Keys.VideoSource) == "youtube" {
+      return .youTube
     } else {
-      return .HLS
+      return .hls
     }
   }
 
@@ -63,15 +63,15 @@ struct GroundControl {
   // MARK: - Public Methods
 
   static func sync() {
-    Alamofire.request(.GET, groundControlURL).responseJSON { response in
-      guard let results = response.result.value as? NSDictionary where response.result.error == nil else {
+    Alamofire.request(groundControlURL, method: .get).responseJSON { response in
+      guard let results = response.result.value as? NSDictionary, response.result.error == nil else {
         return
       }
       Debug.print(results)
       for key in [Keys.DefaultBackgroundURL, Keys.VideoSource] {
-        NSUserDefaults.standardUserDefaults().setObject(results[key], forKey: key)
+        UserDefaults.standard.set(results[key], forKey: key)
       }
-      NSUserDefaults.standardUserDefaults().synchronize()
+      UserDefaults.standard.synchronize()
     }
   }
 

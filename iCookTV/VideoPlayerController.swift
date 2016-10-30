@@ -36,13 +36,13 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
   /// An activity indicator displayed before the player item is ready.
   private lazy var loadingIndicator: UIActivityIndicatorView = {
-    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     _indicator.hidesWhenStopped = true
     return _indicator
   }()
 
   private let playerItemNotifications = [
-    AVPlayerItemDidPlayToEndTimeNotification
+    NSNotification.Name.AVPlayerItemDidPlayToEndTime
   ]
 
   // MARK: - Initialization
@@ -55,7 +55,7 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
   deinit {
     for notification in playerItemNotifications {
-      NSNotificationCenter.defaultCenter().removeObserver(self, name: notification, object: nil)
+      NotificationCenter.default.removeObserver(self, name: notification, object: nil)
     }
   }
 
@@ -67,8 +67,8 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
       contentView.addSubview(loadingIndicator)
       loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
       // AVPlayerViewController's own indicator has a 5 pt offset from the center.
-      loadingIndicator.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor, constant: -5).active = true
-      loadingIndicator.centerYAnchor.constraintEqualToAnchor(contentView.centerYAnchor).active = true
+      loadingIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -5).isActive = true
+      loadingIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
   }
 
@@ -82,8 +82,8 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
     }
 
     let url = iCookTVKeys.baseAPIURL + "videos/\(id).json"
-    Alamofire.request(.GET, url).responseJSON { [weak self] response in
-      guard let data = response.data where response.result.error == nil else {
+    Alamofire.request(url, method: .get).responseJSON { [weak self] response in
+      guard let data = response.data, response.result.error == nil else {
         self?.setPlayerItem(nil)
         Tracker.track(response.result.error)
         return
@@ -102,21 +102,21 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
     }
   }
 
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     player?.pause()
 
     if let playerItem = player?.currentItem {
-      let duration: NSTimeInterval = CMTimeGetSeconds(playerItem.duration)
-      let currentTime: NSTimeInterval = CMTimeGetSeconds(playerItem.currentTime())
+      let duration: TimeInterval = CMTimeGetSeconds(playerItem.duration)
+      let currentTime: TimeInterval = CMTimeGetSeconds(playerItem.currentTime())
       let fraction = currentTime / duration
 
       Tracker.track(Event(name: "Played Video", details: [
-        TrackableKey.videoID: video?.id ?? "",
-        TrackableKey.videoTitle: video?.title ?? "",
-        TrackableKey.currentTime: currentTime,
-        TrackableKey.duration: duration,
-        TrackableKey.percentage: fraction * 100
+        TrackableKey.videoID: NSString(format: "%@", video?.id ?? ""),
+        TrackableKey.videoTitle: NSString(format: "%@", video?.title ?? ""),
+        TrackableKey.currentTime: NSNumber(value: currentTime),
+        TrackableKey.duration: NSNumber(value: duration),
+        TrackableKey.percentage: NSNumber(value: fraction * 100)
       ]))
     }
   }
@@ -132,9 +132,9 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
   // MARK: - NSNotification Callbacks
 
-  @objc private func handlePlayerItemNotification(notification: NSNotification) {
+  @objc fileprivate func handlePlayerItemNotification(_ notification: Notification) {
     switch notification.name {
-    case AVPlayerItemDidPlayToEndTimeNotification:
+    case NSNotification.Name.AVPlayerItemDidPlayToEndTime:
       dismiss()
     default:
       break
@@ -145,27 +145,27 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
   private func dismiss() {
     if let navigation = navigationController {
-      navigation.popViewControllerAnimated(true)
+      navigation.popViewController(animated: true)
     } else if let presenter = presentingViewController {
-      presenter.dismissViewControllerAnimated(true, completion: nil)
+      presenter.dismiss(animated: true, completion: nil)
     }
   }
 
-  private func setPlayerItem(playerItem: AVPlayerItem?) {
+  private func setPlayerItem(_ playerItem: AVPlayerItem?) {
     loadingIndicator.stopAnimating()
 
     guard let playerItem = playerItem else {
       let message = R.string.localizable.videoError() + "\n" + R.string.localizable.contactInfo()
-      let alert = UIAlertController(title: R.string.localizable.errorTitle(), message: message, preferredStyle: .Alert)
-      alert.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .Default) { [weak self] _ in
+      let alert = UIAlertController(title: R.string.localizable.errorTitle(), message: message, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default) { [weak self] _ in
         self?.dismiss()
       })
-      presentViewController(alert, animated: true, completion: nil)
+      present(alert, animated: true, completion: nil)
       return
     }
 
     for notification in playerItemNotifications {
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: .handlePlayerItemNotification,
         name: notification,

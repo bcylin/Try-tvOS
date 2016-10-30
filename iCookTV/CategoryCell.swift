@@ -38,7 +38,7 @@ class CategoryCell: UICollectionViewCell {
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
     _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
-    _imageView.contentMode = .ScaleAspectFill
+    _imageView.contentMode = .scaleAspectFill
     return _imageView
   }()
 
@@ -46,7 +46,7 @@ class CategoryCell: UICollectionViewCell {
     let _label = UILabel()
     _label.font = UIFont.tvFontForCategoryCell()
     _label.textColor = UIColor.tvTextColor()
-    _label.textAlignment = .Center
+    _label.textAlignment = .center
     return _label
   }()
 
@@ -81,11 +81,11 @@ class CategoryCell: UICollectionViewCell {
 
   // MARK: - UIFocusEnvironment
 
-  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+  override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     let focused = (context.nextFocusedView == self)
 
     let color = focused ? UIColor.tvFocusedTextColor() : UIColor.tvTextColor()
-    let transform = focused ? CGAffineTransformMakeTranslation(0, 25) : CGAffineTransformIdentity
+    let transform = focused ? CGAffineTransform(translationX: 0, y: 25) : CGAffineTransform.identity
     let font = focused ? UIFont.tvFontForFocusedCategoryCell() : UIFont.tvFontForCategoryCell()
 
     coordinator.addCoordinatedAnimations({
@@ -97,7 +97,7 @@ class CategoryCell: UICollectionViewCell {
 
   // MARK: - Private Methods
 
-  private func setUpSubviews() {
+  fileprivate func setUpSubviews() {
     clipsToBounds = false
     imageView.adjustsImageWhenAncestorFocused = true
 
@@ -105,18 +105,18 @@ class CategoryCell: UICollectionViewCell {
     contentView.addSubview(textLabel)
 
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
-    imageView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    imageView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
-    imageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
+    imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
     textLabel.translatesAutoresizingMaskIntoConstraints = false
-    textLabel.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor, constant: 22).active = true
-    textLabel.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor).active = true
-    textLabel.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor).active = true
+    textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 22).isActive = true
+    textLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    textLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
   }
 
-  func setUpCover(urls: [Grid: NSURL], forCategory category: Category) {
+  func setUpCover(_ urls: [Grid: URL], forCategory category: Category) {
     // Cancel previous tasks
     for (corner, task) in tasks {
       task.cancel()
@@ -124,20 +124,20 @@ class CategoryCell: UICollectionViewCell {
     }
 
     for (corner, url) in urls {
-      let downloading = ImageDownloader.defaultDownloader.downloadImageWithURL(url, progressBlock: nil) {
+      let downloading = ImageDownloader.default.downloadImage(with: url, progressBlock: nil) {
         [weak self] image, error, imageURL, originalData in
 
         self?.tasks[corner] = nil
-        guard let image = image where imageURL == url else {
+        guard let image = image, imageURL == url else {
           return
         }
 
         self?.coverBuilder.addImage(image, atCorner: corner, categoryID: category.id) { newCover in
           if let current = self {
-            UIView.transitionWithView(
-              current.imageView,
+            UIView.transition(
+              with: current.imageView,
               duration: 0.3,
-              options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
+              options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseIn],
               animations: {
                 self?.imageView.image = newCover
               }, completion: nil
@@ -161,9 +161,9 @@ class CategoryCell: UICollectionViewCell {
       return
     }
 
-    var urls = [Grid: NSURL]()
-    for (index, value) in category.coverURLs.enumerate() {
-      guard let corner = Grid(rawValue: index), url = NSURL(string: value) else { continue }
+    var urls = [Grid: URL]()
+    for (index, value) in category.coverURLs.enumerated() {
+      guard let corner = Grid(rawValue: index), let url = URL(string: value) else { continue }
       urls[corner] = url
     }
 

@@ -59,11 +59,11 @@ class VideosViewController: BlurBackgroundViewController,
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
-    _collectionView.registerClass(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
-    _collectionView.registerClass(
+    _collectionView.register(VideoCell.self, forCellWithReuseIdentifier: String(describing: VideoCell.self))
+    _collectionView.register(
       CategoryHeaderView.self,
       forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-      withReuseIdentifier: String(CategoryHeaderView.self)
+      withReuseIdentifier: String(describing: CategoryHeaderView.self)
     )
     _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self.dataSource
@@ -72,7 +72,7 @@ class VideosViewController: BlurBackgroundViewController,
   }()
 
   private weak var currentRequest: Request?
-  private let paginationQueue = dispatch_queue_create("io.github.bcylin.paginationQueue", DISPATCH_QUEUE_SERIAL)
+  private let paginationQueue = DispatchQueue(label: "io.github.bcylin.paginationQueue", attributes: [])
   private var hasNextPage = true
 
   // MARK: - Initialization
@@ -92,8 +92,8 @@ class VideosViewController: BlurBackgroundViewController,
     view.addSubview(collectionView)
     view.addSubview(dropdownMenuView)
 
-    dropdownMenuView.button.setTitle(R.string.localizable.history(), forState: .Normal)
-    dropdownMenuView.button.addTarget(self, action: .showHistory, forControlEvents: .PrimaryActionTriggered)
+    dropdownMenuView.button.setTitle(R.string.localizable.history(), for: .normal)
+    dropdownMenuView.button.addTarget(self, action: .showHistory, for: .primaryActionTriggered)
 
     if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
       flowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: CategoryHeaderView.requiredHeight)
@@ -109,13 +109,13 @@ class VideosViewController: BlurBackgroundViewController,
     fetchNextPage()
   }
 
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     guard let stack = navigationController?.viewControllers else {
       return
     }
     // Track the event when popped off the navigation stack.
-    if let event = pagingTracking where !stack.contains(self) {
+    if let event = pagingTracking, !stack.contains(self) {
       Tracker.track(event)
     }
   }
@@ -126,7 +126,7 @@ class VideosViewController: BlurBackgroundViewController,
     return collectionView
   }
 
-  override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+  override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     if context.nextFocusedView == dropdownMenuView.button {
       let revealedFrame = CGRect(origin: CGPoint.zero, size: dropdownMenuView.frame.size)
       coordinator.addCoordinatedAnimations({
@@ -142,22 +142,22 @@ class VideosViewController: BlurBackgroundViewController,
 
   // MARK: - UICollectionViewDelegate
 
-  func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     if indexPath.row == dataSource.numberOfItems - 1 && hasNextPage {
       fetchNextPage()
     }
   }
 
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let video = dataSource[indexPath.row]
-    let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell
+    let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
 
     let controller = VideoPlayerController(video: video, coverImage: cell?.imageView.image)
     navigationController?.pushViewController(controller, animated: true)
     HistoryManager.save(video: video)
   }
 
-  func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+  func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     if let cover = (context.nextFocusedView as? VideoCell)?.imageView.image {
       self.backgroundImage = cover
     }
@@ -171,14 +171,14 @@ class VideosViewController: BlurBackgroundViewController,
     return emptyStateOverlay
   }
 
-  func containerViewForOverlayView(overlayView: UIView) -> UIView {
+  func containerViewForOverlayView(_ overlayView: UIView) -> UIView {
     return view
   }
 
-  func constraintsForOverlayView(overlayView: UIView) -> [NSLayoutConstraint] {
+  func constraintsForOverlayView(_ overlayView: UIView) -> [NSLayoutConstraint] {
     return [
-      overlayView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
-      overlayView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor)
+      overlayView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      overlayView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
     ]
   }
 
@@ -193,7 +193,7 @@ class VideosViewController: BlurBackgroundViewController,
 
   // MARK: - UIResponder Callbacks
 
-  @objc private func showHistory(sender: UIButton) {
+  @objc fileprivate func showHistory(_ sender: UIButton) {
     navigationController?.pushViewController(HistoryViewController(), animated: true)
   }
 
@@ -208,37 +208,41 @@ class VideosViewController: BlurBackgroundViewController,
 
     let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
     let parameters = [
-      "page[size]": dataSource.dynamicType.pageSize,
+      "page[size]": type(of: dataSource).pageSize,
       "page[number]": dataSource.currentPage + 1
     ]
 
-    currentRequest = Alamofire.request(.GET, url, parameters: parameters).responseJSON { [weak self] response in
+    currentRequest = Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self] response in
       self?.isLoading = false
 
-      guard let data = response.data where response.result.error == nil else {
+      guard let data = response.data, response.result.error == nil else {
         self?.showAlert(response.result.error)
         return
       }
 
       guard let
         collectionView = self?.collectionView,
-        pagination = self?.paginationQueue
+        let pagination = self?.paginationQueue
       else {
         return
       }
 
-      dispatch_async(pagination) {
+      pagination.async {
         do {
           let json = try JSON(data: data)
-          let videos = try json.array("data").map(Video.init)
+          let videos = try json.getArray(at: "data").map(Video.init)
 
-          dispatch_sync(dispatch_get_main_queue()) {
+          DispatchQueue.main.sync {
             self?.hasNextPage = json["links"]?["next"] != nil
             self?.dataSource.append(videos, toCollectionView: collectionView)
-            self?.setOverlayViewHidden(self?.dataSource.numberOfItems > 0, animated: true)
+            if let numberOfItems = self?.dataSource.numberOfItems {
+              self?.setOverlayViewHidden(numberOfItems > 0, animated: true)
+            } else {
+              self?.setOverlayViewHidden(false, animated: true)
+            }
           }
         } catch {
-          dispatch_sync(dispatch_get_main_queue()) {
+          DispatchQueue.main.sync {
             self?.showAlert(error, retry: self?.fetchNextPage)
           }
         }

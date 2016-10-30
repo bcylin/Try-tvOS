@@ -28,18 +28,18 @@ import UIKit
 
 extension UIViewController {
 
-  func showAlert(error: ErrorType?, retry: (() -> Void)? = nil) {
+  func showAlert(_ error: Error?, retry: (() -> Void)? = nil) {
     Tracker.track(error)
 
     let alert = UIAlertController(
       title: R.string.localizable.errorTitle(),
       message: R.string.localizable.contactInfo(),
-      preferredStyle: .Alert
+      preferredStyle: .alert
     )
-    alert.addAction(UIAlertAction(title: R.string.localizable.retry(), style: .Default) { _ in
+    alert.addAction(UIAlertAction(title: R.string.localizable.retry(), style: .default) { _ in
       retry?()
     })
-    presentViewController(alert, animated: true, completion: nil)
+    present(alert, animated: true, completion: nil)
   }
 
 }

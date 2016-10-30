@@ -41,17 +41,17 @@ class BlurBackgroundViewController: UIViewController {
   var backgroundImage: UIImage? {
     didSet {
       // Throttle background image transition to avoid extensive changes in a short period of time.
-      NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: .animateBackgroundTransition, object: nil)
-      performSelector(.animateBackgroundTransition, withObject: nil, afterDelay: 0.2)
+      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: .animateBackgroundTransition, object: nil)
+      perform(.animateBackgroundTransition, with: nil, afterDelay: 0.2)
     }
   }
 
   private let backgroundImageView = UIImageView()
 
-  private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+  private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
   private lazy var activityIndicator: UIActivityIndicatorView = {
-    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     _indicator.color = UIColor.Palette.GreyishBrown
     _indicator.hidesWhenStopped = true
     return _indicator
@@ -63,28 +63,28 @@ class BlurBackgroundViewController: UIViewController {
     super.loadView()
     view.backgroundColor = UIColor.tvBackgroundColor()
     backgroundImageView.frame = view.bounds
-    backgroundImageView.contentMode = .ScaleAspectFill
-    backgroundImageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    backgroundImageView.contentMode = .scaleAspectFill
+    backgroundImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     blurEffectView.frame = view.bounds
-    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
     view.addSubview(backgroundImageView)
     view.addSubview(blurEffectView)
     view.addSubview(activityIndicator)
 
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    activityIndicator.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-    activityIndicator.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+    activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
   }
 
   // MARK: - Private Methods
 
-  @objc private func animateBackgroundTransition() {
+  @objc fileprivate func animateBackgroundTransition() {
     Debug.print(#function)
-    UIView.transitionWithView(
-      self.backgroundImageView,
+    UIView.transition(
+      with: self.backgroundImageView,
       duration: 0.5,
-      options: [.BeginFromCurrentState, .TransitionCrossDissolve, .CurveEaseIn],
+      options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseIn],
       animations: {
         self.backgroundImageView.image = self.backgroundImage
       }, completion: nil

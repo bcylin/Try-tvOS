@@ -36,7 +36,7 @@ protocol Trackable: class {
 
 protocol TrackableAttributes {
   var name: String { get }
-  var details: [String: AnyObject] { get }
+  var details: [String: Any] { get }
 }
 
 
@@ -45,7 +45,7 @@ extension TrackableAttributes where Self: CustomStringConvertible {
     return "{\n  name: \(name),\n  details: \(details)\n}"
   }
 
-  var attributes: [String: AnyObject] {
+  var attributes: [String: Any] {
     var attributes = details
     attributes["name"] = name
     attributes[TrackableKey.categoryTitle] = nil
@@ -57,9 +57,9 @@ extension TrackableAttributes where Self: CustomStringConvertible {
 
 struct PageView: TrackableAttributes, CustomStringConvertible {
   let name: String
-  let details: [String: AnyObject]
+  let details: [String: Any]
 
-  init(name: String, details: [String: AnyObject] = [:]) {
+  init(name: String, details: [String: Any] = [:]) {
     self.name = name
     self.details = details
   }
@@ -68,7 +68,7 @@ struct PageView: TrackableAttributes, CustomStringConvertible {
 
 struct Event: TrackableAttributes, CustomStringConvertible {
   let name: String
-  let details: [String: AnyObject]
+  let details: [String: Any]
 }
 
 ////////////////////////////////////////////////////////////////////////////////

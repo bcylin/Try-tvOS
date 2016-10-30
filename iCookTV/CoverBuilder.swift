@@ -31,38 +31,38 @@ class CoverBuilder {
   static let DidCreateCoverNotification = "CoverBuilderDidCreateCoverNotification"
   static let NotificationUserInfoCoverKey = "CoverBuilderNotificationUserInfoCoverKey"
 
-  private lazy var operationQueue: NSOperationQueue = {
-    let _queue = NSOperationQueue()
+  private lazy var operationQueue: OperationQueue = {
+    let _queue = OperationQueue()
     _queue.maxConcurrentOperationCount = 1
     return _queue
   }()
 
   private(set) var cover: UIImage?
 
-  private static let imageCache = NSCache()
+  private static let imageCache = NSCache<NSString, UIImage>()
 
   private var filledGrids = Set<Grid>()
 
   // MARK: - Private Methods
 
-  private func cacheImage(image: UIImage, forKey key: String) {
-    self.dynamicType.imageCache.setObject(image, forKey: key)
+  private func cacheImage(_ image: UIImage, forKey key: String) {
+    type(of: self).imageCache.setObject(image, forKey: key as NSString)
 
-    NSNotificationCenter.defaultCenter().postNotificationName(
-      self.dynamicType.DidCreateCoverNotification,
+    NotificationCenter.default.post(
+      name: Notification.Name(rawValue: type(of: self).DidCreateCoverNotification),
       object: self,
-      userInfo: [self.dynamicType.NotificationUserInfoCoverKey: image]
+      userInfo: [type(of: self).NotificationUserInfoCoverKey: image]
     )
   }
 
   // MARK: - Public Methods
 
-  func addImage(image: UIImage, atCorner corner: Grid, categoryID id: String? = nil, completion: (newCover: UIImage) -> Void) {
-    operationQueue.addOperation(NSBlockOperation { [weak self] in
+  func addImage(_ image: UIImage, atCorner corner: Grid, categoryID id: String? = nil, completion: @escaping (_ newCover: UIImage) -> Void) {
+    operationQueue.addOperation(BlockOperation { [weak self] in
       let imageSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
 
       var canvas: UIImage!
-      if let currentImage = self?.cover where currentImage.size == imageSize {
+      if let currentImage = self?.cover, currentImage.size == imageSize {
         canvas = currentImage
       } else {
         canvas = UIImage.placeholderImage(withSize: imageSize)
@@ -72,18 +72,18 @@ class CoverBuilder {
       self?.cover = cover
       self?.filledGrids.insert(corner)
 
-      if let key = id where self?.filledGrids.count == Grid.numberOfGrids {
-        self?.cacheImage(cover, forKey: key)
+      if let key = id, self?.filledGrids.count == Grid.numberOfGrids {
+        self?.cacheImage(cover!, forKey: key)
       }
 
-      dispatch_sync(dispatch_get_main_queue()) {
-        completion(newCover: cover)
+      DispatchQueue.main.sync {
+        completion(cover!)
       }
     })
   }
 
   func coverForCategory(withID id: String) -> UIImage? {
-    return self.dynamicType.imageCache.objectForKey(id) as? UIImage
+    return type(of: self).imageCache.object(forKey: id as NSString)
   }
 
   func resetCover() {

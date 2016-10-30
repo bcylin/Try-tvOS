@@ -32,53 +32,53 @@ extension Video {
 
   // MARK: - Private Helpers
 
-  private var playerItemURL: NSURL? {
+  private var playerItemURL: URL? {
     switch GroundControl.videoSource {
-    case .HLS:
-      return source == nil ? nil : NSURL(string: source!)
-    case .YouTube:
+    case .hls:
+      return source == nil ? nil : URL(string: source!)
+    case .youTube:
       guard let
-        youtubeURL = NSURL(string: youtube),
-        videoURL = HCYoutubeParser.h264videosWithYoutubeURL(youtubeURL)?["hd720"] as? String
+        youtubeURL = URL(string: youtube),
+        let videoURL = HCYoutubeParser.h264videos(withYoutubeURL: youtubeURL)?["hd720"] as? String
       else {
         return nil
       }
-      return NSURL(string: videoURL)
+      return URL(string: videoURL)
     }
   }
 
   private var titleMetaData: AVMetadataItem {
     let _title = AVMutableMetadataItem()
-    _title.key = AVMetadataCommonKeyTitle
+    _title.key = AVMetadataCommonKeyTitle as (NSCopying & NSObjectProtocol)?
     _title.keySpace = AVMetadataKeySpaceCommon
-    _title.locale = NSLocale.currentLocale()
-    _title.value = title
+    _title.locale = Locale.current
+    _title.value = title as (NSCopying & NSObjectProtocol)?
     return _title
   }
 
   private var descriptionMetaData: AVMetadataItem {
     let _description = AVMutableMetadataItem()
-    _description.key = AVMetadataCommonKeyDescription
+    _description.key = AVMetadataCommonKeyDescription as (NSCopying & NSObjectProtocol)?
     _description.keySpace = AVMetadataKeySpaceCommon
-    _description.locale = NSLocale.currentLocale()
+    _description.locale = Locale.current
     _description.value = (description ?? "")
-      .componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
-      .joinWithSeparator("")
+      .components(separatedBy: CharacterSet.newlines)
+      .joined(separator: "") as (NSCopying & NSObjectProtocol)?
     return _description
   }
 
   // MARK: - Public Methods
 
-  func convertToPlayerItemWithCover(image: UIImage?, completion: (AVPlayerItem?) -> Void) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+  func convertToPlayerItemWithCover(_ image: UIImage?, completion: @escaping (AVPlayerItem?) -> Void) {
+    DispatchQueue.global().async {
       guard let url = self.playerItemURL else {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
           completion(nil)
         }
         return
       }
 
-      let playerItem = AVPlayerItem(URL: url)
+      let playerItem = AVPlayerItem(url: url)
       var metadata = [
         self.titleMetaData,
         self.descriptionMetaData
@@ -88,7 +88,7 @@ extension Video {
       }
       playerItem.externalMetadata = metadata
 
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         completion(playerItem)
       }
     }
@@ -102,14 +102,14 @@ extension Video {
 
 private extension UIImage {
 
-  private static let JPEGLeastCompressionQuality = CGFloat(1)
+  static let JPEGLeastCompressionQuality = CGFloat(1)
 
-  private var metadataItem: AVMetadataItem {
+  var metadataItem: AVMetadataItem {
     let _item = AVMutableMetadataItem()
-    _item.key = AVMetadataCommonKeyArtwork
+    _item.key = AVMetadataCommonKeyArtwork as (NSCopying & NSObjectProtocol)?
     _item.keySpace = AVMetadataKeySpaceCommon
-    _item.locale = NSLocale.currentLocale()
-    _item.value = UIImageJPEGRepresentation(self, UIImage.JPEGLeastCompressionQuality)
+    _item.locale = Locale.current
+    _item.value = UIImageJPEGRepresentation(self, UIImage.JPEGLeastCompressionQuality) as (NSCopying & NSObjectProtocol)?
     return _item
   }
 

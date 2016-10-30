@@ -33,9 +33,9 @@ struct Category {
   let coverURLs: [String]
 
   init(json value: JSON) throws {
-    id = try value.string("id")
-    name = try value.string("attributes", "name", or: "")
-    coverURLs = try value.array("attributes", "cover-urls").map(String.init)
+    id = try value.getString(at: "id")
+    name = try value.getString(at: "attributes", "name", or: "")
+    coverURLs = try value.getArray(at: "attributes", "cover-urls").map(String.init)
   }
 
 }

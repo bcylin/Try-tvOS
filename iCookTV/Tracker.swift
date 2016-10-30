@@ -33,10 +33,10 @@ enum Tracker {
   static let defaultDatabase = "icook_tvos"
   static let sessionsTable = "sessions"
 
-  static func track(pageView: PageView) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+  static func track(_ pageView: PageView) {
+    DispatchQueue.global().async {
       Debug.print(pageView)
-      Answers.logCustomEventWithName(pageView.name, customAttributes: pageView.details)
+      Answers.logCustomEvent(withName: pageView.name, customAttributes: pageView.details)
       TreasureData.sharedInstance().addEvent(pageView.attributes, database: defaultDatabase, table: "screens")
       #if DEBUG
         TreasureData.sharedInstance().uploadEvents()
@@ -44,10 +44,10 @@ enum Tracker {
     }
   }
 
-  static func track(event: Event) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+  static func track(_ event: Event) {
+    DispatchQueue.global().async {
       Debug.print(event)
-      Answers.logCustomEventWithName(event.name, customAttributes: event.details)
+      Answers.logCustomEvent(withName: event.name, customAttributes: event.details)
       TreasureData.sharedInstance().addEvent(event.attributes, database: defaultDatabase, table: "events")
       #if DEBUG
         TreasureData.sharedInstance().uploadEvents()
@@ -55,14 +55,14 @@ enum Tracker {
     }
   }
 
-  static func track(error: ErrorType?, file: String = #file, function: String = #function, line: Int = #line) {
+  static func track(_ error: Error?, file: String = #file, function: String = #function, line: Int = #line) {
     guard let error = error else {
       return
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-      let description = String(error)
+    DispatchQueue.global().async {
+      let description = String(describing: error)
       Debug.print(description, file: file, function: function, line: line)
-      Answers.logCustomEventWithName("Error", customAttributes: ["Description": description])
+      Answers.logCustomEvent(withName: "Error", customAttributes: ["Description": description])
       TreasureData.sharedInstance().addEvent([
         "description": description,
         "function": "\(file.typeName).\(function)",

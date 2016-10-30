@@ -27,7 +27,7 @@
 import UIKit
 
 enum Grid: Int {
-  case TopLeft, TopRight, BottomLeft, BottomRight
+  case topLeft, topRight, bottomLeft, bottomRight
 
   static let numberOfGrids: Int = {
     var count = 0
@@ -45,14 +45,14 @@ extension CGRect {
   func rect(bySize size: CGSize, atCorner corner: Grid) -> CGRect {
     let target = CGSize(width: min(width, size.width), height: min(height, size.height))
     switch corner {
-    case .TopLeft:
-      return divide(target.height, fromEdge: .MaxYEdge).remainder.divide(target.width, fromEdge: .MaxXEdge).remainder
-    case .TopRight:
-      return divide(target.height, fromEdge: .MaxYEdge).remainder.divide(target.width, fromEdge: .MaxXEdge).slice
-    case .BottomLeft:
-      return divide(target.height, fromEdge: .MaxYEdge).slice.divide(target.width, fromEdge: .MaxXEdge).remainder
-    case .BottomRight:
-      return divide(target.height, fromEdge: .MaxYEdge).slice.divide(target.width, fromEdge: .MaxXEdge).slice
+    case .topLeft:
+      return divided(atDistance: target.height, from: .maxYEdge).remainder.divided(atDistance: target.width, from: .maxXEdge).remainder
+    case .topRight:
+      return divided(atDistance: target.height, from: .maxYEdge).remainder.divided(atDistance: target.width, from: .maxXEdge).slice
+    case .bottomLeft:
+      return divided(atDistance: target.height, from: .maxYEdge).slice.divided(atDistance: target.width, from: .maxXEdge).remainder
+    case .bottomRight:
+      return divided(atDistance: target.height, from: .maxYEdge).slice.divided(atDistance: target.width, from: .maxXEdge).slice
     }
   }
 

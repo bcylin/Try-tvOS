@@ -81,7 +81,7 @@ class DataSourceSpec: QuickSpec {
     describe("moveItem(atIndexPathToTop:inCollectionView:") {
       it("should reorder the items") {
         self.dataSource.moveItem(
-          atIndexPathToTop: NSIndexPath(forRow: 2, inSection: 0),
+          atIndexPathToTop: IndexPath(row: 2, section: 0),
           inCollectionView: self.collectionView
         )
         expect(self.dataSource.numberOfItems) == 5

@@ -40,7 +40,7 @@ class MenuView: UIView {
   }()
 
   private(set) lazy var button: UIButton = {
-    let _button = MenuButton(type: .System)
+    let _button = MenuButton(type: .system)
     _button.titleLabel?.font = UIFont.tvFontForMenuButton()
     return _button
   }()
@@ -71,22 +71,28 @@ class MenuView: UIView {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     button.translatesAutoresizingMaskIntoConstraints = false
 
-    focusGuide.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-    focusGuide.trailingAnchor.constraintEqualToAnchor(button.leadingAnchor).active = true
-    focusGuide.heightAnchor.constraintEqualToAnchor(heightAnchor).active = true
-    focusGuide.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    focusGuide.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    focusGuide.trailingAnchor.constraint(equalTo: button.leadingAnchor).isActive = true
+    focusGuide.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+    focusGuide.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
-    imageView.contentMode = .ScaleAspectFill
-    imageView.widthAnchor.constraintEqualToConstant(87).active = true
-    imageView.heightAnchor.constraintEqualToConstant(64).active = true
-    imageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: Metrics.EdgePadding.left).active = true
-    imageView.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    if #available(tvOS 10.0, *) {
+      focusGuide.preferredFocusEnvironments = [button]
+    } else {
+      focusGuide.preferredFocusedView = button
+    }
 
-    titleLabel.leadingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: 20).active = true
-    titleLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    imageView.contentMode = .scaleAspectFill
+    imageView.widthAnchor.constraint(equalToConstant: 87).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.EdgePadding.left).isActive = true
+    imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
-    button.trailingAnchor.constraintEqualToAnchor(trailingAnchor, constant: -Metrics.EdgePadding.right).active = true
-    button.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+    titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
+    titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+
+    button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.EdgePadding.right).isActive = true
+    button.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
 
 }
