@@ -412,7 +412,7 @@
 		B5F7BF401BA9C95F00A75099 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Polydice, Inc.";
 				TargetAttributes = {
 					B5F7BF471BA9C95F00A75099 = {

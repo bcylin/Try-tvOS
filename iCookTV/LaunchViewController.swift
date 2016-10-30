@@ -134,7 +134,7 @@ class LaunchViewController: UIViewController {
       }
 
       do {
-        Debug.print(response.result.value)
+        Debug.print("\(response.result.value)")
         let json = try JSON(data: data)
         let categories = try json.getArray(at: "data").map(Category.init)
         let showCategories: () -> Void = {
