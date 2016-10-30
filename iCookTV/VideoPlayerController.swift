@@ -125,8 +125,8 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
 
   var pageView: PageView? {
     return PageView(name: "Player", details: [
-      TrackableKey.videoID: video?.id as AnyObject? ?? "" as AnyObject,
-      TrackableKey.videoTitle: video?.title as AnyObject? ?? "" as AnyObject
+      TrackableKey.videoID: video?.id ?? "",
+      TrackableKey.videoTitle: video?.title ?? ""
     ])
   }
 

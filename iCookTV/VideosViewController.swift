@@ -41,9 +41,9 @@ class VideosViewController: BlurBackgroundViewController,
 
   var pagingTracking: Event? {
     return Event(name: "Fetched Page", details: [
-      TrackableKey.categoryID: categoryID as AnyObject,
-      TrackableKey.categoryTitle: title as AnyObject? ?? "" as AnyObject,
-      TrackableKey.page: String(dataSource.currentPage) as AnyObject
+      TrackableKey.categoryID: categoryID,
+      TrackableKey.categoryTitle: title ?? "",
+      TrackableKey.page: String(dataSource.currentPage)
     ])
   }
 
@@ -186,8 +186,8 @@ class VideosViewController: BlurBackgroundViewController,
 
   var pageView: PageView? {
     return PageView(name: "Videos", details: [
-      TrackableKey.categoryID: categoryID as AnyObject,
-      TrackableKey.categoryTitle: title as AnyObject? ?? "" as AnyObject
+      TrackableKey.categoryID: categoryID,
+      TrackableKey.categoryTitle: title ?? ""
     ])
   }
 
