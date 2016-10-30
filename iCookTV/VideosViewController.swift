@@ -34,6 +34,7 @@ class VideosViewController: UIViewController,
   UICollectionViewDelegateFlowLayout,
   BlurBackgroundPresentable,
   DataFetching,
+  DropdownMenuPresentable,
   LoadingIndicatorPresentable,
   OverlayViewPresentable,
   Trackable {
@@ -54,12 +55,6 @@ class VideosViewController: UIViewController,
 
   private var categoryID = ""
 
-  private(set) lazy var dropdownMenuView: MenuView = {
-    let _menu = MenuView(frame: CGRect(x: 0, y: -140, width: self.view.bounds.width, height: 140))
-    _menu.backgroundColor = UIColor.tvMenuBarColor()
-    return _menu
-  }()
-
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
     _collectionView.register(cell: VideoCell.self)
@@ -77,6 +72,10 @@ class VideosViewController: UIViewController,
   // MARK: - DataFetching
 
   let pagination = Pagination(name: "io.github.bcylin.paginationQueue")
+
+  // MARK: - DropdownMenuPresentable
+
+  private(set) lazy var dropdownMenuView: MenuView = type(of: self).defaultMenuView()
 
   // MARK: - LoadingIndicatorPresentable
 
@@ -98,8 +97,8 @@ class VideosViewController: UIViewController,
 
     collectionView.frame = view.bounds
     view.addSubview(collectionView)
-    view.addSubview(dropdownMenuView)
 
+    setUpDropdownMenuView()
     dropdownMenuView.button.setTitle(R.string.localizable.history(), for: .normal)
     dropdownMenuView.button.addTarget(self, action: .showHistory, for: .primaryActionTriggered)
 
@@ -135,17 +134,7 @@ class VideosViewController: UIViewController,
   }
 
   override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-    if context.nextFocusedView == dropdownMenuView.button {
-      let revealedFrame = CGRect(origin: CGPoint.zero, size: dropdownMenuView.frame.size)
-      coordinator.addCoordinatedAnimations({
-        self.dropdownMenuView.frame = revealedFrame
-      }, completion: nil)
-    } else if context.previouslyFocusedView == dropdownMenuView.button {
-      let hiddenFrame = dropdownMenuView.frame.offsetBy(dx: 0, dy: -dropdownMenuView.frame.height)
-      coordinator.addCoordinatedAnimations({
-        self.dropdownMenuView.frame = hiddenFrame
-      }, completion: nil)
-    }
+    animateDropdownMenuView(in: context, with: coordinator)
   }
 
   // MARK: - UICollectionViewDelegate
