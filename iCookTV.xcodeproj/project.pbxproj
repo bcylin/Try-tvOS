@@ -524,7 +524,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CI\" != true ]; then\n  FABRIC_APIKEY=$(cat ${SRCROOT}/keys/fabric.apikey);\n  FABRIC_BUILDSECRET=$(cat ${SRCROOT}/keys/fabric.buildsecret);\n  ${PODS_ROOT}/Fabric/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET};\nfi";
+			shellScript = "if [ \"$CONFIGURATION\" = \"Release\" ] && [ \"$CI\" != true ]; then\n  FABRIC_APIKEY=$(cat ${SRCROOT}/keys/fabric.apikey);\n  FABRIC_BUILDSECRET=$(cat ${SRCROOT}/keys/fabric.buildsecret);\n  ${PODS_ROOT}/Fabric/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET};\nelse\n  echo \"Skip Fabric script\"\nfi";
 		};
 		B52DFA9C1CF8006E005B9D67 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
