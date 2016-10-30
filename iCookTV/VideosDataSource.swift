@@ -49,19 +49,15 @@ class VideosDataSource: DataSource<VideosCollection> {
   // MARK: - UICollectionViewDataSource
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: VideoCell.self), for: indexPath)
-    (cell as? VideoCell)?.configure(withVideo: dataCollection[indexPath.row])
+    let cell = collectionView.dequeueReusableCell(for: indexPath) as VideoCell
+    cell.configure(withVideo: dataCollection[indexPath.row])
     return cell
   }
 
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> UICollectionReusableView {
     if kind == UICollectionElementKindSectionHeader {
-      let headerView = collectionView.dequeueReusableSupplementaryView(
-        ofKind: UICollectionElementKindSectionHeader,
-        withReuseIdentifier: String(describing: CategoryHeaderView.self),
-        for: indexPath
-      )
-      (headerView as? CategoryHeaderView)?.accessoryLabel.text = title
+      let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, for: indexPath) as CategoryHeaderView
+      headerView.accessoryLabel.text = title
       return headerView
     }
 

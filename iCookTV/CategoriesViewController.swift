@@ -47,7 +47,7 @@ class CategoriesViewController: UIViewController,
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
-    _collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: String(describing: CategoryCell.self))
+    _collectionView.register(cell: CategoryCell.self)
     _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self.dataSource
     _collectionView.delegate = self

@@ -62,12 +62,8 @@ class VideosViewController: UIViewController,
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
-    _collectionView.register(VideoCell.self, forCellWithReuseIdentifier: String(describing: VideoCell.self))
-    _collectionView.register(
-      CategoryHeaderView.self,
-      forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-      withReuseIdentifier: String(describing: CategoryHeaderView.self)
-    )
+    _collectionView.register(cell: VideoCell.self)
+    _collectionView.register(supplementaryView: CategoryHeaderView.self, ofKind: UICollectionElementKindSectionHeader)
     _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self.dataSource
     _collectionView.delegate = self

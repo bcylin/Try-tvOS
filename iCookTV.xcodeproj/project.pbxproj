@@ -35,6 +35,7 @@
 		B543C3F31CD34419008C512B /* Video+PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3F21CD34419008C512B /* Video+PlayerItem.swift */; };
 		B5501BE31CD74206001C3281 /* TrackableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5501BE21CD74206001C3281 /* TrackableNavigationController.swift */; };
 		B5501BE91CD8ACEC001C3281 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5501BE81CD8ACEC001C3281 /* Trackable.swift */; };
+		B55BF7E71DC5B7F400EE20BD /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55BF7E61DC5B7F400EE20BD /* Reusable.swift */; };
 		B56D0E261CBC0C1900B92F73 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */; };
 		B56D68E91CA564B00097D5D7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D68E81CA564B00097D5D7 /* Category.swift */; };
 		B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */; };
@@ -110,6 +111,7 @@
 		B543C3F21CD34419008C512B /* Video+PlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+PlayerItem.swift"; sourceTree = "<group>"; };
 		B5501BE21CD74206001C3281 /* TrackableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackableNavigationController.swift; sourceTree = "<group>"; };
 		B5501BE81CD8ACEC001C3281 /* Trackable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
+		B55BF7E61DC5B7F400EE20BD /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B56D68E81CA564B00097D5D7 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySpec.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				B5EE174F1DC509B8009DA1AE /* DataFetching.swift */,
 				B50A202A1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift */,
 				B543C3E91CD1E85E008C512B /* OverlayViewPresentable.swift */,
+				B55BF7E61DC5B7F400EE20BD /* Reusable.swift */,
 				B516E78A1D54D73B00A3FCB9 /* SourceType.swift */,
 				B5501BE81CD8ACEC001C3281 /* Trackable.swift */,
 			);
@@ -627,6 +630,7 @@
 				B5AEEE321C82D4BC001CF112 /* Metrics.swift in Sources */,
 				B543C3EA1CD1E85E008C512B /* OverlayViewPresentable.swift in Sources */,
 				B5BA3B4C1CF6D25500B0A022 /* R.generated.swift in Sources */,
+				B55BF7E71DC5B7F400EE20BD /* Reusable.swift in Sources */,
 				B516E78B1D54D73B00A3FCB9 /* SourceType.swift in Sources */,
 				B5501BE91CD8ACEC001C3281 /* Trackable.swift in Sources */,
 				B5501BE31CD74206001C3281 /* TrackableNavigationController.swift in Sources */,
