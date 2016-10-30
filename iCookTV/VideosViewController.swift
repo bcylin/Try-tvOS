@@ -59,7 +59,7 @@ class VideosViewController: BlurBackgroundViewController,
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
-    _collectionView.register(VideoCell.self, forCellWithReuseIdentifier: NSStringFromClass(VideoCell.self))
+    _collectionView.register(VideoCell.self, forCellWithReuseIdentifier: String(describing: VideoCell.self))
     _collectionView.register(
       CategoryHeaderView.self,
       forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
