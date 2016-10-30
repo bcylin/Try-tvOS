@@ -39,7 +39,7 @@ class VideosViewController: UIViewController,
   Trackable {
 
   private(set) lazy var dataSource: VideosDataSource = {
-    VideosDataSource(title: self.title ?? "")
+    VideosDataSource(categoryID: self.categoryID, title: self.title)
   }()
 
   var pagingTracking: Event? {
@@ -221,30 +221,17 @@ class VideosViewController: UIViewController,
     }
 
     isLoading = (dataSource.numberOfItems == 0)
-
-    let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
-    let parameters = [
-      "page[size]": type(of: dataSource).pageSize,
-      "page[number]": dataSource.currentPage + 1
-    ]
-
-    do {
-      let urlRequest = try URLRequest(url: url, method: .get)
-      let encodedURLRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-      fetch(request: encodedURLRequest) { [weak self] (result: Result<[Video]>) in
-        switch result {
-        case let .success(videos):
-          guard let current = self else {
-            return
-          }
-          self?.dataSource.append(videos, toCollectionView: current.collectionView)
-          self?.setOverlayViewHidden(current.dataSource.numberOfItems > 0, animated: true)
-        case let .failure(error):
-          self?.showAlert(error, retry: self?.fetchNextPage)
+    fetch(request: dataSource.requestForNextPage) { [weak self] (result: Result<[Video]>) in
+      switch result {
+      case let .success(videos):
+        guard let current = self else {
+          return
         }
+        self?.dataSource.append(videos, toCollectionView: current.collectionView)
+        self?.setOverlayViewHidden(current.dataSource.numberOfItems > 0, animated: true)
+      case let .failure(error):
+        self?.showAlert(error, retry: self?.fetchNextPage)
       }
-    } catch {
-      Debug.print(error)
     }
   }
 

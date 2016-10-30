@@ -25,6 +25,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class VideosDataSource: DataSource<VideosCollection> {
 
@@ -35,11 +36,13 @@ class VideosDataSource: DataSource<VideosCollection> {
   static let pageSize = 20
 
   private let title: String
+  fileprivate let categoryID: String
 
   // MARK: - Initialization
 
-  init(title: String) {
-    self.title = title
+  init(categoryID: String, title: String? = nil) {
+    self.title = title ?? ""
+    self.categoryID = categoryID
     super.init(dataCollection: VideosCollection())
   }
 
@@ -63,6 +66,27 @@ class VideosDataSource: DataSource<VideosCollection> {
     }
 
     return UICollectionReusableView()
+  }
+
+}
+
+
+extension VideosDataSource {
+
+  var requestForNextPage: URLRequest {
+    let url = iCookTVKeys.baseAPIURL + "categories/\(categoryID)/videos.json"
+    let parameters = [
+      "page[size]": type(of: self).pageSize,
+      "page[number]": currentPage + 1
+    ]
+
+    do {
+      let urlRequest = try URLRequest(url: url, method: .get)
+      let encodedURLRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+      return encodedURLRequest
+    } catch {
+      fatalError("\(error)")
+    }
   }
 
 }
