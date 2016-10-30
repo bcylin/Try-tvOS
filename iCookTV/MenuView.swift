@@ -76,6 +76,12 @@ class MenuView: UIView {
     focusGuide.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     focusGuide.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
+    if #available(tvOS 10.0, *) {
+      focusGuide.preferredFocusEnvironments = [button]
+    } else {
+      focusGuide.preferredFocusedView = button
+    }
+
     imageView.contentMode = .scaleAspectFill
     imageView.widthAnchor.constraint(equalToConstant: 87).isActive = true
     imageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
