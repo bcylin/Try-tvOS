@@ -55,12 +55,13 @@
 		B5BA61891C77431400548B38 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA61881C77431400548B38 /* VideoCell.swift */; };
 		B5BA618B1C7748B900548B38 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618A1C7748B900548B38 /* Video.swift */; };
 		B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */; };
-		B5C591151CA04BA50096B985 /* CategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C591141CA04BA50096B985 /* CategoryHeaderView.swift */; };
+		B5C591151CA04BA50096B985 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C591141CA04BA50096B985 /* SectionHeaderView.swift */; };
 		B5C79B161DBFBCF80069837A /* BlurBackgroundPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C79B151DBFBCF80069837A /* BlurBackgroundPresentable.swift */; };
 		B5C85D041CA97981000AE0CF /* UIImage+Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */; };
 		B5DA8EDE1CB3BD1B0068E0E3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA8EDD1CB3BD1B0068E0E3 /* MenuView.swift */; };
 		B5DCF9341C985E1600D19FC0 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */; };
 		B5EE17501DC509B8009DA1AE /* DataFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE174F1DC509B8009DA1AE /* DataFetching.swift */; };
+		B5EFE6C21DC600FF00236D1A /* VideosGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EFE6C11DC600FF00236D1A /* VideosGridLayout.swift */; };
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F7BF521BA9C95F00A75099 /* Assets.xcassets */; };
 		B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */; };
@@ -134,12 +135,13 @@
 		B5BA61881C77431400548B38 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		B5BA618A1C7748B900548B38 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerController.swift; sourceTree = "<group>"; };
-		B5C591141CA04BA50096B985 /* CategoryHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHeaderView.swift; sourceTree = "<group>"; };
+		B5C591141CA04BA50096B985 /* SectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		B5C79B151DBFBCF80069837A /* BlurBackgroundPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackgroundPresentable.swift; sourceTree = "<group>"; };
 		B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Grid.swift"; sourceTree = "<group>"; };
 		B5DA8EDD1CB3BD1B0068E0E3 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		B5EE174F1DC509B8009DA1AE /* DataFetching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFetching.swift; sourceTree = "<group>"; };
+		B5EFE6C11DC600FF00236D1A /* VideosGridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosGridLayout.swift; sourceTree = "<group>"; };
 		B5F7BF481BA9C95F00A75099 /* iCookTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCookTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F7BF521BA9C95F00A75099 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				B55BF7E61DC5B7F400EE20BD /* Reusable.swift */,
 				B516E78A1D54D73B00A3FCB9 /* SourceType.swift */,
 				B5501BE81CD8ACEC001C3281 /* Trackable.swift */,
+				B5EFE6C11DC600FF00236D1A /* VideosGridLayout.swift */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -266,12 +269,12 @@
 			isa = PBXGroup;
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
-				B5C591141CA04BA50096B985 /* CategoryHeaderView.swift */,
 				B543C3EC1CD1EF26008C512B /* EmptyStateView.swift */,
 				B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */,
 				B500D99E1CB93D0600622198 /* MainMenuView.swift */,
 				B500D9A01CB93D8100622198 /* MenuButton.swift */,
 				B5DA8EDD1CB3BD1B0068E0E3 /* MenuView.swift */,
+				B5C591141CA04BA50096B985 /* SectionHeaderView.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 			);
 			name = View;
@@ -612,7 +615,6 @@
 				B53E397B1CA14B4200EB1EEE /* CategoriesViewController.swift in Sources */,
 				B56D68E91CA564B00097D5D7 /* Category.swift in Sources */,
 				B5A8F7091CA259120069F836 /* CategoryCell.swift in Sources */,
-				B5C591151CA04BA50096B985 /* CategoryHeaderView.swift in Sources */,
 				B52EC3B11CB26F1B0072762C /* CGRect+Grid.swift in Sources */,
 				B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */,
 				B52BD6751D5F94320023D4E9 /* DataCollection.swift in Sources */,
@@ -635,6 +637,7 @@
 				B543C3EA1CD1E85E008C512B /* OverlayViewPresentable.swift in Sources */,
 				B5BA3B4C1CF6D25500B0A022 /* R.generated.swift in Sources */,
 				B55BF7E71DC5B7F400EE20BD /* Reusable.swift in Sources */,
+				B5C591151CA04BA50096B985 /* SectionHeaderView.swift in Sources */,
 				B516E78B1D54D73B00A3FCB9 /* SourceType.swift in Sources */,
 				B5501BE91CD8ACEC001C3281 /* Trackable.swift in Sources */,
 				B5501BE31CD74206001C3281 /* TrackableNavigationController.swift in Sources */,
@@ -649,6 +652,7 @@
 				B5BA618D1C774BC400548B38 /* VideoPlayerController.swift in Sources */,
 				B52BD6731D5F910D0023D4E9 /* VideosCollection.swift in Sources */,
 				B58E906D1D5F806600AC184D /* VideosDataSource.swift in Sources */,
+				B5EFE6C21DC600FF00236D1A /* VideosGridLayout.swift in Sources */,
 				B5DCF9341C985E1600D19FC0 /* VideosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

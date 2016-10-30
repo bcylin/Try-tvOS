@@ -37,33 +37,22 @@ class VideosViewController: UIViewController,
   DropdownMenuPresentable,
   LoadingIndicatorPresentable,
   OverlayViewPresentable,
-  Trackable {
+  Trackable,
+  VideosGridLayout {
 
-  private(set) lazy var dataSource: VideosDataSource = {
+  private var categoryID = ""
+
+  private lazy var dataSource: VideosDataSource = {
     VideosDataSource(categoryID: self.categoryID, title: self.title)
   }()
 
-  var pagingTracking: Event? {
+  private var pagingTracking: Event? {
     return Event(name: "Fetched Page", details: [
       TrackableKey.categoryID: categoryID,
       TrackableKey.categoryTitle: title ?? "",
       TrackableKey.page: String(dataSource.currentPage)
     ])
   }
-
-  // MARK: - Private Properties
-
-  private var categoryID = ""
-
-  private(set) lazy var collectionView: UICollectionView = {
-    let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.gridFlowLayout)
-    _collectionView.register(cell: VideoCell.self)
-    _collectionView.register(supplementaryView: CategoryHeaderView.self, ofKind: UICollectionElementKindSectionHeader)
-    _collectionView.remembersLastFocusedIndexPath = true
-    _collectionView.dataSource = self.dataSource
-    _collectionView.delegate = self
-    return _collectionView
-  }()
 
   // MARK: - BlurBackgroundPresentable
 
@@ -81,6 +70,10 @@ class VideosViewController: UIViewController,
 
   private(set) lazy var loadingIndicator: UIActivityIndicatorView = type(of: self).defaultLoadingIndicator()
 
+  // MARK: - VideosGridLayout
+
+  private(set) lazy var collectionView: UICollectionView = type(of: self).defaultCollectionView(dataSource: self.dataSource, delegate: self)
+
   // MARK: - Initialization
 
   convenience init(categoryID: String, title: String? = nil) {
@@ -94,17 +87,10 @@ class VideosViewController: UIViewController,
   override func loadView() {
     super.loadView()
     setUpBlurBackground()
-
-    collectionView.frame = view.bounds
-    view.addSubview(collectionView)
-
+    setUpCollectionView()
     setUpDropdownMenuView()
     dropdownMenuView.button.setTitle(R.string.localizable.history(), for: .normal)
     dropdownMenuView.button.addTarget(self, action: .showHistory, for: .primaryActionTriggered)
-
-    if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-      flowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: CategoryHeaderView.requiredHeight)
-    }
   }
 
   override func viewDidLoad() {
@@ -162,11 +148,7 @@ class VideosViewController: UIViewController,
 
   // MARK: - OverlayViewPresentable
 
-  private lazy var emptyStateOverlay: UIView = { EmptyStateView() }()
-
-  var overlayView: UIView {
-    return emptyStateOverlay
-  }
+  private(set) lazy var overlayView: UIView = { EmptyStateView() }()
 
   func containerViewForOverlayView(_ overlayView: UIView) -> UIView {
     return view

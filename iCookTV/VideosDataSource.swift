@@ -40,7 +40,7 @@ class VideosDataSource: DataSource<VideosCollection> {
 
   // MARK: - Initialization
 
-  init(categoryID: String, title: String? = nil) {
+  init(categoryID: String = "", title: String? = nil) {
     self.title = title ?? ""
     self.categoryID = categoryID
     super.init(dataCollection: VideosCollection())
@@ -56,7 +56,7 @@ class VideosDataSource: DataSource<VideosCollection> {
 
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> UICollectionReusableView {
     if kind == UICollectionElementKindSectionHeader {
-      let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, for: indexPath) as CategoryHeaderView
+      let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, for: indexPath) as SectionHeaderView
       headerView.accessoryLabel.text = title
       return headerView
     }
