@@ -60,7 +60,7 @@ class VideosViewController: UIViewController,
 
   // MARK: - DataFetching
 
-  let pagination = Pagination(name: "io.github.bcylin.paginationQueue")
+  let pagination = Pagination(name: "io.github.bcylin.pagination.videos")
 
   // MARK: - DropdownMenuPresentable
 

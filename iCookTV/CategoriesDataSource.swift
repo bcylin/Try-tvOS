@@ -43,3 +43,17 @@ class CategoriesDataSource: DataSource<CategoriesCollection> {
   }
 
 }
+
+
+extension CategoriesDataSource {
+
+  static var requestForCategories: URLRequest {
+    let url = iCookTVKeys.baseAPIURL + "categories.json"
+    do {
+      return try URLRequest(url: url, method: .get)
+    } catch {
+      fatalError("\(error)")
+    }
+  }
+
+}
