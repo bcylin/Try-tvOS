@@ -1,5 +1,5 @@
 //
-//  CategoryHeaderView.swift
+//  SectionHeaderView.swift
 //  TryTVOS
 //
 //  Created by Ben on 21/03/2016.
@@ -27,7 +27,7 @@
 import UIKit
 
 /// A customized view with a layout of `H:|-[icon]-[title]-(>=0)-[accessory]-|`.
-class CategoryHeaderView: UICollectionReusableView {
+class SectionHeaderView: UICollectionReusableView {
 
   static let requiredHeight = CGFloat(140)
 

@@ -26,11 +26,13 @@
 
 import Freddy
 
-struct Category {
+struct Category: JSONDecodable {
 
   let id: String
   let name: String
   let coverURLs: [String]
+
+  // MARK: - JSONDecodable
 
   init(json value: JSON) throws {
     id = try value.getString(at: "id")

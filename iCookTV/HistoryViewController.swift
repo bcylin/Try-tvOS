@@ -26,7 +26,32 @@
 
 import UIKit
 
-class HistoryViewController: VideosViewController {
+class HistoryViewController: UIViewController,
+  UICollectionViewDelegate,
+  UICollectionViewDelegateFlowLayout,
+  BlurBackgroundPresentable,
+  DropdownMenuPresentable,
+  LoadingIndicatorPresentable,
+  OverlayViewPresentable,
+  VideosGridLayout {
+
+  private let dataSource = VideosDataSource()
+
+  // MARK: - BlurBackgroundPresentable
+
+  let imageAnimationQueue = ImageAnimationQueue(imageView: UIImageView())
+
+  // MARK: - DropdownMenuPresentable
+
+  private(set) lazy var dropdownMenuView: MenuView = type(of: self).defaultMenuView()
+
+  // MARK: - LoadingIndicatorPresentable
+
+  private(set) lazy var loadingIndicator: UIActivityIndicatorView = type(of: self).defaultLoadingIndicator()
+
+  // MARK: - VideosGridLayout
+
+  private(set) lazy var collectionView: UICollectionView = type(of: self).defaultCollectionView(dataSource: self.dataSource, delegate: self)
 
   // MARK: - UIViewController
 
@@ -39,6 +64,9 @@ class HistoryViewController: VideosViewController {
 
   override func loadView() {
     super.loadView()
+    setUpBlurBackground()
+    setUpCollectionView()
+    setUpDropdownMenuView()
     dropdownMenuView.button.setTitle(R.string.localizable.home(), for: .normal)
     dropdownMenuView.button.addTarget(self, action: .backToHome, for: .primaryActionTriggered)
   }
@@ -75,43 +103,46 @@ class HistoryViewController: VideosViewController {
     }
   }
 
-  // MARK: - VideosViewController
+  // MARK: - UIFocusEnvironment
 
-  override var pagingTracking: Event? {
-    return nil
+  override var preferredFocusedView: UIView? {
+    return collectionView
+  }
+
+  override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    animateDropdownMenuView(in: context, with: coordinator)
   }
 
   // MARK: - UICollectionViewDelegate
 
-  override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    // History doesn't need pagination.
-  }
-
-  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    super.collectionView(collectionView, didSelectItemAt: indexPath)
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     // Reorder current displayed contents after the video player is presented.
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
       self.dataSource.moveItem(atIndexPathToTop: indexPath, inCollectionView: collectionView)
     }
   }
 
-  // MARK: - OverlayEnabled
+  // MARK: - OverlayViewPresentable
 
-  private lazy var emptyStateOverlay: UIView = {
+  private(set) lazy var overlayView: UIView = {
     let _empty = EmptyStateView()
     _empty.textLabel.text = R.string.localizable.noHistoryFound()
     return _empty
   }()
 
-  override var overlayView: UIView {
-    return emptyStateOverlay
+  func containerViewForOverlayView(_ overlayView: UIView) -> UIView {
+    return view
   }
 
-  // MARK: - Trackable
+  func constraintsForOverlayView(_ overlayView: UIView) -> [NSLayoutConstraint] {
+    return [
+      overlayView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      overlayView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    ]
+  }
 
-  override var pageView: PageView? {
-    // Track History PV when the number of items is retrived.
-    return nil
+  func updateBackground(with image: UIImage?) {
+    animateBackgroundTransition(to: image)
   }
 
   // MARK: - UIResponder Callbacks

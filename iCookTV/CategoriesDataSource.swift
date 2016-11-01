@@ -37,9 +37,23 @@ class CategoriesDataSource: DataSource<CategoriesCollection> {
   // MARK: - UICollectionViewDataSource
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CategoryCell.self), for: indexPath)
-    (cell as? CategoryCell)?.configure(withCategory: dataCollection[indexPath.row])
+    let cell = collectionView.dequeueReusableCell(for: indexPath) as CategoryCell
+    cell.configure(withCategory: dataCollection[indexPath.row])
     return cell
+  }
+
+}
+
+
+extension CategoriesDataSource {
+
+  static var requestForCategories: URLRequest {
+    let url = iCookTVKeys.baseAPIURL + "categories.json"
+    do {
+      return try URLRequest(url: url, method: .get)
+    } catch {
+      fatalError("\(error)")
+    }
   }
 
 }

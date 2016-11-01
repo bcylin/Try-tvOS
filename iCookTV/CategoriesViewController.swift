@@ -26,9 +26,10 @@
 
 import UIKit
 
-class CategoriesViewController: BlurBackgroundViewController,
+class CategoriesViewController: UIViewController,
   UICollectionViewDelegate,
   UICollectionViewDelegateFlowLayout,
+  BlurBackgroundPresentable,
   Trackable {
 
   private var dataSource: CategoriesDataSource {
@@ -46,12 +47,16 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   private(set) lazy var collectionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: Metrics.showcaseLayout)
-    _collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: String(describing: CategoryCell.self))
+    _collectionView.register(cell: CategoryCell.self)
     _collectionView.remembersLastFocusedIndexPath = true
     _collectionView.dataSource = self.dataSource
     _collectionView.delegate = self
     return _collectionView
   }()
+
+  // MARK: - BlurBackgroundPresentable
+
+  let imageAnimationQueue = ImageAnimationQueue(imageView: UIImageView())
 
   // MARK: - Initialization
 
@@ -69,6 +74,7 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   override func loadView() {
     super.loadView()
+    setUpBlurBackground()
     navigationItem.titleView = UIView()
 
     let divided = view.bounds.divided(atDistance: 800, from: .maxYEdge)
@@ -107,7 +113,7 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
     if let cell = context.nextFocusedView as? CategoryCell, let cover = cell.imageView.image, cell.hasDisplayedCover {
-      self.backgroundImage = cover
+      animateBackgroundTransition(to: cover)
     }
   }
 
@@ -121,8 +127,10 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   @objc fileprivate func handleCreatedCover(_ notification: Notification) {
     // Update the background image when the first mosaic cover is created.
-    DispatchQueue.main.async {
-      self.backgroundImage = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage
+    if let cover = notification.userInfo?[CoverBuilder.NotificationUserInfoCoverKey] as? UIImage {
+      DispatchQueue.main.async {
+        self.animateBackgroundTransition(to: cover)
+      }
     }
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: CoverBuilder.DidCreateCoverNotification), object: nil)
   }
@@ -131,6 +139,10 @@ class CategoriesViewController: BlurBackgroundViewController,
 
   @objc fileprivate func showHistory(_ sender: UIButton) {
     navigationController?.pushViewController(HistoryViewController(), animated: true)
+  }
+
+  @objc fileprivate func updateBackground(with image: UIImage) {
+    animateBackgroundTransition(to: image)
   }
 
 }
@@ -142,4 +154,5 @@ class CategoriesViewController: BlurBackgroundViewController,
 private extension Selector {
   static let handleCreatedCover = #selector(CategoriesViewController.handleCreatedCover(_:))
   static let showHistory = #selector(CategoriesViewController.showHistory(_:))
+  static let updateBackground = #selector(CategoriesViewController.updateBackground(with:))
 }

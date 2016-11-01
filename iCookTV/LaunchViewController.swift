@@ -28,7 +28,7 @@ import UIKit
 import Alamofire
 import Freddy
 
-class LaunchViewController: UIViewController {
+class LaunchViewController: UIViewController, DataFetching {
 
   private lazy var launchImageView: UIImageView = {
     let _imageView = UIImageView()
@@ -67,6 +67,10 @@ class LaunchViewController: UIViewController {
     static let first = (begin: Double(0), duration: Double(0.6))
     static let second = (begin: Double(0.2), duration: Double(0.7))
   }
+
+  // MARK: - DataFetching
+
+  let pagination = Pagination(name: "io.github.bcylin.pagination.categories")
 
   // MARK: - UIViewController
 
@@ -127,32 +131,29 @@ class LaunchViewController: UIViewController {
   // MARK: - Private Methods
 
   private func fetchCategories() {
-    Alamofire.request(iCookTVKeys.baseAPIURL + "categories.json", method: .get).responseJSON { [weak self] response in
-      guard let data = response.data, response.result.error == nil else {
-        self?.showAlert(response.result.error)
-        return
-      }
-
-      do {
-        Debug.print(response.result.value)
-        let json = try JSON(data: data)
-        let categories = try json.getArray(at: "data").map(Category.init)
-        let showCategories: () -> Void = {
-          self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
-        }
-
-        if let this = self, this.isAnimating {
-          // Wait until the animation finishes
-          DispatchQueue.global().async {
-            _ = this.semaphore.wait(timeout: Animation.duration.dispatchTime)
-            DispatchQueue.main.async(execute: showCategories)
-          }
-        } else {
-          showCategories()
-        }
-      } catch {
+    fetch(request: CategoriesDataSource.requestForCategories) { [weak self] (result: Result<[Category]>) in
+      switch result {
+      case let .success(categories):
+        self?.show(categories: categories)
+      case let .failure(error):
         self?.showAlert(error, retry: self?.fetchCategories)
       }
+    }
+  }
+
+  private func show(categories: [Category]) {
+    let next: () -> Void = { [weak self] in
+      self?.navigationController?.setViewControllers([CategoriesViewController(categories: categories)], animated: true)
+    }
+
+    if isAnimating {
+      // Wait until the animation finishes
+      DispatchQueue.global().async {
+        _ = self.semaphore.wait(timeout: Animation.duration.dispatchTime)
+        DispatchQueue.main.async(execute: next)
+      }
+    } else {
+      next()
     }
   }
 
