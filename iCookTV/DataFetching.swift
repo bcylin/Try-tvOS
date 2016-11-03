@@ -30,6 +30,22 @@ import Freddy
 enum Result<T> {
   case success(T)
   case failure(Error)
+
+  func mapSuccess<U>(_ transform: (T) -> U) -> Result<U> {
+    switch self {
+    case .success(let value): return .success(transform(value))
+    case .failure(let error): return .failure(error)
+    }
+  }
+
+  func mapError(_ transform: (Error) -> Void) -> Result<T> {
+    switch self {
+    case .success(_): break
+    case .failure(let error): transform(error)
+    }
+    return self
+  }
+
 }
 
 

@@ -132,12 +132,13 @@ class LaunchViewController: UIViewController, DataFetching {
 
   private func fetchCategories() {
     fetch(request: CategoriesDataSource.requestForCategories) { [weak self] (result: Result<[Category]>) in
-      switch result {
-      case let .success(categories):
-        self?.show(categories: categories)
-      case let .failure(error):
-        self?.showAlert(error, retry: self?.fetchCategories)
-      }
+      _ = result
+        .mapSuccess { [weak self] categories in
+          self?.show(categories: categories)
+        }
+        .mapError { [weak self] error in
+          self?.showAlert(error, retry: self?.fetchCategories)
+        }
     }
   }
 
