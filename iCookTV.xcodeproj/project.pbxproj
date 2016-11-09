@@ -313,7 +313,10 @@
 				BAB05330A45C8FC69E4F49F5 /* Pods */,
 				B5F7BF491BA9C95F00A75099 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		B5F7BF491BA9C95F00A75099 /* Products */ = {
 			isa = PBXGroup;
