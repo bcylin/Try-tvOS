@@ -183,7 +183,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B53E39791CA1494600EB1EEE /* Extension */ = {
+		B53E39791CA1494600EB1EEE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */,
@@ -193,24 +193,22 @@
 				B56D0E251CBC0C1900B92F73 /* UIViewController+Alert.swift */,
 				B543C3F21CD34419008C512B /* Video+PlayerItem.swift */,
 			);
-			name = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		B543C3EB1CD1E93B008C512B /* Protocol */ = {
+		B543C3EB1CD1E93B008C512B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				B5C79B151DBFBCF80069837A /* BlurBackgroundPresentable.swift */,
-				B52BD6741D5F94320023D4E9 /* DataCollection.swift */,
 				B5EE174F1DC509B8009DA1AE /* DataFetching.swift */,
 				B55BF7E81DC5C3C400EE20BD /* DropdownMenuPresentable.swift */,
 				B50A202A1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift */,
 				B543C3E91CD1E85E008C512B /* OverlayViewPresentable.swift */,
 				B55BF7E61DC5B7F400EE20BD /* Reusable.swift */,
-				B516E78A1D54D73B00A3FCB9 /* SourceType.swift */,
 				B5501BE81CD8ACEC001C3281 /* Trackable.swift */,
 				B5EFE6C11DC600FF00236D1A /* VideosGridLayout.swift */,
 			);
-			name = Protocol;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		B5761A541CCF555D008CCC08 /* Supporting Files */ = {
@@ -234,38 +232,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B5A614FD1CCA0884004A3CD5 /* Classes */ = {
+		B5A614FD1CCA0884004A3CD5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B5AAAE5D1C85DD1D002DDFC8 /* Controller */,
-				B53E39791CA1494600EB1EEE /* Extension */,
-				B5D036581D54E96900B80CFC /* Helper */,
-				B5AAAE5B1C85DD0A002DDFC8 /* Model */,
-				B543C3EB1CD1E93B008C512B /* Protocol */,
-				B5AAAE5C1C85DD16002DDFC8 /* View */,
+				B5AAAE5D1C85DD1D002DDFC8 /* Controllers */,
+				B53E39791CA1494600EB1EEE /* Extensions */,
+				B5D036581D54E96900B80CFC /* Helpers */,
+				B5AAAE5B1C85DD0A002DDFC8 /* Models */,
+				B543C3EB1CD1E93B008C512B /* Protocols */,
+				B5AAAE5C1C85DD16002DDFC8 /* Views */,
 				B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */,
 				B50BFC041CC88FA3004F853D /* Debug.swift */,
 				B51A95381CCF1C5100E5ED97 /* iCookTVKeys.swift */,
 				B5AEEE311C82D4BC001CF112 /* Metrics.swift */,
 			);
-			name = Classes;
+			name = Sources;
 			sourceTree = "<group>";
 		};
-		B5AAAE5B1C85DD0A002DDFC8 /* Model */ = {
+		B5AAAE5B1C85DD0A002DDFC8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				B52BD6761D5FA2570023D4E9 /* CategoriesCollection.swift */,
 				B594CB3A1D53998900CB5630 /* CategoriesDataSource.swift */,
 				B56D68E81CA564B00097D5D7 /* Category.swift */,
+				B52BD6741D5F94320023D4E9 /* DataCollection.swift */,
 				B52BD6781D6024D30023D4E9 /* DataSource.swift */,
+				B516E78A1D54D73B00A3FCB9 /* SourceType.swift */,
 				B5BA618A1C7748B900548B38 /* Video.swift */,
 				B52BD6721D5F910D0023D4E9 /* VideosCollection.swift */,
 				B58E906C1D5F806600AC184D /* VideosDataSource.swift */,
 			);
-			name = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		B5AAAE5C1C85DD16002DDFC8 /* View */ = {
+		B5AAAE5C1C85DD16002DDFC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B5A8F7081CA259120069F836 /* CategoryCell.swift */,
@@ -277,10 +277,10 @@
 				B5C591141CA04BA50096B985 /* SectionHeaderView.swift */,
 				B5BA61881C77431400548B38 /* VideoCell.swift */,
 			);
-			name = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		B5AAAE5D1C85DD1D002DDFC8 /* Controller */ = {
+		B5AAAE5D1C85DD1D002DDFC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */,
@@ -290,10 +290,10 @@
 				B5BA618C1C774BC400548B38 /* VideoPlayerController.swift */,
 				B5DCF9331C985E1600D19FC0 /* VideosViewController.swift */,
 			);
-			name = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		B5D036581D54E96900B80CFC /* Helper */ = {
+		B5D036581D54E96900B80CFC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */,
@@ -301,7 +301,7 @@
 				B53115921CC69E7C00E75292 /* HistoryManager.swift */,
 				B543C3F01CD21530008C512B /* Tracker.swift */,
 			);
-			name = Helper;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		B5F7BF3F1BA9C95F00A75099 = {
@@ -327,7 +327,7 @@
 		B5F7BF4A1BA9C95F00A75099 /* iCookTV */ = {
 			isa = PBXGroup;
 			children = (
-				B5A614FD1CCA0884004A3CD5 /* Classes */,
+				B5A614FD1CCA0884004A3CD5 /* Sources */,
 				B5A614FC1CCA0848004A3CD5 /* Supporting Files */,
 				B5F7BF521BA9C95F00A75099 /* Assets.xcassets */,
 			);
