@@ -33,6 +33,7 @@
 		B543C3EF1CD1FD0B008C512B /* GroundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3EE1CD1FD0B008C512B /* GroundControl.swift */; };
 		B543C3F11CD21530008C512B /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3F01CD21530008C512B /* Tracker.swift */; };
 		B543C3F31CD34419008C512B /* Video+PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C3F21CD34419008C512B /* Video+PlayerItem.swift */; };
+		B546053A1DDB482A00208D37 /* DataRequest+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54605391DDB482A00208D37 /* DataRequest+Result.swift */; };
 		B5501BE31CD74206001C3281 /* TrackableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5501BE21CD74206001C3281 /* TrackableNavigationController.swift */; };
 		B5501BE91CD8ACEC001C3281 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5501BE81CD8ACEC001C3281 /* Trackable.swift */; };
 		B55BF7E71DC5B7F400EE20BD /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55BF7E61DC5B7F400EE20BD /* Reusable.swift */; };
@@ -111,6 +112,7 @@
 		B543C3EE1CD1FD0B008C512B /* GroundControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundControl.swift; sourceTree = "<group>"; };
 		B543C3F01CD21530008C512B /* Tracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		B543C3F21CD34419008C512B /* Video+PlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+PlayerItem.swift"; sourceTree = "<group>"; };
+		B54605391DDB482A00208D37 /* DataRequest+Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Result.swift"; sourceTree = "<group>"; };
 		B5501BE21CD74206001C3281 /* TrackableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackableNavigationController.swift; sourceTree = "<group>"; };
 		B5501BE81CD8ACEC001C3281 /* Trackable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
 		B55BF7E61DC5B7F400EE20BD /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */,
+				B54605391DDB482A00208D37 /* DataRequest+Result.swift */,
 				B53E39771CA1494000EB1EEE /* UIColor+TV.swift */,
 				B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */,
 				B5C85D031CA97981000AE0CF /* UIImage+Grid.swift */,
@@ -622,6 +625,7 @@
 				B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */,
 				B52BD6751D5F94320023D4E9 /* DataCollection.swift in Sources */,
 				B5EE17501DC509B8009DA1AE /* DataFetching.swift in Sources */,
+				B546053A1DDB482A00208D37 /* DataRequest+Result.swift in Sources */,
 				B52BD6791D6024D30023D4E9 /* DataSource.swift in Sources */,
 				B50BFC051CC88FA3004F853D /* Debug.swift in Sources */,
 				B55BF7E91DC5C3C400EE20BD /* DropdownMenuPresentable.swift in Sources */,
