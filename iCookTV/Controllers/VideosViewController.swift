@@ -189,16 +189,17 @@ class VideosViewController: UIViewController,
 
     isLoading = (dataSource.numberOfItems == 0)
     fetch(request: dataSource.requestForNextPage) { [weak self] (result: Result<[Video]>) in
-      switch result {
-      case let .success(videos):
-        guard let current = self else {
-          return
+      _ = result
+        .mapSuccess { [weak self] videos in
+          guard let current = self else {
+            return
+          }
+          self?.dataSource.append(videos, toCollectionView: current.collectionView)
+          self?.setOverlayViewHidden(current.dataSource.numberOfItems > 0, animated: true)
         }
-        self?.dataSource.append(videos, toCollectionView: current.collectionView)
-        self?.setOverlayViewHidden(current.dataSource.numberOfItems > 0, animated: true)
-      case let .failure(error):
-        self?.showAlert(error, retry: self?.fetchNextPage)
-      }
+        .mapError { [weak self] error in
+          self?.showAlert(error, retry: self?.fetchNextPage)
+        }
     }
   }
 

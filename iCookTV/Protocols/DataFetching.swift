@@ -27,15 +27,6 @@
 import Alamofire
 import Freddy
 
-enum Result<T> {
-  case success(T)
-  case failure(Error)
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
 protocol DataFetching: class {
   /// A reference to the pagination object that prevents duplicate requests.
   var pagination: Pagination { get }
@@ -57,26 +48,19 @@ extension DataFetching {
       return
     }
 
-    pagination.currentRequest = sessionManager.request(request).responseJSON { [weak self] response in
-      guard let data = response.data, response.result.error == nil else {
-        completion(.failure(response.result.error!))
-        return
-      }
-
-      guard let pagination = self?.pagination else {
-        return
-      }
-
-      pagination.queue.async {
+    pagination.currentRequest = sessionManager.request(request).responseJSONObject(queue: pagination.queue) { [weak self] result in
+      switch result {
+      case let .success(json):
         do {
-          let json = try JSON(data: data)
           let items = try json.getArray(at: "data").map(T.init)
-          pagination.hasNextPage = json["links"]?["next"] != nil
+          self?.pagination.hasNextPage = json["links"]?["next"] != nil
 
           DispatchQueue.main.sync { completion(.success(items)) }
         } catch {
           DispatchQueue.main.sync { completion(.failure(error)) }
         }
+      case let .failure(error):
+        DispatchQueue.main.sync { completion(.failure(error)) }
       }
     }
   }

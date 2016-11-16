@@ -7,8 +7,6 @@ cache:
     - Pods
 before_install:
   - export LANG=en_US.UTF-8
-  - rvm get head
-  - brew update
   - brew tap homebrew/bundle
   - brew bundle
 install:
@@ -19,7 +17,6 @@ before_script:
 script:
   - bundle exec scan
 after_success:
-  - make coverage
   - bash <(curl -s https://codecov.io/bash)
 notifications:
   email: false
