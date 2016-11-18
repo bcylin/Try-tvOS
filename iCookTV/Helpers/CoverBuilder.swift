@@ -57,7 +57,7 @@ class CoverBuilder {
 
   // MARK: - Public Methods
 
-  func addImage(_ image: UIImage, atCorner corner: Grid, categoryID id: String? = nil, completion: @escaping (_ newCover: UIImage?) -> Void) {
+  func add(image: UIImage, to grid: Grid, categoryID id: String? = nil, completion: @escaping (_ newCover: UIImage?) -> Void) {
     operationQueue.addOperation(BlockOperation { [weak self] in
       let imageSize = CGSize(width: image.size.width * 2, height: image.size.height * 2)
       var canvas: UIImage?
@@ -68,9 +68,9 @@ class CoverBuilder {
         canvas = UIImage.placeholderImage(withSize: imageSize)
       }
 
-      let cover = canvas?.image(byReplacingImage: image, atCorner: corner)
+      let cover = canvas?.image(byReplacingImage: image, in: grid)
       self?.cover = cover
-      self?.filledGrids.insert(corner)
+      self?.filledGrids.insert(grid)
 
       if let key = id, let image = cover, self?.filledGrids.count == Grid.numberOfGrids {
         self?.cacheImage(image, forKey: key)

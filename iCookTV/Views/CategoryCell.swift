@@ -118,21 +118,21 @@ class CategoryCell: UICollectionViewCell {
 
   func setUpCover(_ urls: [Grid: URL], forCategory category: Category) {
     // Cancel previous tasks
-    for (corner, task) in tasks {
+    for (grid, task) in tasks {
       task.cancel()
-      tasks[corner] = nil
+      tasks[grid] = nil
     }
 
-    for (corner, url) in urls {
+    for (grid, url) in urls {
       let downloading = ImageDownloader.default.downloadImage(with: url, progressBlock: nil) {
         [weak self] image, error, imageURL, originalData in
 
-        self?.tasks[corner] = nil
+        self?.tasks[grid] = nil
         guard let image = image, imageURL == url else {
           return
         }
 
-        self?.coverBuilder.addImage(image, atCorner: corner, categoryID: category.id) { newCover in
+        self?.coverBuilder.add(image: image, to: grid, categoryID: category.id) { newCover in
           if let current = self {
             UIView.transition(
               with: current.imageView,
@@ -146,7 +146,7 @@ class CategoryCell: UICollectionViewCell {
         }
       }
       if let task = downloading {
-        tasks[corner] = task
+        tasks[grid] = task
       }
     }
   }
@@ -163,8 +163,8 @@ class CategoryCell: UICollectionViewCell {
 
     var urls = [Grid: URL]()
     for (index, value) in category.coverURLs.enumerated() {
-      guard let corner = Grid(rawValue: index), let url = URL(string: value) else { continue }
-      urls[corner] = url
+      guard let grid = Grid(rawValue: index), let url = URL(string: value) else { continue }
+      urls[grid] = url
     }
 
     setUpCover(urls, forCategory: category)

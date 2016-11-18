@@ -28,13 +28,13 @@ import UIKit
 
 extension UIImage {
 
-  func image(byReplacingImage image: UIImage, atCorner corner: Grid) -> UIImage? {
+  func image(byReplacingImage image: UIImage, in grid: Grid) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(size, true, 0)
 
     let canvas = CGRect(origin: CGPoint.zero, size: size)
     self.draw(in: canvas)
 
-    let rect = canvas.rect(bySize: image.size, atCorner: corner)
+    let rect = canvas.rect(with: image.size, in: grid)
     image.draw(in: rect)
 
     let newImage = UIGraphicsGetImageFromCurrentImageContext()

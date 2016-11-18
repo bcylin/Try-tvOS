@@ -26,7 +26,7 @@
 
 import UIKit
 
-enum Grid: Int {
+enum Grid: Int, Equatable {
   case topLeft, topRight, bottomLeft, bottomRight
 
   static let numberOfGrids: Int = {
@@ -34,17 +34,18 @@ enum Grid: Int {
     while let _ = Grid(rawValue: count) { count += 1 }
     return count
   }()
-}
 
-func == (lhs: Grid, rhs: Grid) -> Bool {
-  return lhs.rawValue == rhs.rawValue
+  static func == (lhs: Grid, rhs: Grid) -> Bool {
+    return lhs.rawValue == rhs.rawValue
+  }
+
 }
 
 extension CGRect {
 
-  func rect(bySize size: CGSize, atCorner corner: Grid) -> CGRect {
+  func rect(with size: CGSize, in grid: Grid) -> CGRect {
     let target = CGSize(width: min(width, size.width), height: min(height, size.height))
-    switch corner {
+    switch grid {
     case .topLeft:
       return divided(atDistance: target.height, from: .maxYEdge).remainder.divided(atDistance: target.width, from: .maxXEdge).remainder
     case .topRight:
