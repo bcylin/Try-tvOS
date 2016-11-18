@@ -65,7 +65,7 @@ class CoverBuilder {
       if let currentImage = self?.cover, currentImage.size == imageSize {
         canvas = currentImage
       } else {
-        canvas = UIImage.placeholderImage(withSize: imageSize)
+        canvas = UIImage.placeholderImage(with: imageSize)
       }
 
       let cover = canvas?.image(byReplacingImage: image, in: grid)

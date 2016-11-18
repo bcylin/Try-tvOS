@@ -31,7 +31,7 @@ class VideoCell: UICollectionViewCell {
 
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
-    _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
+    _imageView.image = UIImage.placeholderImage(with: self.bounds.size)
     _imageView.contentMode = .scaleAspectFill
     return _imageView
   }()
@@ -79,7 +79,7 @@ class VideoCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     imageView.kf.cancelDownloadTask()
-    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
+    imageView.image = UIImage.placeholderImage(with: bounds.size)
     titleLabel.text = nil
   }
 
@@ -138,9 +138,9 @@ class VideoCell: UICollectionViewCell {
 
   // MARK: - Public Methods
 
-  func configure(withVideo video: Video) {
+  func configure(with video: Video) {
     if let url = video.coverURL {
-      imageView.kf.setImage(with: url, placeholder: UIImage.placeholderImage(withSize: bounds.size))
+      imageView.kf.setImage(with: url, placeholder: UIImage.placeholderImage(with: bounds.size))
     }
     titleLabel.text = video.title
     timeLabel.text = video.timestamp

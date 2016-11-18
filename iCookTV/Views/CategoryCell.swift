@@ -37,7 +37,7 @@ class CategoryCell: UICollectionViewCell {
 
   private(set) lazy var imageView: UIImageView = {
     let _imageView = UIImageView()
-    _imageView.image = UIImage.placeholderImage(withSize: self.bounds.size)
+    _imageView.image = UIImage.placeholderImage(with: self.bounds.size)
     _imageView.contentMode = .scaleAspectFill
     return _imageView
   }()
@@ -75,7 +75,7 @@ class CategoryCell: UICollectionViewCell {
       tasks[index] = nil
     }
     coverBuilder.resetCover()
-    imageView.image = UIImage.placeholderImage(withSize: bounds.size)
+    imageView.image = UIImage.placeholderImage(with: bounds.size)
     textLabel.text = nil
   }
 
@@ -153,7 +153,7 @@ class CategoryCell: UICollectionViewCell {
 
   // MARK: - Public Methods
 
-  func configure(withCategory category: Category) {
+  func configure(with category: Category) {
     textLabel.text = category.name
 
     if let cached = coverBuilder.coverForCategory(withID: category.id) {

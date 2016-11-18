@@ -50,7 +50,7 @@ class VideosDataSource: DataSource<VideosCollection> {
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(for: indexPath) as VideoCell
-    cell.configure(withVideo: dataCollection[indexPath.row])
+    cell.configure(with: dataCollection[indexPath.row])
     return cell
   }
 
