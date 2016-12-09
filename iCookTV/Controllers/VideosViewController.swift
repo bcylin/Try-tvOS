@@ -56,7 +56,7 @@ class VideosViewController: UIViewController,
 
   // MARK: - BlurBackgroundPresentable
 
-  let imageAnimationQueue = ImageAnimationQueue(imageView: UIImageView())
+  let backgroundImageView = UIImageView()
 
   // MARK: - DataFetching
 

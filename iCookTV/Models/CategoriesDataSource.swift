@@ -38,7 +38,7 @@ class CategoriesDataSource: DataSource<CategoriesCollection> {
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(for: indexPath) as CategoryCell
-    cell.configure(withCategory: dataCollection[indexPath.row])
+    cell.configure(with: dataCollection[indexPath.row])
     return cell
   }
 

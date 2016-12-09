@@ -31,7 +31,7 @@ protocol VideosGridLayout: class {
   var collectionView: UICollectionView { get }
 
   /// Returns a configured collection view.
-  static func defaultLoadingIndicator() -> UIActivityIndicatorView
+  static func defaultCollectionView(dataSource: UICollectionViewDataSource, delegate: UICollectionViewDelegate) -> UICollectionView
 
   /// Sets up the collection view in the view hierarchy.
   func setUpCollectionView()

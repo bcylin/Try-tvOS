@@ -28,13 +28,13 @@ import UIKit
 
 extension UIImage {
 
-  func image(byReplacingImage image: UIImage, atCorner corner: Grid) -> UIImage? {
+  func image(byReplacingImage image: UIImage, in grid: Grid) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(size, true, 0)
 
     let canvas = CGRect(origin: CGPoint.zero, size: size)
     self.draw(in: canvas)
 
-    let rect = canvas.rect(bySize: image.size, atCorner: corner)
+    let rect = canvas.rect(with: image.size, in: grid)
     image.draw(in: rect)
 
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -43,7 +43,7 @@ extension UIImage {
     return newImage
   }
 
-  class func placeholderImage(withSize size: CGSize) -> UIImage? {
+  class func placeholderImage(with size: CGSize) -> UIImage? {
     let layer = CAGradientLayer()
     layer.frame = CGRect(origin: CGPoint.zero, size: size)
     layer.colors = [UIColor.white.cgColor, UIColor.Palette.LightGray.cgColor]
@@ -63,7 +63,7 @@ extension UIImage {
     return image
   }
 
-  class func resizableImage(withFillColor color: UIColor) -> UIImage? {
+  class func resizableImage(filledWith color: UIColor) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 0)
 
     color.setFill()

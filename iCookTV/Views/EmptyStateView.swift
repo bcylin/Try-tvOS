@@ -67,10 +67,10 @@ class EmptyStateView: UIView {
 
     imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
-    let views = [
+    let views: [String: Any] = [
       "image": imageView,
       "text": textLabel
-    ] as [String : Any]
+    ]
     addConstraints(NSLayoutConstraint.constraints(
       withVisualFormat: "H:|-(>=0)-[image(280)]-(>=0)-|",
       options: [],

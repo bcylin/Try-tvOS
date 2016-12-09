@@ -27,8 +27,8 @@
 import UIKit
 
 protocol BlurBackgroundPresentable: class {
-  /// A reference to the ImageAnimationQueue object that handles image transition.
-  var imageAnimationQueue: ImageAnimationQueue { get }
+  /// A reference to the background image view.
+  var backgroundImageView: UIImageView { get }
 
   /// Sets up the background image view with a blur effect on top of it.
   func setUpBlurBackground()
@@ -43,7 +43,6 @@ extension BlurBackgroundPresentable where Self: UIViewController {
   func setUpBlurBackground() {
     view.backgroundColor = UIColor.tvBackgroundColor()
 
-    let backgroundImageView = imageAnimationQueue.imageView
     backgroundImageView.frame = view.bounds
     backgroundImageView.contentMode = .scaleAspectFill
     backgroundImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -58,9 +57,9 @@ extension BlurBackgroundPresentable where Self: UIViewController {
 
   func animateBackgroundTransition(to image: UIImage?) {
     // Throttle background image transition to avoid extensive changes in a short period of time.
-    let selector = #selector(ImageAnimationQueue.animateBackgroundTransition(to:))
-    NSObject.cancelPreviousPerformRequests(withTarget: imageAnimationQueue, selector: selector, object: nil)
-    imageAnimationQueue.perform(selector, with: image, afterDelay: 0.2)
+    let selector = #selector(UIImageView.transition(to:))
+    NSObject.cancelPreviousPerformRequests(withTarget: backgroundImageView)
+    backgroundImageView.perform(selector, with: image, afterDelay: 0.2)
   }
 
 }
@@ -69,22 +68,16 @@ extension BlurBackgroundPresentable where Self: UIViewController {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-class ImageAnimationQueue: NSObject {
+extension UIImageView {
 
-  fileprivate let imageView: UIImageView
-
-  init(imageView: UIImageView) {
-    self.imageView = imageView
-  }
-
-  @objc fileprivate func animateBackgroundTransition(to image: UIImage?) {
+  @objc fileprivate func transition(to image: UIImage?) {
     Debug.print(#function)
     UIView.transition(
-      with: imageView,
+      with: self,
       duration: 0.5,
       options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseIn],
       animations: {
-        self.imageView.image = image
+        self.image = image
       }, completion: nil
     )
   }

@@ -35,34 +35,34 @@ extension UIFont {
 
   // MARK: - Private Methods
 
-  private class func tvFontOfSize(_ fontSize: CGFloat) -> UIFont {
+  private class func tvFont(ofSize fontSize: CGFloat) -> UIFont {
     return UIFont(name: FontFamily.PingFangTCRegular, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
   }
 
-  private class func tvBoldFontOfSize(_ fontSize: CGFloat) -> UIFont {
+  private class func tvBoldFont(ofSize fontSize: CGFloat) -> UIFont {
     return UIFont(name: FontFamily.PingFangTCMedium, size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize)
   }
 
   // MARK: - Public Methods
 
   class func tvFontForTagline() -> UIFont {
-    return UIFont.tvFontOfSize(44)
+    return UIFont.tvFont(ofSize: 44)
   }
 
   class func tvFontForCategoryCell() -> UIFont {
-    return UIFont.tvFontOfSize(35)
+    return UIFont.tvFont(ofSize: 35)
   }
 
   class func tvFontForFocusedCategoryCell() -> UIFont {
-    return UIFont.tvFontOfSize(40)
+    return UIFont.tvFont(ofSize: 40)
   }
 
   class func tvFontForVideoCell() -> UIFont {
-    return UIFont.tvFontOfSize(29)
+    return UIFont.tvFont(ofSize: 29)
   }
 
   class func tvFontForFocusedVideoCell() -> UIFont {
-    return UIFont.tvBoldFontOfSize(29)
+    return UIFont.tvBoldFont(ofSize: 29)
   }
 
   class func tvFontForVideoLength() -> UIFont {
@@ -70,15 +70,15 @@ extension UIFont {
   }
 
   class func tvFontForLogo() -> UIFont {
-    return UIFont.tvFontOfSize(65)
+    return UIFont.tvFont(ofSize: 65)
   }
 
   class func tvFontForMenuButton() -> UIFont {
-    return UIFont.tvFontOfSize(30)
+    return UIFont.tvFont(ofSize: 30)
   }
 
   class func tvFontForHeaderTitle() -> UIFont {
-    return UIFont.tvFontOfSize(35)
+    return UIFont.tvFont(ofSize: 35)
   }
 
 }
