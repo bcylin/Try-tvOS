@@ -8,7 +8,7 @@ bootstrap:
 	bundle exec pod keys set TreasureDataAPIKey "-"
 	bundle exec pod install
 	# sh scripts/fabric.sh
-	echo "fabric.apikey" > keys/fabric.apike
+	echo "fabric.apikey" > keys/fabric.apikey
 	echo "fabric.buildsecret" > keys/fabric.buildsecret
 
 coverage:
