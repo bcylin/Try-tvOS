@@ -6,6 +6,6 @@ if ! command -v swiftlint >/dev/null; then
   brew install swiftlint
 elif [ $(swiftlint version) != "$SWIFTLINT_VERSION" ]; then
   brew upgrade swiftlint
-else
-  swiftlint
 fi
+
+swiftlint
