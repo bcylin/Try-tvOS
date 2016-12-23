@@ -39,7 +39,7 @@ struct Debug {
     #if DEBUG
       let prefix = dateFormatter.string(from: Date()) + " \(file.typeName).\(function):[\(line)]"
       let content = items.map { "\($0)" } .joined(separator: separator)
-      Swift.print("\(prefix) \(content)\n", terminator: terminator)
+      Swift.print("\(prefix) \(content)", terminator: terminator)
     #endif
   }
 

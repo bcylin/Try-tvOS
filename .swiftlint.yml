@@ -2,6 +2,7 @@ disabled_rules:
   - force_try
   - line_length
   - nesting
+  - vertical_whitespace
 type_name:
   excluded:
     - iCookTVKeys

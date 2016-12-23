@@ -25,8 +25,6 @@
 //
 
 import UIKit
-import Crashlytics
-import Fabric
 import TreasureData_tvOS_SDK
 
 @UIApplicationMain
@@ -40,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     GroundControl.sync()
-    setUpAnalytics()
+    Tracker.setUpAnalytics()
 
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = TrackableNavigationController(rootViewController: LaunchViewController())
@@ -50,17 +48,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidEnterBackground(_ application: UIApplication) {
-    TreasureData.sharedInstance().endSession(Tracker.sessionsTable)
+    #if TRACKING
+      TreasureData.sharedInstance().endSession(Tracker.sessionsTable)
 
-    backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
-      self?.endBackgroundTask(inApplication: application)
-    })
+      backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
+        self?.endBackgroundTask(inApplication: application)
+      })
 
-    TreasureData.sharedInstance().uploadEvents(callback: { [weak self] in
-      self?.endBackgroundTask(inApplication: application)
-    }) { [weak self] _ in
-      self?.endBackgroundTask(inApplication: application)
-    }
+      TreasureData.sharedInstance().uploadEvents(callback: { [weak self] in
+        self?.endBackgroundTask(inApplication: application)
+      }) { [weak self] _ in
+        self?.endBackgroundTask(inApplication: application)
+      }
+    #endif
   }
 
   // MARK: - Private Methods
@@ -68,21 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func endBackgroundTask(inApplication application: UIApplication) {
     application.endBackgroundTask(backgroundTask)
     backgroundTask = UIBackgroundTaskInvalid
-  }
-
-  private func setUpAnalytics() {
-    Crashlytics.start(withAPIKey: iCookTVKeys.CrashlyticsAPIKey)
-    Fabric.with([Crashlytics.self])
-
-    TreasureData.initializeApiEndpoint("https://in.treasuredata.com")
-    TreasureData.initialize(withApiKey: iCookTVKeys.TreasureDataAPIKey)
-    TreasureData.sharedInstance().enableAutoAppendUniqId()
-    TreasureData.sharedInstance().enableAutoAppendModelInformation()
-    TreasureData.sharedInstance().enableAutoAppendAppInformation()
-    TreasureData.sharedInstance().enableAutoAppendLocaleInformation()
-
-    TreasureData.sharedInstance().defaultDatabase = Tracker.defaultDatabase
-    TreasureData.sharedInstance().startSession(Tracker.sessionsTable)
   }
 
 }

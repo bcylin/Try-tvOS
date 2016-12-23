@@ -10,18 +10,33 @@ A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
 ## Setup
 
-Install required dependencies using [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
+Install [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+gem install bundler
+```
+
+### Quick Start
+
+Run the following commands to install dependencies:
+
+```
+make bootstrap
+```
+
+### Production Setups
+
+If you work at Polydice, instead of `make bootstrap`, set up the project step by step with the following commands. Fill in the credentials and ask admin for required files.
 
 ```
 brew tap homebrew/bundle
 brew bundle
-```
-```
 bundle install
 bundle exec pod install
 ```
 
-### API
+#### API
 
 `pod install` will prompt for the required configuration to run the app:
 
@@ -31,37 +46,34 @@ What is the key for BaseAPIURL
 >
 ```
 
-Input `https://polydice.com/iCook-tvOS/demo/` for `BaseAPIURL`.
-
 > TBD: API details are hidden for now due to proprietary reasons.
 
-### Required Keys
+#### Required Keys
+
+Managed by CocoaPods-Keys:
 
 * CrashlyticsAPIKey
 * TreasureDataAPIKey
 
-Managed by CocoaPods-Keys, they can be real API keys or any arbitrary strings.
+#### Required Files
 
-### Required Files
+* Required by the Fabric script for the `Release` configuration:
 
-```
-./keys/fabric.apikey
-./keys/fabric.buildsecret
-```
-
-Required by the Fabric script for the `Release` configuration.
-
-### Ignored
+  ```
+  ./keys/fabric.apikey
+  ./keys/fabric.buildsecret
+  ```
 
 * `icook-tv-top-shelf-image.png` is not included in the repo due to the license of image.
 
-### Known Issues
+## Known Issues
 
 * Initializing generic `DataSource` will cause `EXC_BAD_ACCESS` in Xcode 8. Fixed in Xcode 8.1.
 
 ## Demo
 
-Install the beta version via <https://testflight.icook.tw>.
+* Install the beta version via <https://testflight.icook.tw>.
+* Download the tvOS app from [App Store](https://itunes.apple.com/tw/app/ai-liao-li/id554065086).
 
 ## Contact
 
