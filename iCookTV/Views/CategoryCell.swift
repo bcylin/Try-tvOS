@@ -124,9 +124,7 @@ class CategoryCell: UICollectionViewCell {
     }
 
     for (grid, url) in urls {
-      let downloading = ImageDownloader.default.downloadImage(with: url, progressBlock: nil) {
-        [weak self] image, error, imageURL, originalData in
-
+      let downloading = ImageDownloader.default.downloadImage(with: url, progressBlock: nil) { [weak self] image, _, imageURL, _ in
         self?.tasks[grid] = nil
         guard let image = image, imageURL == url else {
           return

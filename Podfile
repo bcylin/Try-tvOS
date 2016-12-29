@@ -9,19 +9,19 @@ workspace "iCookTV"
 project "iCookTV"
 
 target :iCookTV do
-  pod "Alamofire", "~> 4.0.0"
+  pod "Alamofire", "~> 4.2.0"
   pod "Crashlytics"
   pod "Fabric"
   pod "Freddy", "~> 3.0.0"
   pod "HCYoutubeParser"
   pod "Hue", "~> 2.0.0"
-  pod "R.swift", "~> 3.0.0"
-  pod "Kingfisher", "~> 3.1.0"
+  pod "R.swift", "~> 3.2.0"
+  pod "Kingfisher", "~> 3.2.0"
   pod "TreasureData-tvOS-SDK", "0.1.14"
 
   target :iCookTVTests do
-    pod "Nimble", "~> 5.0.0"
-    pod "Quick", "~> 0.10.0"
+    pod "Nimble"
+    pod "Quick"
   end
 end
 
