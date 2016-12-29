@@ -86,7 +86,7 @@ class HistoryViewController: UIViewController,
       } catch {
         Tracker.track(error)
         // Remove the malformed cache.
-        HistoryManager.deleteCache() { _ in
+        HistoryManager.deleteCache { _ in
           self.isLoading = false
         }
       }

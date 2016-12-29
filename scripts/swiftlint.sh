@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SWIFTLINT_VERSION="0.13.2"
+SWIFTLINT_VERSION="0.15.0"
 
 if ! command -v swiftlint >/dev/null; then
   brew install swiftlint
