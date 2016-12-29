@@ -15,7 +15,7 @@ install:
 before_script:
   - bundle exec danger
 script:
-  - bundle exec scan
+  - bundle exec fastlane scan
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 notifications:

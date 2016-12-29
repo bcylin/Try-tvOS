@@ -7,6 +7,6 @@
 workspace "iCookTV.xcworkspace"
 scheme "iCookTV"
 clean true
+skip_build true
 code_coverage true
-destination "name=Apple TV 1080p,OS=latest"
 output_types "junit"
