@@ -31,15 +31,15 @@ import Keys
 struct iCookTVKeys {
 
   static let baseAPIURL: String = {
-    IcooktvKeys().baseAPIURL()
+    ICookTVKeys().baseAPIURL
   }()
 
   static let CrashlyticsAPIKey: String = {
-    IcooktvKeys().crashlyticsAPIKey()
+    ICookTVKeys().crashlyticsAPIKey
   }()
 
   static let TreasureDataAPIKey: String = {
-    IcooktvKeys().treasureDataAPIKey()
+    ICookTVKeys().treasureDataAPIKey
   }()
 
 }
