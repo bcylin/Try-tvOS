@@ -21,6 +21,7 @@ target :iCookTV do
   target :iCookTVTests do
     pod "Nimble"
     pod "Quick"
+    pod "SwiftLint", "0.24.0"
   end
 end
 

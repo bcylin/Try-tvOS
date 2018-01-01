@@ -11,7 +11,11 @@ variable_name:
   excluded:
     - id
     - URL
+included:
+  - iCookTV
+  - iCookTVTests
 excluded:
   - Carthage
   - Pods
   - iCookTV/R.generated.swift
+  - vendor
