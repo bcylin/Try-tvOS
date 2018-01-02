@@ -10,6 +10,3 @@ bootstrap:
 	# sh scripts/fabric.sh
 	echo "fabric.apikey" > keys/fabric.apikey
 	echo "fabric.buildsecret" > keys/fabric.buildsecret
-
-coverage:
-	bundle exec slather coverage -s --input-format profdata --scheme iCookTV --workspace iCookTV.xcworkspace iCookTV.xcodeproj
