@@ -1,5 +1,4 @@
 source "https://github.com/CocoaPods/Specs.git"
-source "https://github.com/bcylin/Specs.git"
 
 platform :tvos, "9.0"
 use_frameworks!
@@ -17,11 +16,12 @@ target :iCookTV do
   pod "Hue", "~> 2.0.0"
   pod "R.swift", "~> 3.2.0"
   pod "Kingfisher", "~> 3.2.0"
-  pod "TreasureData-tvOS-SDK", "0.1.14"
+  pod "TreasureData-iOS-SDK", "0.1.15"
 
   target :iCookTVTests do
     pod "Nimble"
     pod "Quick"
+    pod "SwiftLint", "0.24.0"
   end
 end
 
