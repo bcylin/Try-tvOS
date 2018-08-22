@@ -1,6 +1,5 @@
 bootstrap:
-	brew tap homebrew/bundle
-	brew bundle
+	gem install bundler
 	bundle install
 	# pod install
 	bundle exec pod keys set BaseAPIURL "https://polydice.com/iCook-tvOS/demo/"

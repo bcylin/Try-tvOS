@@ -10,10 +10,9 @@ A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
 ## Setup
 
-Install [Homebrew](http://brew.sh/) and [Bundler](http://bundler.io/):
+Install [Bundler](http://bundler.io/):
 
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 gem install bundler
 ```
 
@@ -30,8 +29,6 @@ make bootstrap
 If you work at Polydice, instead of `make bootstrap`, set up the project step by step with the following commands. Fill in the credentials and ask admin for required files.
 
 ```
-brew tap homebrew/bundle
-brew bundle
 bundle install
 bundle exec pod install
 ```
