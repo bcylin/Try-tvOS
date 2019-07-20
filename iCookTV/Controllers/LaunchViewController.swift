@@ -122,10 +122,10 @@ class LaunchViewController: UIViewController, DataFetching {
         self.lowerTaglineConstraint?.constant = 0
         self.view.layoutIfNeeded()
       }
-    }) { _ in
+    }, completion: { _ in
       self.semaphore.signal()
       self.isAnimating = false
-    }
+    })
   }
 
   // MARK: - Private Methods
