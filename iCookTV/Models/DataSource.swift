@@ -38,6 +38,14 @@ class DataSource<Collection: DataCollection>: NSObject, SourceType {
 
   private(set) var dataCollection: Collection
 
+  var numberOfItems: Int {
+    return dataCollection.count
+  }
+
+  subscript(index: Int) -> Collection.DataType {
+    return dataCollection[index]
+  }
+
   // MARK: - UICollectionViewDataSource
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

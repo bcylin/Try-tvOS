@@ -37,7 +37,7 @@ class LaunchViewController: UIViewController, DataFetching {
   }()
 
   private lazy var activityIndicator: UIActivityIndicatorView = {
-    let _indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    let _indicator = UIActivityIndicatorView(style: .whiteLarge)
     _indicator.color = UIColor.Palette.GreyishBrown
     _indicator.hidesWhenStopped = true
     return _indicator
