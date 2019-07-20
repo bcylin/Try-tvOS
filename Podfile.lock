@@ -1,44 +1,74 @@
 PODS:
-  - Alamofire (4.2.0)
+  - Alamofire (4.8.2)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.10)
   - HCYoutubeParser (0.0.5)
-  - Hue (2.0.1)
+  - Hue (5.0.0)
   - KeenClientTD (3.2.27)
   - Keys (1.0.1)
-  - Kingfisher (3.2.4)
-  - SwiftLint (0.24.0)
+  - Kingfisher (5.7.0)
+  - SwiftLint (0.34.0)
   - TreasureData-iOS-SDK (0.1.15):
     - KeenClientTD (= 3.2.27)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.2.0)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, tag `4.8.2`)
   - Crashlytics
   - Fabric
   - HCYoutubeParser
-  - Hue (~> 2.0.0)
+  - Hue (from `https://github.com/zenangst/Hue.git`, tag `5.0.0`)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (~> 3.2.0)
-  - SwiftLint (= 0.24.0)
+  - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `5.7.0`)
+  - SwiftLint (from `https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/4/0/1/SwiftLint/0.34.0/SwiftLint.podspec.json`)
   - TreasureData-iOS-SDK (= 0.1.15)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Crashlytics
+    - Fabric
+    - HCYoutubeParser
+    - KeenClientTD
+    - TreasureData-iOS-SDK
+
 EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 4.8.2
+  Hue:
+    :git: https://github.com/zenangst/Hue.git
+    :tag: 5.0.0
   Keys:
     :path: Pods/CocoaPodsKeys
+  Kingfisher:
+    :git: https://github.com/onevcat/Kingfisher.git
+    :tag: 5.7.0
+  SwiftLint:
+    :podspec: https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/4/0/1/SwiftLint/0.34.0/SwiftLint.podspec.json
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 4.8.2
+  Hue:
+    :git: https://github.com/zenangst/Hue.git
+    :tag: 5.0.0
+  Kingfisher:
+    :git: https://github.com/onevcat/Kingfisher.git
+    :tag: 5.7.0
 
 SPEC CHECKSUMS:
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   HCYoutubeParser: bc1db8c062e4b835eda381f2be2f9970f6a8d071
-  Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
+  Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
   KeenClientTD: ddb29a702bd4cfce5d526519ca8959d70c324c6a
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
-  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
-  SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
+  Kingfisher: 5e1c7784a4e1052c2ed2f22dd4b19b1db74c837e
+  SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
   TreasureData-iOS-SDK: cc878af36b85ae3540a9a5bdb36b7bdc8707b719
 
-PODFILE CHECKSUM: e5951c6489057187d3b6c52cfcfe304dc59eb489
+PODFILE CHECKSUM: 7d0f309956943494904766e181472b47d17e9494
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.7.5

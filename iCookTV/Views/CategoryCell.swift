@@ -52,7 +52,7 @@ class CategoryCell: UICollectionViewCell {
 
   private let coverBuilder = CoverBuilder()
 
-  private var tasks = [Grid: RetrieveImageDownloadTask]()
+  private var tasks = [Grid: DownloadTask]()
 
   // MARK: - Initialization
 
@@ -124,11 +124,12 @@ class CategoryCell: UICollectionViewCell {
     }
 
     for (grid, url) in urls {
-      let downloading = ImageDownloader.default.downloadImage(with: url, progressBlock: nil) { [weak self] image, _, imageURL, _ in
+      let downloading = ImageDownloader.default.downloadImage(with: url, options: []) { [weak self] in
         self?.tasks[grid] = nil
-        guard let image = image, imageURL == url else {
+        guard let result = try? $0.get(), result.url == url else {
           return
         }
+        let image = result.image
 
         self?.coverBuilder.add(image: image, to: grid, categoryID: category.id) { newCover in
           if let current = self {

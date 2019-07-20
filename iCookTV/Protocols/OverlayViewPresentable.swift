@@ -61,9 +61,10 @@ extension OverlayViewPresentable where Self: UIViewController {
     }
 
     if let url = GroundControl.defaultBackgroundURL, !hidden {
-      KingfisherManager.shared.downloader.downloadImage(with: url, completionHandler: { [weak self] image, _, _, _ in
+      ImageDownloader.default.downloadImage(with: url, options: []) { [weak self] in
+        let image = try? $0.get().image
         self?.updateBackground(with: image)
-      })
+      }
     }
   }
 
