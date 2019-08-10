@@ -26,10 +26,9 @@
 
 @testable import iCookTV
 import UIKit
-import Nimble
-import Quick
+import XCTest
 
-class DataSourceSpec: QuickSpec {
+final class DataSourceSpec: XCTestCase {
 
   private struct TestCollection: DataCollection {
     typealias DataType = String
@@ -37,62 +36,56 @@ class DataSourceSpec: QuickSpec {
   }
 
   private var dataSource = DataSource(dataCollection: TestCollection(items: []))
-  private let dataCollection = TestCollection(items: [
-    "Lorem", "ipsum", "dolor", "sit", "amet"
-  ])
   private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
 
-  override func spec() {
+  override func setUp() {
+    dataSource = DataSource(dataCollection: TestCollection(items: [
+      "Lorem", "ipsum", "dolor", "sit", "amet"
+    ]))
+  }
 
-    beforeEach {
-      self.dataSource = DataSource(dataCollection: self.dataCollection)
-    }
+  func testNumberOfItems() {
+    // It should return the count of items
+    XCTAssertEqual(dataSource.numberOfItems, 5)
+  }
 
-    describe("SourceType") {
-      describe("numberOfItems") {
-        it("should return the count of items") {
-          expect(self.dataSource.numberOfItems) == 5
-        }
-      }
+  func testSubscript() {
+    // It should return the item at index
+    XCTAssertEqual(dataSource[0], "Lorem")
+    XCTAssertEqual(dataSource[1], "ipsum")
+    XCTAssertEqual(dataSource[2], "dolor")
+    XCTAssertEqual(dataSource[3], "sit")
+    XCTAssertEqual(dataSource[4], "amet")
+  }
 
-      describe("subscript") {
-        it("should return the item at index") {
-          expect(self.dataSource[0]) == "Lorem"
-          expect(self.dataSource[1]) == "ipsum"
-          expect(self.dataSource[2]) == "dolor"
-          expect(self.dataSource[3]) == "sit"
-          expect(self.dataSource[4]) == "amet"
-        }
-      }
-    }
+  func testAppendItemsToCollectionView() {
+    // Given
+    let items = ["consectetur", "adipisicing", "elit"]
 
-    describe("append(_:toCollectionView:") {
-      it("should append items to collection") {
-        let items = ["consectetur", "adipisicing", "elit"]
-        self.dataSource.append(items, toCollectionView: self.collectionView)
+    // When
+    dataSource.append(items, toCollectionView: collectionView)
 
-        expect(self.dataSource.numberOfItems) == 8
-        expect(self.dataSource[5]) == "consectetur"
-        expect(self.dataSource[6]) == "adipisicing"
-        expect(self.dataSource[7]) == "elit"
-      }
-    }
+    // It should append items to collection
+    XCTAssertEqual(dataSource.numberOfItems, 8)
+    XCTAssertEqual(dataSource[5], "consectetur")
+    XCTAssertEqual(dataSource[6], "adipisicing")
+    XCTAssertEqual(dataSource[7], "elit")
+  }
 
-    describe("moveItem(atIndexPathToTop:inCollectionView:") {
-      it("should reorder the items") {
-        self.dataSource.moveItem(
-          atIndexPathToTop: IndexPath(row: 2, section: 0),
-          inCollectionView: self.collectionView
-        )
-        expect(self.dataSource.numberOfItems) == 5
-        expect(self.dataSource[0]) == "dolor"
-        expect(self.dataSource[1]) == "Lorem"
-        expect(self.dataSource[2]) == "ipsum"
-        expect(self.dataSource[3]) == "sit"
-        expect(self.dataSource[4]) == "amet"
-      }
-    }
+  func testMoveItemAtIndexPathToTopInCollectionView() {
+    // Given
+    let indexPath = IndexPath(row: 2, section: 0)
 
+    // When
+    dataSource.moveItem(atIndexPathToTop: indexPath, inCollectionView: collectionView)
+
+    // It should reorder the items
+    XCTAssertEqual(dataSource.numberOfItems, 5)
+    XCTAssertEqual(dataSource[0], "dolor")
+    XCTAssertEqual(dataSource[1], "Lorem")
+    XCTAssertEqual(dataSource[2], "ipsum")
+    XCTAssertEqual(dataSource[3], "sit")
+    XCTAssertEqual(dataSource[4], "amet")
   }
 
 }

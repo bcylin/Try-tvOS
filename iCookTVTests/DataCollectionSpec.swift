@@ -25,10 +25,9 @@
 //
 
 @testable import iCookTV
-import Nimble
-import Quick
+import XCTest
 
-class DataCollectionSpec: QuickSpec {
+final class DataCollectionSpec: XCTestCase {
 
   private struct TestCollection: DataCollection {
     typealias DataType = Int
@@ -37,68 +36,77 @@ class DataCollectionSpec: QuickSpec {
 
   private var dataCollection = TestCollection(items: [])
 
-  override func spec() {
+  override func setUp() {
+    dataCollection = TestCollection(items: [1, 1, 2, 3, 5, 8])
+  }
 
-    beforeEach {
-      self.dataCollection = TestCollection(items: [1, 1, 2, 3, 5, 8])
-    }
+  func testCount() {
+    // It should return the count of items
+    XCTAssertEqual(dataCollection.count, 6)
+  }
 
-    describe("count") {
-      it("should return the count of items") {
-        expect(self.dataCollection.count) == 6
-      }
-    }
+  func testSubscript() {
+    // It should return the item at index
+    XCTAssertEqual(dataCollection[0], 1)
+    XCTAssertEqual(dataCollection[1], 1)
+    XCTAssertEqual(dataCollection[2], 2)
+    XCTAssertEqual(dataCollection[3], 3)
+    XCTAssertEqual(dataCollection[4], 5)
+    XCTAssertEqual(dataCollection[5], 8)
+  }
 
-    describe("subscript") {
-      it("should return the item at index") {
-        expect(self.dataCollection[0]) == 1
-        expect(self.dataCollection[1]) == 1
-        expect(self.dataCollection[2]) == 2
-        expect(self.dataCollection[3]) == 3
-        expect(self.dataCollection[4]) == 5
-        expect(self.dataCollection[5]) == 8
-      }
-    }
+  func testAppendItems() {
+    // Given
+    let newItems = [13, 21, 34, 55]
 
-    describe("append(_:)") {
-      it("should append items to collection") {
-        let collection = self.dataCollection.append([13, 21, 34, 55])
-        expect(self.dataCollection.count) == 6
-        expect(collection.count) == 10
-        expect(collection[6]) == 13
-        expect(collection[7]) == 21
-        expect(collection[8]) == 34
-        expect(collection[9]) == 55
-      }
-    }
+    // When
+    let newCollection = dataCollection.append(newItems)
 
-    describe("insert(_:atIndex:)") {
-      it("should insert item to collection") {
-        let collection = self.dataCollection.insert(42, atIndex: 3)
-        expect(self.dataCollection.count) == 6
-        expect(collection.count) == 7
-        expect(collection.items) == [1, 1, 2, 42, 3, 5, 8]
-      }
-    }
+    // Then the original data collection should remain the same
+    XCTAssertEqual(dataCollection.count, 6)
 
-    describe("deleteItem(atIndex:)") {
-      it("should delete item at index") {
-        let collection = self.dataCollection.deleteItem(atIndex: 3)
-        expect(self.dataCollection.count) == 6
-        expect(collection.count) == 5
-        expect(collection.items) == [1, 1, 2, 5, 8]
-      }
-    }
+    // It should append items to the new collection
+    XCTAssertEqual(newCollection.count, 10)
+    XCTAssertEqual(newCollection[6], 13)
+    XCTAssertEqual(newCollection[7], 21)
+    XCTAssertEqual(newCollection[8], 34)
+    XCTAssertEqual(newCollection[9], 55)
+  }
 
-    describe("moveItem(fromIndex:toIndex:)") {
-      it("should reorder the items") {
-        let collection = self.dataCollection.moveItem(fromIndex: 1, toIndex: 4)
-        expect(self.dataCollection.count) == 6
-        expect(collection.count) == 6
-        expect(collection.items) == [1, 2, 3, 5, 1, 8]
-      }
-    }
+  func testInsertItemAtIndex() {
+    // When
+    let newCollection = dataCollection.insert(42, atIndex: 3)
 
+    // Then the original data collection should remain the same
+    XCTAssertEqual(dataCollection.count, 6)
+
+    // It should insert item to the new collection
+    XCTAssertEqual(newCollection.count, 7)
+    XCTAssertEqual(newCollection.items, [1, 1, 2, 42, 3, 5, 8])
+  }
+
+  func testDeleteItemAtIndex() {
+    // When
+    let newCollection = dataCollection.deleteItem(atIndex: 3)
+
+    // Then the original data collection should remain the same
+    XCTAssertEqual(dataCollection.count, 6)
+
+    // It should delete item at index in the new collection
+    XCTAssertEqual(newCollection.count, 5)
+    XCTAssertEqual(newCollection.items, [1, 1, 2, 5, 8])
+  }
+
+  func testMoveItemFromIndexToIndex() {
+    // When
+    let newCollection = dataCollection.moveItem(fromIndex: 1, toIndex: 4)
+
+    // Then the original data collection should remain the same
+    XCTAssertEqual(dataCollection.count, 6)
+
+    // It should reorder the items in the new collection
+    XCTAssertEqual(newCollection.count, 6)
+    XCTAssertEqual(newCollection.items, [1, 2, 3, 5, 1, 8])
   }
 
 }
