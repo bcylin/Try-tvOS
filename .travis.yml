@@ -7,12 +7,14 @@ cache:
     - Pods
 before_install:
   - export LANG=en_US.UTF-8
+  - xcrun instruments -s devices
+  - xcrun instruments -w "Apple TV 4K (12.4)" || true
 install:
   - make bootstrap
 before_script:
   - if [ -n "$DANGER_GITHUB_API_TOKEN" ]; then bundle exec danger; fi
 script:
-  - bundle exec fastlane scan
+  - bundle exec fastlane scan --device "Apple TV 4K (12.4)"
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 notifications:
