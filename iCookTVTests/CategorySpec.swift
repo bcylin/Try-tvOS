@@ -25,7 +25,6 @@
 //
 
 @testable import iCookTV
-import Freddy
 import Nimble
 import Quick
 
@@ -35,10 +34,10 @@ class CategorySpec: QuickSpec {
 
     let data: Data = Resources.testData(named: "Category.json")!
 
-    describe("init(json:)") {
+    describe("decoding") {
       it("should parse JSON as Category") {
-        let json = try! JSON(data: data)
-        let category = try! Category(json: json)
+        let decoder = JSONDecoder()
+        let category = try! decoder.decode(Category.self, from: data)
 
         expect(category.id).to(equal("9527"))
         expect(category.name).to(equal("愛料理廚房"))

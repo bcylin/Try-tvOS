@@ -27,7 +27,7 @@
 import Foundation
 import Freddy
 
-struct Video: JSONDecodable, JSONEncodable {
+struct Video: Codable, JSONDecodable, JSONEncodable {
 
   let id: String
   let title: String
@@ -91,6 +91,53 @@ struct Video: JSONDecodable, JSONEncodable {
     ]
 
     return .dictionary(json)
+  }
+
+  // MARK: - Codable
+
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case attributes
+  }
+
+  private enum AttributesCodingKeys: String, CodingKey {
+    case title
+    case subtitle
+    case description
+    case length
+    case youtube = "embed-url"
+    case source = "video-url"
+    case cover = "cover-url"
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(String.self, forKey: .id)
+
+    let attributes = try container.nestedContainer(keyedBy: AttributesCodingKeys.self, forKey: .attributes)
+    title = try attributes.decode(String.self, forKey: .title)
+    subtitle = try? attributes.decode(String.self, forKey: .subtitle)
+    description = try? attributes.decode(String.self, forKey: .description)
+    length = (try? attributes.decode(Int.self, forKey: .length)) ?? 0
+    youtube = try attributes.decode(String.self, forKey: .youtube)
+    source = try? attributes.decode(String.self, forKey: .source)
+    cover = try attributes.decode(String.self, forKey: .cover)
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(id, forKey: .id)
+
+    var attributes = container.nestedContainer(keyedBy: AttributesCodingKeys.self, forKey: .attributes)
+    try attributes.encode(title, forKey: .title)
+    try attributes.encode(length, forKey: .length)
+    try attributes.encode(youtube, forKey: .youtube)
+    try attributes.encode(cover, forKey: .cover)
+
+    // Optional values
+    try subtitle.map { try attributes.encode($0, forKey: .subtitle) }
+    try description.map { try attributes.encode($0, forKey: .description) }
+    try source.map { try attributes.encode($0, forKey: .source) }
   }
 
 }

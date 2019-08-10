@@ -24,9 +24,10 @@
 //  SOFTWARE.
 //
 
+import Foundation
 import Freddy
 
-struct Category: JSONDecodable {
+struct Category: Codable, JSONDecodable {
 
   let id: String
   let name: String
@@ -38,6 +39,36 @@ struct Category: JSONDecodable {
     id = try value.getString(at: "id")
     name = try value.getString(at: "attributes", "name", or: "")
     coverURLs = try value.getArray(at: "attributes", "cover-urls").map(String.init)
+  }
+
+  // MARK: - Codable
+
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case attributes
+  }
+
+  private enum AttributesCodingKeys: String, CodingKey {
+    case name
+    case coverURLs = "cover-urls"
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(String.self, forKey: .id)
+
+    let attributes = try container.nestedContainer(keyedBy: AttributesCodingKeys.self, forKey: .attributes)
+    name = try attributes.decode(String.self, forKey: .name)
+    coverURLs = try attributes.decode([String].self, forKey: .coverURLs)
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(id, forKey: .id)
+
+    var attributes = container.nestedContainer(keyedBy: AttributesCodingKeys.self, forKey: .attributes)
+    try attributes.encode(name, forKey: .name)
+    try attributes.encode(coverURLs, forKey: .coverURLs)
   }
 
 }

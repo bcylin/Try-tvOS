@@ -35,9 +35,11 @@ class VideoSpec: QuickSpec {
 
     let data: Data = Resources.testData(named: "Video.json")!
     let json = try! JSON(data: data as Data)
-    let video = try! Video(json: json)
 
-    describe("init(json:)") {
+    let decoder = JSONDecoder()
+    let video = try! decoder.decode(Video.self, from: data)
+
+    describe("decoding") {
       it("should parse JSON as Video") {
         expect(video.id).to(equal("42"))
         expect(video.title).to(equal("Lorem"))
