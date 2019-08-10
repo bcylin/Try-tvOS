@@ -26,13 +26,16 @@
 
 import Foundation
 
-struct Category: Codable {
+struct Category {
 
   let id: String
   let name: String
   let coverURLs: [String]
 
-  // MARK: - Codable
+}
+
+
+extension Category: Codable {
 
   private enum CodingKeys: String, CodingKey {
     case id
@@ -44,6 +47,8 @@ struct Category: Codable {
     case coverURLs = "cover-urls"
   }
 
+  // MARK: - Decodable
+
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     id = try container.decode(String.self, forKey: .id)
@@ -52,6 +57,8 @@ struct Category: Codable {
     name = try attributes.decode(String.self, forKey: .name)
     coverURLs = try attributes.decode([String].self, forKey: .coverURLs)
   }
+
+  // MARK: - Encodable
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
