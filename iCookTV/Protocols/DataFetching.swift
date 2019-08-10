@@ -25,7 +25,6 @@
 //
 
 import Alamofire
-import Freddy
 
 protocol DataFetching: class {
   /// A reference to the pagination object that prevents duplicate requests.
@@ -37,23 +36,25 @@ protocol DataFetching: class {
   ///   - request: An Alamofire URL request.
   ///   - sessionManager: A session manager to send the request. Optional, default is SessionManager.default.
   ///   - completion: A closure to be executed once the request has finished.
-  func fetch<T: JSONDecodable>(request: URLRequestConvertible, with sessionManager: SessionManager, completion: @escaping (Result<[T]>) -> Void)
+  func fetch<T: Decodable>(request: URLRequestConvertible, with sessionManager: SessionManager, completion: @escaping (Result<[T]>) -> Void)
 }
 
 
 extension DataFetching {
 
-  func fetch<T: JSONDecodable>(request: URLRequestConvertible, with sessionManager: SessionManager = SessionManager.default, completion: @escaping (Result<[T]>) -> Void) {
+  func fetch<T: Decodable>(request: URLRequestConvertible, with sessionManager: SessionManager = SessionManager.default, completion: @escaping (Result<[T]>) -> Void) {
     guard pagination.isReady else {
       return
     }
 
-    pagination.currentRequest = sessionManager.request(request).responseJSONObject(queue: pagination.queue) { [weak self] result in
+    pagination.currentRequest = sessionManager.request(request).responseResult(queue: pagination.queue) { [weak self] result in
       switch result {
-      case let .success(json):
+      case let .success(data):
         do {
-          let items = try json.getArray(at: "data").map(T.init)
-          self?.pagination.hasNextPage = json["links"]?["next"] != nil
+          let decoder = JSONDecoder()
+          let parsed = try decoder.decode(DataKeyPathDecoding<[T]>.self, from: data)
+          let items = parsed.data
+          self?.pagination.hasNextPage = parsed.links?.next != nil
 
           DispatchQueue.main.sync { completion(.success(items)) }
         } catch {

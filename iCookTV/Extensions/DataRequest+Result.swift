@@ -26,7 +26,6 @@
 
 import Foundation
 import Alamofire
-import Freddy
 
 enum Result<T> {
   case success(T)
@@ -55,10 +54,10 @@ enum Result<T> {
 
 extension DataRequest {
 
-  func responseJSONObject(
+  func responseResult(
     queue: DispatchQueue? = nil,
     options: JSONSerialization.ReadingOptions = .allowFragments,
-    completion: @escaping (Result<JSON>) -> Void
+    completion: @escaping (Result<Data>) -> Void
   ) -> Self {
     let serializer = DataRequest.jsonResponseSerializer(options: options)
 
@@ -68,13 +67,7 @@ extension DataRequest {
         completion(.failure(error))
         return
       }
-
-      do {
-        let json = try JSON(data: data)
-        completion(.success(json))
-      } catch {
-        completion(.failure(error))
-      }
+      completion(.success(data))
     }
   }
 
