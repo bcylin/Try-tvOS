@@ -11,7 +11,6 @@ target :iCookTV do
   pod "Alamofire", "~> 4.2.0"
   pod "Crashlytics"
   pod "Fabric"
-  pod "Freddy", "~> 3.0.0"
   pod "HCYoutubeParser"
   pod "Hue", "~> 2.0.0"
   pod "Kingfisher", "~> 3.2.0"
