@@ -17,8 +17,6 @@ target :iCookTV do
   pod "TreasureData-iOS-SDK", "0.1.15"
 
   target :iCookTVTests do
-    pod "Nimble"
-    pod "Quick"
     pod "SwiftLint", "0.24.0"
   end
 end
