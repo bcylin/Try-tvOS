@@ -25,21 +25,12 @@
 //
 
 import Foundation
-import Freddy
 
-struct Category: Codable, JSONDecodable {
+struct Category: Codable {
 
   let id: String
   let name: String
   let coverURLs: [String]
-
-  // MARK: - JSONDecodable
-
-  init(json value: JSON) throws {
-    id = try value.getString(at: "id")
-    name = try value.getString(at: "attributes", "name", or: "")
-    coverURLs = try value.getArray(at: "attributes", "cover-urls").map(String.init)
-  }
 
   // MARK: - Codable
 

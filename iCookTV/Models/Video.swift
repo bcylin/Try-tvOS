@@ -25,9 +25,8 @@
 //
 
 import Foundation
-import Freddy
 
-struct Video: Codable, JSONDecodable, JSONEncodable {
+struct Video: Codable {
 
   let id: String
   let title: String
@@ -47,50 +46,6 @@ struct Video: Codable, JSONDecodable, JSONEncodable {
     let minutes = (length / 60) % 60
     let hours = length / 3600
     return (hours > 0 ? "\(hours):" : "") + String(format: "%d:%02d", minutes, seconds)
-  }
-
-  // MARK: - JSONDecodable
-
-  init(json value: JSON) throws {
-    let nullable: JSON.SubscriptingOptions = [.NullBecomesNil, .MissingKeyBecomesNil]
-    id = try value.getString(at: "id")
-    title = try value.getString(at: "attributes", "title")
-    subtitle = try value.getString(at: "attributes", "subtitle", alongPath: nullable)
-    description = try value.getString(at: "attributes", "description", alongPath: nullable)
-    length = try value.getInt(at: "attributes", "length", or: 0)
-    youtube = try value.getString(at: "attributes", "embed-url")
-    source = try value.getString(at: "attributes", "video-url", alongPath: nullable)
-    cover = try value.getString(at: "attributes", "cover-url")
-  }
-
-  // MARK: - JSONEncodable
-
-  func toJSON() -> JSON {
-    var attributes: [String: JSON] = [
-      "title": .string(title),
-      "embed-url": .string(youtube),
-      "cover-url": .string(cover),
-      "length": .int(length)
-    ]
-
-    if let source = source {
-      attributes["video-url"] = .string(source)
-    }
-
-    if let subtitle = subtitle {
-      attributes["subtitle"] = .string(subtitle)
-    }
-
-    if let description = description {
-      attributes["description"] = .string(description)
-    }
-
-    let json: [String: JSON] = [
-      "id": .string(id),
-      "attributes": .dictionary(attributes)
-    ]
-
-    return .dictionary(json)
   }
 
   // MARK: - Codable
