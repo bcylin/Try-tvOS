@@ -75,11 +75,9 @@ struct HistoryManager {
       var records = history
 
       // Keep the latest video at top.
-      for (index, element) in self.history.enumerated() {
-        if element["id"] == json["id"] {
-          records.remove(at: index)
-          break
-        }
+      for (index, element) in self.history.enumerated() where element["id"] == json["id"] {
+        records.remove(at: index)
+        break
       }
       records.insert(json, at: 0)
       Debug.print("records.count =", records.count)

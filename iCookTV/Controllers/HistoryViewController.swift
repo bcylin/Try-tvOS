@@ -59,7 +59,7 @@ class HistoryViewController: UIViewController,
     get {
       return R.string.localizable.history()
     }
-    set {}
+    set {}  // swiftlint:disable:this unused_setter_value
   }
 
   override func loadView() {
