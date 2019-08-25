@@ -25,9 +25,8 @@
 //
 
 import Foundation
-import Freddy
 
-struct Video: JSONDecodable, JSONEncodable {
+struct Video: Codable {
 
   let id: String
   let title: String
@@ -49,48 +48,51 @@ struct Video: JSONDecodable, JSONEncodable {
     return (hours > 0 ? "\(hours):" : "") + String(format: "%d:%02d", minutes, seconds)
   }
 
-  // MARK: - JSONDecodable
+  // MARK: - Codable
 
-  init(json value: JSON) throws {
-    let nullable: JSON.SubscriptingOptions = [.NullBecomesNil, .MissingKeyBecomesNil]
-    id = try value.getString(at: "id")
-    title = try value.getString(at: "attributes", "title")
-    subtitle = try value.getString(at: "attributes", "subtitle", alongPath: nullable)
-    description = try value.getString(at: "attributes", "description", alongPath: nullable)
-    length = try value.getInt(at: "attributes", "length", or: 0)
-    youtube = try value.getString(at: "attributes", "embed-url")
-    source = try value.getString(at: "attributes", "video-url", alongPath: nullable)
-    cover = try value.getString(at: "attributes", "cover-url")
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case attributes
   }
 
-  // MARK: - JSONEncodable
+  private enum AttributesCodingKeys: String, CodingKey {
+    case title
+    case subtitle
+    case description
+    case length
+    case youtube = "embed-url"
+    case source = "video-url"
+    case cover = "cover-url"
+  }
 
-  func toJSON() -> JSON {
-    var attributes: [String: JSON] = [
-      "title": .string(title),
-      "embed-url": .string(youtube),
-      "cover-url": .string(cover),
-      "length": .int(length)
-    ]
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(String.self, forKey: .id)
 
-    if let source = source {
-      attributes["video-url"] = .string(source)
-    }
+    let attributes = try container.nestedContainer(keyedBy: AttributesCodingKeys.self, forKey: .attributes)
+    title = try attributes.decode(String.self, forKey: .title)
+    subtitle = try? attributes.decode(String.self, forKey: .subtitle)
+    description = try? attributes.decode(String.self, forKey: .description)
+    length = (try? attributes.decode(Int.self, forKey: .length)) ?? 0
+    youtube = try attributes.decode(String.self, forKey: .youtube)
+    source = try? attributes.decode(String.self, forKey: .source)
+    cover = try attributes.decode(String.self, forKey: .cover)
+  }
 
-    if let subtitle = subtitle {
-      attributes["subtitle"] = .string(subtitle)
-    }
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(id, forKey: .id)
 
-    if let description = description {
-      attributes["description"] = .string(description)
-    }
+    var attributes = container.nestedContainer(keyedBy: AttributesCodingKeys.self, forKey: .attributes)
+    try attributes.encode(title, forKey: .title)
+    try attributes.encode(length, forKey: .length)
+    try attributes.encode(youtube, forKey: .youtube)
+    try attributes.encode(cover, forKey: .cover)
 
-    let json: [String: JSON] = [
-      "id": .string(id),
-      "attributes": .dictionary(attributes)
-    ]
-
-    return .dictionary(json)
+    // Optional values
+    try subtitle.map { try attributes.encode($0, forKey: .subtitle) }
+    try description.map { try attributes.encode($0, forKey: .description) }
+    try source.map { try attributes.encode($0, forKey: .source) }
   }
 
 }

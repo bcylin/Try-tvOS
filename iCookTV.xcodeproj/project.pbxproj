@@ -45,6 +45,7 @@
 		B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A571CCF5752008CCC08 /* ResourceHelper.swift */; };
 		B5761A5A1CCF6CCD008CCC08 /* VideoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5761A591CCF6CCD008CCC08 /* VideoSpec.swift */; };
 		B5761A5C1CCF6D78008CCC08 /* Video.json in Resources */ = {isa = PBXBuildFile; fileRef = B5761A5B1CCF6D78008CCC08 /* Video.json */; };
+		B57C930A22FF149800BBAC40 /* KeyPathDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53CD05422FEFF1C00492E27 /* KeyPathDecoding.swift */; };
 		B586EFDB1CCA21B300EA8218 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586EFDA1CCA21B300EA8218 /* InsetLabel.swift */; };
 		B58DE38B1CB8B54200C00266 /* CoverBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */; };
 		B58E906D1D5F806600AC184D /* VideosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58E906C1D5F806600AC184D /* VideosDataSource.swift */; };
@@ -104,6 +105,7 @@
 		B52EC3B01CB26F1B0072762C /* CGRect+Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Grid.swift"; sourceTree = "<group>"; };
 		B52EC3B21CB3A02E0072762C /* UIFont+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TV.swift"; sourceTree = "<group>"; };
 		B53115921CC69E7C00E75292 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
+		B53CD05422FEFF1C00492E27 /* KeyPathDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPathDecoding.swift; sourceTree = "<group>"; };
 		B53E39771CA1494000EB1EEE /* UIColor+TV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TV.swift"; sourceTree = "<group>"; };
 		B53E397A1CA14B4200EB1EEE /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B543C3E91CD1E85E008C512B /* OverlayViewPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewPresentable.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				B58DE38A1CB8B54200C00266 /* CoverBuilder.swift */,
 				B543C3EE1CD1FD0B008C512B /* GroundControl.swift */,
 				B53115921CC69E7C00E75292 /* HistoryManager.swift */,
+				B53CD05422FEFF1C00492E27 /* KeyPathDecoding.swift */,
 				B543C3F01CD21530008C512B /* Tracker.swift */,
 			);
 			path = Helpers;
@@ -530,7 +533,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV/Pods-iCookTV-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Freddy/Freddy.framework",
 				"${BUILT_PRODUCTS_DIR}/HCYoutubeParser/HCYoutubeParser.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/KeenClientTD/KeenClientTD.framework",
@@ -541,7 +543,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Freddy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCYoutubeParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeenClientTD.framework",
@@ -590,7 +591,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iCookTV-iCookTVTests/Pods-iCookTV-iCookTVTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Freddy/Freddy.framework",
 				"${BUILT_PRODUCTS_DIR}/HCYoutubeParser/HCYoutubeParser.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/KeenClientTD/KeenClientTD.framework",
@@ -603,7 +603,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Freddy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCYoutubeParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeenClientTD.framework",
@@ -661,6 +660,7 @@
 				B50BFC071CC8AF14004F853D /* HistoryViewController.swift in Sources */,
 				B51A95391CCF1C5100E5ED97 /* iCookTVKeys.swift in Sources */,
 				B586EFDB1CCA21B300EA8218 /* InsetLabel.swift in Sources */,
+				B57C930A22FF149800BBAC40 /* KeyPathDecoding.swift in Sources */,
 				B500D9AF1CBA3B7900622198 /* LaunchViewController.swift in Sources */,
 				B50A202B1DC4B53C00ACBF1B /* LoadingIndicatorPresentable.swift in Sources */,
 				B500D99F1CB93D0600622198 /* MainMenuView.swift in Sources */,

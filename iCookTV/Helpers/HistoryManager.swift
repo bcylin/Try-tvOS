@@ -25,7 +25,6 @@
 //
 
 import Foundation
-import Freddy
 
 struct HistoryManager {
 
@@ -46,16 +45,11 @@ struct HistoryManager {
   // MARK: - Public Methods
 
   /// Returns the deserialized video history read from the cache directory.
-  static var history: [JSON] {
+  static var history: [Data] {
     if let path = cache?.path, let records = NSArray(contentsOfFile: path) as? [Data] {
-      do {
-        return try records.map { try JSON(data: $0) }
-      } catch {
-        Tracker.track(error)
-        return [JSON]()
-      }
+      return records
     } else {
-      return [JSON]()
+      return []
     }
   }
 
@@ -71,19 +65,17 @@ struct HistoryManager {
       }
       Debug.print(path)
 
-      let json = video.toJSON()
-      var records = history
+      let decoder = JSONDecoder()
+      var records: [Video] = history.flatMap { try? decoder.decode(Video.self, from: $0) }
 
       // Keep the latest video at top.
-      for (index, element) in self.history.enumerated() where element["id"] == json["id"] {
-        records.remove(at: index)
-        break
-      }
-      records.insert(json, at: 0)
+      records = records.filter { $0.id != video.id }
+      records.insert(video, at: 0)
       Debug.print("records.count =", records.count)
 
       do {
-        let data = try records.map { try $0.serialize() } as NSArray
+        let encoder = JSONEncoder()
+        let data = try records.map { try encoder.encode($0) } as NSArray
         data.write(toFile: path, atomically: true)
       } catch {
         Tracker.track(error)

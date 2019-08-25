@@ -77,7 +77,8 @@ class HistoryViewController: UIViewController,
     isLoading = true
     DispatchQueue.global().async {
       do {
-        let history = try HistoryManager.history.map(Video.init)
+        let decoder = JSONDecoder()
+        let history = try HistoryManager.history.map { try decoder.decode(Video.self, from: $0) }
         DispatchQueue.main.sync {
           self.dataSource.append(history, toCollectionView: self.collectionView)
           self.setOverlayViewHidden(self.dataSource.numberOfItems > 0, animated: true)

@@ -27,7 +27,6 @@
 import UIKit
 import AVKit
 import Alamofire
-import Freddy
 
 class VideoPlayerController: AVPlayerViewController, Trackable {
 
@@ -90,8 +89,9 @@ class VideoPlayerController: AVPlayerViewController, Trackable {
       }
 
       do {
-        let json = try JSON(data: data)
-        let video = try Video(json: json["data"] ?? nil)
+        let decoder = JSONDecoder()
+        let parsed = try decoder.decode(DataKeyPathDecoding<Video>.self, from: data)
+        let video = parsed.data
         video.convertToPlayerItemWithCover(self?.coverImage) { [weak self] in
           self?.setPlayerItem($0)
         }

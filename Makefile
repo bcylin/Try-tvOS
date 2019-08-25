@@ -2,7 +2,7 @@ bootstrap:
 	gem install bundler -v 2.0.2
 	bundle install
 	# pod install
-	bundle exec pod keys set BaseAPIURL "https://polydice.com/iCook-tvOS/demo/"
+	bundle exec pod keys set BaseAPIURL "https://cdn.jsdelivr.net/gh/polydice/iCook-tvOS@gh-pages/demo/"
 	bundle exec pod keys set CrashlyticsAPIKey "-"
 	bundle exec pod keys set TreasureDataAPIKey "-"
 	bundle exec pod install

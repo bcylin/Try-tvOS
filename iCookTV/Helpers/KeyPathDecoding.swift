@@ -1,9 +1,9 @@
 //
-//  CategorySpec.swift
-//  iCookTV
+//  KeyPathDecoding.swift
+//  TryTVOS
 //
-//  Created by Ben on 26/04/2016.
-//  Copyright © 2016 Polydice, Inc.
+//  Created by Ben on 10/08/2019.
+//  Copyright © 2019 bcylin.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,15 @@
 //  SOFTWARE.
 //
 
-@testable import iCookTV
-import Nimble
-import Quick
+import Foundation
 
-class CategorySpec: QuickSpec {
+/// A type for decoding nested data structure.
+struct DataKeyPathDecoding<T: Decodable>: Decodable {
 
-  override func spec() {
+  let data: T
+  let links: Links?
 
-    let data: Data = Resources.testData(named: "Category.json")!
-
-    describe("decoding") {
-      it("should parse JSON as Category") {
-        let decoder = JSONDecoder()
-        let category = try! decoder.decode(Category.self, from: data)
-
-        expect(category.id).to(equal("9527"))
-        expect(category.name).to(equal("愛料理廚房"))
-        expect(category.coverURLs).to(equal([
-          "https://imag.es/1.jpg",
-          "https://imag.es/2.jpg",
-          "https://imag.es/3.jpg",
-          "https://imag.es/4.jpg"
-        ]))
-      }
-    }
-
+  struct Links: Decodable {
+    let next: String?
   }
-
 }

@@ -25,7 +25,6 @@
 //
 
 @testable import iCookTV
-import Freddy
 import Nimble
 import Quick
 
@@ -34,10 +33,10 @@ class VideoSpec: QuickSpec {
   override func spec() {
 
     let data: Data = Resources.testData(named: "Video.json")!
-    let json = try! JSON(data: data as Data)
-    let video = try! Video(json: json)
+    let decoder = JSONDecoder()
+    let video = try! decoder.decode(Video.self, from: data)
 
-    describe("init(json:)") {
+    describe("decoding") {
       it("should parse JSON as Video") {
         expect(video.id).to(equal("42"))
         expect(video.title).to(equal("Lorem"))
@@ -50,15 +49,20 @@ class VideoSpec: QuickSpec {
       }
     }
 
-    describe("toJSON()") {
-      let converted = video.toJSON()
+    describe("encoding") {
+      let encoder = JSONEncoder()
+      let data = try! encoder.encode(video)
+      let jsonString = String(data: data, encoding: .utf8)
 
-      it("should convert Video to JSON") {
-        expect(converted["id"]).to(equal(json["id"]))
-
-        for key in ["title", "embed-url", "video-url", "cover-url", "length", "subtitle", "description"] {
-          expect(converted["attributes"]?[key]).to(equal(json["attributes"]?[key]))
-        }
+      it("should encode Video to JSON") {
+        expect(jsonString).to(contain("\"id\":\"42\""))
+        expect(jsonString).to(contain("\"title\":\"Lorem\""))
+        expect(jsonString).to(contain("\"subtitle\":\"ipsum\""))
+        expect(jsonString).to(contain("\"description\":\"dolor sit amet\""))
+        expect(jsonString).to(contain("\"length\":123"))
+        expect(jsonString).to(contain("\"embed-url\":\"https:\\/\\/www.youtube.com\\/watch?v=3345678\""))
+        expect(jsonString).to(contain("\"video-url\":\"https:\\/\\/vide.os\\/source.m3u8\""))
+        expect(jsonString).to(contain("\"cover-url\":\"https:\\/\\/imag.es\\/cover.jpg\""))
       }
     }
 

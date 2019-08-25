@@ -26,7 +26,6 @@
 
 import UIKit
 import Alamofire
-import Freddy
 import Keys
 
 class VideosViewController: UIViewController,

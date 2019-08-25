@@ -26,7 +26,6 @@
 
 import UIKit
 import Alamofire
-import Freddy
 
 class LaunchViewController: UIViewController, DataFetching {
 
