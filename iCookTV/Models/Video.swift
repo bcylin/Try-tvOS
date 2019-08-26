@@ -26,7 +26,7 @@
 
 import Foundation
 
-struct Video: Codable {
+struct Video {
 
   let id: String
   let title: String
@@ -48,7 +48,10 @@ struct Video: Codable {
     return (hours > 0 ? "\(hours):" : "") + String(format: "%d:%02d", minutes, seconds)
   }
 
-  // MARK: - Codable
+}
+
+
+extension Video: Codable {
 
   private enum CodingKeys: String, CodingKey {
     case id
@@ -65,6 +68,8 @@ struct Video: Codable {
     case cover = "cover-url"
   }
 
+  // MARK: - Decodable
+
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     id = try container.decode(String.self, forKey: .id)
@@ -78,6 +83,8 @@ struct Video: Codable {
     source = try? attributes.decode(String.self, forKey: .source)
     cover = try attributes.decode(String.self, forKey: .cover)
   }
+
+  // MARK: - Encodable
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)

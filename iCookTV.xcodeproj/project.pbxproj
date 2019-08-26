@@ -65,7 +65,6 @@
 		B5EFE6C21DC600FF00236D1A /* VideosGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EFE6C11DC600FF00236D1A /* VideosGridLayout.swift */; };
 		B5F7BF4C1BA9C95F00A75099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF4B1BA9C95F00A75099 /* AppDelegate.swift */; };
 		B5F7BF531BA9C95F00A75099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F7BF521BA9C95F00A75099 /* Assets.xcassets */; };
-		B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */; };
 		E0CC9B4F972579066B42862A /* Pods_iCookTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1068EAEDE861A2EEA0CF2228 /* Pods_iCookTV.framework */; };
 /* End PBXBuildFile section */
 
@@ -149,7 +148,6 @@
 		B5F7BF521BA9C95F00A75099 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F7BF541BA9C95F00A75099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5F7BF591BA9C95F00A75099 /* iCookTV.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iCookTV.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCookTVTests.swift; sourceTree = "<group>"; };
 		B5F7BF5F1BA9C95F00A75099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCC5F61AC4253D5EB2FF6C5F /* Pods_iCookTV_iCookTVTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iCookTV_iCookTVTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F631C183B75D6A45DF934799 /* Pods-iCookTV-iCookTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCookTV-iCookTVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCookTV-iCookTVTests/Pods-iCookTV-iCookTVTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -347,7 +345,6 @@
 				B5761A521CCF4D3D008CCC08 /* CategorySpec.swift */,
 				B52BD6801D60B62E0023D4E9 /* DataCollectionSpec.swift */,
 				B52BD67E1D6034A10023D4E9 /* DataSourceSpec.swift */,
-				B5F7BF5D1BA9C95F00A75099 /* iCookTVTests.swift */,
 				B5761A571CCF5752008CCC08 /* ResourceHelper.swift */,
 				B5761A591CCF6CCD008CCC08 /* VideoSpec.swift */,
 			);
@@ -597,8 +594,6 @@
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/TreasureData-iOS-SDK/TreasureData_iOS_SDK.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -609,8 +604,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TreasureData_iOS_SDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -696,7 +689,6 @@
 				B5761A531CCF4D3D008CCC08 /* CategorySpec.swift in Sources */,
 				B52BD6811D60B62E0023D4E9 /* DataCollectionSpec.swift in Sources */,
 				B52BD67F1D6034A10023D4E9 /* DataSourceSpec.swift in Sources */,
-				B5F7BF5E1BA9C95F00A75099 /* iCookTVTests.swift in Sources */,
 				B5761A581CCF5752008CCC08 /* ResourceHelper.swift in Sources */,
 				B5761A5A1CCF6CCD008CCC08 /* VideoSpec.swift in Sources */,
 			);
