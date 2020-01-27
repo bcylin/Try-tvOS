@@ -49,8 +49,8 @@ extension Video {
 
   private var titleMetaData: AVMetadataItem {
     let _title = AVMutableMetadataItem()
-    _title.key = AVMetadataCommonKeyTitle as (NSCopying & NSObjectProtocol)?
-    _title.keySpace = AVMetadataKeySpaceCommon
+    _title.key = AVMetadataKey.commonKeyTitle as (NSCopying & NSObjectProtocol)?
+    _title.keySpace = .common
     _title.locale = Locale.current
     _title.value = title as (NSCopying & NSObjectProtocol)?
     return _title
@@ -58,8 +58,8 @@ extension Video {
 
   private var descriptionMetaData: AVMetadataItem {
     let _description = AVMutableMetadataItem()
-    _description.key = AVMetadataCommonKeyDescription as (NSCopying & NSObjectProtocol)?
-    _description.keySpace = AVMetadataKeySpaceCommon
+    _description.key = AVMetadataKey.commonKeyDescription as (NSCopying & NSObjectProtocol)?
+    _description.keySpace = .common
     _description.locale = Locale.current
     _description.value = (description ?? "")
       .components(separatedBy: CharacterSet.newlines)
@@ -106,10 +106,10 @@ private extension UIImage {
 
   var metadataItem: AVMetadataItem {
     let _item = AVMutableMetadataItem()
-    _item.key = AVMetadataCommonKeyArtwork as (NSCopying & NSObjectProtocol)?
-    _item.keySpace = AVMetadataKeySpaceCommon
+    _item.key = AVMetadataKey.commonKeyArtwork as (NSCopying & NSObjectProtocol)?
+    _item.keySpace = .common
     _item.locale = Locale.current
-    _item.value = UIImageJPEGRepresentation(self, UIImage.JPEGLeastCompressionQuality) as (NSCopying & NSObjectProtocol)?
+    _item.value = jpegData(compressionQuality: UIImage.JPEGLeastCompressionQuality) as (NSCopying & NSObjectProtocol)?
     return _item
   }
 

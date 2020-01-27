@@ -66,7 +66,7 @@ struct HistoryManager {
       Debug.print(path)
 
       let decoder = JSONDecoder()
-      var records: [Video] = history.flatMap { try? decoder.decode(Video.self, from: $0) }
+      var records: [Video] = history.compactMap { try? decoder.decode(Video.self, from: $0) }
 
       // Keep the latest video at top.
       records = records.filter { $0.id != video.id }

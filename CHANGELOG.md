@@ -10,6 +10,7 @@
 * Simpler project quick start [#6](https://github.com/polydice/iCook-tvOS/pull/6)
 * Replace Freddy with Swift Codable [#11](https://github.com/polydice/iCook-tvOS/pull/11)
 * Replace Quick and Nimble with XCTest [#12](https://github.com/polydice/iCook-tvOS/pull/12)
+* Swift 5 [#13](https://github.com/polydice/iCook-tvOS/pull/13)
 
 ## v1.0.0
 

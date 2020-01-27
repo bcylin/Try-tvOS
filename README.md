@@ -1,22 +1,14 @@
 # iCook tvOS App
 
 [![Build Status](https://travis-ci.org/polydice/iCook-tvOS.svg)](https://travis-ci.org/polydice/iCook-tvOS)
+![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg)
 [![codecov.io](https://codecov.io/github/polydice/iCook-tvOS/coverage.svg?branch=develop)](https://codecov.io/github/polydice/iCook-tvOS?branch=develop)
-![Swift 3.2](https://img.shields.io/badge/Swift-3.2-orange.svg)
 
 A tvOS app that plays [iCook TV](https://tv.icook.tw/) videos.
 
 <img src="https://polydice.github.io/iCook-tvOS/images/Screenshot.png" width=800px>
 
-## Setup
-
-Install [Bundler](http://bundler.io/):
-
-```
-gem install bundler
-```
-
-### Quick Start
+## Quick Start
 
 Run the following commands to install dependencies:
 
@@ -24,7 +16,7 @@ Run the following commands to install dependencies:
 make bootstrap
 ```
 
-### Production Setups
+## Production Setups
 
 If you work at Polydice, instead of `make bootstrap`, set up the project step by step with the following commands. Fill in the credentials and ask admin for required files.
 
@@ -62,10 +54,6 @@ Managed by CocoaPods-Keys:
   ```
 
 * `icook-tv-top-shelf-image.png` is not included in the repo due to the license of image.
-
-## Known Issues
-
-* Initializing generic `DataSource` will cause `EXC_BAD_ACCESS` in Xcode 8. Fixed in Xcode 8.1.
 
 ## Demo
 
