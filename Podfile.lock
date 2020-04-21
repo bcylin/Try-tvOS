@@ -13,49 +13,31 @@ PODS:
     - KeenClientTD (= 3.2.27)
 
 DEPENDENCIES:
-  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, tag `4.8.2`)
+  - Alamofire (= 4.8.2)
   - Crashlytics
   - Fabric
   - HCYoutubeParser
-  - Hue (from `https://github.com/zenangst/Hue.git`, tag `5.0.0`)
+  - Hue (= 5.0.0)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `5.7.0`)
-  - SwiftLint (from `https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/4/0/1/SwiftLint/0.34.0/SwiftLint.podspec.json`)
+  - Kingfisher (= 5.7.0)
+  - SwiftLint (= 0.34.0)
   - TreasureData-iOS-SDK (= 0.1.15)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
+    - Alamofire
     - Crashlytics
     - Fabric
     - HCYoutubeParser
+    - Hue
     - KeenClientTD
+    - Kingfisher
+    - SwiftLint
     - TreasureData-iOS-SDK
 
 EXTERNAL SOURCES:
-  Alamofire:
-    :git: https://github.com/Alamofire/Alamofire.git
-    :tag: 4.8.2
-  Hue:
-    :git: https://github.com/zenangst/Hue.git
-    :tag: 5.0.0
   Keys:
     :path: Pods/CocoaPodsKeys
-  Kingfisher:
-    :git: https://github.com/onevcat/Kingfisher.git
-    :tag: 5.7.0
-  SwiftLint:
-    :podspec: https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/4/0/1/SwiftLint/0.34.0/SwiftLint.podspec.json
-
-CHECKOUT OPTIONS:
-  Alamofire:
-    :git: https://github.com/Alamofire/Alamofire.git
-    :tag: 4.8.2
-  Hue:
-    :git: https://github.com/zenangst/Hue.git
-    :tag: 5.0.0
-  Kingfisher:
-    :git: https://github.com/onevcat/Kingfisher.git
-    :tag: 5.7.0
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -65,10 +47,10 @@ SPEC CHECKSUMS:
   Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
   KeenClientTD: ddb29a702bd4cfce5d526519ca8959d70c324c6a
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
-  Kingfisher: 5e1c7784a4e1052c2ed2f22dd4b19b1db74c837e
+  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
   TreasureData-iOS-SDK: cc878af36b85ae3540a9a5bdb36b7bdc8707b719
 
-PODFILE CHECKSUM: 7d0f309956943494904766e181472b47d17e9494
+PODFILE CHECKSUM: 7ea57cbdad11c9272d4cb7f33d605a5265ca5902
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.1
