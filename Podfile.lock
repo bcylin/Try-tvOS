@@ -5,12 +5,9 @@ PODS:
   - Fabric (1.6.10)
   - HCYoutubeParser (0.0.5)
   - Hue (5.0.0)
-  - KeenClientTD (3.2.27)
   - Keys (1.0.1)
   - Kingfisher (5.7.0)
   - SwiftLint (0.34.0)
-  - TreasureData-iOS-SDK (0.1.15):
-    - KeenClientTD (= 3.2.27)
 
 DEPENDENCIES:
   - Alamofire (= 4.8.2)
@@ -21,7 +18,6 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher (= 5.7.0)
   - SwiftLint (= 0.34.0)
-  - TreasureData-iOS-SDK (= 0.1.15)
 
 SPEC REPOS:
   trunk:
@@ -30,10 +26,8 @@ SPEC REPOS:
     - Fabric
     - HCYoutubeParser
     - Hue
-    - KeenClientTD
     - Kingfisher
     - SwiftLint
-    - TreasureData-iOS-SDK
 
 EXTERNAL SOURCES:
   Keys:
@@ -45,12 +39,10 @@ SPEC CHECKSUMS:
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   HCYoutubeParser: bc1db8c062e4b835eda381f2be2f9970f6a8d071
   Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
-  KeenClientTD: ddb29a702bd4cfce5d526519ca8959d70c324c6a
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
-  TreasureData-iOS-SDK: cc878af36b85ae3540a9a5bdb36b7bdc8707b719
 
-PODFILE CHECKSUM: 7ea57cbdad11c9272d4cb7f33d605a5265ca5902
+PODFILE CHECKSUM: 255db7376b0e9223db978ec1100ad51c92b67d3d
 
 COCOAPODS: 1.9.1

@@ -37,9 +37,4 @@ struct iCookTVKeys {
   static let CrashlyticsAPIKey: String = {
     ICookTVKeys().crashlyticsAPIKey
   }()
-
-  static let TreasureDataAPIKey: String = {
-    ICookTVKeys().treasureDataAPIKey
-  }()
-
 }

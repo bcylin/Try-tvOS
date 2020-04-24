@@ -25,7 +25,6 @@
 //
 
 import UIKit
-import TreasureData_iOS_SDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,22 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
 
     return true
-  }
-
-  func applicationDidEnterBackground(_ application: UIApplication) {
-    #if TRACKING
-      TreasureData.sharedInstance().endSession(Tracker.sessionsTable)
-
-      backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
-        self?.endBackgroundTask(inApplication: application)
-      })
-
-      TreasureData.sharedInstance().uploadEvents(callback: { [weak self] in
-        self?.endBackgroundTask(inApplication: application)
-      }, onError: { [weak self] _ in
-        self?.endBackgroundTask(inApplication: application)
-      })
-    #endif
   }
 
   // MARK: - Private Methods

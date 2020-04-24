@@ -27,27 +27,13 @@
 import Foundation
 import Crashlytics
 import Fabric
-import TreasureData_iOS_SDK
 
 enum Tracker {
-
-  static let defaultDatabase = "icook_tvos"
-  static let sessionsTable = "sessions"
 
   static func setUpAnalytics() {
     #if TRACKING
       Crashlytics.start(withAPIKey: iCookTVKeys.CrashlyticsAPIKey)
       Fabric.with([Crashlytics.self])
-
-      TreasureData.initializeApiEndpoint("https://in.treasuredata.com")
-      TreasureData.initialize(withApiKey: iCookTVKeys.TreasureDataAPIKey)
-      TreasureData.sharedInstance().enableAutoAppendUniqId()
-      TreasureData.sharedInstance().enableAutoAppendModelInformation()
-      TreasureData.sharedInstance().enableAutoAppendAppInformation()
-      TreasureData.sharedInstance().enableAutoAppendLocaleInformation()
-
-      TreasureData.sharedInstance().defaultDatabase = Tracker.defaultDatabase
-      TreasureData.sharedInstance().startSession(Tracker.sessionsTable)
     #endif
   }
 
@@ -56,10 +42,6 @@ enum Tracker {
       Debug.print(pageView)
       #if TRACKING
         Answers.logCustomEvent(withName: pageView.name, customAttributes: pageView.details)
-        TreasureData.sharedInstance().addEvent(pageView.attributes, database: defaultDatabase, table: "screens")
-      #endif
-      #if TRACKING && DEBUG
-        TreasureData.sharedInstance().uploadEvents()
       #endif
     }
   }
@@ -69,10 +51,6 @@ enum Tracker {
       Debug.print(event)
       #if TRACKING
         Answers.logCustomEvent(withName: event.name, customAttributes: event.details)
-        TreasureData.sharedInstance().addEvent(event.attributes, database: defaultDatabase, table: "events")
-      #endif
-      #if TRACKING && DEBUG
-        TreasureData.sharedInstance().uploadEvents()
       #endif
     }
   }
@@ -88,14 +66,6 @@ enum Tracker {
 
       #if TRACKING
         Answers.logCustomEvent(withName: "Error", customAttributes: ["Description": description])
-        TreasureData.sharedInstance().addEvent([
-          "description": description,
-          "function": "\(file.typeName).\(function)",
-          "line": line
-        ], database: defaultDatabase, table: "errors")
-      #endif
-      #if TRACKING && DEBUG
-        TreasureData.sharedInstance().uploadEvents()
       #endif
     }
   }
