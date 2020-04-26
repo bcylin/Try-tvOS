@@ -6,7 +6,5 @@ bootstrap:
 	bundle exec pod keys set CrashlyticsAPIKey "API_KEY"
 	bundle exec pod keys set TreasureDataAPIKey "API_KEY"
 	bundle exec pod install
-	# sh scripts/fabric.sh
-	mkdir -p keys
-	touch keys/fabric.apikey && echo "fabric.apikey" > keys/fabric.apikey
-	touch keys/fabric.buildsecret && echo "fabric.buildsecret" > keys/fabric.buildsecret
+	# mock Google Services plist
+	cp mock-GoogleService-Info.plist iCookTV/GoogleService-Info.plist

@@ -25,15 +25,13 @@
 //
 
 import Foundation
-import Crashlytics
-import Fabric
+import Firebase
 
 enum Tracker {
 
   static func setUpAnalytics() {
     #if TRACKING
-      Crashlytics.start(withAPIKey: iCookTVKeys.CrashlyticsAPIKey)
-      Fabric.with([Crashlytics.self])
+      FirebaseApp.configure()
     #endif
   }
 
@@ -41,7 +39,7 @@ enum Tracker {
     DispatchQueue.global().async {
       Debug.print(pageView)
       #if TRACKING
-        Answers.logCustomEvent(withName: pageView.name, customAttributes: pageView.details)
+
       #endif
     }
   }
@@ -50,7 +48,7 @@ enum Tracker {
     DispatchQueue.global().async {
       Debug.print(event)
       #if TRACKING
-        Answers.logCustomEvent(withName: event.name, customAttributes: event.details)
+
       #endif
     }
   }
@@ -65,7 +63,7 @@ enum Tracker {
       Debug.print(description, file: file, function: function, line: line)
 
       #if TRACKING
-        Answers.logCustomEvent(withName: "Error", customAttributes: ["Description": description])
+
       #endif
     }
   }
