@@ -1,6 +1,6 @@
 # iCook tvOS App
 
-[![Build Status](https://travis-ci.org/polydice/iCook-tvOS.svg)](https://travis-ci.org/polydice/iCook-tvOS)
+![iOS build](https://github.com/polydice/iCook-tvOS/workflows/iOS%20build/badge.svg)
 ![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg)
 [![codecov.io](https://codecov.io/github/polydice/iCook-tvOS/coverage.svg?branch=develop)](https://codecov.io/github/polydice/iCook-tvOS?branch=develop)
 
