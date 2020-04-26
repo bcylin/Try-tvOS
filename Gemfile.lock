@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     CFPropertyList (3.0.2)
     RubyInline (3.12.5)
