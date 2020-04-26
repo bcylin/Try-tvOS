@@ -24,13 +24,16 @@
 //  SOFTWARE.
 //
 
-import Foundation
+import FBSDKTVOSKit
 import Firebase
+import Foundation
 
 enum Tracker {
-
   static func setUpAnalytics() {
+    Settings.isAutoInitEnabled = false
     #if TRACKING
+      Settings.appID = iCookTVKeys.FacebookAppID
+      ApplicationDelegate.initializeSDK(nil)
       FirebaseApp.configure()
     #endif
   }
@@ -67,5 +70,4 @@ enum Tracker {
       #endif
     }
   }
-
 }

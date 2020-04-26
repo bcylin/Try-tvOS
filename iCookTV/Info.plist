@@ -20,20 +20,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>develop</string>
-	<key>Fabric</key>
-	<dict>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>FacebookAutoInitEnabled</key>
+	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>

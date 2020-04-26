@@ -34,7 +34,4 @@ struct iCookTVKeys {
     ICookTVKeys().baseAPIURL
   }()
 
-  static let CrashlyticsAPIKey: String = {
-    ICookTVKeys().crashlyticsAPIKey
-  }()
 }
