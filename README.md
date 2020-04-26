@@ -39,25 +39,24 @@ What is the key for BaseAPIURL
 
 #### Required Keys
 
-Managed by CocoaPods-Keys:
+Managed by [CocoaPods-Keys](https://github.com/orta/cocoapods-keys):
 
-* CrashlyticsAPIKey
-* TreasureDataAPIKey
+* BaseAPIURL
+* FacebookAppID
+
 
 #### Required Files
 
-* Required by the Fabric script for the `Release` configuration:
+* Required by the Firebase SDK for the `Release` configuration:
 
   ```
-  ./keys/fabric.apikey
-  ./keys/fabric.buildsecret
+  iCookTV/GoogleService-Info.plist
   ```
 
 * `icook-tv-top-shelf-image.png` is not included in the repo due to the license of image.
 
 ## Demo
 
-* Install the beta version via <https://testflight.icook.tw>.
 * Download the tvOS app from [App Store](https://itunes.apple.com/tw/app/ai-liao-li/id554065086).
 
 ## Contact
