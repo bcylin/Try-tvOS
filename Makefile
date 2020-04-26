@@ -7,4 +7,4 @@ bootstrap:
 	bundle exec pod keys set TreasureDataAPIKey "API_KEY"
 	bundle exec pod install
 	# mock Google Services plist
-	cp mock-GoogleService-Info.plist iCookTV/GoogleService-Info.plist
+	cp -n mock-GoogleService-Info.plist iCookTV/GoogleService-Info.plist
