@@ -28,7 +28,6 @@ jobs:
           bundle config path vendor/bundle
           make bootstrap
       - name: Run Fastlane Build
-        run: |
-          bundle exec fastlane scan
+        run: bundle exec fastlane scan
       - name: Send coverage to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+        run: bundle exec fastlane run codecov_reporter

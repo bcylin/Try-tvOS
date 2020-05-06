@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/dlackty/fastlane-plugin-codecov_reporter.git
+  revision: f5bacb2df153a648579bbf5ccd75810032cb4be3
+  branch: update-config-item
+  specs:
+    fastlane-plugin-codecov_reporter (0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -284,6 +291,7 @@ DEPENDENCIES
   cocoapods-keys
   danger
   fastlane
+  fastlane-plugin-codecov_reporter!
 
 BUNDLED WITH
    2.1.4
