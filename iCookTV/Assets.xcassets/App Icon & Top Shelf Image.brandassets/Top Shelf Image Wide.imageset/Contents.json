@@ -2,7 +2,12 @@
   "images" : [
     {
       "idiom" : "tv",
+      "filename" : "Top Shelf Wide_2320x720.png",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {
