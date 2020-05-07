@@ -14,6 +14,7 @@ target :iCookTV do
   pod "Hue", "5.0.0"
   pod "Kingfisher", "5.7.0"
   pod "FBSDKTVOSKit"
+  pod "ComScore"
 
   target :iCookTVTests do
     pod "SwiftLint", '0.34.0'
@@ -23,6 +24,6 @@ end
 
 plugin "cocoapods-keys", {
   project: "iCookTV",
-  keys: ["BaseAPIURL", "FacebookAppID"]
+  keys: ["BaseAPIURL", "FacebookAppID", "ComScorePublisherID"]
 }
 

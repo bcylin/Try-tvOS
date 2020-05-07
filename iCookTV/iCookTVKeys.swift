@@ -34,4 +34,11 @@ struct iCookTVKeys {
     ICookTVKeys().baseAPIURL
   }()
 
+  static let FacebookAppID: String = {
+    ICookTVKeys().facebookAppID
+  }()
+
+  static let ComScorePublisherID: String = {
+    ICookTVKeys().comScorePublisherID
+  }()
 }

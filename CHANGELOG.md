@@ -14,6 +14,7 @@
 * Update gems and migrate to GitHub Actions [#14](https://github.com/polydice/iCook-tvOS/pull/14)
 * Clean up tracking [#15](https://github.com/polydice/iCook-tvOS/pull/15)
 * Clean up Fastlane and CI [#16](https://github.com/polydice/iCook-tvOS/pull/16)
+* Add ComScore SDK [#17](https://github.com/polydice/iCook-tvOS/pull/17)
 
 ## v1.0.0
 
