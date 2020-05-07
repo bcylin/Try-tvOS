@@ -24,6 +24,7 @@
 //  SOFTWARE.
 //
 
+import ComScore
 import FBSDKTVOSKit
 import Firebase
 import Foundation
@@ -35,6 +36,11 @@ enum Tracker {
       Settings.appID = iCookTVKeys.FacebookAppID
       ApplicationDelegate.initializeSDK(nil)
       FirebaseApp.configure()
+      let comScoreConfiguration = SCORPublisherConfiguration { (configurationBuilder) in
+        configurationBuilder?.publisherId = iCookTVKeys.ComScorePublisherID
+      }
+      SCORAnalytics.configuration().addClient(with: comScoreConfiguration)
+      SCORAnalytics.start()
     #endif
   }
 

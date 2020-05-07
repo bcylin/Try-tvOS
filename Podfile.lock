@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.8.2)
+  - ComScore (6.3.1):
+    - ComScore/Dynamic (= 6.3.1)
+  - ComScore/Dynamic (6.3.1)
   - FBSDKCoreKit (6.3.0):
     - FBSDKCoreKit/Basics (= 6.3.0)
     - FBSDKCoreKit/Core (= 6.3.0)
@@ -71,6 +74,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.8.2)
+  - ComScore
   - FBSDKTVOSKit
   - Firebase/Crashlytics
   - HCYoutubeParser
@@ -82,6 +86,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ComScore
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
@@ -109,6 +114,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  ComScore: 2d6206a44c233c08b1f1891e8f138e8f80c07503
   FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
   FBSDKLoginKit: d46aa04d9bb9990a4deb6441736fae24a8c94496
   FBSDKShareKit: cbd309f29d00e596bc28319724a7519940e804fa
@@ -131,6 +137,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
 
-PODFILE CHECKSUM: 9b9fc03aabefe478dda51a4e62057819ca211503
+PODFILE CHECKSUM: e3ad5972da41a88854e69330a4902ec177fe813e
 
 COCOAPODS: 1.9.1
