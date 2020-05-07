@@ -28,9 +28,6 @@ jobs:
           bundle config path vendor/bundle
           make bootstrap
       - name: Run Fastlane Build
-        run: |
-          xcrun instruments -s devices
-          xcrun instruments -w "Apple TV (13.3)" || true
-          bundle exec fastlane scan --device "Apple TV (13.3)"
+        run: bundle exec fastlane scan
       - name: Send coverage to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+        run: bundle exec fastlane run codecov_reporter

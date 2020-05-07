@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/dlackty/fastlane-plugin-codecov_reporter.git
+  revision: f5bacb2df153a648579bbf5ccd75810032cb4be3
+  branch: update-config-item
+  specs:
+    fastlane-plugin-codecov_reporter (0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -12,13 +19,13 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    algoliasearch (1.27.1)
+    algoliasearch (1.27.2)
       httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
     atomos (0.1.3)
     aws-eventstream (1.1.0)
-    aws-partitions (1.300.0)
-    aws-sdk-core (3.94.0)
+    aws-partitions (1.310.0)
+    aws-sdk-core (3.94.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -26,11 +33,11 @@ GEM
     aws-sdk-kms (1.30.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.62.0)
+    aws-sdk-s3 (1.63.1)
       aws-sdk-core (~> 3, >= 3.83.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.1.2)
+    aws-sigv4 (1.1.3)
       aws-eventstream (~> 1.0, >= 1.0.2)
     babosa (1.0.3)
     claide (1.0.3)
@@ -74,7 +81,7 @@ GEM
       nap
     cocoapods-search (1.0.0)
     cocoapods-stats (1.1.0)
-    cocoapods-trunk (1.4.1)
+    cocoapods-trunk (1.5.0)
       nap (>= 0.8, < 2.0)
       netrc (~> 0.11)
     cocoapods-try (1.2.0)
@@ -85,14 +92,14 @@ GEM
     concurrent-ruby (1.1.6)
     cork (0.3.0)
       colored2 (~> 3.1)
-    danger (7.0.0)
+    danger (8.0.0)
       claide (~> 1.0)
       claide-plugins (>= 0.9.2)
       colored2 (~> 3.1)
       cork (~> 0.1)
       faraday (>= 0.9.0, < 2.0)
       faraday-http-cache (~> 2.0)
-      git (~> 1.6)
+      git (~> 1.7)
       kramdown (~> 2.0)
       kramdown-parser-gfm (~> 1.0)
       no_proxy_fix
@@ -119,7 +126,7 @@ GEM
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
     fastimage (2.1.7)
-    fastlane (2.146.0)
+    fastlane (2.146.1)
       CFPropertyList (>= 2.3, < 4.0.0)
       addressable (>= 2.3, < 3.0.0)
       aws-sdk-s3 (~> 1.0)
@@ -161,7 +168,7 @@ GEM
     fourflusher (2.3.1)
     fuzzy_match (2.0.4)
     gh_inspector (1.1.3)
-    git (1.6.0)
+    git (1.7.0)
       rchardet (~> 1.8)
     google-api-client (0.36.4)
       addressable (~> 2.5, >= 2.5.1)
@@ -200,7 +207,8 @@ GEM
     jmespath (1.4.0)
     json (2.3.0)
     jwt (2.1.0)
-    kramdown (2.1.0)
+    kramdown (2.2.1)
+      rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     memoist (0.16.2)
@@ -231,6 +239,7 @@ GEM
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     retriable (3.1.2)
+    rexml (3.2.4)
     rouge (2.0.7)
     ruby-macho (1.4.0)
     rubyzip (1.3.0)
@@ -284,6 +293,7 @@ DEPENDENCIES
   cocoapods-keys
   danger
   fastlane
+  fastlane-plugin-codecov_reporter!
 
 BUNDLED WITH
    2.1.4
